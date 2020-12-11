@@ -1,6 +1,13 @@
 # projekt-java-client
 
-## Project setup
+## Description
+
+This is project for our Java classes. We want to design an application that will support and facilitate the process of managing a food warehouse.
+This is the `client-side` of our application.
+
+## Usage
+
+### Project setup
 ```
 yarn install
 ```
