@@ -87,7 +87,7 @@ export default {
         width: 80%;
         margin: 0 auto;
         margin-bottom: 0.25rem;
-        border: 1px solid red;
+        /* border: 1px solid red; */
     }
 
     .cell__label{
