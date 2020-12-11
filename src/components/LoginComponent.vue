@@ -7,6 +7,7 @@
                 class="input"
                 label=""
                 solo
+                v-model="c_login"
             ></v-text-field>
         </form>
         
@@ -19,11 +20,12 @@
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="passwd_show ? 'text' : 'password'"
                 @click:append="passwd_show = !passwd_show"
+                v-model="c_password"
             ></v-text-field>
         </form>
 
         <div class="cell relative">
-            <v-btn class="submit__btn">Zaloguj się</v-btn>
+            <v-btn class="submit__btn" @click="login()">Zaloguj się</v-btn>
         </div>
 
         <div class="cell align-center footer">
@@ -42,8 +44,21 @@ export default {
     data() {
         return{
             passwd_show: false,
+            c_login: '',
+            c_password: '',
         }
 
+    },
+
+    methods: {
+        login(){
+            let credentials = {
+                email: this.c_login,
+                password: this.c_password,
+            };
+            console.log(credentials);
+            this.$store.dispatch('login',credentials);
+        }
     },
 }
 </script>

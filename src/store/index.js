@@ -10,12 +10,9 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
-    login(context,email,password){
-      let obj = {
-        email: email,
-        password: password,
-      };
-      axios.post('http://localhost:8090/login', obj)
+    login(context,credentials){
+     
+      axios.post('http://localhost:8090/login', credentials)
             .then((response) =>{
               if (response.status === 200) {
                 const jwtToken = response.headers['authorization'];
