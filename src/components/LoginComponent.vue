@@ -1,6 +1,11 @@
 <template>
     <div class="login-component">
         <h2 class="title">Zaloguj się</h2>
+
+        <div class="cell error" v-if="c_error">
+            <p>Podano niewłaściwe dane logowania. Popraw dane i spróbuj ponownie</p>
+        </div>
+
         <form class="cell">
             <label class="cell__label">Login</label>
             <v-text-field
@@ -8,6 +13,7 @@
                 label=""
                 solo
                 v-model="c_login"
+                v-on:keyup.enter="login()"
             ></v-text-field>
         </form>
         
@@ -21,6 +27,7 @@
                 :type="passwd_show ? 'text' : 'password'"
                 @click:append="passwd_show = !passwd_show"
                 v-model="c_password"
+                v-on:keyup.enter="login()"
             ></v-text-field>
         </form>
 
@@ -46,6 +53,7 @@ export default {
             passwd_show: false,
             c_login: '',
             c_password: '',
+            c_error: false,
         }
 
     },
@@ -57,7 +65,23 @@ export default {
                 password: this.c_password,
             };
             console.log(credentials);
-            this.$store.dispatch('login',credentials);
+            this.$store.dispatch('login',credentials)
+            .then((result) =>{
+                console.log(result);
+                if(result == true){
+                    console.log("przechodzimy na admina");
+                    this.$router.push({ name: 'Admin'});
+                }
+            },(error) =>{
+                if(error == "bad credentials"){
+                    console.log("nieprawidłowe dane logowania");
+                    this.c_error = true;
+                }
+                else{
+                    console.log("problem z połączeniem");
+                }
+            })
+            
         }
     },
 }
@@ -150,6 +174,15 @@ export default {
         text-decoration: none;
         font-weight: 600;
         color: #007E33;
+    }
+
+    .error{
+        margin-bottom: 1.5rem;
+    }
+
+    .error > p{
+        font-size: 0.8rem;
+        color: rgb(209, 33, 33);
     }
 
 </style>

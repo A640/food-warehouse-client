@@ -11,21 +11,29 @@ export default new Vuex.Store({
   },
   actions: {
     login(context,credentials){
-     
-      axios.post('http://localhost:8090/login', credentials)
-            .then((response) =>{
-              if (response.status === 200) {
-                const jwtToken = response.headers['authorization'];
-                if (jwtToken) {
-                    localStorage.setItem('jwtToken', jwtToken);
-                    console.log("zalogowaned")
-                } 
-              }
-            }, (error) =>{
-              console.error("Błąd przy logowaniu");
-              console.log(error);
-            });
-    }
+      return new Promise(function(resolve,reject){
+        axios.post('http://localhost:8090/login', credentials)
+              .then((response) =>{
+                if (response.status === 200) {
+                  const jwtToken = response.headers['authorization'];
+                  if (jwtToken) {
+                      localStorage.setItem('jwtToken', jwtToken);
+                      console.log("zalogowaned")
+                      resolve(true)
+                  }
+                  else{
+                    reject("bad credentials");
+                  } 
+                }else{
+                  reject("bad credentials")
+                }
+              }, (error) =>{
+                console.error("Błąd przy logowaniu");
+                console.log(error);
+                reject(error);
+        });
+      });
+    },
   },
   modules: {
   }
