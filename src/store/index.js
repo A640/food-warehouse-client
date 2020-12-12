@@ -43,7 +43,36 @@ export default new Vuex.Store({
       });
     },
 
-   
+    checkLogin(context,login){
+      return new Promise(function(resolve,reject){
+        let obj = {username: login};
+
+        axios.post(context.getters.getServerAddress +'/register/username',obj)
+              .then((response) =>{
+
+                if (response.status === 200) {
+                  let isUsed = response.data['result'];
+                  isUsed = isUsed.usernameExists;
+            
+                  if(isUsed) {
+                    resolve(true)
+                  }
+                  else{
+                    resolve(false)
+                  } 
+                }else{
+                  reject("Błąd przy połączeniu")
+                }
+              }, (error) =>{
+
+                console.error("Błąd przy połączeniu");
+                console.log(error);
+                reject(error);
+        });
+      });
+    },
+
+  
   },
   modules: {
   },

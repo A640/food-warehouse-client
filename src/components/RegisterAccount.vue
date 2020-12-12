@@ -18,6 +18,7 @@
                 solo
                 v-model="c_login"
                 :rules="r_login"
+                :error-messages="e_login"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
@@ -90,11 +91,12 @@ export default {
             c_password: '',
             c_password2: '',
             c_error: false,
+            e_login: [],
 
             r_login: [
                 value => !!value || 'To pole jest wymagane!',
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',  
             ],
             r_email: [
                 value => !!value || 'To pole jest wymagane!',
@@ -129,7 +131,16 @@ export default {
 
             this.$emit('next',account)
             
-        }
+        },
+
+    },
+
+    watch: {
+        c_login (val) {
+            this.$store.dispatch('checkLogin',val).then(valid => {
+                this.e_login = valid ?  ['Ten login jest zajęty! Wybierz inny login.'] : [];
+            })
+        },
     },
 }
 </script>

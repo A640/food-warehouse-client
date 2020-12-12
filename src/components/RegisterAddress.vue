@@ -172,7 +172,7 @@ export default {
                  value => !!value || 'To pole jest wymagane!',
             ],
 
-            country: '',
+            country: [],
 
         }
 
