@@ -1,0 +1,236 @@
+<template>
+    <div class="register-component">
+
+         <div class="cell">
+            <h2 class="title">Utwórz konto</h2>
+        </div>
+       
+
+        <div class="cell error" v-if="c_error">
+            <p>Podano niewłaściwe dane logowania. Popraw dane i spróbuj ponownie</p>
+        </div>
+
+        <form class="cell">
+            <label class="cell__label">Login</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_login"
+                :rules="r_login"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        <form class="cell">
+            <label class="cell__label">E-mail</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_email"
+                :rules="r_email"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        
+        <form class="cell">
+            <label class="cell__label">Hasło</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="passwd_show ? 'text' : 'password'"
+                @click:append="passwd_show = !passwd_show"
+                v-model="c_password"
+                :rules="r_password"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        <form class="cell">
+            <label class="cell__label">Powtórz hasło</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="passwd_show ? 'text' : 'password'"
+                @click:append="passwd_show = !passwd_show"
+                v-model="c_password2"
+                v-on:keyup.enter.stop
+                :rules="r_password2"
+            ></v-text-field>
+        </form>
+
+        <div class="cell relative">
+            <v-btn class="submit__btn" fab elevation="1" @click="nextStep()"><v-icon>mdi-arrow-right</v-icon></v-btn>
+        </div>
+
+        <div class="cell align-center footer">
+            <p>Masz już konto?
+            <router-link to="/login" class="cell__link">Zaloguj się</router-link>
+            </p>
+        </div>
+
+        
+    </div>
+</template>
+
+<script>
+export default {
+    
+    data() {
+        return{
+            passwd_show: false,
+            c_login: '',
+            c_email: '',
+            c_password: '',
+            c_password2: '',
+            c_error: false,
+
+            r_login: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+            ],
+            r_email: [
+                value => !!value || 'To pole jest wymagane!',
+                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail musi być poprawny'
+            ],
+
+            r_password: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length >= 8 || 'Hasło musi zawierać conajmniej 8 znaków',
+                value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
+                v => !v || /[a-z]+/.test(v) || 'Wymagana conajmniej jedna mała litera',
+                v => !v || /[A-Z]+/.test(v) || 'Wymagana conajmniej jedna duża litera',
+                v => !v || /[0-9]+/.test(v) || 'Wymagana conajmniej jedna cyfra',
+            ],
+
+            r_password2: [
+                (value) => !!value || 'Podaj ponownie hasło',
+                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
+            ]
+        }
+
+    },
+
+    methods: {
+        nextStep(){
+
+            let account = {
+                login: this.c_login,
+                email: this.c_email,
+                password: this.c_password,
+            }
+
+            this.$emit('next',account)
+            
+        }
+    },
+}
+</script>
+
+<style scoped>
+
+    .register-component{
+        width: 100%;
+        /* height: 60%; */
+        background-color: rgb(251, 252, 253);
+        
+        align-self: center;
+        /* border-radius: 10px; */
+        /* padding: 2rem; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        max-width: 550px;
+    }
+
+    .input{
+        margin-top: 0.75rem;
+        font-family: 'Segoe UI';
+        font-weight: 600;
+        
+    }
+
+    .title{
+        /* margin: 0 auto; */
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        font-family: 'Segoe UI';
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+
+    .cell{
+        display: block;
+        /* vertical-align: middle; */
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 0.25rem;
+        /* border: 1px solid red; */
+    }
+
+    .cell__label{
+        font-family: 'Segoe UI';
+        font-weight: 450;
+        margin-bottom: 1rem;
+    }
+
+    .align-right{
+        text-align: right;
+    }
+
+    .submit__btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-family: 'Segoe UI';
+        font-weight: 500;
+        background-color: #007E33;
+    }
+
+    .align-center{
+        text-align: center;
+    }
+
+    .footer{
+        margin: auto;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    .cell > p {
+        font-family: 'Segoe UI';
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .relative{
+        position: relative;
+        height: 5rem;
+        margin-top: 1rem;
+    }
+
+    .cell__link{
+        display: inline;
+        text-decoration: none;
+        font-weight: 600;
+        color: #007E33;
+    }
+
+    .error{
+        margin-bottom: 1.5rem;
+    }
+
+    .error > p{
+        font-size: 0.8rem;
+        color: rgb(209, 33, 33);
+    }
+
+</style>

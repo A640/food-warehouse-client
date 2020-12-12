@@ -1,0 +1,282 @@
+<template>
+    <div class="register-component">
+
+        <div class="cell double">
+            <v-btn
+                icon 
+                @click="back()" 
+            >
+                <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+            <h2 class="title ml-3">Podaj swoje dane</h2>
+        </div>
+        
+
+
+        <form class="cell">
+            <label class="cell__label">Imie</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_name"
+                :rules="r_name"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        <form class="cell">
+            <label class="cell__label">Nazwisko</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_surname"
+                :rules="r_surname"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        <form class="cell">
+            <label class="cell__label">Teflon</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_phone"
+                :rules="r_phone"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+        <div class="cell">
+            <v-switch v-model="is_company" label="Mam firmę"></v-switch>
+        </div>
+        
+
+        <form class="cell" v-if="is_company">
+            <label class="cell__label">Nazwa firmy</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_company"
+                :rules="r_company"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        <form class="cell" v-if="is_company">
+            <label class="cell__label">NIP</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                type="number"
+                v-model="c_tax"
+                :rules="r_tax"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+
+
+        
+    
+
+        <div class="cell relative">
+            <v-btn class="submit__btn" fab elevation="1" @click="nextStep()"><v-icon>mdi-arrow-right</v-icon></v-btn>
+        </div>
+
+
+        
+    </div>
+</template>
+
+<script>
+export default {
+    
+    data() {
+        return{
+            is_company: false,
+            c_name: '',
+            c_surname: '',
+            c_phone: '',
+            c_company: '',
+            c_tax: '',
+
+            r_name: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+            ],
+
+            r_surname: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+            ],
+
+             r_phone: [
+                value => !!value || 'To pole jest wymagane!',
+                // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
+                value => (value || '').length >= 9 || 'Minimum 9 cyfr',
+            ],
+
+             r_company: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length <= 64 || 'Maksymalnie 64 znaków',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+            ],
+
+            r_tax: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length >= 8 || 'Hasło musi zawierać conajmniej 8 znaków',
+                value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
+                v => !v || /[a-z]+/.test(v) || 'Wymagana conajmniej jedna mała litera',
+                v => !v || /[A-Z]+/.test(v) || 'Wymagana conajmniej jedna duża litera',
+                v => !v || /[0-9]+/.test(v) || 'Wymagana conajmniej jedna cyfra',
+            ],
+
+            r_password2: [
+                (value) => !!value || 'Podaj ponownie hasło',
+                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
+            ],
+        }
+
+
+    },
+
+    methods: {
+        nextStep(){
+
+            let personal_details = {
+                name: this.c_name,
+                surname: this.c_surname,
+                phone: this.c_phone,
+                company: this.c_company,
+                tax: this.c_tax,
+            }
+
+            this.$emit('next',personal_details)
+            
+        },
+
+        back(){
+            this.$emit('back')
+        }
+    },
+}
+</script>
+
+<style soped>
+
+    .register-component{
+        width: 100%;
+        /* height: 60%; */
+        background-color: rgb(251, 252, 253);
+        
+        align-self: center;
+        /* border-radius: 10px; */
+        /* padding: 2rem; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        max-width: 550px;
+        padding-bottom: 1.5rem;
+    }
+
+    .input{
+        margin-top: 0.75rem;
+        font-family: 'Segoe UI';
+        font-weight: 600;
+        
+    }
+
+    .title{
+        /* margin: 0 auto; */
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        font-family: 'Segoe UI';
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+
+    .cell{
+        display: block;
+        /* vertical-align: middle; */
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 0.25rem;
+        /* border: 1px solid red; */
+    }
+
+    .cell__label{
+        font-family: 'Segoe UI';
+        font-weight: 450;
+        margin-bottom: 1rem;
+    }
+
+    .align-right{
+        text-align: right;
+    }
+
+    .submit__btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-family: 'Segoe UI';
+        font-weight: 500;
+        background-color: #007E33;
+    }
+
+    .align-center{
+        text-align: center;
+    }
+
+    .footer{
+        margin: auto;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    .cell > p {
+        font-family: 'Segoe UI';
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .relative{
+        position: relative;
+        height: 5rem;
+        /* border: solid 1px rgb(209, 33, 33); */
+        margin-top: 1rem;
+    }
+
+    .cell__link{
+        display: inline;
+        text-decoration: none;
+        font-weight: 600;
+        color: #007E33;
+    }
+
+    .error{
+        margin-bottom: 1.5rem;
+    }
+
+    .error > p{
+        font-size: 0.8rem;
+        color: rgb(209, 33, 33);
+    }
+
+    .inline{
+        display: inline;
+    }
+
+    .double{
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+    }
+
+</style>

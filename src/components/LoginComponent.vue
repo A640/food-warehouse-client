@@ -37,7 +37,7 @@
 
         <div class="cell align-center footer">
             <p>Nie masz konta?
-            <router-link to="/rejestracja" class="cell__link">Zarejestruj się</router-link>
+            <router-link to="/register" class="cell__link">Zarejestruj się</router-link>
             </p>
         </div>
 
@@ -61,7 +61,7 @@ export default {
     methods: {
         login(){
             let credentials = {
-                email: this.c_login,
+                username: this.c_login,
                 password: this.c_password,
             };
             console.log(credentials);
@@ -105,7 +105,7 @@ export default {
     }
 
     .input{
-        margin-top: 2rem;
+        margin-top: 1rem;
         font-family: 'Segoe UI';
         font-weight: 600;
         

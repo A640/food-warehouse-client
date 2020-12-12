@@ -6,14 +6,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    adress: "localhost",
+    port: 8090,
   },
   mutations: {
+    
   },
   actions: {
     login(context,credentials){
       return new Promise(function(resolve,reject){
-        axios.post('http://localhost:8090/login', credentials)
+
+        console.log(context.getters.getServerAddress);
+
+        axios.post(context.getters.getServerAddress +'/login', credentials)
               .then((response) =>{
+
                 if (response.status === 200) {
                   const jwtToken = response.headers['authorization'];
                   if (jwtToken) {
@@ -28,13 +35,21 @@ export default new Vuex.Store({
                   reject("bad credentials")
                 }
               }, (error) =>{
+
                 console.error("Błąd przy logowaniu");
                 console.log(error);
                 reject(error);
         });
       });
     },
+
+   
   },
   modules: {
+  },
+  getters: {
+    getServerAddress(context){
+      return 'http://' + context.adress + ':' + String(context.port)
+    },
   }
 })
