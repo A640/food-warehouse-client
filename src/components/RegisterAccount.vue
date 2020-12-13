@@ -5,10 +5,7 @@
             <h2 class="title">Utwórz konto</h2>
         </div>
        
-
-        <div class="cell error" v-if="c_error">
-            <p>Podano niewłaściwe dane logowania. Popraw dane i spróbuj ponownie</p>
-        </div>
+        <v-form ref="accountForm" @submit.prevent="nextStep">
 
         <form class="cell">
             <label class="cell__label">Login</label>
@@ -31,6 +28,7 @@
                 solo
                 v-model="c_email"
                 :rules="r_email"
+                :error-messages="e_email"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
@@ -72,11 +70,11 @@
 
         <div class="cell align-center footer">
             <p>Masz już konto?
-            <router-link to="/login" class="cell__link">Zaloguj się</router-link>
+            <router-link :to="{name: 'Login'}" class="cell__link">Zaloguj się</router-link>
             </p>
         </div>
 
-        
+        </v-form>
     </div>
 </template>
 
@@ -92,6 +90,7 @@ export default {
             c_password2: '',
             c_error: false,
             e_login: [],
+            e_email: [],
 
             r_login: [
                 value => !!value || 'To pole jest wymagane!',
@@ -121,15 +120,25 @@ export default {
     },
 
     methods: {
+
+        allValidated(){
+            if(this.$refs.accountForm.validate() && this.e_login.length == 0 && this.e_email.length == 0){
+                return true;
+            }
+            return false
+        },
+
         nextStep(){
 
-            let account = {
-                login: this.c_login,
-                email: this.c_email,
-                password: this.c_password,
-            }
+            if(this.allValidated()){
+                 let account = {
+                    login: this.c_login,
+                    email: this.c_email,
+                    password: this.c_password,
+                }
 
-            this.$emit('next',account)
+                this.$emit('next',account)
+            }
             
         },
 
@@ -139,6 +148,12 @@ export default {
         c_login (val) {
             this.$store.dispatch('checkLogin',val).then(valid => {
                 this.e_login = valid ?  ['Ten login jest zajęty! Wybierz inny login.'] : [];
+            })
+        },
+
+         c_email (val) {
+            this.$store.dispatch('checkEmail',val).then(valid => {
+                this.e_email = valid ?  ['Ten email jest już w użyciu! Podaj inny adres.'] : [];
             })
         },
     },

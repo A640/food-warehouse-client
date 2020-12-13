@@ -12,6 +12,7 @@
         </div>
         
 
+        <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
             <label class="cell__label">Imie</label>
@@ -87,7 +88,7 @@
             <v-btn class="submit__btn" fab elevation="1" @click="nextStep()"><v-icon>mdi-arrow-right</v-icon></v-btn>
         </div>
 
-
+        </v-form>
         
     </div>
 </template>
@@ -122,20 +123,8 @@ export default {
                 value => (value || '').length >= 9 || 'Minimum 9 cyfr',
             ],
 
-             r_company: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 64 || 'Maksymalnie 64 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
-            ],
-
-            r_tax: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length >= 8 || 'Hasło musi zawierać conajmniej 8 znaków',
-                value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
-                v => !v || /[a-z]+/.test(v) || 'Wymagana conajmniej jedna mała litera',
-                v => !v || /[A-Z]+/.test(v) || 'Wymagana conajmniej jedna duża litera',
-                v => !v || /[0-9]+/.test(v) || 'Wymagana conajmniej jedna cyfra',
-            ],
+            r_company: [],
+            r_tax: [],
 
             r_password2: [
                 (value) => !!value || 'Podaj ponownie hasło',
@@ -147,23 +136,69 @@ export default {
     },
 
     methods: {
+
+        allValidated(){
+            if(this.$refs.detailsForm.validate()){
+                return true;
+            }
+            return false
+        },
+
         nextStep(){
 
-            let personal_details = {
-                name: this.c_name,
-                surname: this.c_surname,
-                phone: this.c_phone,
-                company: this.c_company,
-                tax: this.c_tax,
-            }
+            if(this.allValidated()){
 
-            this.$emit('next',personal_details)
+                
+
+                let personal_details = {
+                    name: this.c_name,
+                    surname: this.c_surname,
+                    phone: this.c_phone,
+                    company: this.c_company,
+                    tax: this.c_tax,
+                }
+
+                if(!this.is_company){
+                    this.c_company = '';
+                    this.c_tax = '';
+                    personal_details.company = null;
+                    personal_details.tax = null;
+                }
+
+                this.$emit('next',personal_details)
+            }
+            
             
         },
 
         back(){
             this.$emit('back')
         }
+    },
+
+    watch: {
+        is_company (val) {
+            console.log("company")
+            console.log(val)
+            if(val){
+                this.r_company = [
+                    value => !!value || 'To pole jest wymagane!',
+                    value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
+                    value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                ];
+
+                this.r_tax = [
+                    value => !!value || 'To pole jest wymagane!',
+                    value => (value || '').length == 12 || 'NIP powinien zawierać 12 znaków',
+                ];
+            }
+            else{
+                this.r_company = [];
+
+                this.r_tax = [];
+            }
+        },
+
     },
 }
 </script>

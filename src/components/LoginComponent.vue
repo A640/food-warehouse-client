@@ -2,8 +2,8 @@
     <div class="login-component">
         <h2 class="title">Zaloguj się</h2>
 
-        <div class="cell error" v-if="c_error">
-            <p>Podano niewłaściwe dane logowania. Popraw dane i spróbuj ponownie</p>
+        <div class="cell credentials_error" v-if="c_error">
+            <p>Podano niewłaściwe dane logowania. Popraw dane i spróbuj ponownie.</p>
         </div>
 
         <form class="cell">
@@ -37,7 +37,7 @@
 
         <div class="cell align-center footer">
             <p>Nie masz konta?
-            <router-link to="/register" class="cell__link">Zarejestruj się</router-link>
+            <router-link :to="{name: 'Register'}" class="cell__link">Zarejestruj się</router-link>
             </p>
         </div>
 
@@ -91,7 +91,7 @@ export default {
 
     .login-component{
         width: 50%;
-        height: 60%;
+        min-height: 60%;
         background-color: rgb(251, 252, 253);
         
         align-self: center;
@@ -167,6 +167,8 @@ export default {
         position: relative;
         height: 3rem;
         margin-top: 1rem;
+        margin-bottom: 2rem;
+        /* border: solid 1px red; */
     }
 
     .cell__link{
@@ -176,11 +178,11 @@ export default {
         color: #007E33;
     }
 
-    .error{
+    .credentials_error{
         margin-bottom: 1.5rem;
     }
 
-    .error > p{
+    .credentials_error > p{
         font-size: 0.8rem;
         color: rgb(209, 33, 33);
     }

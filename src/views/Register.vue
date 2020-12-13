@@ -85,6 +85,29 @@ export default {
             console.log(data);
             this.address = data;
 
+            if(this.account != null && this.personal_details != null && this.address != null){
+                let r_data = {
+                    account: this.account,
+                    personal_data: this.personal_details,
+                    adress: this.address,
+                }
+                this.$store.dispatch('register', r_data)
+                .then((result) =>{
+                    console.log(result);
+                    if(result == true){
+                        console.log("zarejestrowaned");
+                        this.$router.push({ name: 'Admin'});
+                    }
+                },(error) =>{
+                    if(error == "bad credentials"){
+                        console.log("nieprawidłowe dane logowania");
+                        this.c_error = true;
+                    }
+                    else{
+                        console.log("problem z połączeniem");
+                    }
+                })
+            }
             
         },
 

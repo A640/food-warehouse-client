@@ -11,7 +11,7 @@
             <h2 class="title ml-3">Podaj swój adres</h2>
         </div>
         
-
+        <v-form ref="addressForm" @submit.prevent="nextStep">
         <form class="cell">
             <label class="cell__label">Ulica</label>
             <v-text-field
@@ -115,7 +115,7 @@
         <div class="cell relative">
             <v-btn class="submit__btn" @click="nextStep()">Utwórz konto</v-btn>
         </div>
-
+        </v-form>
 
         
     </div>
@@ -184,22 +184,33 @@ export default {
     },
 
     methods: {
+        
+        allValidated(){
+            if(this.$refs.addressForm.validate()){
+                return true;
+            }
+            return false
+        },
 
         nextStep(){
 
-            let pc = String(this.c_pc1) + " - " + String(this.c_pc2);
-            console.log(pc)
+            if(this.allValidated()){
+                let pc = String(this.c_pc1) + " - " + String(this.c_pc2);
+                console.log(pc)
 
-            let address = {
-                street: this.c_street,
-                building_num: this.c_building_num,
-                apartment_num: this.c_apartment_num,
-                town: this.c_town,
-                pc: pc,
-                country: this.c_country,
+                let address = {
+                    street: this.c_street,
+                    building_num: this.c_building_num,
+                    apartment_num: this.c_apartment_num,
+                    town: this.c_town,
+                    pc: pc,
+                    country: this.c_country,
+                }
+
+                this.$emit('next',address)
             }
 
-            this.$emit('next',address)
+            
             
         },
 
