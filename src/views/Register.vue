@@ -89,19 +89,18 @@ export default {
                 let r_data = {
                     account: this.account,
                     personal_data: this.personal_details,
-                    adress: this.address,
+                    address: this.address,
                 }
                 this.$store.dispatch('register', r_data)
                 .then((result) =>{
                     console.log(result);
                     if(result == true){
                         console.log("zarejestrowaned");
-                        this.$router.push({ name: 'Admin'});
+                        this.$router.push({ name: 'RegisterSuccess'});
                     }
                 },(error) =>{
-                    if(error == "bad credentials"){
-                        console.log("nieprawidłowe dane logowania");
-                        this.c_error = true;
+                    if(error == "cannot create"){
+                        alert("Nie udało się utworzyć konta")
                     }
                     else{
                         console.log("problem z połączeniem");

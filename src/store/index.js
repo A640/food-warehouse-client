@@ -60,8 +60,9 @@ export default new Vuex.Store({
       return new Promise(function(resolve,reject){
 
         console.log(context.getters.getServerAddress);
+        console.log(data);
 
-        axios.post(context.getters.getServerAddress +'/register/username',data)
+        axios.post(context.getters.getServerAddress +'/register',data)
           .then((response) =>{
 
             if (response.status === 200) {
@@ -85,7 +86,7 @@ export default new Vuex.Store({
               console.log(error.response.status);
               console.log(error.response.headers);
 
-              if(error.response.status == 403){
+              if(error.response.status == 400){
                 reject("cannot create")
               }
             } else if (error.request) {

@@ -132,7 +132,7 @@ export default {
 
             if(this.allValidated()){
                  let account = {
-                    login: this.c_login,
+                    username: this.c_login,
                     email: this.c_email,
                     password: this.c_password,
                 }
