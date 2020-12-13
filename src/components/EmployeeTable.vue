@@ -28,7 +28,7 @@
 
 <script>
 import Delete from '@/components/DeleteConfirmation.vue';
-import Edit from '@/components/EditEmployee.vue';
+import Edit from '@/components/EditEmployeePopup.vue';
 
 
 export default {

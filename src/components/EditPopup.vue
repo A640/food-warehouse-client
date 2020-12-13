@@ -8,11 +8,11 @@
                 <v-icon>mdi-plus</v-icon>
             </v-btn>
         </template>
-        <v-card>
-            <v-card-title>
-                <h2 class="mb-2 mt-3">{{ title() }}</h2>
-                <br/>
-            </v-card-title>
+        <v-card class="pop-card">
+
+            <div class="cell ">
+                <h2 class="pop title">{{ title() }}</h2>
+            </div>
             
             <slot></slot>
            
@@ -21,11 +21,11 @@
                 <v-spacer></v-spacer>
                 <v-btn text class="mb-3" @click="dialog = false">Anuluj</v-btn>
                 <v-btn 
-                 color="red lighten-1" 
+                 color="blue lighten-1" 
                  class="mb-3 mr-2" 
                  dark 
                  @click="deleteFromDB(id)"
-                >Usuń</v-btn>
+                >Zapisz</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -80,3 +80,24 @@ export default {
     
 }
 </script>
+
+<style scoped>
+
+    .cell{
+        display: block;
+        /* vertical-align: middle; */
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 0.25rem;
+        /* border: 1px solid red; */
+    }
+    .pop-card{
+        padding-top: 2rem;
+    }
+
+    .pop-title{
+        /* margin-top: 1rem; */
+        margin-bottom: 1rem;
+    }
+
+</style>

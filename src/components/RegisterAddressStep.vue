@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style soped>
+<style scoped>
 
     .register-component{
         width: 100%;
