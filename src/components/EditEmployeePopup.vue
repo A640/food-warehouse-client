@@ -1,5 +1,5 @@
 <template>
-    <popup :id="id" :edit="edit" >
+    <popup :id="id" :edit="edit" v-slot="scope" >
         
         <div class="cell ">
             <p class="section-title">Konto</p>
@@ -7,10 +7,21 @@
 
         <edit-account 
             :pid="-1" 
-            :validate="validate_trigger" 
+            :validate="validate_trigger_a" 
             @dataUpdate="updateDataAccount" 
             @allValidated="validateA"
         />
+
+        
+        <div class="cell">
+            <label class="cell__label">Rodzaj użytkownika</label>
+            <v-autocomplete
+                solo
+                v-model="c_user_type"
+                :items="u_types"
+            ></v-autocomplete>
+        </div>
+        
 
         <div class="cell ">
             <p class="section-title">Pracownik</p>
@@ -18,12 +29,20 @@
 
         <edit-employee
             :pid="-1" 
-            :validate="validate_trigger" 
+            :validate="validate_trigger_e" 
             @dataUpdate="updateDataEmployee" 
             @allValidated="validateE"
         />
 
-        
+        <div class="cell ">
+            <v-btn text class="mr-2 mb-5" @click="scope.close">Anuluj</v-btn>
+            <v-btn 
+            color="blue lighten-1" 
+            class="mb-5" 
+            dark 
+            @click="validate()"
+            >Zapisz</v-btn>
+        </div>
 
      </popup>
 </template>
@@ -53,11 +72,15 @@ export default {
 
     data() {
         return{
-            validate_trigger: false,
+            validate_trigger_a: false,
+            validate_trigger_e: false,
             account: null,
             employee: null,
             a_validated: false,
             e_validated: false,
+
+            c_user_type: 'Employee',
+            u_types: [],
         }
 
     },
@@ -75,17 +98,39 @@ export default {
         validate(){
             this.a_validated = false;
             this.e_validated = false;
-            this.validate_trigger = true;
+            this.validate_trigger_a = true;
+            this.validate_trigger_e = true;
         },
 
         validateA(value){
             this.a_validated = value;
-            this.validate_trigger = false;
+            this.validate_trigger_a = false;
+            if(value == true && this.e_validated == true && this.c_user_type != null && this.c_user_type != ''){
+                this.eSave();
+            }
         },
 
         validateE(value){
             this.e_validated = value;
-            this.validate_trigger = false;
+            this.validate_trigger_e = false;
+            if(value == true && this.a_validated == true && this.c_user_type != null && this.c_user_type != ''){
+                this.eSave();
+            }
+        },
+
+        eSave(){
+
+            let obj = {
+                edit: this.edit,
+                data:{ 
+                    account: this.account,
+                    personal_data: this.employee, 
+                }
+            };
+            obj.data.account.permission = this.c_user_type;
+            console.log("save new employee attempt");
+            console.log(obj);
+            this.$store.dispatch('editEmployee',obj);
         },
 
         nextStep(validated){
@@ -95,6 +140,14 @@ export default {
             this.validate_trigger = false;
         },
 
+        dialogClose(){
+            this.$emit('closeDialog');
+        }
+    },
+
+    mounted() {
+        let module = require("@/assets/userTypes.js");
+        this.u_types = module.array;
     },
 }
 </script>

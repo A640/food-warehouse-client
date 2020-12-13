@@ -8,9 +8,13 @@ export default new Vuex.Store({
   state: {
     adress: "localhost",
     port: 8090,
+    employees: [],
+    customers: [],
   },
   mutations: {
-    
+    setEmployees(context,data){
+      context.employees = data;
+    }
   },
   actions: {
     login(context,credentials){
@@ -159,7 +163,40 @@ export default new Vuex.Store({
       });
     },
 
-  
+    editEmployee(context,data){
+      return new Promise(function(resolve,reject){
+        let obj = data.data;
+
+        if(data.edit == true){
+            console.log("Employee edit")
+        }else{
+          console.log(obj);        
+          axios.post(context.getters.getServerAddress +'/employee',obj)
+            .then((response) =>{
+
+              if (response.status === 200) {
+
+                resolve(true)
+                 
+              }else{
+                reject("Błąd przy połączeniu")
+              }
+            }, (error) =>{
+
+              console.error("Błąd przy połączeniu");
+              console.log(error);
+              reject(error);
+            });
+        }
+      });
+    },
+
+    getAllEmployees(context){
+      axios.get(context.getters.getServerAddress +'/register/email')
+      .then( (data) => {
+          context.commit('setEmployees',data);
+      })
+    }
   },
   modules: {
   },

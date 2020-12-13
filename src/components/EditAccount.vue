@@ -70,6 +70,7 @@ export default {
         pid: {
             default: -1,
         },
+        
         validate: {
             type: Boolean,
             default: false,

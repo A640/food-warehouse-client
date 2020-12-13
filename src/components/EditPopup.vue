@@ -8,30 +8,24 @@
                 <v-icon>mdi-plus</v-icon>
             </v-btn>
         </template>
-        <v-card class="pop-card">
-
-            <div class="cell ">
-                <h2 class="pop title">{{ title() }}</h2>
-            </div>
+        <div class="pop-card">
+            <div class="pop-wrapper">
+                <div class="cell pop-title">
+                    <h2 class="pop-title__text">{{ title() }}</h2>
+                </div>
+                
+                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                    <slot :close="closeDialog"></slot>
             
-            <slot></slot>
-           
-
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn text class="mb-3" @click="dialog = false">Anuluj</v-btn>
-                <v-btn 
-                 color="blue lighten-1" 
-                 class="mb-3 mr-2" 
-                 dark 
-                 @click="deleteFromDB(id)"
-                >Zapisz</v-btn>
-            </v-card-actions>
-        </v-card>
+                </simplebar>
+            </div>
+        </div>
     </v-dialog>
 </template>
 
 <script>
+import simplebar from 'simplebar-vue';
+
 export default {
     props: {
         id:{
@@ -42,6 +36,10 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+
+    components: {
+        simplebar,
     },
 
     data() {
@@ -76,6 +74,10 @@ export default {
 
             return title;
         },
+
+        closeDialog(){
+            this.dialog=false;
+        }
     },
     
 }
@@ -93,11 +95,31 @@ export default {
     }
     .pop-card{
         padding-top: 2rem;
+        background-color: white;
+    }
+
+    .pop-wrapper{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 
     .pop-title{
         /* margin-top: 1rem; */
         margin-bottom: 1rem;
+        order: 1;
+    }
+
+     .pop-title__text{
+        /* margin-top: 1rem; */
+        margin-bottom: 1rem;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    .pop-content{
+        order: 2;
+        flex-grow: 1;
     }
 
 </style>

@@ -1,100 +1,60 @@
 <template>
-    <v-form ref="addressForm" @submit.prevent="nextStep">
+    <v-form ref="employeeForm" @submit.prevent="nextStep">
         <form class="cell">
-            <label class="cell__label">Ulica</label>
+            <label class="cell__label">Imie</label>
             <v-text-field
                 class="input"
                 label=""
                 solo
-                v-model="c_street"
-                :rules="r_street"
+                v-model="c_name"
+                :rules="r_name"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
 
-
-        <form class="cell double">
-            <div class="mr-5">
-                <label class="cell__label">Numer budynku</label>
-                <v-text-field
-                    class="input"
-                    label=""
-                    solo
-                    v-model="c_building_num"
-                    :rules="r_building_num"
-                    v-on:keyup.enter.stop
-                ></v-text-field>
-            </div>
-            <div class="ml-5">
-                <label class="cell__label">Numer mieszkania</label>
-                <v-text-field
-                    class="input"
-                    label=""
-                    solo
-                    v-model="c_apartment_num"
-                    :rules="r_apartment_num"
-                    v-on:keyup.enter.stop
-                ></v-text-field>
-            </div>    
-
-
-        </form>
-
         <form class="cell">
-            
-        </form>
-
-        <form class="cell">
-            <label class="cell__label">Miejscowość</label>
+            <label class="cell__label">Nazwisko</label>
             <v-text-field
                 class="input"
                 label=""
                 solo
-                v-model="c_town"
-                :rules="r_town"
+                v-model="c_surname"
+                :rules="r_surname"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
 
-        <form class="cell" >
-            <label class="cell__label">Kod pocztowy</label>
-            <div class="double">
-                <v-text-field
-                class="pc-input input inline mr-5"
-                label=""
-                type="number"
-                solo       
-                v-model="c_pc1"
-                :rules="r_pc1"
-                v-on:keyup.enter.stop
-            ></v-text-field>
-
-            <p>-</p>
-
+        <form class="cell">
+            <label class="cell__label">Nazwa stanowiska</label>
             <v-text-field
-                class="pc-input input inline ml-5"
+                class="input"
                 label=""
-                type="number"
                 solo
-                v-model="c_pc2"
-                :rules="r_pc2"
+                v-model="c_position"
+                :rules="r_position"
                 v-on:keyup.enter.stop
             ></v-text-field>
-            </div>
-            
-            
         </form>
 
 
-        <div class="cell">
-            <label class="cell__label">Kraj</label>
-            <v-autocomplete
+        <form class="cell">
+            <label class="cell__label">Wypłata</label>
+            <v-text-field
+                class="input"
+                label=""
+                type="number"
                 solo
-                :rules="r_country"
-                v-model="c_country"
-                :items="country"
-            ></v-autocomplete>
-        </div>
+                v-model="c_salary"
+                :rules="r_salary"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+
+        
+
+
+        
     </v-form>
 </template>
 
@@ -113,52 +73,37 @@ export default {
 
     data() {
         return{
-            is_company: false,
-            c_street: '',
-            c_building_num: '',
-            c_apartment_num: '',
-            c_town: '',
-            c_pc1: '',
-            c_pc2: '',
-            c_country: 'PL',
+            c_name: '',
+            c_surname: '',
+            c_position: '',
+            c_salary: 0,
 
-            r_street: [
-                value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
-            ],
-
-            r_building_num: [
+            r_name: [
                 value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
-            r_apartment_num: [
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+            r_surname: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
-            r_town: [
+            r_position: [
                 value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 128 || 'Maksymalnie 128 znaki',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
-            r_pc1: [
+            r_salary: [
                 value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length == 2 || 'Kod musi zawierać 2 cyfry',
-                v => !v || /[0-9]{2}/.test(v) || 'Nieprawidłowy format kodu',
+                value => value < 100000 || 'Zbyt duża wartość',
+                value => value >= 0 || 'Nie można wprowadzić wartości ujemnej',
             ],
-
-            r_pc2: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length == 3 || 'Kod musi zawierać 3 cyfry',
-                v => !v || /[0-9]{3}/.test(v) || 'Nieprawidłowy format kodu',
-            ],
-
-            r_country: [
-                 value => !!value || 'To pole jest wymagane!',
-            ],
-
-            country: [],
 
         }
 
@@ -169,7 +114,7 @@ export default {
     methods: {
         
         allValidated(){
-            if(this.$refs.addressForm.validate()){
+            if(this.$refs.employeeForm.validate()){
                 return true;
             }
             return false
@@ -183,27 +128,18 @@ export default {
         validate (val) {
             if(val == true){
                 if(this.allValidated()){
-                    let pc = String(this.c_pc1) + " - " + String(this.c_pc2);
-                    console.log(pc)
+                  
 
-                    let address = {
-                        street: this.c_street,
-                        building_number: String(this.c_building_num),
-                        apartment_number: String(this.c_apartment_num),
-                        town: this.c_town,
-                        postal_code: pc,
-                        country: this.c_country,
+                    let employee = {
+                        name: this.c_name,
+                        surname: this.c_surname,
+                        position: this.c_position,
+                        salary: this.c_salary,
                     }
 
-                    if(address.street == ''){
-                        address.street = null;
-                    }
+                   
 
-                    if(address.apartment_number == ''){
-                        address.apartment_number = null;
-                    }
-
-                    this.$emit('dataUpdate',address);
+                    this.$emit('dataUpdate',employee);
                     this.$emit('allValidated',true);
                 }
                 else{
