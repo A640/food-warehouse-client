@@ -141,12 +141,12 @@ export default {
             r_building_num: [
                 value => !!value || 'To pole jest wymagane!',
                 value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
-                v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
+                // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_apartment_num: [
                 value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
-                v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
+                // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_town: [
