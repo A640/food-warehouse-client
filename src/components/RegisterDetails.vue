@@ -152,7 +152,7 @@ export default {
                 let personal_details = {
                     name: this.c_name,
                     surname: this.c_surname,
-                    phone_umber: this.c_phone,
+                    phone_number: this.c_phone,
                     firm_name: this.c_company,
                     tax_id: this.c_tax,
                 }

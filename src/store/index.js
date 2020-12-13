@@ -26,7 +26,8 @@ export default new Vuex.Store({
               if (jwtToken) {
                   localStorage.setItem('jwtToken', jwtToken);
                   console.log("zalogowaned")
-                  resolve(true)
+                  const permission = response.data['permission'];
+                  resolve(permission)
               }
               else{
                 reject("opcja 1");
@@ -68,7 +69,7 @@ export default new Vuex.Store({
             if (response.status === 200) {
               let created = response.data['result'];
               created = created.created;
-        
+
               if(created) {
                 resolve(true)
               }

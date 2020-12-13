@@ -68,9 +68,23 @@ export default {
             this.$store.dispatch('login',credentials)
             .then((result) =>{
                 console.log(result);
-                if(result == true){
+                if(result == 'Admin'){
                     console.log("przechodzimy na admina");
                     this.$router.push({ name: 'Admin'});
+                } else if(result == 'Manager'){
+                    console.log("przechodzimy na menedżera");
+                    this.$router.push({ name: 'Admin'});
+                } else if(result == 'Employee'){
+                    console.log("przechodzimy na pracownika");
+                    this.$router.push({ name: 'Admin'});
+                } else if(result == 'Supplier'){
+                    console.log("przechodzimy na dostawcę");
+                    this.$router.push({ name: 'Admin'});
+                } else if(result == 'Customer'){
+                    console.log("przechodzimy na klienta");
+                    this.$router.push({ name: 'Home'});
+                } else{
+                    console.log("Nie rozpoznano typu użytkownika");
                 }
             },(error) =>{
                 if(error == "bad credentials"){
