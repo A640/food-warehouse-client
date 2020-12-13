@@ -30,7 +30,6 @@
                 <label class="cell__label">Numer budynku</label>
                 <v-text-field
                     class="input"
-                    type="number"
                     label=""
                     solo
                     v-model="c_building_num"
@@ -42,7 +41,6 @@
                 <label class="cell__label">Numer mieszkania</label>
                 <v-text-field
                     class="input"
-                    type="number"
                     label=""
                     solo
                     v-model="c_apartment_num"
