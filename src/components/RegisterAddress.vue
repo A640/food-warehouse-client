@@ -200,11 +200,19 @@ export default {
 
                 let address = {
                     street: this.c_street,
-                    building_num: this.c_building_num,
-                    apartment_num: this.c_apartment_num,
+                    building_num: String(this.c_building_num),
+                    apartment_num: String(this.c_apartment_num),
                     town: this.c_town,
                     pc: pc,
                     country: this.c_country,
+                }
+
+                if(address.street == ''){
+                    address.street = null;
+                }
+
+                if(address.apartment_num == ''){
+                    address.street = null;
                 }
 
                 this.$emit('next',address)

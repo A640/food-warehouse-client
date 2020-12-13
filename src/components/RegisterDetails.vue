@@ -72,7 +72,6 @@
                 class="input"
                 label=""
                 solo
-                type="number"
                 v-model="c_tax"
                 :rules="r_tax"
                 v-on:keyup.enter.stop
