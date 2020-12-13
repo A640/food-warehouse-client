@@ -1,17 +1,5 @@
 <template>
-    <div class="register-component">
-
-        <div class="cell double">
-            <v-btn
-                icon
-                @click="back()" 
-            >
-                <v-icon>mdi-chevron-left</v-icon>
-            </v-btn>
-            <h2 class="title ml-3">Podaj swój adres</h2>
-        </div>
-        
-        <v-form ref="addressForm" @submit.prevent="nextStep">
+    <v-form ref="addressForm" @submit.prevent="nextStep">
         <form class="cell">
             <label class="cell__label">Ulica</label>
             <v-text-field
@@ -107,22 +95,22 @@
                 :items="country"
             ></v-autocomplete>
         </div>
-        
-    
-
-        <div class="cell relative">
-            <v-btn class="submit__btn" @click="nextStep()">Utwórz konto</v-btn>
-        </div>
-        </v-form>
-
-        
-    </div>
+    </v-form>
 </template>
 
 <script>
-
 export default {
-    
+
+    props: {
+        pid: {
+            default: -1,
+        },
+        validate: {
+            type: Boolean,
+            default: false,
+        },
+    },
+
     data() {
         return{
             is_company: false,
@@ -176,10 +164,7 @@ export default {
 
     },
 
-    mounted() {
-        let module = require("@/assets/countries.js");
-        this.country = module.array;
-    },
+   
 
     methods: {
         
@@ -190,156 +175,63 @@ export default {
             return false
         },
 
-        nextStep(){
+    },
 
-            if(this.allValidated()){
-                let pc = String(this.c_pc1) + " - " + String(this.c_pc2);
-                console.log(pc)
 
-                let address = {
-                    street: this.c_street,
-                    building_number: String(this.c_building_num),
-                    apartment_number: String(this.c_apartment_num),
-                    town: this.c_town,
-                    postal_code: pc,
-                    country: this.c_country,
+    watch: {
+
+        validate (val) {
+            if(val == true){
+                if(this.allValidated()){
+                    let pc = String(this.c_pc1) + " - " + String(this.c_pc2);
+                    console.log(pc)
+
+                    let address = {
+                        street: this.c_street,
+                        building_number: String(this.c_building_num),
+                        apartment_number: String(this.c_apartment_num),
+                        town: this.c_town,
+                        postal_code: pc,
+                        country: this.c_country,
+                    }
+
+                    if(address.street == ''){
+                        address.street = null;
+                    }
+
+                    if(address.apartment_number == ''){
+                        address.apartment_number = null;
+                    }
+
+                    this.$emit('dataUpdate',address);
+                    this.$emit('allValidated',true);
                 }
-
-                if(address.street == ''){
-                    address.street = null;
+                else{
+                    this.$emit('allValidated',false);
                 }
-
-                if(address.apartment_number == ''){
-                    address.apartment_number = null;
-                }
-
-                this.$emit('next',address)
             }
-
-            
-            
         },
 
-        back(){
-            this.$emit('back')
+    },
+
+    mounted() {
+        let module = require("@/assets/countries.js");
+        this.country = module.array;
+
+        if(this.pid == -1){
+            this.is_company = false;
+            this.c_name = '';
+            this.c_surname = '';
+            this.c_phone = '';
+            this.c_company = '';
+            this.c_tax = '';
+            this.r_company = [];
+            this.r_tax = [];
         }
+        else{
+            this.loadData(this.pid);
+        }
+
     },
 }
 </script>
-
-<style soped>
-
-    .register-component{
-        width: 100%;
-        /* height: 60%; */
-        background-color: rgb(251, 252, 253);
-        
-        align-self: center;
-        /* border-radius: 10px; */
-        /* padding: 2rem; */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        max-width: 550px;
-    }
-
-    .input{
-        margin-top: 0.75rem;
-        font-family: 'Segoe UI';
-        font-weight: 600;
-        
-    }
-
-    .pc-input{
-        width: 3rem;
-    }
-
-    .title{
-        /* margin: 0 auto; */
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-        font-family: 'Segoe UI';
-        font-weight: 600;
-        font-size: 1.3rem;
-    }
-
-    .cell{
-        display: block;
-        /* vertical-align: middle; */
-        width: 80%;
-        margin: 0 auto;
-        margin-bottom: 0.25rem;
-        /* border: 1px solid red; */
-    }
-
-    .cell__label{
-        font-family: 'Segoe UI';
-        font-weight: 450;
-        margin-bottom: 1rem;
-    }
-
-    .align-right{
-        text-align: right;
-    }
-
-    .submit__btn{
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-family: 'Segoe UI';
-        font-weight: 500;
-        background-color: #007E33;
-    }
-
-    .align-center{
-        text-align: center;
-    }
-
-    .footer{
-        margin: auto;
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-    }
-
-    .cell > p {
-        font-family: 'Segoe UI';
-        font-weight: 500;
-        font-size: 1rem;
-    }
-
-    .relative{
-        position: relative;
-        height: 3rem;
-        margin-top: 1rem;
-    }
-
-    .cell__link{
-        display: inline;
-        text-decoration: none;
-        font-weight: 600;
-        color: #007E33;
-    }
-
-    .error{
-        margin-bottom: 1.5rem;
-    }
-
-    .error > p{
-        font-size: 0.8rem;
-        color: rgb(209, 33, 33);
-    }
-
-    .inline{
-        display: inline;
-    }
-
-    .double{
-        display: flex;
-        flex-direction: row;
-        align-items: baseline;
-    }
-
-    
-
-</style>

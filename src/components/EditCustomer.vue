@@ -1,18 +1,5 @@
 <template>
-    <div class="register-component">
-
-        <div class="cell double">
-            <v-btn
-                icon 
-                @click="back()" 
-            >
-                <v-icon>mdi-chevron-left</v-icon>
-            </v-btn>
-            <h2 class="title ml-3">Podaj swoje dane</h2>
-        </div>
-        
-
-        <v-form ref="detailsForm" @submit.prevent="nextStep">
+    <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
             <label class="cell__label">Imie</label>
@@ -77,23 +64,21 @@
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
-
-
-
-        
-    
-
-        <div class="cell relative">
-            <v-btn class="submit__btn" fab elevation="1" @click="nextStep()"><v-icon>mdi-arrow-right</v-icon></v-btn>
-        </div>
-
-        </v-form>
-        
-    </div>
+    </v-form>
 </template>
 
 <script>
 export default {
+
+    props: {
+        pid: {
+            default: -1,
+        },
+        validate: {
+            type: Boolean,
+            default: false,
+        },
+    },
     
     data() {
         return{
@@ -130,8 +115,6 @@ export default {
                 (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
             ],
         }
-
-
     },
 
     methods: {
@@ -143,39 +126,16 @@ export default {
             return false
         },
 
-        nextStep(){
-
-            if(this.allValidated()){
-
-                
-
-                let personal_details = {
-                    name: this.c_name,
-                    surname: this.c_surname,
-                    phone_number: this.c_phone,
-                    firm_name: this.c_company,
-                    tax_id: this.c_tax,
-                }
-
-                if(!this.is_company){
-                    this.c_company = '';
-                    this.c_tax = '';
-                    personal_details.company = null;
-                    personal_details.tax = null;
-                }
-
-                this.$emit('next',personal_details)
-            }
-            
-            
+        loadData(id){
+            console.log("Get initial data: " + id);
+           // this.$store.getAccount(id)
         },
 
-        back(){
-            this.$emit('back')
-        }
+       
     },
 
     watch: {
+
         is_company (val) {
             console.log("company")
             console.log(val)
@@ -198,9 +158,54 @@ export default {
             }
         },
 
+        validate (val) {
+            if(val == true){
+                if(this.allValidated()){
+                    let personal_details = {
+                        name: this.c_name,
+                        surname: this.c_surname,
+                        phone_number: this.c_phone,
+                        firm_name: this.c_company,
+                        tax_id: this.c_tax,
+                    }
+
+                    if(!this.is_company){
+                        this.c_company = '';
+                        this.c_tax = '';
+                        personal_details.firm_name = null;
+                        personal_details.tax_id = null;
+                    }
+
+                    this.$emit('dataUpdate',personal_details);
+                    this.$emit('allValidated',true);
+                }
+                else{
+                    this.$emit('allValidated',false);
+                }
+            }
+        },
+
     },
+
+    mounted() {
+        if(this.pid == -1){
+            this.is_company = false;
+            this.c_name = '';
+            this.c_surname = '';
+            this.c_phone = '';
+            this.c_company = '';
+            this.c_tax = '';
+            this.r_company = [];
+            this.r_tax = [];
+        }
+        else{
+            this.loadData(this.pid);
+        }
+    },
+
 }
 </script>
+
 
 <style soped>
 

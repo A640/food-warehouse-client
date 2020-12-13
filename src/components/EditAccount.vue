@@ -1,10 +1,5 @@
 <template>
-    <div class="register-component">
-
-         <div class="cell">
-            <h2 class="title">Utwórz konto</h2>
-        </div>
-       
+    <div>
         <v-form ref="accountForm" @submit.prevent="nextStep">
 
         <form class="cell">
@@ -64,22 +59,22 @@
             ></v-text-field>
         </form>
 
-        <div class="cell relative">
-            <v-btn class="submit__btn" fab elevation="1" @click="nextStep()"><v-icon>mdi-arrow-right</v-icon></v-btn>
-        </div>
-
-        <div class="cell align-center footer">
-            <p>Masz już konto?
-            <router-link :to="{name: 'Login'}" class="cell__link">Zaloguj się</router-link>
-            </p>
-        </div>
-
         </v-form>
     </div>
 </template>
 
 <script>
 export default {
+
+    props: {
+        pid: {
+            default: -1,
+        },
+        validate: {
+            type: Boolean,
+            default: false,
+        },
+    },
     
     data() {
         return{
@@ -128,20 +123,10 @@ export default {
             return false
         },
 
-        nextStep(){
-
-            if(this.allValidated()){
-                 let account = {
-                    username: this.c_login,
-                    email: this.c_email,
-                    password: this.c_password,
-                }
-
-                this.$emit('next',account)
-            }
-            
-        },
-
+        loadData(id){
+            console.log("Get initial data: " + id);
+           // this.$store.getAccount(id)
+        }
     },
 
     watch: {
@@ -151,31 +136,52 @@ export default {
             })
         },
 
-         c_email (val) {
+        c_email (val) {
             this.$store.dispatch('checkEmail',val).then(valid => {
                 this.e_email = valid ?  ['Ten email jest już w użyciu! Podaj inny adres.'] : [];
             })
         },
+
+        validate (val) {
+            if(val == true){
+                if(this.allValidated()){
+                    let account = {
+                        username: this.c_login,
+                        email: this.c_email,
+                        password: this.c_password,
+                    }
+
+                    this.$emit('dataUpdate',account);
+                    this.$emit('allValidated',true);
+                }
+                else{
+                    this.$emit('allValidated',false);
+                }
+            }
+        }
     },
+
+    mounted() {
+        if(this.pid == -1){
+            this.passwd_show = false;
+            this.c_login = '';
+            this.c_email = '';
+            this.c_password = '';
+            this.c_password2 = '';
+            this.c_error = false;
+            this.e_login = [];
+            this.e_email = [];
+        }
+        else{
+            this.loadData(this.pid);
+        }
+    },
+
 }
 </script>
 
-<style scoped>
 
-    .register-component{
-        width: 100%;
-        /* height: 60%; */
-        background-color: rgb(251, 252, 253);
-        
-        align-self: center;
-        /* border-radius: 10px; */
-        /* padding: 2rem; */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        max-width: 550px;
-    }
+<style scoped>
 
     .input{
         margin-top: 0.75rem;

@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import Register1 from '@/components/RegisterAccount.vue'
-import Register2 from '@/components/RegisterDetails.vue'
-import Register3 from '@/components/RegisterAddress.vue'
+import Register1 from '@/components/RegisterAccountStep.vue'
+import Register2 from '@/components/RegisterDetailsStep.vue'
+import Register3 from '@/components/RegisterAddressStep.vue'
 
 export default {
     components: {
