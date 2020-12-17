@@ -8,7 +8,51 @@ export default new Vuex.Store({
   state: {
     adress: "localhost",
     port: 8090,
-    employees: [],
+    employees: [
+      {
+        id: 1,
+        name: 'Albert',
+        surname: 'Kanak',
+        position: 'Sprzątaczka',
+        salary: 12000,
+      },
+      {
+        id: 2,
+        name: 'Kamil',
+        surname: 'Bawaban',
+        position: 'Sprzątaczka',
+        salary: 20,
+      },
+      {
+        id: 3,
+        name: 'Bartłomiej',
+        surname: 'Liszek',
+        position: 'Sprzątaczka',
+        salary: 10000,
+      },
+      {
+        id: 4,
+        name: 'Tomasz',
+        surname: 'Dudzic',
+        position: 'SQL Genius',
+        salary: 12000,
+      },
+      {
+        id: 5,
+        name: 'Myster',
+        surname: 'Bujak',
+        position: 'Sprzątaczka',
+        salary: 100,
+      },
+      {
+        id: 6,
+        name: 'Dominik',
+        surname: 'Baran',
+        position: 'Sprzątaczka',
+        salary: 4600,
+      },
+      
+    ],
     customers: [],
   },
   mutations: {
@@ -192,17 +236,27 @@ export default new Vuex.Store({
     },
 
     getAllEmployees(context){
-      axios.get(context.getters.getServerAddress +'/register/email')
+      console.log("Gecik employee")
+      let token = localStorage.getItem('jwtToken')
+      axios.get(context.getters.getServerAddress +'/employee', { headers: { Authorization: `Bearer ${token}` }})
       .then( (data) => {
-          context.commit('setEmployees',data);
+          console.log(data)
+          context.commit('setEmployees',data.data.result);
       })
-    }
+    },
+
+    getEmployeeData(context, id){
+      return context.state.employees.find(employee => employee.id == id);
+    },
   },
   modules: {
   },
   getters: {
     getServerAddress(context){
       return 'http://' + context.adress + ':' + String(context.port)
+    },
+    getEmployees(context){
+      return context.employees;
     },
   }
 })

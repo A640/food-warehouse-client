@@ -35,6 +35,7 @@
                 :key="item.title"
                 :to="{name: item.link}"
                 link
+                @click="title = item.title"
             >
                 <v-list-item-icon>
                 <v-icon class="item-color">{{ item.icon }}</v-icon>
@@ -82,11 +83,11 @@ export default {
         drawer: true,
         items: [
             { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
-            { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Employees' },
-            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Employees' },
-            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Employees'},
-            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Employees' },
-            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Employees' },
+            { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Customers' },
+            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Employees2' },
+            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Employees2'},
+            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Employees2' },
+            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Employees2' },
         ],
         mini: true,
         title: 'Pracownicy'

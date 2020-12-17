@@ -45,70 +45,45 @@ export default {
         {
           text: 'Imię',
           align: 'start',
-          value: 'name',
+          value: 'personal_data.name',
         },
-        { text: 'Nazwisko', value: 'surname' },
-        { text: 'Stanowisko', value: 'position' },
-        { text: 'Pensja', value: 'salary' },
+        { text: 'Nazwisko', value: 'personal_data.surname' },
+        { text: 'Stanowisko', value: 'personal_data.position' },
+        { text: 'Pensja', value: 'personal_data.salary' },
         { text: "Akcje", value: "controls", sortable: false}
       ],
-      employees: [
-        {
-          id: 1,
-          name: 'Albert',
-          surname: 'Kanak',
-          position: 'Sprzątaczka',
-          salary: 12000,
-        },
-        {
-          id: 2,
-          name: 'Kamil',
-          surname: 'Bawaban',
-          position: 'Sprzątaczka',
-          salary: 20,
-        },
-        {
-          id: 3,
-          name: 'Bartłomiej',
-          surname: 'Liszek',
-          position: 'Sprzątaczka',
-          salary: 10000,
-        },
-        {
-          id: 4,
-          name: 'Tomasz',
-          surname: 'Dudzic',
-          position: 'SQL Genius',
-          salary: 12000,
-        },
-        {
-          id: 5,
-          name: 'Myster',
-          surname: 'Bujak',
-          position: 'Sprzątaczka',
-          salary: 100,
-        },
-        {
-          id: 6,
-          name: 'Dominik',
-          surname: 'Baran',
-          position: 'Sprzątaczka',
-          salary: 4600,
-        },
-        
-      ],
+      employees: [],
     }  
   },
 
 
-    methods: {
-        deleteEmployee(id){
-            console.log(id)
-            console.log("Delete employee: " + id)
-        }
-    },
+  methods: {
+      deleteEmployee(id){
+          console.log(id)
+          console.log("Delete employee: " + id)
+      }
+  },
 
+  created() {
+    this.$store.watch(
+      ()=>{
+        return this.$store.getters.getEmployees // could also put a Getter here
+      },
+      (newValue)=>{
+        //Update data when changed
+        this.employees = newValue;
+      },
+      //To detect nested value changes inside Objects
+      {
+        deep:true
+      }
+      )      
+  },
 
+  mounted() {
+    this.employees = this.$store.getters.getEmployees;
+    this.$store.dispatch('getAllEmployees')
+  }
 
 }
 </script>

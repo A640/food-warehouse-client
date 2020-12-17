@@ -120,6 +120,16 @@ export default {
             return false
         },
 
+        loadData(id){
+            this.$store.dispatch('getEmployeeData',id)
+            .then((result) => {
+                this.name = result.name;
+                this.surname = result.surname;
+                this.position = result.position;
+                this.salary = result.salary;
+            })
+        }
+
     },
 
 
