@@ -33,6 +33,7 @@
             <v-list-item
                 v-for="item in items"
                 :key="item.title"
+                :to="{name: item.link}"
                 link
             >
                 <v-list-item-icon>
@@ -40,7 +41,7 @@
                 </v-list-item-icon>
     
                 <v-list-item-content>
-                <v-list-item-title class="item-color">{{ item.title }}</v-list-item-title>
+                <v-list-item-title class="item-color"  >{{ item.title }}</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             </v-list>
@@ -57,7 +58,9 @@
             </div>
             
             <div id="content">
-                <user-table/>
+               <transition name="slide-fade" mode="out-in">
+                    <router-view :key="$route.path" /> 
+                </transition>
             </div>
             
         </div>
@@ -66,24 +69,24 @@
 </template>
 
 <script>
-import UserTable from '@/components/EmployeeTable.vue' 
+//import UserTable from '@/components/EmployeeTable.vue' 
 
 export default {
     
-    components: {
-       UserTable,
-    },
+    // components: {
+    //    UserTable,
+    // },
 
     data () {
         return {
         drawer: true,
         items: [
-            { title: 'Pracownicy', icon: 'mdi-account' },
-            { title: 'Klienci', icon: 'mdi-account-group' },
-            { title: 'Pojazdy', icon: 'mdi-truck' },
-            { title: 'Magazyny', icon:  'mdi-home-variant'},
-            { title: 'Producenci', icon: 'mdi-food' },
-            { title: 'Produkty', icon: 'mdi-tag-outline' },
+            { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
+            { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Employees' },
+            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Employees' },
+            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Employees'},
+            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Employees' },
+            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Employees' },
         ],
         mini: true,
         title: 'Pracownicy'
