@@ -71,7 +71,7 @@ import EditAccount from '@/components/Editors/AccountEditor.vue'
 
 export default {
 
-    name:'Add/EditEmployeePopupContent',
+    name:'Add-Edit-EmployeePopupContent',
 
     components:{
         Popup,
