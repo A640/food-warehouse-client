@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Delete from '@/components/DeleteConfirmation.vue';
-import Edit from '@/components/EditEmployeePopup.vue';
+import Delete from '@/components/Popups/DeleteConfirmation.vue';
+import Edit from '@/components/PopupContents/EditEmployeePopup.vue';
 
 
 export default {

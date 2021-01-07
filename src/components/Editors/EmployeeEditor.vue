@@ -1,194 +1,211 @@
 <template>
-    <div>
-        <v-form ref="accountForm" @submit.prevent="nextStep">
-
+    <v-form ref="employeeForm" @submit.prevent="nextStep">
         <form class="cell">
-            <label class="cell__label">Login</label>
+            <label class="cell__label">Imie</label>
             <v-text-field
                 class="input"
                 label=""
                 solo
-                v-model="c_login"
-                :rules="r_login"
-                :error-messages="e_login"
+                v-model="c_name"
+                :rules="r_name"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
 
         <form class="cell">
-            <label class="cell__label">E-mail</label>
+            <label class="cell__label">Nazwisko</label>
             <v-text-field
                 class="input"
                 label=""
                 solo
-                v-model="c_email"
-                :rules="r_email"
-                :error-messages="e_email"
+                v-model="c_surname"
+                :rules="r_surname"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
+
+        <form class="cell">
+            <label class="cell__label">Nazwa stanowiska</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="c_position"
+                :rules="r_position"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+
+        <form class="cell">
+            <label class="cell__label">Wypłata</label>
+            <v-text-field
+                class="input"
+                label=""
+                type="number"
+                solo
+                v-model="c_salary"
+                :rules="r_salary"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
 
         
-        <form class="cell">
-            <label class="cell__label">Hasło</label>
-            <v-text-field
-                class="input"
-                label=""
-                solo
-                :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="passwd_show ? 'text' : 'password'"
-                @click:append="passwd_show = !passwd_show"
-                v-model="c_password"
-                :rules="r_password"
-                v-on:keyup.enter.stop
-            ></v-text-field>
-        </form>
 
-        <form class="cell">
-            <label class="cell__label">Powtórz hasło</label>
-            <v-text-field
-                class="input"
-                label=""
-                solo
-                :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="passwd_show ? 'text' : 'password'"
-                @click:append="passwd_show = !passwd_show"
-                v-model="c_password2"
-                v-on:keyup.enter.stop
-                :rules="r_password2"
-            ></v-text-field>
-        </form>
 
-        </v-form>
-    </div>
+        
+    </v-form>
 </template>
 
 <script>
 export default {
 
+    name: 'EmployeeEditor',
+
     props: {
-        pid: {
+        pid:{
             default: -1,
         },
-        
         validate: {
             type: Boolean,
             default: false,
         },
     },
-    
+
     data() {
         return{
-            passwd_show: false,
-            c_login: '',
-            c_email: '',
-            c_password: '',
-            c_password2: '',
-            c_error: false,
-            e_login: [],
-            e_email: [],
+            c_name: '',
+            c_surname: '',
+            c_position: '',
+            c_salary: 0,
 
-            r_login: [
+            r_name: [
                 value => !!value || 'To pole jest wymagane!',
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',  
-            ],
-            r_email: [
-                value => !!value || 'To pole jest wymagane!',
-                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail musi być poprawny'
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
-            r_password: [
+            r_surname: [
                 value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length >= 8 || 'Hasło musi zawierać conajmniej 8 znaków',
-                value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
-                v => !v || /[a-z]+/.test(v) || 'Wymagana conajmniej jedna mała litera',
-                v => !v || /[A-Z]+/.test(v) || 'Wymagana conajmniej jedna duża litera',
-                v => !v || /[0-9]+/.test(v) || 'Wymagana conajmniej jedna cyfra',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
-            r_password2: [
-                (value) => !!value || 'Podaj ponownie hasło',
-                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
-            ]
+            r_position: [
+                value => !!value || 'To pole jest wymagane!',
+                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
+                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
+            ],
+
+            r_salary: [
+                value => !!value || 'To pole jest wymagane!',
+                value => value < 100000 || 'Zbyt duża wartość',
+                value => value >= 0 || 'Nie można wprowadzić wartości ujemnej',
+            ],
+
         }
 
     },
 
-    methods: {
+   
 
+    methods: {
+        
         allValidated(){
-            if(this.$refs.accountForm.validate() && this.e_login.length == 0 && this.e_email.length == 0){
+            if(this.$refs.employeeForm.validate()){
                 return true;
             }
             return false
         },
 
         loadData(id){
-            console.log("Get initial data: " + id);
-           // this.$store.getAccount(id)
+            this.$store.dispatch('getEmployeeData',id)
+            .then((result) => {
+                console.log(result);
+                this.c_name = result.name;
+                this.c_surname = result.surname;
+                this.c_position = result.position;
+                this.c_salary = result.salary;
+            })
         }
+
     },
 
-    watch: {
-        c_login (val) {
-            this.$store.dispatch('checkLogin',val).then(valid => {
-                this.e_login = valid ?  ['Ten login jest zajęty! Wybierz inny login.'] : [];
-            })
-        },
 
-        c_email (val) {
-            this.$store.dispatch('checkEmail',val).then(valid => {
-                this.e_email = valid ?  ['Ten email jest już w użyciu! Podaj inny adres.'] : [];
-            })
-        },
+    watch: {
 
         validate (val) {
             if(val == true){
                 if(this.allValidated()){
-                    let account = {
-                        username: this.c_login,
-                        email: this.c_email,
-                        password: this.c_password,
+                  
+
+                    let employee = {
+                        name: this.c_name,
+                        surname: this.c_surname,
+                        position: this.c_position,
+                        salary: this.c_salary,
                     }
 
-                    this.$emit('dataUpdate',account);
+                   
+
+                    this.$emit('dataUpdate',employee);
                     this.$emit('allValidated',true);
                 }
                 else{
                     this.$emit('allValidated',false);
                 }
             }
-        }
+        },
+
     },
 
     mounted() {
+        
         if(this.pid == -1){
-            this.passwd_show = false;
-            this.c_login = '';
-            this.c_email = '';
-            this.c_password = '';
-            this.c_password2 = '';
-            this.c_error = false;
-            this.e_login = [];
-            this.e_email = [];
+            
+            this.c_name = '';
+            this.c_surname = '';
+            this.position = '';
+            this.salary = 0;
         }
         else{
             this.loadData(this.pid);
         }
-    },
 
+    },
 }
 </script>
 
-
 <style scoped>
+
+    .register-component{
+        width: 100%;
+        /* height: 60%; */
+        background-color: rgb(251, 252, 253);
+        
+        align-self: center;
+        /* border-radius: 10px; */
+        /* padding: 2rem; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        max-width: 550px;
+    }
 
     .input{
         margin-top: 0.75rem;
         font-family: 'Segoe UI';
         font-weight: 600;
         
+    }
+
+    .pc-input{
+        width: 3rem;
     }
 
     .title{
@@ -246,7 +263,7 @@ export default {
 
     .relative{
         position: relative;
-        height: 5rem;
+        height: 3rem;
         margin-top: 1rem;
     }
 
@@ -265,5 +282,17 @@ export default {
         font-size: 0.8rem;
         color: rgb(209, 33, 33);
     }
+
+    .inline{
+        display: inline;
+    }
+
+    .double{
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+    }
+
+    
 
 </style>

@@ -15,7 +15,7 @@
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
-                    <slot :close="closeDialog"></slot>
+                    <slot :close_popup="closeDialog" ></slot>
             
                 </simplebar>
             </div>
@@ -27,11 +27,10 @@
 import simplebar from 'simplebar-vue';
 
 export default {
+
+    name: "Add-Edit-Popup",
+
     props: {
-        id:{
-            type: Number,
-            default: undefined,
-        },
         edit:{
             type: Boolean,
             default: false,
@@ -49,20 +48,6 @@ export default {
     },
 
     methods: {
-        deleteFromDB(id){
-            if(this.type === 'user'){
-                this.$store.dispatch('deleteCard', id)
-            }
-            else{
-                console.log("Nierozpoznano typu do usunięcia")
-            }
-        },
-
-        typeShow(){
-            if(this.type === 'user'){
-                return 'użytkownika'
-            }
-        },
 
         title(){
             let title='';

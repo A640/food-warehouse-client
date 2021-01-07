@@ -25,6 +25,7 @@
                 <v-btn 
                  color="red lighten-1" 
                  class="mb-3 mr-2" 
+                 elevation="1"
                  dark 
                  @click="deleteFromDB(id)"
                 >Usuń</v-btn>

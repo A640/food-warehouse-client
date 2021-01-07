@@ -1,25 +1,25 @@
 <template>
     <div class="register-component">
 
-        <div class="cell double">
-            <v-btn
-                icon 
-                @click="back()" 
-            >
-                <v-icon>mdi-chevron-left</v-icon>
-            </v-btn>
-            <h2 class="title ml-3">Podaj swoje dane</h2>
+         <div class="cell">
+            <h2 class="title">Utwórz konto</h2>
         </div>
-        
-        <edit-customer 
+       
+        <edit-account 
             :pid="-1" 
             :validate="validate_trigger" 
             @dataUpdate="updateData" 
-            @allValidated="nextStep" 
+            @allValidated="nextStep"
         />
 
         <div class="cell relative">
             <v-btn class="submit__btn" fab elevation="1" @click="validate()"><v-icon>mdi-arrow-right</v-icon></v-btn>
+        </div>
+
+        <div class="cell align-center footer">
+            <p>Masz już konto?
+            <router-link :to="{name: 'Login'}" class="cell__link">Zaloguj się</router-link>
+            </p>
         </div>
 
         
@@ -27,19 +27,18 @@
 </template>
 
 <script>
-import EditCustomer from '@/components/EditCustomer.vue'
+import EditAccount from '@/components/Editors/AccountEditor.vue'
 
 export default {
-    
-    components: {
-        EditCustomer
-    },
-   
 
+    components: {
+        EditAccount,
+    },
+    
     data() {
         return{
             validate_trigger: false,
-            personal_details: null,
+            account: null,
         }
 
     },
@@ -47,7 +46,7 @@ export default {
     methods: {
 
         updateData(data){
-            this.personal_details = data;
+            this.account = data;
         },
 
         validate(){
@@ -58,13 +57,9 @@ export default {
 
         nextStep(validated){
             if(validated){
-                this.$emit('next',this.personal_details);
+                this.$emit('next',this.account);
             }
             this.validate_trigger = false;
-        },
-
-        back(){
-            this.$emit('back')
         }
 
     },
@@ -72,7 +67,7 @@ export default {
 }
 </script>
 
-<style soped>
+<style scoped>
 
     .register-component{
         width: 100%;
@@ -87,7 +82,6 @@ export default {
         justify-content: center;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         max-width: 550px;
-        padding-bottom: 1.5rem;
     }
 
     .input{
@@ -153,7 +147,6 @@ export default {
     .relative{
         position: relative;
         height: 5rem;
-        /* border: solid 1px rgb(209, 33, 33); */
         margin-top: 1rem;
     }
 
@@ -171,16 +164,6 @@ export default {
     .error > p{
         font-size: 0.8rem;
         color: rgb(209, 33, 33);
-    }
-
-    .inline{
-        display: inline;
-    }
-
-    .double{
-        display: flex;
-        flex-direction: row;
-        align-items: baseline;
     }
 
 </style>

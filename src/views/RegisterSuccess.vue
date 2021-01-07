@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Message from '@/components/RegisterSuccessComponent.vue'
+import Message from '@/components/Register/RegisterSuccessComponent.vue'
 
 export default {
     components: {

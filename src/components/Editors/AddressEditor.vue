@@ -103,6 +103,8 @@
 <script>
 export default {
 
+    name: 'AddressEditor',
+
     props: {
         pid: {
             default: -1,

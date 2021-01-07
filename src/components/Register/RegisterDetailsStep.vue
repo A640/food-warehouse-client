@@ -3,25 +3,23 @@
 
         <div class="cell double">
             <v-btn
-                icon
+                icon 
                 @click="back()" 
             >
                 <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
-            <h2 class="title ml-3">Podaj swój adres</h2>
+            <h2 class="title ml-3">Podaj swoje dane</h2>
         </div>
         
-        
-        <edit-address 
+        <edit-customer 
             :pid="-1" 
             :validate="validate_trigger" 
             @dataUpdate="updateData" 
-            @allValidated="nextStep"
+            @allValidated="nextStep" 
         />
-    
 
         <div class="cell relative">
-            <v-btn class="submit__btn" @click="validate()">Utwórz konto</v-btn>
+            <v-btn class="submit__btn" fab elevation="1" @click="validate()"><v-icon>mdi-arrow-right</v-icon></v-btn>
         </div>
 
         
@@ -29,19 +27,19 @@
 </template>
 
 <script>
-import EditAddress from '@/components/EditAddress.vue'
-
+import EditCustomer from '@/components/Editors/CustomerEditor.vue'
 
 export default {
-
-    components: {
-        EditAddress,
-    },
     
-   data() {
+    components: {
+        EditCustomer
+    },
+   
+
+    data() {
         return{
             validate_trigger: false,
-            address: null,
+            personal_details: null,
         }
 
     },
@@ -49,7 +47,7 @@ export default {
     methods: {
 
         updateData(data){
-            this.address = data;
+            this.personal_details = data;
         },
 
         validate(){
@@ -60,7 +58,7 @@ export default {
 
         nextStep(validated){
             if(validated){
-                this.$emit('next',this.address);
+                this.$emit('next',this.personal_details);
             }
             this.validate_trigger = false;
         },
@@ -70,10 +68,11 @@ export default {
         }
 
     },
+
 }
 </script>
 
-<style scoped>
+<style soped>
 
     .register-component{
         width: 100%;
@@ -88,6 +87,7 @@ export default {
         justify-content: center;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         max-width: 550px;
+        padding-bottom: 1.5rem;
     }
 
     .input{
@@ -95,10 +95,6 @@ export default {
         font-family: 'Segoe UI';
         font-weight: 600;
         
-    }
-
-    .pc-input{
-        width: 3rem;
     }
 
     .title{
@@ -156,7 +152,8 @@ export default {
 
     .relative{
         position: relative;
-        height: 3rem;
+        height: 5rem;
+        /* border: solid 1px rgb(209, 33, 33); */
         margin-top: 1rem;
     }
 
@@ -185,7 +182,5 @@ export default {
         flex-direction: row;
         align-items: baseline;
     }
-
-    
 
 </style>

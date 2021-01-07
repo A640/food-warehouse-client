@@ -1,25 +1,27 @@
 <template>
     <div class="register-component">
 
-         <div class="cell">
-            <h2 class="title">Utwórz konto</h2>
+        <div class="cell double">
+            <v-btn
+                icon
+                @click="back()" 
+            >
+                <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+            <h2 class="title ml-3">Podaj swój adres</h2>
         </div>
-       
-        <edit-account 
+        
+        
+        <edit-address 
             :pid="-1" 
             :validate="validate_trigger" 
             @dataUpdate="updateData" 
             @allValidated="nextStep"
         />
+    
 
         <div class="cell relative">
-            <v-btn class="submit__btn" fab elevation="1" @click="validate()"><v-icon>mdi-arrow-right</v-icon></v-btn>
-        </div>
-
-        <div class="cell align-center footer">
-            <p>Masz już konto?
-            <router-link :to="{name: 'Login'}" class="cell__link">Zaloguj się</router-link>
-            </p>
+            <v-btn class="submit__btn" @click="validate()">Utwórz konto</v-btn>
         </div>
 
         
@@ -27,18 +29,19 @@
 </template>
 
 <script>
-import EditAccount from '@/components/EditAccount.vue'
+import EditAddress from '@/components/Editors/AddressEditor.vue'
+
 
 export default {
 
     components: {
-        EditAccount,
+        EditAddress,
     },
     
-    data() {
+   data() {
         return{
             validate_trigger: false,
-            account: null,
+            address: null,
         }
 
     },
@@ -46,7 +49,7 @@ export default {
     methods: {
 
         updateData(data){
-            this.account = data;
+            this.address = data;
         },
 
         validate(){
@@ -57,13 +60,16 @@ export default {
 
         nextStep(validated){
             if(validated){
-                this.$emit('next',this.account);
+                this.$emit('next',this.address);
             }
             this.validate_trigger = false;
+        },
+
+        back(){
+            this.$emit('back')
         }
 
     },
-
 }
 </script>
 
@@ -89,6 +95,10 @@ export default {
         font-family: 'Segoe UI';
         font-weight: 600;
         
+    }
+
+    .pc-input{
+        width: 3rem;
     }
 
     .title{
@@ -146,7 +156,7 @@ export default {
 
     .relative{
         position: relative;
-        height: 5rem;
+        height: 3rem;
         margin-top: 1rem;
     }
 
@@ -165,5 +175,17 @@ export default {
         font-size: 0.8rem;
         color: rgb(209, 33, 33);
     }
+
+    .inline{
+        display: inline;
+    }
+
+    .double{
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+    }
+
+    
 
 </style>

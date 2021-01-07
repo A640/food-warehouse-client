@@ -22,12 +22,12 @@ const routes = [
       {
         path: 'employees',
         name: 'Admin_Employees',
-        component: () => import(/* webpackChunkName: "about" */ '../components/EmployeeTable.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/EmployeeTable.vue'),
       },
       {
         path: 'customers',
         name: 'Admin_Customers',
-        component: () => import(/* webpackChunkName: "about" */ '../components/CustomerTable.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/CustomerTable.vue'),
       }
     ]
   },

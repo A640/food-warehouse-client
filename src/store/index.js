@@ -8,56 +8,27 @@ export default new Vuex.Store({
   state: {
     adress: "localhost",
     port: 8090,
-    employees: [
-      {
-        id: 1,
-        name: 'Albert',
-        surname: 'Kanak',
-        position: 'Sprzątaczka',
-        salary: 12000,
-      },
-      {
-        id: 2,
-        name: 'Kamil',
-        surname: 'Bawaban',
-        position: 'Sprzątaczka',
-        salary: 20,
-      },
-      {
-        id: 3,
-        name: 'Bartłomiej',
-        surname: 'Liszek',
-        position: 'Sprzątaczka',
-        salary: 10000,
-      },
-      {
-        id: 4,
-        name: 'Tomasz',
-        surname: 'Dudzic',
-        position: 'SQL Genius',
-        salary: 12000,
-      },
-      {
-        id: 5,
-        name: 'Myster',
-        surname: 'Bujak',
-        position: 'Sprzątaczka',
-        salary: 100,
-      },
-      {
-        id: 6,
-        name: 'Dominik',
-        surname: 'Baran',
-        position: 'Sprzątaczka',
-        salary: 4600,
-      },
-      
-    ],
+    employees: [],
+    employees_loading: false,
+
     customers: [],
+
+    no_connection: false,
+    reconnected: false,
   },
   mutations: {
     setEmployees(context,data){
       context.employees = data;
+    },
+    setNoConnection(context,value){
+      context.no_connection = value;
+      context.reconnected = false;
+    },
+    setReconnected(context,value){
+      context.reconnected = value;
+    },
+    setEmployeesLoading(context, value){
+      context.employees_loading = value;
     }
   },
   actions: {
@@ -68,7 +39,10 @@ export default new Vuex.Store({
 
         axios.post(context.getters.getServerAddress +'/login', credentials)
           .then((response) =>{
+            //if connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
 
+            //check if 
             if (response.status === 200) {
               const jwtToken = response.headers['authorization'];
               if (jwtToken) {
@@ -85,8 +59,19 @@ export default new Vuex.Store({
             }
           })
           .catch( (error) =>{
-            if (error.response) {
+            console.log("erroror");
+            console.log(error.toJSON());
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+
+              context.dispatch('noConnectionChange',true);
+
+            }else if (error.response) {
               // Request made and server responded
+
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+
               console.log(error.response.data);
               console.log(error.response.status);
               console.log(error.response.headers);
@@ -113,6 +98,8 @@ export default new Vuex.Store({
 
         axios.post(context.getters.getServerAddress +'/register',data)
           .then((response) =>{
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
 
             if (response.status === 200) {
               let created = response.data['result'];
@@ -129,11 +116,20 @@ export default new Vuex.Store({
             }
           })
           .catch( (error) =>{
-            if (error.response) {
+
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+
+              context.dispatch('noConnectionChange',true);
+
+            }else if (error.response) {
               // Request made and server responded
               console.log(error.response.data);
               console.log(error.response.status);
               console.log(error.response.headers);
+
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
 
               if(error.response.status == 400){
                 reject("cannot create")
@@ -154,27 +150,44 @@ export default new Vuex.Store({
         let obj = {username: login};
 
         axios.post(context.getters.getServerAddress +'/register/username',obj)
-              .then((response) =>{
+          .then((response) =>{
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
 
-                if (response.status === 200) {
-                  let isUsed = response.data['result'];
-                  isUsed = isUsed.usernameExists;
+            if (response.status === 200) {
+              let isUsed = response.data['result'];
+              isUsed = isUsed.usernameExists;
+        
+              if(isUsed) {
+                resolve(true)
+              }
+              else{
+                resolve(false)
+              } 
+            }else{
+              reject("Błąd przy połączeniu")
+            }
+          }).catch( (error) =>{
+
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+
+              context.dispatch('noConnectionChange',true);
+
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
             
-                  if(isUsed) {
-                    resolve(true)
-                  }
-                  else{
-                    resolve(false)
-                  } 
-                }else{
-                  reject("Błąd przy połączeniu")
-                }
-              }, (error) =>{
-
-                console.error("Błąd przy połączeniu");
-                console.log(error);
-                reject(error);
-        });
+              reject(error)
+            }
+            
+          }); 
+        
       });
     },
 
@@ -183,71 +196,231 @@ export default new Vuex.Store({
         let obj = {email: email};
 
         axios.post(context.getters.getServerAddress +'/register/email',obj)
-              .then((response) =>{
+          .then((response) =>{
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
 
-                if (response.status === 200) {
-                  let isUsed = response.data['result'];
-                  isUsed = isUsed.emailExists;
+            if (response.status === 200) {
+              let isUsed = response.data['result'];
+              isUsed = isUsed.emailExists;
+        
+              if(isUsed) {
+                resolve(true)
+              }
+              else{
+                resolve(false)
+              } 
+            }else{
+              reject("Błąd przy połączeniu")
+            }
+          }).catch( (error) =>{
+
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+
+              context.dispatch('noConnectionChange',true);
+
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
             
-                  if(isUsed) {
-                    resolve(true)
-                  }
-                  else{
-                    resolve(false)
-                  } 
-                }else{
-                  reject("Błąd przy połączeniu")
-                }
-              }, (error) =>{
-
-                console.error("Błąd przy połączeniu");
-                console.log(error);
-                reject(error);
-        });
+              
+            }
+            reject(error);
+          });
       });
     },
 
     editEmployee(context,data){
       return new Promise(function(resolve,reject){
-        let obj = data.data;
+        //get authorization token
+        let token = localStorage.getItem('jwtToken')
 
-        if(data.edit == true){
-            console.log("Employee edit")
-        }else{
-          console.log(obj);        
-          axios.post(context.getters.getServerAddress +'/employee',obj)
-            .then((response) =>{
+          // if updating existing Employee and User data
+          axios.put(context.getters.getServerAddress + '/employee/' + data.personal_data.employee_id ,data,{ headers: { Authorization: `Bearer ${token}` }})
+          .then((response) =>{
+            console.log(response);
 
-              if (response.status === 200) {
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
 
-                resolve(true)
-                 
-              }else{
-                reject("Błąd przy połączeniu")
-              }
-            }, (error) =>{
+            if (response.status === 200) {
+              //if updated successfully
+              resolve(true);
 
-              console.error("Błąd przy połączeniu");
-              console.log(error);
-              reject(error);
-            });
-        }
+            }else{
+              reject(response);
+            }
+
+          })
+          .catch( (error) =>{
+
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+
+              context.dispatch('noConnectionChange',true);
+
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+              
+            }
+            reject(error);
+          });
+
+        
       });
     },
 
-    getAllEmployees(context){
+    addEmployee(context,data){
+      return new Promise(function(resolve,reject){
+        //get authorization token
+        let token = localStorage.getItem('jwtToken')
+
+        // creating new Employee and new User
+        axios.post(context.getters.getServerAddress +'/employee',data,{ headers: { Authorization: `Bearer ${token}` }})
+          .then((response) =>{
+
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
+
+            if (response.status === 200) {
+              // if added successfully
+              resolve(true)
+                
+            }else{
+              reject(response)
+            }
+
+          })
+          .catch( (error) =>{
+
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+
+              context.dispatch('noConnectionChange',true);
+
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+            
+              reject(error)
+            }
+            
+          });
+        
+      });
+    },
+
+    getAllEmployees(context, silent=false){
+      //get all Employees and their User info from server
+      //silent option is mainly for not hide reconnected banner
+
       console.log("Gecik employee")
+      context.commit('setEmployeesLoading',true);
       let token = localStorage.getItem('jwtToken')
       axios.get(context.getters.getServerAddress +'/employee', { headers: { Authorization: `Bearer ${token}` }})
-      .then( (data) => {
+        .then( (data) => {
+
+          if(!silent){
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
+          }
+         
+
+          //save Employees data in vuex store
           console.log(data)
           context.commit('setEmployees',data.data.result);
-      })
+          context.commit('setEmployeesLoading',false);
+        })
+        .catch( (error) =>{
+
+          if(error.toJSON().message == "Network Error"){
+            //if can't connect to server
+
+            context.dispatch('noConnectionChange',true);
+
+          }else{
+            // Request made and server responded
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+
+            if(!silent){
+               //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+            }
+           
+          }
+          context.commit('setEmployeesLoading',false);
+        }); 
     },
 
     getEmployeeData(context, id){
-      return context.state.employees.find(employee => employee.id == id);
+      let res = context.state.employees.find(employee => employee.personal_data.employee_id == id);
+      return res.personal_data;
     },
+
+    getAccountData(context,id){
+      //search for account data in employees if not found, search in customers
+      let res = context.state.employees.find(employee => employee.account.userId == id);
+      if(!res && context.state.customers){
+        context.state.customers.find(customer => customer.account.userId == id);
+      }
+      return res.account;
+    },
+
+    noConnectionChange(context,noConnection){
+      context.commit('setNoConnection',noConnection)
+      console.log('noConnectionChange');
+      if(noConnection){
+        console.log('Trying to reconnect...');
+        context.dispatch('retryConnection');
+      }
+      
+    },
+
+    retryConnection(context){
+
+      if(context.getters.getNoConnection){
+        // try to connect with server on ping address
+        console.log("Ping");
+
+        axios.get(context.getters.getServerAddress +'/ping')
+        .then( () => {
+          //if connnection was successfull
+
+          context.commit('setNoConnection',false);
+          context.commit('setReconnected',true);
+        })
+        .catch( () => {
+          //if not connected to server
+          context.commit('setNoConnection',true);
+
+          // try reconnect after 5s
+          setTimeout(function() {
+            context.dispatch('retryConnection');
+          }, 5000);
+        })
+      }
+    }
+
+
   },
   modules: {
   },
@@ -258,5 +431,14 @@ export default new Vuex.Store({
     getEmployees(context){
       return context.employees;
     },
+    getNoConnection(context){
+      return context.no_connection;
+    },
+    getReconnected(context){
+      return context.reconnected;
+    },
+    getEmployeesLoading(context){
+      return context.employees_loading;
+    }
   }
 })
