@@ -22,12 +22,17 @@
           hide-details
         ></v-text-field>
         <edit :edit="Boolean(false)" />
+        <v-btn :text="!delete_many_mode" :outlined="!delete_many_mode" elevation="0" class="ml-5" @click="delete_many_mode ? disableDeleteManyMode() : delete_many_mode=true">
+                <v-icon>mdi-delete</v-icon>
+        </v-btn>
 
       </v-card-title>
       <v-data-table
         :headers="headers"
         :items="customers"
         :search="search"
+        :show-select="delete_many_mode" 
+        v-model="selected"
         :expanded.sync="expanded"
         show-expand
         :fixed-header="true"
@@ -35,8 +40,13 @@
         item-key="personal_data.customer_id"
       >
       <template v-slot:[`item.controls`]="props">
-        <delete :id=props.item.personal_data.customer_id :name="props.item.personal_data.name + ' ' + props.item.personal_data.surname" type="user" />
-        <edit :edit="Boolean(true)" :account_id="props.item.account.userId" :customer_id="props.item.personal_data.customer_id" />
+        <delete 
+          :id=props.item.personal_data.customer_id 
+          :name="props.item.personal_data.name + ' ' + props.item.personal_data.surname" 
+          type="klienta"
+          v-on:DeleteConfirm="deleteOne" 
+        />
+        <edit :edit="Boolean(true)" :account_id="props.item.account.user_id" :customer_id="props.item.personal_data.customer_id" />
       </template>
       <template v-slot:expanded-item="{ item }">
         <td :colspan="headers.length+1" class="pa-0 details" >
@@ -78,7 +88,10 @@
       
       </v-data-table>
 
-     
+     <div v-if="delete_many_mode" class="right-buttons">
+                <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">Anuluj</v-btn>
+                <delete-many name="Usuwanie zaznaczonych klientów" :count="selected.length" type="klientów" v-on:deleteConfirm="deleteMany()"  ></delete-many>
+      </div>
     </v-card>
   </div>
 </template>
@@ -86,6 +99,7 @@
 <script>
 import Delete from '@/components/Popups/DeleteConfirmation.vue';
 import Edit from '@/components/PopupContents/CustomerPopup.vue';
+import DeleteMany from '@/components/Popups/DeleteManyConfirmation.vue';
 
 
 export default {
@@ -93,12 +107,14 @@ export default {
     components: {
       Delete,
       Edit,
+      DeleteMany,
     },
 
     data () {
     return {
       search: '',
       headers: [
+        { text: '', value: 'data-table-expand' },
         {
           text: 'Imię',
           align: 'start',
@@ -111,15 +127,31 @@ export default {
       ],
       customers: [],
       expanded: [],
+
+      selected: [],
+      delete_many_mode: false,
       // loading_data: true,
     }  
   },
 
 
   methods: {
-      deleteEmployee(id){
-          console.log(id)
-          console.log("Delete customer: " + id)
+
+      disableDeleteManyMode(){
+        this.delete_many_mode = false;
+        this.selected = [];
+      },
+
+      deleteMany(){
+        let delete_ids = this.selected.map( (employee) => {
+            return employee.personal_data.employee_id;
+        })
+        // console.log(delete_ids);
+        this.$store.dispatch('deleteManyCustomers',delete_ids)
+      },
+
+      deleteOne(id){
+        this.$store.dispatch('deleteCustomer',id)
       }
   },
 
@@ -238,5 +270,11 @@ export default {
     padding: 2rem;
     padding-bottom: 1rem;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  .right-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 1rem;
   }
 </style>

@@ -1,8 +1,16 @@
 <template >
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:[`activator`]="{ on }">
-            <v-btn v-on="on" class="mx-2" icon  small  @click="dialog=true">
-                <v-icon dark>mdi-delete</v-icon>
+            <v-btn 
+                v-on="on" 
+                color="red lighten-1" 
+                class="mb-3 mr-2" 
+                elevation="0"
+                :dark="count != 0"
+                @click="dialog=true"
+                :disabled="count == 0"
+            >
+                Usuń wybranych {{ type }}
             </v-btn>
         </template>
         <v-card v-if="loading" class="loader">
@@ -12,17 +20,18 @@
                 color="red"
             ></v-progress-circular>
         </v-card>
-        <v-card v-else >
+        <v-card v-else>
+            
             <v-card-title>
                 <h2 class="mb-2 mt-3">{{ name }}</h2>
                 <br/>
             </v-card-title>
             <v-card-subtitle>
-                ID: {{ id }}
+                wybranych: <b>{{ count }}</b>
             </v-card-subtitle>
 
             <v-card-text>
-                <p class="mb-1">Czy napewno chcesz usunąć {{ type }} {{ name }}?</p>
+                <p class="mb-1">Czy napewno chcesz usunąć <b>{{ count }}</b> {{ type }}?</p>
                 <p class="mt-0">Tej akcji nie można cofnąć!</p>
             </v-card-text>
 
@@ -34,7 +43,7 @@
                  class="mb-3 mr-2" 
                  elevation="1"
                  dark 
-                 @click="deleteConfirm()"
+                 @click="deleteConfirm"
                 >Usuń</v-btn>
             </v-card-actions>
         </v-card>
@@ -48,7 +57,7 @@ export default {
             type: String,
             default: 'Usuń',
         },
-        id:{
+        count:{
             type: Number,
             default: undefined,
         },
@@ -68,12 +77,14 @@ export default {
     methods: {
         deleteConfirm(){
             this.loading = true;
-           this.$emit('DeleteConfirm',this.id);
+            this.$emit('deleteConfirm');
         },
+
         dialogClose(){
             this.dialog = false;
             this.loading =  false;
-        }
+        },
+        
     },
     
 }

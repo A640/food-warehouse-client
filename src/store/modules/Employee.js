@@ -29,7 +29,7 @@ const EmployeeModule = {
               let token = localStorage.getItem('jwtToken')
       
                 // if updating existing Employee and User data
-                axios.put(context.getters.getServerAddress + '/employee/' + data.personal_data.employee_id ,data,{ headers: { Authorization: `Bearer ${token}` }})
+                axios.put(context.getters.getServerAddress + '/employee',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
                   console.log(response);
       
@@ -113,8 +113,105 @@ const EmployeeModule = {
               
             });
         },
-      
-        getAllEmployees(context, silent=false){
+
+      deleteEmployee(context,id){
+          return new Promise(function(resolve,reject){
+            //get authorization token
+            let token = localStorage.getItem('jwtToken')
+    
+            // creating new Employee and new User
+            axios.delete(context.getters.getServerAddress + '/employee/' + id,{ headers: { Authorization: `Bearer ${token}` }})
+              .then((response) =>{
+    
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+                console.log(response);
+                if (response.status === 200) {
+                  // if added successfully
+                  if(response.data.result.deleted){
+                    resolve(true)
+                  }
+                  else{
+                    reject("serverBlockDelete")
+                  }
+                  
+                    
+                }else{
+                  reject(response)
+                }
+    
+              })
+              .catch( (error) =>{
+    
+                if(error.toJSON().message == "Network Error"){
+                  //if can't connect to server
+    
+                  context.dispatch('noConnectionChange',true);
+    
+                }else{
+                  // Request made and server responded
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+    
+                  //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                
+                  reject(error)
+                }
+                
+              });
+            
+          });
+      },
+
+      deleteManyEmployees(context,ids){
+          return new Promise(function(resolve,reject){
+            //get authorization token
+            let token = localStorage.getItem('jwtToken')
+            console.log("deleteMany");
+            console.log(ids);
+            // creating new Employee and new User
+            axios.delete(context.getters.getServerAddress + '/employee',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
+              .then((response) =>{
+    
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+    
+                if (response.status === 200) {
+                  // if added successfully
+                  resolve(true)
+                    
+                }else{
+                  reject(response)
+                }
+    
+              })
+              .catch( (error) =>{
+    
+                if(error.toJSON().message == "Network Error"){
+                  //if can't connect to server
+    
+                  context.dispatch('noConnectionChange',true);
+    
+                }else{
+                  // Request made and server responded
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+    
+                  //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                
+                  reject(error)
+                }
+                
+              });
+            
+          });
+      },
+
+      getAllEmployees(context, silent=false){
             //get all Employees and their User info from server
             //silent option is mainly for not hide reconnected banner
       
