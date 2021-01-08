@@ -52,9 +52,11 @@ export default {
         title(){
             let title='';
             if(this.edit){
-                title += "Edytuj pracownika"
+                title = "Edytuj"
             }
-            else{ title += "Dodaj pracownika"}
+            else{ 
+                title = "Dodaj"
+            }
 
 
             return title;

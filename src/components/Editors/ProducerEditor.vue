@@ -2,75 +2,50 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Imie</label>
-            <v-text-field
-                class="input"
-                label=""
-                solo
-                v-model="c_name"
-                :rules="r_name"
-                v-on:keyup.enter.stop
-            ></v-text-field>
-        </form>
-
-        <form class="cell">
-            <label class="cell__label">Nazwisko</label>
-            <v-text-field
-                class="input"
-                label=""
-                solo
-                v-model="c_surname"
-                :rules="r_surname"
-                v-on:keyup.enter.stop
-            ></v-text-field>
-        </form>
-
-        <form class="cell">
-            <label class="cell__label">Teflon</label>
-            <v-text-field
-                class="input"
-                label=""
-                solo
-                v-model="c_phone"
-                :rules="r_phone"
-                v-on:keyup.enter.stop
-            ></v-text-field>
-        </form>
-        <div class="cell">
-            <v-switch v-model="is_company" label="Mam firmę"></v-switch>
-        </div>
-        
-
-        <form class="cell" v-if="is_company">
             <label class="cell__label">Nazwa firmy</label>
             <v-text-field
                 class="input"
                 label=""
                 solo
-                v-model="c_company"
-                :rules="r_company"
+                v-model="i_firm_name"
+                :rules="r_firm_name"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
 
-        <form class="cell" v-if="is_company">
-            <label class="cell__label">NIP</label>
+        <form class="cell">
+            <label class="cell__label">Telefon</label>
             <v-text-field
                 class="input"
                 label=""
                 solo
-                v-model="c_tax"
-                :rules="r_tax"
+                v-model="i_phone"
+                :rules="r_phone"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
+
+        <form class="cell">
+            <label class="cell__label">Email</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="i_email"
+                :rules="r_email"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+    
+
     </v-form>
 </template>
 
 <script>
 export default {
 
-    name: 'CustomerEditor',
+    name: 'ProducerEditor',
 
     props: {
         pid: {
@@ -84,20 +59,12 @@ export default {
     
     data() {
         return{
-            is_company: false,
-            c_name: '',
-            c_surname: '',
-            c_phone: '',
-            c_company: '',
-            c_tax: '',
+            i_firm_name: '',
+            i_phone: '',
+            i_email: '',
 
-            r_name: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
-            ],
 
-            r_surname: [
+            r_firm_name: [
                 value => !!value || 'To pole jest wymagane!',
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
@@ -109,12 +76,9 @@ export default {
                 value => (value || '').length >= 9 || 'Minimum 9 cyfr',
             ],
 
-            r_company: [],
-            r_tax: [],
-
-            r_password2: [
-                (value) => !!value || 'Podaj ponownie hasło',
-                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
+            r_email: [
+                value => !!value || 'To pole jest wymagane!',
+                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail musi być poprawny'
             ],
         }
     },
@@ -129,68 +93,42 @@ export default {
         },
 
         loadData(id){ 
-           this.$store.dispatch('getCustomerData',id)
-           .then( (customer) => {
-                if(customer.firm_name != '' && customer.firm_name != null){
-                    this.is_company = true;
-                }
-                else{
-                    this.is_company = false;
-                }
-                this.c_name = customer.name;
-                this.c_surname = customer.surname;
-                this.c_phone = customer.phone_number;
-                this.c_company = customer.firm_name;
-                this.c_tax = customer.tax_id;
+           this.$store.dispatch('getProducerData',id)
+           .then( (producer) => {
+               //load data from vuex store
+                this.i_firm_name = producer.firm_name;
+                this.i_phone = producer.phone;
+                this.i_email = producer.email;
            })
         },
 
        
     },
 
+    computed:{
+        drivers(){
+            //load possible drivers
+
+            let drivers = this.$store.getters.getEmployees.map( (employee) => {
+                return {text: employee.personal_data.name + ' ' + employee.personal_data.surname, value: employee.personal_data.employee_id}
+            })
+            return drivers;
+            
+        }
+    },
+
     watch: {
-
-        is_company (val) {
-            console.log("company")
-            console.log(val)
-            if(val){
-                this.r_company = [
-                    value => !!value || 'To pole jest wymagane!',
-                    value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
-                    value => (value || '').length >= 3 || 'Minimum 3 znaki',
-                ];
-
-                this.r_tax = [
-                    value => !!value || 'To pole jest wymagane!',
-                    value => (value || '').length == 12 || 'NIP powinien zawierać 12 znaków',
-                ];
-            }
-            else{
-                this.r_company = [];
-
-                this.r_tax = [];
-            }
-        },
 
         validate (val) {
             if(val == true){
                 if(this.allValidated()){
-                    let personal_details = {
-                        name: this.c_name,
-                        surname: this.c_surname,
-                        phone_number: this.c_phone,
-                        firm_name: this.c_company,
-                        tax_id: this.c_tax,
+                    let producer = {
+                        i_firm_name: this.i_firm_name,
+                        i_phone: this.i_phone,
+                        i_email: this.i_email,
                     }
 
-                    if(!this.is_company){
-                        this.c_company = '';
-                        this.c_tax = '';
-                        personal_details.firm_name = null;
-                        personal_details.tax_id = null;
-                    }
-
-                    this.$emit('dataUpdate',personal_details);
+                    this.$emit('dataUpdate',producer);
                     this.$emit('allValidated',true);
                 }
                 else{
@@ -215,6 +153,7 @@ export default {
         else{
             this.loadData(this.pid);
         }
+        this.$store.dispatch('getAllEmployees');
     },
 
 }
@@ -330,6 +269,9 @@ export default {
         display: flex;
         flex-direction: row;
         align-items: baseline;
+    }
+    .date-picker{
+        margin: 0 auto;
     }
 
 </style>

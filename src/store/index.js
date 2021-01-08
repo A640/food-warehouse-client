@@ -7,6 +7,8 @@ import router from '@/router'
 import EmployeeModule from './modules/Employee.js'
 import AccountModule from './modules/Account.js'
 import CustomerModule from './modules/Customer.js'
+import VehicleModule from './modules/Vehicle.js'
+import ProducerModule from './modules/Producer.js'
 
 Vue.use(Vuex)
 
@@ -84,6 +86,8 @@ export default new Vuex.Store({
     employee: EmployeeModule,
     account: AccountModule,
     customer: CustomerModule,
+    vehicle: VehicleModule,
+    producer: ProducerModule,
     
   },
 

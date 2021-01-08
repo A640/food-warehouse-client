@@ -84,9 +84,9 @@ export default {
         items: [
             { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
             { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Customers' },
-            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Employees2' },
+            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Vehicles' },
             { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Employees2'},
-            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Employees2' },
+            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Producers' },
             { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Employees2' },
         ],
         mini: true,

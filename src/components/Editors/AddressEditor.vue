@@ -113,6 +113,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        address_obj:{
+            type: Object,
+            default: null,
+        }
     },
 
     data() {
@@ -180,18 +184,37 @@ export default {
         },
 
         loadData(id){
-            this.$store.dispatch('getAddressData',id)
-            .then((address) => {
-                this.c_street = address.street
-                this.c_building_num = address.building_number
-                this.c_apartment_num = address.apartment_number
-                this.c_town = address.town
-                let postal = address.postal_code.split(' - ');
+
+            //check if address is provided via prop
+            if(this.address_obj != null){
+                this.c_street = this.address_obj.street
+                this.c_building_num = this.address_obj.building_number
+                this.c_apartment_num = this.address_obj.apartment_number
+                this.c_town = this.address_obj.town
+                let postal = this.address_obj.postal_code.split(' - ');
                 this.c_pc1 = postal[0];
                 this.c_pc2 = postal[1];
-                this.c_country = address.country;
-                this.address_id = address.address_id;
-            })
+                this.c_country = this.address_obj.country;
+                this.address_id = this.address_obj.address_id;
+                
+            }
+            else{
+                //if not provided get by ID
+                this.$store.dispatch('getAddressData',id)
+                .then((address) => {
+                    this.c_street = address.street
+                    this.c_building_num = address.building_number
+                    this.c_apartment_num = address.apartment_number
+                    this.c_town = address.town
+                    let postal = address.postal_code.split(' - ');
+                    this.c_pc1 = postal[0];
+                    this.c_pc2 = postal[1];
+                    this.c_country = address.country;
+                    this.address_id = address.address_id;
+                })
+            }
+
+            
         }
 
     },
@@ -241,7 +264,7 @@ export default {
         let module = require("@/assets/countries.js");
         this.country = module.array;
 
-        if(this.pid == -1){
+        if(this.pid == -1 && this.address_obj == null){
             this.is_company = false;
             this.c_name = '';
             this.c_surname = '';
