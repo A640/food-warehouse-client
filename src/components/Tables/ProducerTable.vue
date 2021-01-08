@@ -37,37 +37,40 @@
         show-expand
         :fixed-header="true"
         :single-expand="false"
-        item-key="maker_data.producer_id"
+        item-key="maker_data.maker_id"
       >
       <template v-slot:[`item.controls`]="props">
         <delete 
-          :id="props.item.maker_data.producer_id" 
-          :name="props.item.maker_data.name + ' ' + props.item.maker_data.surname" 
+          :id="props.item.maker_data.maker_id" 
+          :name="props.item.maker_data.firm_name" 
           type="producenta"
-          :ref="'del' + props.item.maker_data.producer_id"
+          :ref="'del' + props.item.maker_data.maker_id"
           v-on:DeleteConfirm="deleteOne"
          />
-        <edit :edit="Boolean(true)" :account_id="props.item.account.user_id" :producer_id="props.item.maker_data.producer_id" />
+        <edit :edit="Boolean(true)" :producer_id="props.item.maker_data.maker_id" />
       </template>
       <template v-slot:expanded-item="{ item }">
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
             <div class="bg">
-              <p class="detail details-name">{{item.maker_data.name}} {{item.maker_data.surname}}</p>
-              <p class="detail details-id">ID: {{item.maker_data.producer_id}}</p>
+              <p class="detail details-name">{{item.maker_data.firm_name}}</p>
+              <p class="detail details-id">ID: {{item.maker_data.maker_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
                 <p class="cluster-title">Dane producenta:</p>
-                <p class="detail detail-title">Stanowisko: <span class="detail detail-value">{{item.maker_data.position}}</span></p>
-                <p class="detail detail-title">Pensja: <span class="detail detail-value">{{item.maker_data.salary}}</span></p>
+                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.maker_data.phone}}</span></p>
+                <p class="detail detail-title">Email: <span class="detail detail-value">{{item.maker_data.email}}</span></p>
               </div>
-              <v-divider vertical inset class="ml-10 mr-10" />
+              <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Konto:</p>
-                <p class="detail detail-title">Login: <span class="detail detail-value">{{item.account.username}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.account.email}}</span></p>
-                <p class="detail detail-title">Poziom uprawnień: <span class="detail detail-value">{{item.account.permission}}</span></p>
+                <p class="cluster-title">Adres:</p>
+                <p class="detail detail-value"><span v-if="item.address.street" class="detail detail-value" >{{item.address.street}}</span>
+                {{item.address.building_number}}
+                <span v-if="item.address.apartment_number" class="detail detail-value" >/ {{item.address.apartment_number}}</span>
+                </p>
+                <p class="detail detail-value">{{item.address.postal_code}}, {{item.address.town}}</p>
+                <p class="detail detail-value">{{item.address.country}}</p>
               </div>
             </div>
             
@@ -105,14 +108,9 @@ export default {
       search: '',
       headers: [
         { text: '', value: 'data-table-expand' },
-        {
-          text: 'Imię',
-          align: 'start',
-          value: 'maker_data.name',
-        },
-        { text: 'Nazwisko', value: 'maker_data.surname' },
-        { text: 'Stanowisko', value: 'maker_data.position' },
-        { text: 'Pensja', value: 'maker_data.salary', align:'right' },
+        { text: 'Nazwa', value: 'maker_data.firm_name' },
+        { text: 'Telefon', value: 'maker_data.phone' },
+        { text: 'Email', value: 'maker_data.email' },
         { text: "Akcje", value: "controls", sortable: false, align:'center'}
       ],
       producers: [],
@@ -133,7 +131,7 @@ export default {
 
       deleteMany(){
         let delete_ids = this.selected.map( (producer) => {
-            return producer.maker_data.producer_id;
+            return producer.maker_data.maker_id;
         })
         // console.log(delete_ids);
         this.$store.dispatch('deleteManyProducers',delete_ids)
@@ -142,6 +140,8 @@ export default {
             
             this.$store.dispatch('getAllProducers');
             this.$refs['delMany'].dialogClose();
+            this.selected = [];
+            this.delete_many_mode = false;
             
         })
         .catch((err) => {

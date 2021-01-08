@@ -230,8 +230,8 @@ export default {
 
                     let address = {
                         street: this.c_street,
-                        building_number: String(this.c_building_num),
-                        apartment_number: String(this.c_apartment_num),
+                        building_number: this.c_building_num,
+                        apartment_number: this.c_apartment_num,
                         town: this.c_town,
                         postal_code: pc,
                         country: this.c_country,
@@ -258,21 +258,27 @@ export default {
             }
         },
 
+        address_obj(val){
+            if(val != null){
+                this.loadData;
+            }
+        }
+
     },
+
 
     mounted() {
         let module = require("@/assets/countries.js");
         this.country = module.array;
 
         if(this.pid == -1 && this.address_obj == null){
-            this.is_company = false;
-            this.c_name = '';
-            this.c_surname = '';
-            this.c_phone = '';
-            this.c_company = '';
-            this.c_tax = '';
-            this.r_company = [];
-            this.r_tax = [];
+            this.c_street = '';
+            this.c_building_num = '';
+            this.c_apartment_num = '';
+            this.c_town = '';
+            this.c_pc1 = '';
+            this.c_pc2 = '';
+            this.c_country = 'PL';
         }
         else{
             this.loadData(this.pid);

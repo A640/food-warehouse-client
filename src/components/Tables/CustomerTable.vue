@@ -153,6 +153,8 @@ export default {
             
             this.$store.dispatch('getAllCustomers');
             this.$refs['delMany'].dialogClose();
+            this.selected = [];
+            this.delete_many_mode = false;
             
         })
         .catch((err) => {

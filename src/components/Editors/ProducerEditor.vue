@@ -105,27 +105,15 @@ export default {
        
     },
 
-    computed:{
-        drivers(){
-            //load possible drivers
-
-            let drivers = this.$store.getters.getEmployees.map( (employee) => {
-                return {text: employee.personal_data.name + ' ' + employee.personal_data.surname, value: employee.personal_data.employee_id}
-            })
-            return drivers;
-            
-        }
-    },
-
     watch: {
 
         validate (val) {
             if(val == true){
                 if(this.allValidated()){
                     let producer = {
-                        i_firm_name: this.i_firm_name,
-                        i_phone: this.i_phone,
-                        i_email: this.i_email,
+                        firm_name: this.i_firm_name,
+                        phone: this.i_phone,
+                        email: this.i_email,
                     }
 
                     this.$emit('dataUpdate',producer);

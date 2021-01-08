@@ -21,7 +21,7 @@
         </div>
 
         <edit-address
-            :pid="producer_id"
+            :pid="-1"
             :address_obj="loaded_address" 
             :validate="validate_trigger_ad" 
             @dataUpdate="updateDataAddress" 
@@ -146,6 +146,7 @@ export default {
             
             if(this.edit){
 
+                obj.maker_data.maker_id = this.producer_id;
                 obj.address.address_id = this.address_id;
 
                 console.log("edit producer attempt");
@@ -203,17 +204,18 @@ export default {
 
         },
 
-        mounted() {
-            if(this.producer_id != -1){
-                this.$store.dispatch('getProducerAddress',this.producer_id)
-                .then( (address) => {
-                    this.loaded_address = address;
-                    this.address_id = address.address_id;
-                })
-            }
-            
-        },
 
+    },
+
+    mounted() {
+        if(this.producer_id != -1){
+            this.$store.dispatch('getProducerAddress',this.producer_id)
+            .then( (address) => {
+                this.loaded_address = address;
+                this.address_id = address.address_id;
+            })
+        }
+        
     },
 
 }

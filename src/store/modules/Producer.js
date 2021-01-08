@@ -278,11 +278,11 @@ const ProducerModule = {
         },
       
         getProducerData(context, id){
-            let res = context.state.producers.find(producer => producer.maker_data.producer_id == id);
+            let res = context.state.producers.find(producer => producer.maker_data.maker_id == id);
             return res.maker_data;
         },
         getProducerAddress(context, id){
-          let res = context.state.producers.find(producer => producer.maker_data.producer_id == id);
+          let res = context.state.producers.find(producer => producer.maker_data.maker_id == id);
           return res.address;
       },
         
