@@ -74,7 +74,7 @@
 
 <script>
 import Delete from '@/components/Popups/DeleteConfirmation.vue';
-import Edit from '@/components/PopupContents/EditEmployeePopup.vue';
+import Edit from '@/components/PopupContents/EmployeePopup.vue';
 
 
 export default {

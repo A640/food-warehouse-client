@@ -117,7 +117,6 @@ export default {
 
     data() {
         return{
-            is_company: false,
             c_street: '',
             c_building_num: '',
             c_apartment_num: '',
@@ -178,6 +177,20 @@ export default {
             }
             return false
         },
+
+        loadData(id){
+            this.$store.dispatch('getAddressData',id)
+            .then((address) => {
+                this.c_street = address.street
+                this.c_building_num = address.building_number
+                this.c_apartment_num = address.apartment_number
+                this.c_town = address.town
+                let postal = address.postal_code.split(' - ');
+                this.c_pc1 = postal[0];
+                this.c_pc2 = postal[1];
+                this.c_country = address.country;
+            })
+        }
 
     },
 

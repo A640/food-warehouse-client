@@ -166,8 +166,10 @@ const AccountModule = {
         getAccountData(context,id){
             //search for account data in employees if not found, search in customers
             let res = context.getters.getEmployees.find(employee => employee.account.userId == id);
-            if(!res && context.getters.getCustomers){
-              context.getters.getCustomers.find(customer => customer.account.userId == id);
+            console.log("acc")
+            console.log(res);
+            if(res == undefined){
+              res = context.getters.getCustomers.find(customer => customer.account.userId == id);
             }
             return res.account;
         },

@@ -128,9 +128,21 @@ export default {
             return false
         },
 
-        loadData(id){
-            console.log("Get initial data: " + id);
-           // this.$store.getAccount(id)
+        loadData(id){ 
+           this.$store.dispatch('getCustomerData',id)
+           .then( (customer) => {
+                if(customer.firm_name != '' && customer.firm_name != null){
+                    this.is_company = true;
+                }
+                else{
+                    this.is_company = false;
+                }
+                this.c_name = customer.name;
+                this.c_surname = customer.surname;
+                this.c_phone = customer.phone_number;
+                this.c_company = customer.firm_name;
+                this.c_tax = customer.tax_id;
+           })
         },
 
        
