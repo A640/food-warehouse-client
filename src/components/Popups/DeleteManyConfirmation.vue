@@ -10,7 +10,7 @@
                 @click="dialog=true"
                 :disabled="count == 0"
             >
-                Usuń wybranych {{ type }}
+                Usuń wybrane
             </v-btn>
         </template>
         <v-card v-if="loading" class="loader">
