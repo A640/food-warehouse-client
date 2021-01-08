@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+import router from '@/router'
+
 import EmployeeModule from './modules/Employee.js'
 import AccountModule from './modules/Account.js'
 import CustomerModule from './modules/Customer.js'
@@ -68,6 +70,12 @@ export default new Vuex.Store({
         })
       }
     },
+
+    forbiddenResponse(){
+      console.log("Got FORBIDDEN 403 response from server");
+      //fallback to login component
+      router.push({ name: 'Login'});
+    }
 
   },
 

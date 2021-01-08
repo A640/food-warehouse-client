@@ -57,9 +57,15 @@ const EmployeeModule = {
                     console.log(error.response.data);
                     console.log(error.response.status);
                     console.log(error.response.headers);
-      
+
                     //if connected to server, hide no connection banner
                     context.dispatch('noConnectionChange',false);
+
+                    if(error.response.status == 403){
+                      context.dispatch('forbiddenResponse');
+                    }
+      
+                    
                     
                   }
                   reject(error);
@@ -105,6 +111,10 @@ const EmployeeModule = {
       
                     //if connected to server, hide no connection banner
                     context.dispatch('noConnectionChange',false);
+
+                    if(error.response.status == 403){
+                      context.dispatch('forbiddenResponse');
+                    }
                   
                     reject(error)
                   }
@@ -156,6 +166,10 @@ const EmployeeModule = {
     
                   //if connected to server, hide no connection banner
                   context.dispatch('noConnectionChange',false);
+
+                  if(error.response.status == 403){
+                    context.dispatch('forbiddenResponse');
+                  }
                 
                   reject(error)
                 }
@@ -202,6 +216,10 @@ const EmployeeModule = {
     
                   //if connected to server, hide no connection banner
                   context.dispatch('noConnectionChange',false);
+
+                  if(error.response.status == 403){
+                    context.dispatch('forbiddenResponse');
+                  }
                 
                   reject(error)
                 }
@@ -218,7 +236,7 @@ const EmployeeModule = {
             console.log("Gecik employee")
             context.commit('setEmployeesLoading',true);
             let token = localStorage.getItem('jwtToken')
-            axios.get(context.getters.getServerAddress +'/employee', { headers: { Authorization: `Bearer ${token}` }})
+            axios.get(context.getters.getServerAddress +'/employee', { headers: { Authorization: `Bearer ${token}` } })
               .then( (data) => {
       
                 if(!silent){
@@ -248,6 +266,10 @@ const EmployeeModule = {
                   if(!silent){
                      //if connected to server, hide no connection banner
                     context.dispatch('noConnectionChange',false);
+                  }
+
+                  if(error.response.status == 403){
+                    context.dispatch('forbiddenResponse');
                   }
                  
                 }
