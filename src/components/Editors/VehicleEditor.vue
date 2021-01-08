@@ -216,14 +216,13 @@ export default {
 
     mounted() {
         if(this.pid == -1){
-            this.is_company = false;
-            this.c_name = '';
-            this.c_surname = '';
-            this.c_phone = '';
-            this.c_company = '';
-            this.c_tax = '';
-            this.r_company = [];
-            this.r_tax = [];
+            this.i_brand = '';
+            this.i_model = '';
+            this.i_prod_year = 1990;
+            this.i_reg_no = '';
+            this.i_insurance = new Date().toISOString().substr(0, 10);
+            this.i_inspection = new Date().toISOString().substr(0, 10);
+            this.i_driver = '';
         }
         else{
             this.loadData(this.pid);

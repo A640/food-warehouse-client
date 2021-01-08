@@ -129,14 +129,9 @@ export default {
 
     mounted() {
         if(this.pid == -1){
-            this.is_company = false;
-            this.c_name = '';
-            this.c_surname = '';
-            this.c_phone = '';
-            this.c_company = '';
-            this.c_tax = '';
-            this.r_company = [];
-            this.r_tax = [];
+            this.i_firm_name = '';
+            this.i_phone = '';
+            this.i_email = '';
         }
         else{
             this.loadData(this.pid);
