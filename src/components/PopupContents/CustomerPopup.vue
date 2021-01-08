@@ -43,9 +43,9 @@
 
         <edit-address
             :pid="customer_id" 
-            :validate="validate_trigger_e" 
-            @dataUpdate="updateDataCustomer" 
-            @allValidated="validateE"
+            :validate="validate_trigger_ad" 
+            @dataUpdate="updateDataAddress" 
+            @allValidated="validateAD"
         />
 
         <div class="cell">
@@ -111,10 +111,13 @@ export default {
         return{
             validate_trigger_a: false,
             validate_trigger_e: false,
+            validate_trigger_ad: false,
             account: null,
             customer: null,
+            address: null,
             a_validated: false,
             e_validated: false,
+            ad_validated: false,
 
             c_user_type: 'Customer',
             u_types: [],
@@ -134,17 +137,23 @@ export default {
             this.customer = data;
         },
 
+        updateDataAddress(data){
+            this.address = data;
+        },
+
         validate(){
             this.a_validated = false;
             this.e_validated = false;
+            this.ad_validated = false;
             this.validate_trigger_a = true;
             this.validate_trigger_e = true;
+            this.validate_trigger_ad = true;
         },
 
         validateA(value){
             this.a_validated = value;
             this.validate_trigger_a = false;
-            if(value == true && this.e_validated == true && this.c_user_type != null && this.c_user_type != ''){
+            if(value == true && this.e_validated == true && this.ad_validated == true && this.c_user_type != null && this.c_user_type != ''){
                 this.eSave();
             }
         },
@@ -152,7 +161,15 @@ export default {
         validateE(value){
             this.e_validated = value;
             this.validate_trigger_e = false;
-            if(value == true && this.a_validated == true && this.c_user_type != null && this.c_user_type != ''){
+            if(value == true && this.a_validated == true && this.ad_validated == true && this.c_user_type != null && this.c_user_type != ''){
+                this.eSave();
+            }
+        },
+
+        validateAD(value){
+            this.ad_validated = value;
+            this.validate_trigger_ad = false;
+            if(value == true && this.e_validated == true && this.a_validated == true && this.c_user_type != null && this.c_user_type != ''){
                 this.eSave();
             }
         },
@@ -161,13 +178,15 @@ export default {
             this.overlay = true;
             let obj = {
                 account: this.account,
-                personal_data: this.customer, 
+                personal_data: this.customer,
+                address: this.address, 
             };
             obj.account.permission = this.c_user_type;
             if(this.edit){
 
                 obj.account.user_id = this.account_id;
                 obj.personal_data.customer_id = this.customer_id;
+                obj.address.address_id = this.customer_id;
 
                 console.log("edit customer attempt");
                 console.log(obj);
@@ -205,13 +224,6 @@ export default {
                     })
             }
             
-        },
-
-        nextStep(validated){
-            if(validated){
-                this.$emit('next',this.address);
-            }
-            this.validate_trigger = false;
         },
 
         dialogClose(){

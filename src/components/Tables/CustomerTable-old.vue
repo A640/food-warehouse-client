@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj klienta"
+          label="Wyszukaj pracownika"
           single-line
           hide-details
         ></v-text-field>
@@ -31,9 +31,9 @@
         :headers="headers"
         :items="customers"
         :search="search"
-        :expanded.sync="expanded"
         :show-select="delete_many_mode" 
         v-model="selected"
+        :expanded.sync="expanded"
         show-expand
         :fixed-header="true"
         :single-expand="false"
@@ -41,12 +41,11 @@
       >
       <template v-slot:[`item.controls`]="props">
         <delete 
-          :id="props.item.personal_data.customer_id" 
+          :id=props.item.personal_data.customer_id 
           :name="props.item.personal_data.name + ' ' + props.item.personal_data.surname" 
           type="klienta"
-          :ref="'del' + props.item.personal_data.customer_id"
-          v-on:DeleteConfirm="deleteOne"
-         />
+          v-on:DeleteConfirm="deleteOne" 
+        />
         <edit :edit="Boolean(true)" :account_id="props.item.account.user_id" :customer_id="props.item.personal_data.customer_id" />
       </template>
       <template v-slot:expanded-item="{ item }">
@@ -89,9 +88,9 @@
       
       </v-data-table>
 
-      <div v-if="delete_many_mode" class="right-buttons">
+     <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">Anuluj</v-btn>
-                <delete-many name="Usuwanie zaznaczonych klientów" :count="selected.length" type="klientów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many name="Usuwanie zaznaczonych klientów" :count="selected.length" type="klientów" v-on:deleteConfirm="deleteMany()"  ></delete-many>
       </div>
     </v-card>
   </div>
@@ -128,6 +127,7 @@ export default {
       ],
       customers: [],
       expanded: [],
+
       selected: [],
       delete_many_mode: false,
       // loading_data: true,
@@ -143,43 +143,16 @@ export default {
       },
 
       deleteMany(){
-        let delete_ids = this.selected.map( (customer) => {
-            return customer.personal_data.customer_id;
+        let delete_ids = this.selected.map( (employee) => {
+            return employee.personal_data.employee_id;
         })
         // console.log(delete_ids);
         this.$store.dispatch('deleteManyCustomers',delete_ids)
-        .then( () => {
-            // if added  successfully (resolved promise) clear popup and close
-            
-            this.$store.dispatch('getAllCustomers');
-            this.$refs['delMany'].dialogClose();
-            
-        })
-        .catch((err) => {
-            console.log(err);
-            this.$refs['delMany'].dialogClose();
-        })
       },
 
       deleteOne(id){
-        console.log(id)
         this.$store.dispatch('deleteCustomer',id)
-        .then( () => {
-            // if added  successfully (resolved promise) clear popup and close
-            
-            this.$store.dispatch('getAllCustomers');
-            this.$refs['del' + id ].dialogClose();
-            
-        })
-        .catch((err) => {
-            if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
-            }
-            console.log(err);
-            this.$refs['del' + id ].dialogClose();
-        })
-      },
-      
+      }
   },
 
   computed: {

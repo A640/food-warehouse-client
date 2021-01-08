@@ -124,6 +124,7 @@ export default {
             c_pc1: '',
             c_pc2: '',
             c_country: 'PL',
+            address_id: null,
 
             r_street: [
                 value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
@@ -189,6 +190,7 @@ export default {
                 this.c_pc1 = postal[0];
                 this.c_pc2 = postal[1];
                 this.c_country = address.country;
+                this.address_id = address.address_id;
             })
         }
 
@@ -210,6 +212,10 @@ export default {
                         town: this.c_town,
                         postal_code: pc,
                         country: this.c_country,
+                    }
+
+                    if(this.address_id != null){
+                        address.address_id = this.address_id;
                     }
 
                     if(address.street == ''){
