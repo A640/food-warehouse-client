@@ -140,12 +140,12 @@ export default {
         eSave(){
             this.overlay = true;
             let obj = {
-                maker_data: this.warehouse,
-                address: this.address, 
+                storage: this.warehouse,
+                address: this.address,
+                manager_id: this.warehouse.manager_id,
             };
             
             if(this.edit){
-
                 obj.maker_data.maker_id = this.warehouse_id;
                 obj.address.address_id = this.address_id;
 

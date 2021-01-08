@@ -29,7 +29,7 @@ const WarehouseModule = {
               let token = localStorage.getItem('jwtToken')
       
                 // if updating existing Warehouse and User data
-                axios.put(context.getters.getServerAddress + '/warehouse',data,{ headers: { Authorization: `Bearer ${token}` }})
+                axios.put(context.getters.getServerAddress + '/storage',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
                   console.log(response);
       
@@ -81,7 +81,7 @@ const WarehouseModule = {
               let token = localStorage.getItem('jwtToken')
       
               // creating new Warehouse and new User
-              axios.post(context.getters.getServerAddress +'/warehouse',data,{ headers: { Authorization: `Bearer ${token}` }})
+              axios.post(context.getters.getServerAddress +'/storage',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
       
                   //connected to server, hide no connection banner
@@ -130,7 +130,7 @@ const WarehouseModule = {
             let token = localStorage.getItem('jwtToken')
     
             // creating new Warehouse and new User
-            axios.delete(context.getters.getServerAddress + '/warehouse/' + id,{ headers: { Authorization: `Bearer ${token}` }})
+            axios.delete(context.getters.getServerAddress + '/storage/' + id,{ headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -186,7 +186,7 @@ const WarehouseModule = {
             console.log("deleteMany");
             console.log(ids);
             // creating new Warehouse and new User
-            axios.delete(context.getters.getServerAddress + '/warehouse',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
+            axios.delete(context.getters.getServerAddress + '/storage',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -236,7 +236,7 @@ const WarehouseModule = {
             console.log("Gecik warehouse")
             context.commit('setWarehousesLoading',true);
             let token = localStorage.getItem('jwtToken')
-            axios.get(context.getters.getServerAddress +'/warehouse', { headers: { Authorization: `Bearer ${token}` } })
+            axios.get(context.getters.getServerAddress +'/storage', { headers: { Authorization: `Bearer ${token}` } })
               .then( (data) => {
       
                 if(!silent){

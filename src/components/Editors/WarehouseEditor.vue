@@ -103,9 +103,10 @@ export default {
            this.$store.dispatch('getWarehouseData',id)
            .then( (warehouse) => {
                //load data from vuex store
-                this.i_name = warehouse.name;
-                this.i_capacity = warehouse.capacity;
-                this.i_is_cold_storage = warehouse.is_cold_storage;
+                this.i_name = warehouse.storage.name;
+                this.i_capacity = warehouse.storage.capacity;
+                this.i_is_cold_storage = warehouse.storage.is_cold_storage;
+                this.i_manager = warehouse.manager.personal_data.employee_id;
            })
         },
 
@@ -130,9 +131,10 @@ export default {
             if(val == true){
                 if(this.allValidated()){
                     let warehouse = {
-                        name: this.i_firm_name,
-                        capacity: this.i_phone,
-                        is_cold_storage: this.i_email,
+                        name: this.i_name,
+                        capacity: this.i_capacity,
+                        is_cold_storage: this.i_is_cold_storage,
+                        manager_id: this.i_manager,
                     }
 
                     this.$emit('dataUpdate',warehouse);
