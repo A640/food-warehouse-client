@@ -110,21 +110,7 @@ export default {
 
     }
 
-    .input{
-        margin-top: 1rem;
-        font-family: 'Segoe UI';
-        font-weight: 600;
-        
-    }
 
-    .title{
-        margin: 0 auto;
-        margin-top: 4rem;
-        margin-bottom: 3rem;
-        font-family: 'Segoe UI';
-        font-weight: 600;
-        font-size: 1.3rem;
-    }
 
     .cell{
         display: block;

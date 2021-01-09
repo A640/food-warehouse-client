@@ -1,46 +1,28 @@
 <template>
-    <div class="store">
-        <div id="bar">
-            <h2 class="appbar__title">{{ store_name }}</h2>
-            
-            <div class="search">
-                <v-combobox
-                    class="mt-2"
-                    label="Czego szukasz?"
-                    clearable
-                    solo
-                    background-color="#f0f2f5"
-                    hide-selected
-                    flat
-                    hide-details=true
-                    v-model="i_search"
-                    :items="products_search"
-                    :error="e_search"
-                ></v-combobox>
-            </div>
-
-            <v-btn
-                depressed
-            >
-            <v-icon>mdi-account</v-icon>
-            </v-btn>
-           
-        </div>
-        
-        <div id="content">
-            <router-view :key="$route.path" />
-        </div>
+    <div class="store-grid">
+       
+        <v-container grid-list-md text-xs-center>
+            <v-layout row wrap>
+                
+                <v-flex v-for="i in 20" :key="i" >
+                    <product name="Bejkon" :added=false price=12.5 />
+                </v-flex>
+                
+            </v-layout>
+        </v-container>
+                
+       
     </div>
 </template>
 
 <script>
-
+import Product from '@/components/Store/Product.vue'
 
 
 export default {
 
     components:{
-
+        Product,
     },
 
 
@@ -64,7 +46,7 @@ export default {
 
 <style scoped>
 
-    .store{
+    .store-grid{
         width: 100%;
         height: 100%;
         background-color: rgb(240, 242, 245);
