@@ -19,6 +19,7 @@ export default new Vuex.Store({
 
     adress: "localhost",
     port: 8090,
+    store_name:  'STYRTA_POL',
 
     no_connection: false,
     reconnected: false,
@@ -92,7 +93,7 @@ export default new Vuex.Store({
     producer: ProducerModule,
     warehouse: WarehouseModule,
     product: ProductModule,
-    
+
   },
 
   getters: {
@@ -108,6 +109,10 @@ export default new Vuex.Store({
     getReconnected(context){
       return context.reconnected;
     },
+
+    getStoreName(context){
+      return context.store_name;
+    }
     
   },
 
