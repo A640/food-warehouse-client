@@ -39,6 +39,11 @@ const routes = [
         name: 'Admin_Producers',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProducerTable.vue'),
       },
+      {
+        path: 'warehouses',
+        name: 'Admin_Warehouses',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/WarehouseTable.vue'),
+      },
     ]
   },
   {

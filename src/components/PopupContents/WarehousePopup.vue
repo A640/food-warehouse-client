@@ -146,7 +146,7 @@ export default {
             };
             
             if(this.edit){
-                obj.maker_data.maker_id = this.warehouse_id;
+                obj.storage.storage_id = this.warehouse_id;
                 obj.address.address_id = this.address_id;
 
                 console.log("edit warehouse attempt");
