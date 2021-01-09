@@ -5,7 +5,7 @@
             <v-img
                 height="250"
                 src="@/assets/b.jpg"
-                @click="details()"
+                @click="showDetails()"
             >
                 <v-fade-transition>
                     <div class="detail-info" v-if="hover">
@@ -17,6 +17,15 @@
         
             
         <v-card-title>
+            <v-chip
+                label
+                dark
+                class="mr-2"
+                color="amber"
+                @click="showDetails()"
+            >
+                Dostępna promocja
+            </v-chip>
             {{ name }} 
             <v-spacer></v-spacer> 
             <!-- if product wadd added to cart -->
@@ -57,29 +66,29 @@
                 {{ price }} zł
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-btn color="green lighten-1" dark elevation=0.5 @click="add">Dodaj</v-btn>
+            <add-to-cart />
         </v-card-actions>
 
     </v-card>
 </template>
 
 <script>
+import AddToCart from '@/components/Popups/AddToCart.vue';
+
 export default {
 
-    props:{
-        name:{
-            type: String,
-            default: "Produkt",
-        },
-        added:{
-            type: Boolean,
-            default: false,
-        },
-        price:{
-            type: Number,
-            default: null,
-        }
+    components:{
+        AddToCart,
     },
+    
+    props:{
+        product:{
+            type: Object,
+            // required: true,
+        },
+    },
+
+    
     
     data() {
         return{
@@ -89,7 +98,9 @@ export default {
     },
 
     methods: {
-        
+        showDetails(){
+            this.$router.push({ name: 'Store_Detail', params: {id:/*this.product.id*/ 1 }})
+        }
     },
 }
 </script>
@@ -208,6 +219,7 @@ export default {
         font-weight: 600;
         font-size: 1.2rem;
         color: rgba(255, 255, 255, 0.80);
+        cursor: pointer;
     }
 
 </style>

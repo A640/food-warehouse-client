@@ -3,7 +3,8 @@ import axios from 'axios'
 const AccountModule = {
 
     state: { 
-        
+        login: '',
+        remember_me: true,
     },
 
     mutations: {

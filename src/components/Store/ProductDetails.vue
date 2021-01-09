@@ -41,7 +41,7 @@
                                 <p  class="cell details-price ">40 zł</p>
                                 <p class="cell details-unit ">za 1 europaletę produktu</p>
                                 <div class="order-button cell">
-                                    <v-btn color="green lighten-1" class="pull-right" dark elevation=2 @click="add">Zamów</v-btn>
+                                    <add-to-cart/>
                                 </div>
                                 <p class="detail-claim cell">Produkt z tej oferty ma jeszcze conajmniej 1 miesiąc przydatności</p>
                             </div>
@@ -65,7 +65,7 @@
                                 <p  class="cell details-price "><span class="old-price">40</span> 30 zł</p>
                                 <p class="cell details-unit ">za 1 europaletę produktu</p>
                                 <div class="order-button cell">
-                                    <v-btn color="amber " class="pull-right" dark elevation=2 @click="add">Zamów</v-btn>
+                                    <add-to-cart :sale="true" />
                                 </div>
                                 <p class="detail-claim cell">
                                     Data ważności produktu z tej oferty kończy się 
@@ -91,10 +91,13 @@
 </template>
 
 <script>
+import AddToCart from '@/components/Popups/AddToCart.vue';
+
 
 export default {
 
     components:{
+        AddToCart
 
     },
 

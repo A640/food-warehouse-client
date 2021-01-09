@@ -25,6 +25,29 @@
             ></v-text-field>
         </form>
 
+        <form class="cell">
+            <label class="cell__label">Skrócony opis</label>
+            <v-text-field
+                class="input"
+                label=""
+                solo
+                v-model="i_short_description"
+                :rules="r_short_description"
+                v-on:keyup.enter.stop
+            ></v-text-field>
+        </form>
+
+        <form class="cell">
+            <label class="cell__label">Opis</label>
+            <v-textarea
+                class="input"
+                label=""
+                solo
+                v-model="i_description"
+                v-on:keyup.enter.stop
+            ></v-textarea>
+        </form>
+
         <div class="cell">
             <label class="cell__label">Producent</label>
             <v-autocomplete
@@ -96,6 +119,9 @@ export default {
             i_buy_price: 0,
             i_sell_price: 0,
             i_producer: '',
+            i_short_description: '',
+            i_description: '',
+            i_photo_b64: null,
 
             r_name: [
                 value => !!value || 'To pole jest wymagane!',
@@ -117,6 +143,10 @@ export default {
 
             r_producer: [
                 value => !!value || 'To pole jest wymagane!',
+            ],
+
+            r_short_description: [
+                value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
             ],
 
 
