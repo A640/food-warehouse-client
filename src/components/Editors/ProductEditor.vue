@@ -49,6 +49,28 @@
         </form>
 
         <div class="cell">
+            <v-img
+                v-if="image"
+                class="img"
+                contain
+                height="20rem"
+                :src="image"
+            />
+        </div>
+
+        <v-file-input 
+            v-model="upload_image"
+            class="cell"
+            label="Zdjęcie produktu"
+            filled
+            show-size
+            :rules="r_image"
+            prepend-icon="mdi-camera"
+        ></v-file-input>
+
+        
+
+        <div class="cell">
             <label class="cell__label">Producent</label>
             <v-autocomplete
                 solo
@@ -122,6 +144,8 @@ export default {
             i_short_description: '',
             i_description: '',
             i_photo_b64: null,
+            upload_image: null,
+            image: null,
 
             r_name: [
                 value => !!value || 'To pole jest wymagane!',
@@ -149,6 +173,11 @@ export default {
                 value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
             ],
 
+            r_image: [
+                value => !value || value.size < 5000000 || 'Obraz powinien być mniejszy niż 5 MB!',
+                value => !value || (value.type == 'image/jpeg' || value.type == 'image/jpg' || value.type == 'image/png' || value.type == 'image/gif') || 'Obsługiwane formaty plików to: JPG, JPEG, PNG, GIF'
+            ],
+
 
         }
     },
@@ -172,8 +201,22 @@ export default {
                 this.i_buy_price = product.product.buy_price;
                 this.i_sell_price = product.product.sell_price;
                 this.i_producer = product.maker.maker_data.maker_id
+                this.image = product.product.image;
+                this.i_description = product.product.description;
+                this.i_short_description = product.product.sell_price;
            })
         },
+
+        //convert image to BASE64
+        encodeImage() {
+            var file = this.upload_image;
+            var reader = new FileReader();
+            reader.onloadend = () => {
+                this.image = reader.result
+                console.log(reader.result)
+            }
+            reader.readAsDataURL(file);
+        }
 
        
     },
@@ -202,6 +245,9 @@ export default {
                         buy_price: this.i_buy_price,
                         sell_price: this.i_sell_price,
                         maker_id: this.i_producer,
+                        short_description: this.i_short_description,
+                        description: this.i_description,
+                        image: this.image,
                     }
 
                     this.$emit('dataUpdate',product);
@@ -213,6 +259,24 @@ export default {
             }
         },
 
+        upload_image(val){
+            if(val){
+                console.log(val);
+                this.encodeImage();
+            }
+            else{
+                this.image = null;
+            }
+            
+            // let reader = new FileReader();
+
+            // this.image = URL.createObjectURL(this.upload_image);
+            //         this.image.onload = function() {
+            //             URL.revokeObjectURL(this.image.src); 
+            //         }
+            
+        }
+
     },
 
     mounted() {
@@ -223,6 +287,9 @@ export default {
             this.i_buy_price = 0;
             this.i_sell_price = 0;
             this.i_producer = '';
+            this.i_description = '';
+            this.i_short_description = '',
+            this.image = null;
         }
         else{
             this.loadData(this.pid);
@@ -346,6 +413,11 @@ export default {
     }
     .date-picker{
         margin: 0 auto;
+    }
+    .img{
+        border: solid 1px rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
 
 </style>

@@ -105,6 +105,9 @@ export default {
                 buy_price: Number.parseFloat(this.product.buy_price),
                 maker_id: this.product.maker_id,
                 sell_price: Number.parseFloat(this.product.sell_price),
+                image: this.product.image,
+                description: this.product.description,
+                short_description: this.product.short_description,
             }
             
            
