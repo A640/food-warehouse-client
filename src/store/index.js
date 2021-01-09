@@ -10,6 +10,7 @@ import CustomerModule from './modules/Customer.js'
 import VehicleModule from './modules/Vehicle.js'
 import ProducerModule from './modules/Producer.js'
 import WarehouseModule from './modules/Warehouse.js'
+import ProductModule from './modules/Product.js'
 
 Vue.use(Vuex)
 
@@ -90,7 +91,8 @@ export default new Vuex.Store({
     vehicle: VehicleModule,
     producer: ProducerModule,
     warehouse: WarehouseModule,
-
+    product: ProductModule,
+    
   },
 
   getters: {

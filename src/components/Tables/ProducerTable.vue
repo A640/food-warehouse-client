@@ -39,6 +39,8 @@
         :single-expand="false"
         item-key="maker_data.maker_id"
       >
+
+      <!-- insert table controls -->
       <template v-slot:[`item.controls`]="props">
         <delete 
           :id="props.item.maker_data.maker_id" 
@@ -49,6 +51,8 @@
          />
         <edit :edit="Boolean(true)" :producer_id="props.item.maker_data.maker_id" />
       </template>
+
+      <!-- insert into item expand slot -->
       <template v-slot:expanded-item="{ item }">
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
@@ -111,6 +115,8 @@ export default {
         { text: 'Nazwa', value: 'maker_data.firm_name' },
         { text: 'Telefon', value: 'maker_data.phone' },
         { text: 'Email', value: 'maker_data.email' },
+        { text: 'Miasto', value: 'address.town' },
+        { text: 'Kraj', value: 'address.country' },
         { text: "Akcje", value: "controls", sortable: false, align:'center'}
       ],
       producers: [],

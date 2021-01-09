@@ -39,6 +39,8 @@
         :single-expand="false"
         item-key="personal_data.employee_id"
       >
+
+      <!-- insert table controls -->
       <template v-slot:[`item.controls`]="props">
         <delete 
           :id="props.item.personal_data.employee_id" 
@@ -49,6 +51,8 @@
          />
         <edit :edit="Boolean(true)" :account_id="props.item.account.user_id" :employee_id="props.item.personal_data.employee_id" />
       </template>
+
+      <!-- insert into item expand slot -->
       <template v-slot:expanded-item="{ item }">
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">

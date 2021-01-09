@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj pojazd"
+          label="Wyszukaj produkt"
           single-line
           hide-details
         ></v-text-field>
@@ -29,7 +29,7 @@
       </v-card-title>
       <v-data-table
         :headers="headers"
-        :items="vehicles"
+        :items="products"
         :search="search"
         :expanded.sync="expanded"
         :show-select="delete_many_mode" 
@@ -37,19 +37,19 @@
         show-expand
         :fixed-header="true"
         :single-expand="false"
-        item-key="car_info.car_id"
+        item-key="product.product_id"
       >
 
       <!-- insert table controls -->
       <template v-slot:[`item.controls`]="props">
         <delete 
-          :id="props.item.car_info.car_id" 
-          :name="props.item.car_info.brand + ' ' + props.item.car_info.model" 
-          type="pojazda"
-          :ref="'del' + props.item.car_info.car_id"
+          :id="props.item.product.product_id" 
+          :name="props.item.product.name"
+          type="produkt"
+          :ref="'del' + props.item.product.product_id"
           v-on:DeleteConfirm="deleteOne"
          />
-        <edit :edit="Boolean(true)" :vehicle_id="props.item.car_info.car_id" />
+        <edit :edit="Boolean(true)" :product_id="props.item.product.product_id" />
       </template>
 
       <!-- insert into item expand slot -->
@@ -57,22 +57,23 @@
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
             <div class="bg">
-              <p class="detail details-name">{{item.car_info.brand}} {{item.car_info.model}}</p>
-              <p class="detail details-id">ID: {{item.car_info.car_id}}</p>
+              <p class="detail details-name">{{item.product.name}}</p>
+              <p class="detail details-id">ID: {{item.product.product_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane pojazdu:</p>
-                <p class="detail detail-title">NR Rejestracyjny: <span class="detail detail-value">{{item.car_info.reg_no}}</span></p>
-                <p class="detail detail-title">Ubezpieczenie do: <span class="detail detail-value">{{item.car_info.insurance.substr(0, 10)}}</span></p>
-                <p class="detail detail-title">Przegląd do: <span class="detail detail-value">{{item.car_info.inspection.substr(0, 10)}}</span></p>
+                <p class="cluster-title">Dane produktu:</p>
+                <p class="detail detail-title">Kategoria: <span class="detail detail-value">{{item.product.category}}</span></p>
+                <p class="detail detail-title">Wymaga przechowywania w chłodni: <span class="detail detail-value">{{ item.product.needs_cold ? 'TAK' : 'NIE' }}</span></p>
+                <p class="detail detail-title">Cena kupna: <span class="detail detail-value">{{item.product.buy_price}}</span></p>
+                <p class="detail detail-title">Cena sprzedaży: <span class="detail detail-value">{{item.product.sell_price}}</span></p>
               </div>
-               <v-divider vertical inset class="ml-10 mr-10" />
+              <v-divider vertical inset class="ml-10 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Kierowca:</p>
-                <p class="detail detail-title"><span class="detail detail-value">{{item.driver.personal_data.name}} {{item.driver.personal_data.surname}}</span></p>
-                <p class="detail detail-title">Stanowisko: <span class="detail detail-value">{{item.driver.personal_data.position}}</span></p>
-                <p class="detail detail-title">Email: <span class="detail detail-value">{{item.driver.account.email}}</span></p>
+                <p class="cluster-title">Producent:</p>
+                <p class="detail detail-title"><span class="detail detail-value">{{item.maker.maker_data.firm_name}}</span></p>
+                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.maker.maker_data.phone}}</span></p>
+                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.maker.maker_data.email}}</span></p>
               </div>
             </div>
             
@@ -85,7 +86,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">Anuluj</v-btn>
-                <delete-many name="Usuwanie zaznaczonych pojazdów" :count="selected.length" type="pojazdów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many name="Usuwanie zaznaczonych produktów" :count="selected.length" type="produktów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>
@@ -93,7 +94,7 @@
 
 <script>
 import Delete from '@/components/Popups/DeleteConfirmation.vue';
-import Edit from '@/components/PopupContents/VehiclePopup.vue';
+import Edit from '@/components/PopupContents/ProductPopup.vue';
 import DeleteMany from '@/components/Popups/DeleteManyConfirmation.vue';
 
 
@@ -110,13 +111,19 @@ export default {
       search: '',
       headers: [
         { text: '', value: 'data-table-expand' },
-        { text: 'Marka', value: 'car_info.brand', align: 'start' },
-        { text: 'Model', value: 'car_info.model' },
-        { text: 'NR rejestracyjny', value: 'car_info.reg_no' },
-        { text: 'Kierowca', value: 'car_info.driver_ns' },
+        {
+          text: 'Nazwa',
+          align: 'start',
+          value: 'product.name',
+        },
+        { text: 'Kategoria', value: 'product.category' },
+        { text: 'Wymaga chłodni', value: 'product.cold', align:'center' },
+        { text: 'Producent', value: 'maker.maker_data.firm_name' },
+        { text: 'Cena kupna', value: 'product.buy_price', align:'right' },
+        { text: 'Cena sprzedaży', value: 'product.sell_price', align:'right' },
         { text: "Akcje", value: "controls", sortable: false, align:'center'}
       ],
-      vehicles: [],
+      products: [],
       expanded: [],
       selected: [],
       delete_many_mode: false,
@@ -133,18 +140,19 @@ export default {
       },
 
       deleteMany(){
-        let delete_ids = this.selected.map( (vehicle) => {
-            return vehicle.car_info.car_id;
+        let delete_ids = this.selected.map( (product) => {
+            return product.product.product_id;
         })
         // console.log(delete_ids);
-        this.$store.dispatch('deleteManyVehicles',delete_ids)
+        this.$store.dispatch('deleteManyProducts',delete_ids)
         .then( () => {
             // if added  successfully (resolved promise) clear popup and close
             
-            this.$store.dispatch('getAllVehicles');
+            this.$store.dispatch('getAllProducts');
             this.$refs['delMany'].dialogClose();
             this.selected = [];
             this.delete_many_mode = false;
+            
         })
         .catch((err) => {
             console.log(err);
@@ -154,11 +162,11 @@ export default {
 
       deleteOne(id){
         console.log(id)
-        this.$store.dispatch('deleteVehicle',id)
+        this.$store.dispatch('deleteProduct',id)
         .then( () => {
             // if added  successfully (resolved promise) clear popup and close
             
-            this.$store.dispatch('getAllVehicles');
+            this.$store.dispatch('getAllProducts');
             this.$refs['del' + id ].dialogClose();
             
         })
@@ -178,7 +186,7 @@ export default {
       if(this.$store.getters.getNoConnection){
         return true;
       }else{
-        return this.$store.getters.getVehiclesLoading;
+        return this.$store.getters.getProductsLoading;
       }
     },
     reconnected(){
@@ -189,16 +197,15 @@ export default {
   created() {
     this.$store.watch(
       ()=>{
-        return this.$store.getters.getVehicles // could also put a Getter here
+        return this.$store.getters.getProducts // could also put a Getter here
       },
       (newValue)=>{
         //Update data when changed
-        let veh = newValue.map( (vehicle) => {
-          vehicle.car_info.driver_ns = vehicle.driver.personal_data.name + ' ' + vehicle.driver.personal_data.surname;
-          return vehicle;
+        let prod = newValue.map((product) => {
+          product.product.cold = product.product.needs_cold ? 'TAK' : 'NIE';
+          return product;
         })
-
-        this.vehicles = veh;
+        this.products = prod;
       },
       //To detect nested value changes inside Objects
       {
@@ -210,15 +217,15 @@ export default {
   watch:{
     reconnected(val){
       if(val){
-        this.$store.dispatch('getAllVehicles',true);
+        this.$store.dispatch('getAllProducts',true);
       }
     }
   },
 
   mounted() {
     
-    this.vehicles = this.$store.getters.getVehicles;
-    this.$store.dispatch('getAllVehicles');
+    this.products = this.$store.getters.getProducts;
+    this.$store.dispatch('getAllProducts');
   }
 
 }

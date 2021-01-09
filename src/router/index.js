@@ -44,6 +44,11 @@ const routes = [
         name: 'Admin_Warehouses',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/WarehouseTable.vue'),
       },
+      {
+        path: 'products',
+        name: 'Admin_Products',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProductTable.vue'),
+      },
     ]
   },
   {
@@ -77,7 +82,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/components/Editors/ProductEditor.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/components/PopupContents/ProductPopup.vue')
   }
 ]
 

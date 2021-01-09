@@ -43,7 +43,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Cena po jakiej kupuje magazyn</label>
+            <label class="cell__label">Cena po jakiej magazyn <b>kupuje</b> jednostkę produktu </label>
             <v-text-field
                 class="input"
                 type="number"
@@ -56,7 +56,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Cena po jakiej sprzedaje magazyn</label>
+            <label class="cell__label">Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu </label>
             <v-text-field
                 class="input"
                 type="number"
@@ -141,7 +141,7 @@ export default {
                 this.i_needs_cold = product.product.needs_cold;
                 this.i_buy_price = product.product.buy_price;
                 this.i_sell_price = product.product.sell_price;
-                this.i_producer = product.maker.maker_id
+                this.i_producer = product.maker.maker_data.maker_id
            })
         },
 

@@ -39,6 +39,8 @@
         :single-expand="false"
         item-key="storage.storage_id"
       >
+      
+      <!-- insert table controls -->
       <template v-slot:[`item.controls`]="props">
         <delete 
           :id="props.item.storage.storage_id" 
@@ -49,6 +51,8 @@
          />
         <edit :edit="Boolean(true)" :warehouse_id="props.item.storage.storage_id" />
       </template>
+
+      <!-- insert into item expand slot -->
       <template v-slot:expanded-item="{ item }">
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
@@ -116,9 +120,10 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         { text: 'Nazwa', value: 'storage.name' },
-        { text: 'Pojemność', value: 'storage.capacity' },
-        { text: 'Chłodnia', value: 'storage.is_cold_storage' },
-        { text: 'Zarządca', value: 'manager.personal_data.name' },
+        { text: 'Pojemność', value: 'storage.capacity', align:'end' },
+        { text: 'Chłodnia', value: 'storage.cold', align:'center' },
+        { text: 'Zarządca', value: 'storage.manager_ns' },
+        { text: 'Miasto', value: 'address.town' },
         { text: "Akcje", value: "controls", sortable: false, align:'center'}
       ],
       warehouses: [],
@@ -199,7 +204,13 @@ export default {
       },
       (newValue)=>{
         //Update data when changed
-        this.warehouses = newValue;
+        let wareh = newValue.map((warehouse) => {
+          //prepare boolean value and 2 string value to display AND SEARCH in table
+          warehouse.storage.cold = warehouse.storage.is_cold_storage ? 'TAK' : 'NIE';
+          warehouse.storage.manager_ns = warehouse.manager.personal_data.name + ' ' + warehouse.manager.personal_data.surname;
+          return warehouse;
+        })
+        this.warehouses = wareh;
       },
       //To detect nested value changes inside Objects
       {
