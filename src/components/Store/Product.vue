@@ -73,6 +73,7 @@
                 :price="product.sell_price" 
                 :max="product.quantity"
                 :id="product.product_id"
+                :sale_id="-1"
             />
         </v-card-actions>
 

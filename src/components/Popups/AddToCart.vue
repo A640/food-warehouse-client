@@ -27,7 +27,7 @@
                     <p  class="cell details-price ">Cena za sztukę: <span class="price">{{ price }}</span></p>
 
                     <p class="cell details-price ">Ilość:</p>
-                    <form class="cell" ref="countForm">
+                    <v-form class="cell" v-model="form">
                         
                         <div class="double">
                         
@@ -45,13 +45,13 @@
 
                         </div>
                         
-                    </form>
+                    </v-form>
                     
                     <div class="order-button cell">
                         <p  class="details-price text-right">Razem: <span class="total">{{total}} zł</span></p>
                         <div>
                             <v-btn text class="mr-5" @click="closeDialog()">Anuluj</v-btn>
-                            <v-btn :color="sale ? 'amber' : 'green lighten-1'"   elevation=2 @click="add" :dark="total > 0" :disabled="!(total > 0)" >Dodaj</v-btn>
+                            <v-btn :color="sale ? 'amber' : 'green lighten-1'"   elevation=2 @click="add()" :dark="total > 0" :disabled="!(total > 0)" >Dodaj</v-btn>
                         </div>
                         
                     </div>
@@ -91,6 +91,10 @@ export default {
         due_to:{
             type: String,
             default: null,
+        },
+        sale_id:{
+            type: Number,
+            default: -1, 
         }
     },
 
@@ -108,6 +112,7 @@ export default {
                 value => (value || '') >= 0 || 'Ilość nie może być ujemna',
                 value => (value || '') <= this.max || 'Ilość nie może być większa niż maksymalna liczba sztuk',
             ],
+            form: false,
         }
     },
 
@@ -120,14 +125,20 @@ export default {
     methods: {
 
         add(){
-            if(this.total >0 && this.$refs.countForm.validated()){
+            if(this.total >0 && this.form){
                 let product = {
-                    store_product_id: this.id,
+                    product_id: this.product.product_id,
                     count: this.i_count,
                 }
-                this.$store.dispatch('addToCart',product).then( ()=> {
-                    this.closeDialog();
-                })
+                if(this.sale){
+                    product.discount_id = this.sale_id;
+                }
+                else{
+                    product.discount_id = -1;
+                }
+                this.$store.commit('addToCart',product)
+                this.closeDialog();
+
             }
             
         },

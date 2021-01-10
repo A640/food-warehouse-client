@@ -185,8 +185,6 @@ export default {
     }
 
     #content{
-        margin-left: 1rem;
-        margin-right: 1rem;
         order: 2;
         flex-grow: 1;
         background-color: #f0f2f5;

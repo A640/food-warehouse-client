@@ -74,7 +74,6 @@ export default {
         height: 100%;
         width: 20%;
         max-width: 10rem;
-        background-image: url("../../assets/b.jpg");
         background-size: cover;
         background-position: center;
     }

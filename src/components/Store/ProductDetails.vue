@@ -34,7 +34,14 @@
                                 <p  class="cell details-price ">{{product.sell_price}} zł</p>
                                 <p class="cell details-unit ">za 1 europaletę produktu</p>
                                 <div class="order-button cell">
-                                    <add-to-cart/>
+                                    <add-to-cart
+                                        :product="product" 
+                                        :sale="false" 
+                                        :price="product.sell_price" 
+                                        :max="product.quantity"
+                                        :id="product.product_id"
+                                        :sale_id="-1"
+                                    />
                                 </div>
                                 <p class="detail-claim cell">Produkt z tej oferty ma jeszcze conajmniej 1 miesiąc przydatności</p>
                             </div>
@@ -65,6 +72,7 @@
                                         :max="discount.quantity"
                                         :id="product.product_id"
                                         :due_to="new String(discount.eat_by_date).substr(0, 10)"
+                                        :sale_id="discount.discount_id"
                                     />
                                 </div>
                                 <p class="detail-claim cell">
@@ -110,12 +118,15 @@ export default {
 
     data () {
         return {
-            product: null,
+            product: {},
         }
     },
 
     mounted(){
-        this.$store.dispatch('getStoreProductData',this.id)
+        
+        let temp_id = Number.parseInt(this.$route.params.id);
+        console.log('ID init ',temp_id)
+        this.$store.dispatch('getStoreProductData',temp_id)
         .then( (product) => {
             console.log(product);
             if(product){

@@ -7,7 +7,7 @@ const StoreModule = {
         store_products: [],
         store_products_loading: false,
         cart: [],
-
+// {product_id:1,quantity:20,discount_id:-1},{product_id:1,quantity:40,discount_id:1}
     },
 
     mutations: {
@@ -21,7 +21,11 @@ const StoreModule = {
         },
 
         addToCart(context,product){
-          context.store_products.push(product)
+          let res = context.cart.find(s_product => (s_product.product_id == product.product_id && s_product.discount_id == product.discount_id))
+          if(res){
+              res.quantity += product.quantity;
+          }
+          context.cart.push(product);
         }
 
     },
@@ -81,6 +85,27 @@ const StoreModule = {
             let res = context.state.store_products.find(store_product => store_product.product_id == id);
             return res;
         },
+
+        getCartProducts(context){
+          let cart = context.state.cart
+          cart.map((prod) =>{
+            let p = context.state.store_products.find(store_product => store_product.product_id == prod.product_id)
+            prod.name = p.name;
+            prod.producer_name = p.producer_name;
+            prod.image = p.image;
+            if(prod.discount_id == -1){
+              prod.sell_price = p.sell_price;
+              prod.due_to = null;
+            }
+            else{
+              let d = p.discounts.find(discount => discount.discount_id = prod.discount_id);
+              prod.sell_price = d.sell_price;
+              prod.due_to = d.eat_by_date;
+            }
+            return prod;
+          })
+          return cart;
+        },
         
     },
 
@@ -93,6 +118,8 @@ const StoreModule = {
         getStoreProductsLoading(context){
             return context.store_products_loading;
         },  
+
+         
 
     },
 };
