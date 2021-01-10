@@ -4,8 +4,8 @@
         <v-container grid-list-md text-xs-center>
             <v-layout row wrap>
                 
-                <v-flex v-for="i in 20" :key="i" >
-                    <product name="Bejkon" :added=false price=12.5 />
+                <v-flex v-for="product in products" :key="product.product_id" >
+                    <product  :product="product"  />
                 </v-flex>
                 
             </v-layout>
@@ -31,14 +31,28 @@ export default {
             i_search: '',
             e_search: '',
             products_search: [],
+
         }
     },
 
     computed:{
         store_name(){
             return this.$store.getters.getStoreName;
+        },
+
+        products(){
+            return this.$store.getters.getStoreProducts;
         }
+
+
     },
+
+
+
+
+    mounted(){
+        this.$store.dispatch('getAllStoreProducts')
+    }
 
 
 }

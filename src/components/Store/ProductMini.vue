@@ -5,14 +5,14 @@
                 
                 
                    
-                <v-img src="@/assets/b.jpg" class="round-fix"  max-height="100%" max-width="6rem" />
+                <v-img :src="product.image" class="round-fix"  max-height="100%" max-width="6rem" />
                 <!-- <div class="mini-img">
 
                 </div> -->
                 
                 <div class="details">
-                    <h3 class="details-mini-title" >Lays wiejskie ziemniaczki</h3>
-                    <p  class=" details-price ">Jakiś krótki opis o Rossetta i klasie A ziemniaków</p>
+                    <h3 class="details-mini-title" >{{product.name}}</h3>
+                    <p  class=" details-price ">{{product.producer_name}}</p>
                 </div>
                 
             
@@ -25,17 +25,9 @@
 export default {
 
     props:{
-        name:{
-            type: String,
-            default: "Produkt",
-        },
-        added:{
-            type: Boolean,
-            default: false,
-        },
-        price:{
-            type: Number,
-            default: null,
+        product:{
+            type: Object,
+            required: true,
         }
     },
     

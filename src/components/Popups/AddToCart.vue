@@ -10,7 +10,7 @@
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
-                    <product-mini class="mini"></product-mini>
+                    <product-mini class="mini" :product="product"></product-mini>
 
                     <p 
                         v-if="sale" 
@@ -20,7 +20,7 @@
                                         class="mr-2"
                                         color="amber"
                                     >
-                                        <b>12.02.2021</b>
+                                        <b>{{ due_to }}</b>
                                     </v-chip>
                     </p>
 
@@ -51,7 +51,7 @@
                         <p  class="details-price text-right">Razem: <span class="total">{{total}} zł</span></p>
                         <div>
                             <v-btn text class="mr-5" @click="closeDialog()">Anuluj</v-btn>
-                            <v-btn :color="sale ? 'amber' : 'green lighten-1'"  dark elevation=2 @click="add">Dodaj</v-btn>
+                            <v-btn :color="sale ? 'amber' : 'green lighten-1'"   elevation=2 @click="add" :dark="total > 0" :disabled="!(total > 0)" >Dodaj</v-btn>
                         </div>
                         
                     </div>
@@ -72,21 +72,25 @@ export default {
     name: "AddToCart",
 
     props: {
+        product:{
+            type: Object,
+            required: true,
+        },
         sale:{
             type: Boolean,
             default: false,
         },
         price:{
             type: Number,
-            default: 0,
+            default:null,
         },
         max:{
             type: Number,
-            default: 5,
+            default:null,
         },
-        id:{
-            type: Number,
-            default: -1,
+        due_to:{
+            type: String,
+            default: null,
         }
     },
 

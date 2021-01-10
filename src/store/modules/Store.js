@@ -78,9 +78,8 @@ const StoreModule = {
         },
       
         getStoreProductData(context, id){
-            let res = context.state.store_products.find(store_product => store_product.car_info.car_id == id);
-            res.car_info.driver_id = res.driver.personal_data.employee_id;
-            return res.car_info;
+            let res = context.state.store_products.find(store_product => store_product.product_id == id);
+            return res;
         },
         
     },

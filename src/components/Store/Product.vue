@@ -4,7 +4,7 @@
         <v-hover v-slot="{ hover }">
             <v-img
                 height="250"
-                src="@/assets/b.jpg"
+                :src="product.image"
                 @click="showDetails()"
             >
                 <v-fade-transition>
@@ -18,6 +18,7 @@
             
         <v-card-title>
             <v-chip
+                v-if="product.discounts.length > 0"
                 label
                 dark
                 class="mr-2"
@@ -26,10 +27,10 @@
             >
                 Dostępna promocja
             </v-chip>
-            {{ name }} 
+            {{ product.name }} 
             <v-spacer></v-spacer> 
             <!-- if product wadd added to cart -->
-            <v-chip dark color="green lighten-1" v-if="added">
+            <v-chip dark color="green lighten-1" v-if="product.added">
                 <v-icon left>mdi-check</v-icon>
                 Dodano 
             </v-chip>
@@ -59,14 +60,20 @@
                 
         </v-card-text> -->
 
-        <v-card-text class="text-wrap text-justify">Ziemniak Rossetta klasy A. Idelany do frytek z maka. assssssssssssssssssssssssssssssssssssssssssssssssssssssssss</v-card-text>
+        <v-card-text class="text-wrap text-justify">{{product.short_description}}</v-card-text>
 
         <v-card-actions class="pl-3 pr-3 mt-0">
             <v-card-title>
-                {{ price }} zł
+                {{ product.sell_price }} zł
             </v-card-title>
             <v-spacer></v-spacer>
-            <add-to-cart />
+            <add-to-cart 
+                :product="product" 
+                :sale="false" 
+                :price="product.sell_price" 
+                :max="product.quantity"
+                :id="product.product_id"
+            />
         </v-card-actions>
 
     </v-card>
@@ -84,7 +91,7 @@ export default {
     props:{
         product:{
             type: Object,
-            // required: true,
+            required: true,
         },
     },
 
@@ -99,7 +106,7 @@ export default {
 
     methods: {
         showDetails(){
-            this.$router.push({ name: 'Store_Detail', params: {id:/*this.product.id*/ 1 }})
+            this.$router.push({ name: 'Store_Detail', params: {id:this.product.product_id }})
         }
     },
 }

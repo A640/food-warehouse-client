@@ -19,11 +19,72 @@
                 ></v-combobox>
             </div>
 
-            <v-btn
-                depressed
+            
+
+            <v-menu
+                v-model="mini_menu"
+                :close-on-content-click="false"
+                :nudge-width="200"
+                offset-x
             >
-            <v-icon>mdi-account</v-icon>
-            </v-btn>
+                <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                        depressed
+                        v-on="on"
+                        v-bind="attrs"
+                    >
+                        <v-icon>mdi-account</v-icon>
+                    </v-btn>
+                </template>
+        
+                <v-card>
+                <v-list>
+                    <v-list-item>
+        
+                    <v-list-item-content>
+                        <v-list-item-title>Kamil Bawaban</v-list-item-title>
+                        <v-list-item-subtitle>Kamilox</v-list-item-subtitle>
+                    </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+        
+                <v-divider></v-divider>
+        
+                <v-list>
+                    <v-list-item>
+                    <v-list-item-action>
+                        
+                    </v-list-item-action>
+                    <v-list-item-title>Enable messages</v-list-item-title>
+                    </v-list-item>
+        
+                    <v-list-item>
+                    <v-list-item-action>
+                        
+                    </v-list-item-action>
+                    <v-list-item-title>Enable hints</v-list-item-title>
+                    </v-list-item>
+                </v-list>
+        
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+        
+                    <v-btn
+                    text
+                    @click="menu = false"
+                    >
+                    Cancel
+                    </v-btn>
+                    <v-btn
+                    color="primary"
+                    text
+                    @click="menu = false"
+                    >
+                    Save
+                    </v-btn>
+                </v-card-actions>
+                </v-card>
+            </v-menu>
            
         </div>
         
@@ -49,6 +110,7 @@ export default {
             i_search: '',
             e_search: '',
             products_search: [],
+            mini_menu: false,
         }
     },
 
