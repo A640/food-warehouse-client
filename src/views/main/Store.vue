@@ -19,72 +19,89 @@
                 ></v-combobox>
             </div>
 
-            
+            <div>
+                <v-badge
+                    :content="cart_count"
+                    :value="cart_count"
+                    color="green lighten-2"
+                    class="mr-10"
+                    overlap
+                    
+                >
+                    <v-btn depressed @click="showCart()">
+                        <v-icon>mdi-cart</v-icon>
+                    </v-btn>
+                    
+                    
+                </v-badge>
+                
 
-            <v-menu
-                v-model="mini_menu"
-                :close-on-content-click="false"
-                :nudge-width="200"
-                offset-x
-            >
-                <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                        depressed
-                        v-on="on"
-                        v-bind="attrs"
-                    >
-                        <v-icon>mdi-account</v-icon>
-                    </v-btn>
-                </template>
-        
-                <v-card>
-                <v-list>
-                    <v-list-item>
-        
-                    <v-list-item-content>
-                        <v-list-item-title>Kamil Bawaban</v-list-item-title>
-                        <v-list-item-subtitle>Kamilox</v-list-item-subtitle>
-                    </v-list-item-content>
-                    </v-list-item>
-                </v-list>
-        
-                <v-divider></v-divider>
-        
-                <v-list>
-                    <v-list-item>
-                    <v-list-item-action>
-                        
-                    </v-list-item-action>
-                    <v-list-item-title>Enable messages</v-list-item-title>
-                    </v-list-item>
-        
-                    <v-list-item>
-                    <v-list-item-action>
-                        
-                    </v-list-item-action>
-                    <v-list-item-title>Enable hints</v-list-item-title>
-                    </v-list-item>
-                </v-list>
-        
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-        
+                <v-menu
+                    v-model="mini_menu"
+                    :close-on-content-click="false"
+                    :nudge-width="200"
+                    offset-x
+                >
+                    <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                    text
-                    @click="menu = false"
-                    >
-                    Cancel
-                    </v-btn>
-                    <v-btn
-                    color="primary"
-                    text
-                    @click="menu = false"
-                    >
-                    Save
-                    </v-btn>
-                </v-card-actions>
-                </v-card>
-            </v-menu>
+                            depressed
+                            v-on="on"
+                            v-bind="attrs"
+                        >
+                            <v-icon>mdi-account</v-icon>
+                        </v-btn>
+                    </template>
+            
+                    <v-card>
+                    <v-list>
+                        <v-list-item>
+            
+                        <v-list-item-content>
+                            <v-list-item-title>Kamil Bawaban</v-list-item-title>
+                            <v-list-item-subtitle>Kamilox</v-list-item-subtitle>
+                        </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+            
+                    <v-divider></v-divider>
+            
+                    <v-list>
+                        <v-list-item>
+                        <v-list-item-action>
+                            
+                        </v-list-item-action>
+                        <v-list-item-title>Enable messages</v-list-item-title>
+                        </v-list-item>
+            
+                        <v-list-item>
+                        <v-list-item-action>
+                            
+                        </v-list-item-action>
+                        <v-list-item-title>Enable hints</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+            
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+            
+                        <v-btn
+                        text
+                        @click="menu = false"
+                        >
+                        Cancel
+                        </v-btn>
+                        <v-btn
+                        color="primary"
+                        text
+                        @click="menu = false"
+                        >
+                        Save
+                        </v-btn>
+                    </v-card-actions>
+                    </v-card>
+                </v-menu>
+            </div>
+            
            
         </div>
         
@@ -117,6 +134,9 @@ export default {
     computed:{
         store_name(){
             return this.$store.getters.getStoreName;
+        },
+        cart_count(){
+            return this.$store.getters.getCartItemCount;
         }
     },
 
@@ -125,6 +145,12 @@ export default {
             console.log(this.$route.name);
             if(this.$route.name != 'Store_Grid'){
                 this.$router.push({ name: 'Store_Grid'});
+            }
+        },
+        showCart(){
+            console.log(this.$route.name);
+            if(this.$route.name != 'Store_Cart'){
+                this.$router.push({ name: 'Store_Cart'});
             }
         }
     },

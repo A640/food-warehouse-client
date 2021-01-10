@@ -26,6 +26,15 @@ const StoreModule = {
               res.quantity += product.quantity;
           }
           context.cart.push(product);
+        },
+
+        deleteFromCart(context,product){
+          for(let i=0;i< context.cart.length;i++){
+            let prod = context.cart[i];
+            if(prod.product_id == product.product_id && prod.discount_id == product.discount_id){
+              context.cart.splice(i,1);
+            }
+          }
         }
 
     },
@@ -96,11 +105,13 @@ const StoreModule = {
             if(prod.discount_id == -1){
               prod.sell_price = p.sell_price;
               prod.due_to = null;
+              prod.max = p.quantity;
             }
             else{
               let d = p.discounts.find(discount => discount.discount_id = prod.discount_id);
               prod.sell_price = d.sell_price;
               prod.due_to = d.eat_by_date;
+              prod.max = d.quantity;
             }
             return prod;
           })
@@ -119,7 +130,9 @@ const StoreModule = {
             return context.store_products_loading;
         },  
 
-         
+        getCartItemCount(context){
+          return context.cart.length
+        }
 
     },
 };

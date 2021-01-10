@@ -5,7 +5,7 @@
                 
                 
                    
-                <v-img :src="product.image" class="round-fix"  max-height="100%" max-width="8rem" />
+                <v-img :src="product.image" class="round-fix"  max-height="100%" max-width="9rem" />
                 <!-- <div class="mini-img">
 
                 </div> -->
@@ -29,10 +29,10 @@
                         <p class="details-mini-price" >{{product.sell_price}} zł</p>         
                     </div>
                     <div class="flex-end last" v-else >
-                        <p class="details-mini-price" >30 zł</p>         
+                        <p class="details-mini-price" >{{product.sell_price}} zł</p>         
                     </div>
                 </div>
-                
+                <v-btn  depressed class="close-btn" @click="deleteFromCart()"><v-icon>mdi-close</v-icon></v-btn>
             
         </v-card>
     </div>
@@ -57,7 +57,14 @@ export default {
     },
 
     methods: {
-        
+        deleteFromCart(){
+            let i = {
+                product_id: this.product.product_id,
+                discount_id: this.product.discount_id,
+            }
+            this.$store.commit('deleteFromCart',i);
+            this.$emit('Deleted');
+        }
     },
 }
 </script>
@@ -73,7 +80,7 @@ export default {
     .flex-row{
         display: flex;
         flex-direction: row;
-        height: 9rem;
+        min-height: 9rem;
     }
 
     .flex-end{
@@ -84,6 +91,12 @@ export default {
     .last{
         width: 100%;
         align-items: baseline;
+    }
+
+    .close-btn {
+        height: 9rem !important;
+        align-self: center;
+        background-color: rgba(0, 0, 0, 0) !important;
     }
 
 
@@ -123,7 +136,8 @@ export default {
         margin-top: 1rem;
         margin-bottom: 0.5rem;
         font-weight:700;
-        margin-right: 1rem;
+        font-size: 1.1rem;
+        margin-right: 0.25rem;
     }
 
     .round-fix{

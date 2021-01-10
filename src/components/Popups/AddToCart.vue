@@ -128,7 +128,7 @@ export default {
             if(this.total >0 && this.form){
                 let product = {
                     product_id: this.product.product_id,
-                    count: this.i_count,
+                    quantity: Number.parseInt(this.i_count),
                 }
                 if(this.sale){
                     product.discount_id = this.sale_id;
