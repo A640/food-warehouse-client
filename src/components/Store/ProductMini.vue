@@ -5,10 +5,10 @@
                 
                 
                    
-                    <!-- <v-img src="@/assets/b.jpg" contain max-height="100%" width="0.2%" /> -->
-                <div class="mini-img">
+                <v-img src="@/assets/b.jpg" class="round-fix"  max-height="100%" max-width="6rem" />
+                <!-- <div class="mini-img">
 
-                </div>
+                </div> -->
                 
                 <div class="details">
                     <h3 class="details-mini-title" >Lays wiejskie ziemniaczki</h3>
@@ -96,6 +96,11 @@ export default {
         margin-top: 1rem;
         margin-bottom: 0.5rem;
         
+    }
+
+    .round-fix{
+        border-bottom-left-radius: 4px;
+        border-top-right-radius: 0 !important;
     }
 
   

@@ -203,7 +203,7 @@ export default {
                 this.i_producer = product.maker.maker_data.maker_id
                 this.image = product.product.image;
                 this.i_description = product.product.description;
-                this.i_short_description = product.product.sell_price;
+                this.i_short_description = product.product.short_description;
            })
         },
 

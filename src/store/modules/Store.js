@@ -36,8 +36,7 @@ const StoreModule = {
       
             console.log("Gecik store_product")
             context.commit('setStoreProductsLoading',true);
-            let token = localStorage.getItem('jwtToken')
-            axios.get(context.getters.getServerAddress +'/store_product', { headers: { Authorization: `Bearer ${token}` } })
+            axios.get(context.getters.getServerAddress +'/store/products')
               .then( (data) => {
       
                 if(!silent){

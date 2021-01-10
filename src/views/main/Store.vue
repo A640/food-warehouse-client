@@ -1,7 +1,7 @@
 <template>
     <div class="store">
         <div id="bar">
-            <h2 class="appbar__title">{{ store_name }}</h2>
+            <h2 @click="showMainStore()" class="appbar__title">{{ store_name }}</h2>
             
             <div class="search">
                 <v-combobox
@@ -57,6 +57,17 @@ export default {
             return this.$store.getters.getStoreName;
         }
     },
+
+    methods: {
+        showMainStore(){
+            console.log(this.$route.name);
+            if(this.$route.name != 'Store_Grid'){
+                this.$router.push({ name: 'Store_Grid'});
+            }
+        }
+    },
+
+
 
 
 }
@@ -124,7 +135,7 @@ export default {
         margin-left: 1rem;
         font-family: 'Segoe UI';
         font-weight: 800;
-        
+        cursor: pointer;
     }
 
     .input{

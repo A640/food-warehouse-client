@@ -18,6 +18,7 @@
                         <v-card >
                             <div class="card-container">
                                 <p  class="cell details-title ">Lays chrupiące prosto z pieca 240g</p>
+                                <p  class="cell details-producer">Producent: Kamil</p>
                                 <h3 class="cell" >Szczegóły:</h3>
                                 <p  class="cell details-description ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque semper arcu, eu vulputate arcu. Pellentesque sollicitudin lobortis tortor, eget feugiat augue tristique eget. Suspendisse ultricies a lacus vitae rhoncus. Vivamus in dui ut enim consequat cursus vitae condimentum eros. Donec congue erat eu pellentesque iaculis. Sed dapibus, libero sit amet feugiat semper, augue urna convallis metus, eu commodo nisi elit eget urna. Quisque mollis egestas metus sit amet aliquam. Mauris vitae magna tincidunt odio tincidunt aliquam a eget ex. Vestibulum tincidunt, tellus eget placerat lobortis, velit velit blandit nisi, vel sagittis lectus quam a quam. Nam lacus turpis, volutpat a maximus in, scelerisque ac odio. Nunc non finibus magna. Proin risus mauris, efficitur at leo sed, sagittis luctus lectus. Quisque viverra diam in enim ultrices faucibus. Nam tortor mauris, sollicitudin eget velit sit amet, molestie luctus mauris. Praesent in scelerisque nunc. Ut imperdiet, eros in mollis volutpat, lectus neque sollicitudin leo, vel lacinia urna sapien interdum magna.
 
@@ -154,8 +155,17 @@ export default {
 
     .details-title{
         font-size:1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.3rem;
         font-weight: 600;
+    }
+
+    .details-producer{
+        font-size:0.9rem;
+        /* margin-top: 0rem; */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-bottom: 1.1rem;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.5);
     }
 
     .details-description{
@@ -193,6 +203,7 @@ export default {
         font-weight: 400;
         color: rgba(0, 0, 0, 0.5);
     }
+
 
     .old-price{
         text-decoration: line-through;
