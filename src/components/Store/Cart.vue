@@ -35,7 +35,7 @@
                 </v-stepper-content>
         
                 <v-stepper-content class="pa-0 full-height" step="2">
-                    <Cart1 @next="r2Complete" @back="r2Back"/>
+                    <Cart2 @next="r2Complete" @back="r2Back"/>
                 </v-stepper-content>
         
                 <v-stepper-content class="pa-0 full-height" step="3">
@@ -48,11 +48,13 @@
 
 <script>
 import Cart1 from '@/components/Store/Cart/ProductStep.vue'
+import Cart2 from '@/components/Store/Cart/AddressStep.vue'
 
 export default {
 
     components:{
-        Cart1
+        Cart1,
+        Cart2,
     },
 
 

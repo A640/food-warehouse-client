@@ -38,9 +38,10 @@
 
                 <v-menu
                     v-model="mini_menu"
-                    :close-on-content-click="false"
+                    :close-on-content-click="true"
                     :nudge-width="200"
-                    offset-x
+                    offset-y
+                    bottom
                 >
                     <template v-slot:activator="{ on, attrs }">
                     <v-btn
@@ -68,9 +69,9 @@
                     <v-list>
                         <v-list-item>
                         <v-list-item-action>
-                            
+                            <v-list-item-title>Enable messages</v-list-item-title>
                         </v-list-item-action>
-                        <v-list-item-title>Enable messages</v-list-item-title>
+                        
                         </v-list-item>
             
                         <v-list-item>

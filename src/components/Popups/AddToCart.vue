@@ -1,7 +1,7 @@
 <template >
     <v-dialog v-model="dialog" max-width="800px">
         <template v-slot:[`activator`]="{ on }">
-            <v-btn :color="sale ? 'amber' : 'green lighten-1'" v-on="on" class="pull-right" dark elevation=2 @click="add">Zamów</v-btn>
+            <v-btn :color="sale ? 'amber' : 'green lighten-1'" v-on="on" class="pull-right" dark elevation=2>Zamów</v-btn>
         </template>
         <div class="pop-card">
             <div class="pop-wrapper">

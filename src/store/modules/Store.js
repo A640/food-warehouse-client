@@ -7,6 +7,8 @@ const StoreModule = {
         store_products: [],
         store_products_loading: false,
         cart: [],
+        payment_methods: [],
+        payment_methods_loading: false,
 // {product_id:1,quantity:20,discount_id:-1},{product_id:1,quantity:40,discount_id:1}
     },
 
@@ -18,6 +20,14 @@ const StoreModule = {
 
         setStoreProductsLoading(context, value){
             context.store_products_loading = value;
+        },
+
+        setPaymentMethods(context,data){
+            context.payment_methods = data;
+        },
+
+        setPaymentMethodsLoading(context,value){
+            context.payment_methods_loading = value;
         },
 
         addToCart(context,product){
@@ -89,6 +99,54 @@ const StoreModule = {
                 context.commit('setStoreProductsLoading',false);
               }); 
         },
+
+        getAllPaymentMethods(context, silent=false){
+          //get all StoreProducts and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik payment-type")
+          context.commit('setPaymentTypesLoading',true);
+          let token = localStorage.getItem('jwtToken');
+          axios.get(context.getters.getServerAddress +'/payment-type', { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save PaymentTypes data in vuex store
+              console.log(data)
+              context.commit('setPaymentMethods',data.data.result);
+              context.commit('setPaymentMethodsLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setPaymentTypesLoading',false);
+            }); 
+      },
       
         getStoreProductData(context, id){
             let res = context.state.store_products.find(store_product => store_product.product_id == id);
@@ -132,6 +190,10 @@ const StoreModule = {
 
         getCartItemCount(context){
           return context.cart.length
+        },
+
+        getPaymentMethods(context){
+          return context.payment_methods;
         }
 
     },

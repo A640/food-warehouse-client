@@ -82,7 +82,7 @@ export default {
                     this.$router.push({ name: 'Admin'});
                 } else if(result == 'Customer'){
                     console.log("przechodzimy na klienta");
-                    this.$router.push({ name: 'Home'});
+                    this.$router.push({ name: 'Store_Grid'});
                 } else{
                     console.log("Nie rozpoznano typu użytkownika");
                 }
