@@ -95,6 +95,8 @@ export default {
 
         nextStep(){
             if(this.validated){
+                this.$store.commit('setCartPayment',this.payment_method);
+                this.$store.commit('setCartAddress',this.choosen_address);
                 this.$emit('next');
             }
             

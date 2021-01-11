@@ -13,6 +13,17 @@
                 </v-row>
                 <v-row>
                     <v-col cols="12" md="8">
+
+
+                        <p class="mb-5">Adres</p>
+                            <Address class="mb-5" :address="cart_settings.address" />
+
+                        <p class="mb-5">Metoda płatności</p>
+                            <v-card class="mb-5 center-content  d-flex">
+                                <v-card-title class="center">{{cart_settings.payment.payment_type}}</v-card-title>
+                            </v-card>
+
+                        <p class="mb-5">Produkty</p>
                         <v-card min-height="8rem">
                             <div class="card-container">
                                 <!-- Product list -->
@@ -24,7 +35,7 @@
                                             <v-card-subtitle>Ilość</v-card-subtitle>
                                             <div class="quantity-cell">
                                                 
-                                                <v-label class="quantity-label centered-input" >{{product.quantity}}</v-label>
+                                                <p class="quantity-label centered-input" >{{product.quantity}}</p>
                                                
                                             </div>
                                             
@@ -76,10 +87,13 @@
 
 <script>
 import Product from '@/components/Store/Cart/ProductMiniCart.vue'
+import Address from '@/components/Store/Cart/AddressCard.vue'
+
 export default {
 
     components: {
         Product,
+        Address,
     },
     
     data() {
@@ -117,6 +131,10 @@ export default {
             let total = 0;
             this.products.forEach((p) =>{ total += Number.parseFloat(p.sell_price) * Number.parseInt(p.quantity)});
             return total;
+        },
+
+        cart_settings(){
+            return this.$store.getters.getCartSettings;
         }
     },
 
@@ -153,6 +171,10 @@ export default {
         width: 100%;
         display: flex;
         align-items: baseline;
+    }
+
+    .center{
+        margin: 0 auto !important;
     }
 
     .cart-products{
