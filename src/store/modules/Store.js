@@ -11,6 +11,8 @@ const StoreModule = {
           address: null,
           payment: null,
           comment: '',
+          order_id: null,
+          payment_id: null,
         },
         order_loading: false,
         payment_methods: [],
@@ -44,10 +46,21 @@ const StoreModule = {
           context.cart_settings.address = address;
         },
 
+        setOrderId(context,id){
+          context.cart_settings.order_id = id;
+        },
+
+        setPaymentId(context,id){
+          context.cart_settings.payment_id = id;
+        },
+
         clearCart(context){
           context.cart = [];
           context.cart_settings.address = null;
           context.cart_settings.payment = null;
+          context.cart_settings.comment = '';
+          context.cart_settings.order_id = null;
+          context.cart_settings.payment_id = null;
         },
 
         addToCart(context,product){
@@ -234,19 +247,28 @@ const StoreModule = {
 
           console.log("Leci orderek",order)
 
-          axios.post(context.getters.getServerAddress +'/store/order', order,{ headers: { Authorization: `Bearer ${token}` }})
+         return axios.post(context.getters.getServerAddress +'/store/order', order,{ headers: { Authorization: `Bearer ${token}` }})
             .then( (data) => {
     
               if(!silent){
                 //connected to server, hide no connection banner
                 context.dispatch('noConnectionChange',false);
               }
-             
-    
+              if (data.status === 200){
+                let order_id = data.data.result.order.order_id;
+                let payment_id = data.data.result.payment.payment_id;
+
+                context.commit('setOrderId',order_id);
+                context.commit('setPaymentId',payment_id);
+                
+              }
+              
+              
+              
               //save PaymentTypes data in vuex store
               console.log(data)
               
-              context.commit('ssetOrderLoading',false);
+              context.commit('setOrderLoading',false);
             })
             .catch( (error) =>{
     
@@ -272,8 +294,72 @@ const StoreModule = {
                
               }
               context.commit('setsetOrderLoading',false);
+
             }); 
       },
+
+      payForOrder(context, success){
+        //get all StoreProducts and their User info from server
+        //silent option is mainly for not hide reconnected banner
+  
+        console.log("Payment to server")
+        let token = localStorage.getItem('jwtToken');
+        // let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJDdXN0b21lciIsInJvbGVzIjoiUk9MRV9DdXN0b21lciIsImV4cCI6MTYxMTI0ODU5M30.Jc8QKsIOGyvCxdF99xXubv_tYF6yKYCHaanJxvkW4vEwqiDsImANW-x1VfzA-78L5Vc80o8cE7_Jsqemg3FW6Q'
+        if(context.state.cart_settings.order_id){
+          if(success){
+
+           return axios.put(context.getters.getServerAddress + '/payment/accept/' + context.state.cart_settings.payment_id, null, { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+              context.dispatch('noConnectionChange',false);
+              console.log(data)
+              return data.data;
+            })
+            .catch( (error) =>{
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+                context.dispatch('noConnectionChange',true);
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                //if connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+              }
+            }); 
+          }
+          else{
+  
+           return axios.put(context.getters.getServerAddress + '/payment/reject/' + context.state.cart_settings.payment_id, null, { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+              context.dispatch('noConnectionChange',false);
+              console.log(data)
+              return data.data;
+            })
+            .catch( (error) =>{
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+                context.dispatch('noConnectionChange',true);
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                //if connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+              }
+            }); 
+          }
+        }
+        
+        
+    },
         
     },
 
@@ -297,8 +383,17 @@ const StoreModule = {
 
         getCartSettings(context){
           return context.cart_settings;
+        },
+        
+        isOnlinePayment(context){
+          let type = context.cart_settings.payment.payment_type;
+          if(type == "Za pobraniem gotówką" || type == "Za pobraniem kartą"){
+            return false;
+          }
+          else{
+            return true;
+          }
         }
-
 
     },
 };

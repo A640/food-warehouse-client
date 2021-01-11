@@ -100,6 +100,19 @@ const routes = [
         props: true,
       },
       {
+        path: 'order-complete',
+        name: 'Order_Success',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Store/Cart/OrderSuccess.vue'),
+        props: true,
+      },
+      {
+        path: 'order-complete2',
+        name: 'Order_Warning',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Store/Cart/OrderWarning.vue'),
+        props: true,
+      },
+
+      {
         path: '404',
         name: 'Store404',
         component: () => import(/* webpackChunkName: "about" */ '../components/Store/Store404.vue'),
@@ -115,7 +128,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/components/PopupContents/ProductPopup.vue')
-  }
+  },
+
+  {
+    path: '/payment',
+    name: 'Payment',
+    component: () => import(/* webpackChunkName: "about" */ '../views/main/Payment.vue'),
+    props: true,
+  },
 ]
 
 const router = new VueRouter({

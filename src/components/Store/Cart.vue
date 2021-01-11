@@ -80,7 +80,17 @@ export default {
         r3Complete(){
             console.log("Próba orderu");
             
-            this.$store.dispatch('order');
+            this.$store.dispatch('order')
+            .then(() => {
+                if(this.$store.getters.isOnlinePayment){
+                    this.$router.push({ name: 'Payment'});
+                }
+                else{
+                    this.$store.commit('clearCart');
+                    this.$router.push({ name: 'Order_Success'});
+                }
+                
+            })
             
         },
 
