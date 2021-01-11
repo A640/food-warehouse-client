@@ -26,13 +26,13 @@
                                         </v-chip>
                         </p>
                         <v-spacer></v-spacer>
-                        <p class="details-mini-price" >{{product.sell_price}} zł</p>         
+                        <p :class="removable ? 'details-mini-price' : 'details-mini-price2'" >{{product.sell_price}} zł</p>         
                     </div>
                     <div class="flex-end last" v-else >
-                        <p class="details-mini-price" >{{product.sell_price}} zł</p>         
+                        <p :class="removable ? 'details-mini-price' : 'details-mini-price2'" >{{product.sell_price}} zł</p>         
                     </div>
                 </div>
-                <v-btn  depressed class="close-btn" @click="deleteFromCart()"><v-icon>mdi-close</v-icon></v-btn>
+                <v-btn  depressed v-if="removalbe" class="close-btn" @click="deleteFromCart()"><v-icon>mdi-close</v-icon></v-btn>
             
         </v-card>
     </div>
@@ -46,7 +46,11 @@ export default {
         product:{
             type: Object,
             required: true,
-        }
+        },
+        removable:{
+            type: Boolean,
+            default: true,
+        },
     },
     
     data() {
@@ -138,6 +142,16 @@ export default {
         font-weight:700;
         font-size: 1.1rem;
         margin-right: 0.25rem;
+    }
+
+    .details-mini-price2{
+        margin-top: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight:700;
+        font-size: 1.1rem;
+        margin-right: 1rem;
     }
 
     .round-fix{

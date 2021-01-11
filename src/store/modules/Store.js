@@ -7,6 +7,10 @@ const StoreModule = {
         store_products: [],
         store_products_loading: false,
         cart: [],
+        cart_settings:{
+          address: null,
+          payment: null,
+        },
         payment_methods: [],
         payment_methods_loading: false,
 // {product_id:1,quantity:20,discount_id:-1},{product_id:1,quantity:40,discount_id:1}
@@ -28,6 +32,14 @@ const StoreModule = {
 
         setPaymentMethodsLoading(context,value){
             context.payment_methods_loading = value;
+        },
+
+        setCartPayment(context,payment){
+          context.cart_settings.payment = payment;
+        },
+
+        setCartAddress(context,address){
+          context.cart_settings.address = address;
         },
 
         addToCart(context,product){
@@ -194,7 +206,12 @@ const StoreModule = {
 
         getPaymentMethods(context){
           return context.payment_methods;
+        },
+
+        getCartSettings(context){
+          return context.cart_settings;
         }
+
 
     },
 };

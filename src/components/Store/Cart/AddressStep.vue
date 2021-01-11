@@ -17,7 +17,7 @@
                         <p class="mb-5">Adres</p>
 
                         <v-item-group mandatory v-model="choosen_address" >
-                            <v-item v-slot="{ active, toggle }" class="mb-3" v-for="address in addresses" :key="address.address_id" >
+                            <v-item v-slot="{ active, toggle }" class="mb-3" v-for="address in addresses" :key="address.address_id" :value="address" >
                                 <Address @addressClicked="toggle" @deleteAddress="deleteAddress" :address="address" :editable="address.address_id == -5" :elevation="active ? 5 : 1" :class="active ? 'active-address' : ''"/>
                             </v-item>
                         </v-item-group>
@@ -30,7 +30,7 @@
                         <v-card class="pt-3 pl-3 pb-3">
                             <v-card-title>Wybierz metodę płatności:</v-card-title>
                             <v-radio-group v-model="payment_method" class="ml-4">
-                                <v-radio v-for="method in payment_methods" :key="method.payment_type_id" :label="method.payment_type" />
+                                <v-radio v-for="method in payment_methods" :key="method.payment_type_id" :value="method" :label="method.payment_type" />
                             </v-radio-group>
                         </v-card>
 

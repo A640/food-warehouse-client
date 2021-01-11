@@ -18,24 +18,14 @@
                                 <!-- Product list -->
                                 <v-form v-model="validated">
                                     <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.discount_id)">
-                                        <Product class="mb-4 ml-4"  :product="product" @Deleted="loadData()"/>
+                                        <Product class="mb-4 ml-4"  :removable="false" :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
                                             <v-card-subtitle>Ilość</v-card-subtitle>
                                             <div class="quantity-cell">
-                                                <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) - 1"><v-icon>mdi-minus</v-icon></v-btn>
-                                                <v-text-field
-                                                    class="quantity-input centered-input"
-                                                    type="number"
-                                                    v-model="product.quantity"
-                                                    :rules="[value => (value || '') <= product.max || 'Za dużo',
-                                                        value => !!value || 'Usuń produkt',
-                                                        value => (value || '') >= 0 || 'Nie może być ujemna',
-                                                    ]"
-                                                    flat
-                                                    solo
-                                                />
-                                                <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) + 1"><v-icon>mdi-plus</v-icon></v-btn>
+                                                
+                                                <v-label class="quantity-label centered-input" >{{product.quantity}}</v-label>
+                                               
                                             </div>
                                             
                                         </v-card>
@@ -64,12 +54,12 @@
                             <div class="card-container cell">
                                 <h3 class="cell" >
                                     
-                                    Razem:
+                                    Do zapłaty:
                                 </h3>
                                 <p  class="cell details-price ">{{total}} zł</p>
                                 <p class="cell details-unit "></p>
                                 <div class="order-button cell">
-                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Przejdź do dostawy</v-btn>
+                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Kupuję i płacę</v-btn>
                                 </div>
                                 <p class="detail-claim cell">Produkty zostaną dostarczone w ciągu maksymalnie 5 dni roboczych</p>
                             </div>
@@ -319,7 +309,7 @@ export default {
         color: rgba(0, 0, 0, 0.5);
     }
 
-    .quantity-input{
+    .quantity-label{
         width: 5rem;
         margin: 0 auto;
         font-size: 1.3rem;
@@ -328,7 +318,7 @@ export default {
 
     }
 
-    .centered-input >>> input {
+    .centered-input {
       text-align: center
     }
 
