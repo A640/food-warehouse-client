@@ -19,12 +19,12 @@
                 :complete="step > 2"
                 step="2"
                 >
-                Adres
+                Adres i płatność
                 </v-stepper-step>
         
                 <v-divider></v-divider>
         
-                <v-stepper-step :editable="step > 2" edit-icon="mdi-check" step="3">
+                <v-stepper-step :editable="step > 0" edit-icon="mdi-check" step="3">
                 Podsumowanie
                 </v-stepper-step>
             </v-stepper-header>
@@ -39,7 +39,7 @@
                 </v-stepper-content>
         
                 <v-stepper-content class="pa-0 full-height" step="3">
-                    <Cart1 @next="r3Complete" @back="r3Back"/>
+                    <Cart3 @next="r3Complete" @back="r3Back"/>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
@@ -49,12 +49,14 @@
 <script>
 import Cart1 from '@/components/Store/Cart/ProductStep.vue'
 import Cart2 from '@/components/Store/Cart/AddressStep.vue'
+import Cart3 from '@/components/Store/Cart/SummaryStep.vue'
 
 export default {
 
     components:{
         Cart1,
         Cart2,
+        Cart3,
     },
 
 

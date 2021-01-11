@@ -11,7 +11,7 @@
         
         <div id="content">
             <transition name="slide-fade" mode="out-in">
-                <router-view :key="$route.path" /> 
+               <v-btn outlined @click="showStore()">Katalog produktów</v-btn>
             </transition>
         </div>
     </div>
@@ -41,6 +41,15 @@ export default {
         store_name(){
             return this.$store.getters.getStoreName;
         }
+    },
+
+    methods: {
+        showStore(){
+            if(this.$route.name != 'Store_Cart'){
+                this.$router.push({ name: 'Store_Grid'});
+            }
+        }
+       
     },
 
 

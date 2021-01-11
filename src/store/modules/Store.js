@@ -105,7 +105,7 @@ const StoreModule = {
           //silent option is mainly for not hide reconnected banner
     
           console.log("Gecik payment-type")
-          context.commit('setPaymentTypesLoading',true);
+          context.commit('setPaymentMethodsLoading',true);
           let token = localStorage.getItem('jwtToken');
           axios.get(context.getters.getServerAddress +'/payment-type', { headers: { Authorization: `Bearer ${token}` }})
             .then( (data) => {
@@ -144,7 +144,7 @@ const StoreModule = {
                 }
                
               }
-              context.commit('setPaymentTypesLoading',false);
+              context.commit('setPaymentMethodsLoading',false);
             }); 
       },
       

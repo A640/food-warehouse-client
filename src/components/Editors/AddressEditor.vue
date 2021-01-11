@@ -191,9 +191,9 @@ export default {
                 this.c_building_num = this.address_obj.building_number
                 this.c_apartment_num = this.address_obj.apartment_number
                 this.c_town = this.address_obj.town
-                let postal = this.address_obj.postal_code.split(' - ');
-                this.c_pc1 = postal[0];
-                this.c_pc2 = postal[1];
+                let postal = this.address_obj.postal_code.split('-'); 
+                this.c_pc1 = Number.parseInt(postal[0]);
+                this.c_pc2 = Number.parseInt(postal[1]);
                 this.c_country = this.address_obj.country;
                 this.address_id = this.address_obj.address_id;
                 

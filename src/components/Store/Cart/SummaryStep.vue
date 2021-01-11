@@ -6,55 +6,70 @@
                 <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Adres dostawy i sposób płatności</v-card-title> 
+                           <v-card-title>Podsumowanie:</v-card-title> 
                         </v-card>
                     </v-col>
                     
                 </v-row>
                 <v-row>
-                    <v-col cols="12" md="8" >
+                    <v-col cols="12" md="8">
+                        <v-card min-height="8rem">
+                            <div class="card-container">
+                                <!-- Product list -->
+                                <v-form v-model="validated">
+                                    <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.discount_id)">
+                                        <Product class="mb-4 ml-4"  :product="product" @Deleted="loadData()"/>
+                                    
+                                        <v-card height="9rem" class="mr-4 ml-2">
+                                            <v-card-subtitle>Ilość</v-card-subtitle>
+                                            <div class="quantity-cell">
+                                                <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) - 1"><v-icon>mdi-minus</v-icon></v-btn>
+                                                <v-text-field
+                                                    class="quantity-input centered-input"
+                                                    type="number"
+                                                    v-model="product.quantity"
+                                                    :rules="[value => (value || '') <= product.max || 'Za dużo',
+                                                        value => !!value || 'Usuń produkt',
+                                                        value => (value || '') >= 0 || 'Nie może być ujemna',
+                                                    ]"
+                                                    flat
+                                                    solo
+                                                />
+                                                <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) + 1"><v-icon>mdi-plus</v-icon></v-btn>
+                                            </div>
+                                            
+                                        </v-card>
+                                    </div>
+                                </v-form>
 
-                        <p class="mb-5">Adres</p>
+                                
+                                
+                                
 
-                        <v-item-group mandatory v-model="choosen_address" >
-                            <v-item v-slot="{ active, toggle }" class="mb-3" v-for="address in addresses" :key="address.address_id" >
-                                <Address @addressClicked="toggle" @editAddress2="editNewAddress" :address="address" :editable="address.address_id == -5" :elevation="active ? 5 : 1" :class="active ? 'active-address' : ''"/>
-                            </v-item>
-                        </v-item-group>
-
-                        <NewAddress v-if="!new_address_added" @newAddress="addNewAddress"/>
-                        
-
-                        <p class="mb-4 mt-5">Sposób płatności</p>
-                        
-                        <v-card class="pt-3 pl-3 pb-3">
-                            <v-card-title>Wybierz metodę płatności:</v-card-title>
-                            <v-radio-group v-model="payment_method" class="ml-4">
-                                <v-radio v-for="method in payment_methods" :key="method.payment_type_id" :label="method.payment_type" />
-                            </v-radio-group>
+                                <!-- Loader -->
+                                <v-overlay
+                                    :absolute="true"
+                                    :value="loading"
+                                >
+                                    <v-progress-circular
+                                        indeterminate
+                                        color="amber"
+                                    ></v-progress-circular>
+                                </v-overlay>
+                            </div>
                         </v-card>
-
-                       <!-- Loader -->
-                        <v-overlay
-                            :absolute="true"
-                            :value="loading"
-                        >
-                            <v-progress-circular
-                                indeterminate
-                                color="amber"
-                            ></v-progress-circular>
-                        </v-overlay>
                     </v-col>
                     <v-col>
                         <v-card >
                             <div class="card-container cell">
                                 <h3 class="cell" >
-                                   Przejdź dalej
+                                    
+                                    Razem:
                                 </h3>
-                                <p  class="cell details-price "></p>
+                                <p  class="cell details-price ">{{total}} zł</p>
                                 <p class="cell details-unit "></p>
                                 <div class="order-button cell">
-                                    <v-btn :dark="validated" :disabled="!validated" color="green lighten-1" @click="nextStep()" >Zatwierdź</v-btn>
+                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Przejdź do dostawy</v-btn>
                                 </div>
                                 <p class="detail-claim cell">Produkty zostaną dostarczone w ciągu maksymalnie 5 dni roboczych</p>
                             </div>
@@ -70,24 +85,20 @@
 </template>
 
 <script>
-import Address from '@/components/Store/Cart/AddressCard.vue'
-import NewAddress from '@/components/Popups/NewAddress.vue'
-
-
+import Product from '@/components/Store/Cart/ProductMiniCart.vue'
 export default {
 
     components: {
-        Address,
-        NewAddress,
+        Product,
     },
     
     data() {
         return{
             loading:true,
-            addresses: [],
-            payment_method: null,
-            choosen_address: null,
-            new_address_added: false,
+            products: [],
+            validated: false,
+
+           
         }
 
     },
@@ -103,46 +114,19 @@ export default {
 
         loadData(){
             this.loading = true;
-            this.$store.dispatch('getAllAddresses').then(() => {
-                this.$store.dispatch('getAllPaymentMethods').then(() => {
-                    console.log('add2',this.$store.getters.getAddresses);
-                    if(typeof (this.$store.getters.getAddresses) == 'object'){
-                        this.addresses.push(this.$store.getters.getAddresses);
-                    }else{
-                        this.addresses = this.$store.getters.getAddresses;
-                    }
-                    this.loading = false;
-                })
+            this.$store.dispatch('getCartProducts').then((result) => {
+                this.products = result;
+                this.loading = false;
             })
-        },
-
-        addNewAddress(address){
-            this.addresses.push(address);
-            this.new_address_added = true;
-        },
-
-        editNewAddress(address){
-            console.log("adObject",address)
-            // let index = this.addresses.findIndex(a => a.address_id == address.address_id)
-            // console.log("adIndex",index)
-            // this.addresses[index] = address;
         }
 
     },
 
     computed:{
-        payment_methods(){
-            console.log('payment',this.$store.getters.getPaymentMethods)
-            return this.$store.getters.getPaymentMethods;
-        },
-
-        validated(){
-            if(this.choosen_address != null && this.payment_method != null && this.payment_method !== '' ){
-                return true;
-            }
-            else{
-                return false;
-            }
+        total(){
+            let total = 0;
+            this.products.forEach((p) =>{ total += Number.parseFloat(p.sell_price) * Number.parseInt(p.quantity)});
+            return total;
         }
     },
 
@@ -154,11 +138,6 @@ export default {
 </script>
 
 <style scoped>
-
-    .plus-ico{
-        /* margin: 0 auto !important;
-        font-size: 2rem; */
-    }
 
     .cart-component{
         width: 100%;
@@ -173,16 +152,6 @@ export default {
         justify-content: center; */
 
 
-    }
-
-    .active-address{
-        /* background-color: aqua; */
-        /* border: solid 1px #FFC107; */
-        /* border: solid 1px #66BB6A; */
-        border: solid 2px #2196F3;
-        /* border: solid 1px #03A9F4; */
-        
-        /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); */
     }
 
     .product-cell{
