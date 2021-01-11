@@ -12,7 +12,8 @@
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
-                    <AddressEditor  
+                    <AddressEditor 
+                        :pid="-1" 
                         :validate="validate_trigger_a" 
                         @dataUpdate="updateDataAddress" 
                         @allValidated="validateA"
@@ -80,7 +81,7 @@ export default {
 
        saveAddress(){
            this.address.address_id = -5;
-        //    this.$emit('newAddress',this.address);
+           this.$emit('newAddress');
             this.$store.commit('addAddress',this.address);
            this.clear();
            this.closeDialog();

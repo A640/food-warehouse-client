@@ -42,7 +42,7 @@ export default {
     methods: {
 
         deleteAddress(){
-            // this.$emit("deleteAddress",this.address.address_id);
+            this.$emit("deleteAddress");
             this.$store.commit('deleteAddress',this.address.address_id);
         },
 

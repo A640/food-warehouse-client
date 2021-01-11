@@ -118,15 +118,12 @@ export default {
             })
         },
 
-        addNewAddress(address){
-            this.addresses.push(address);
+        addNewAddress(){
             this.new_address_added = true;
         },
 
-        deleteAddress(a_id){
-            let index = this.addresses.findIndex(a => a.address_id == a_id)
-            console.log("adIndex",index)
-            this.addresses.splice(index,1);
+        deleteAddress(){
+            this.new_address_added = false;
         }
 
     },
