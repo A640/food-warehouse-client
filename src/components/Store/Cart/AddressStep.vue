@@ -106,11 +106,14 @@ export default {
             this.$store.dispatch('getAllAddresses').then(() => {
                 this.$store.dispatch('getAllPaymentMethods').then(() => {
                     console.log('add2',this.$store.getters.getAddresses);
-                    if(typeof (this.$store.getters.getAddresses) == 'object'){
-                        this.addresses.push(this.$store.getters.getAddresses);
-                    }else{
-                        this.addresses = this.$store.getters.getAddresses;
-                    }
+                    let temp = this.$store.getters.getAddresses;
+                    console.log('add3',typeof(temp));
+                    // if(typeof (this.$store.getters.getAddresses) == 'object'){
+                    //     this.addresses.push(this.$store.getters.getAddresses);
+                    // }else{
+                    //     this.addresses = this.$store.getters.getAddresses;
+                    // }
+                    this.addresses = this.$store.getters.getAddresses;
                     this.loading = false;
                 })
             })
@@ -123,9 +126,9 @@ export default {
 
         editNewAddress(address){
             console.log("adObject",address)
-            // let index = this.addresses.findIndex(a => a.address_id == address.address_id)
-            // console.log("adIndex",index)
-            // this.addresses[index] = address;
+            let index = this.addresses.findIndex(a => a.address_id == address.address_id)
+            console.log("adIndex",index)
+            this.addresses[index] = address;
         }
 
     },
