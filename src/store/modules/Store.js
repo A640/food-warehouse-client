@@ -10,7 +10,9 @@ const StoreModule = {
         cart_settings:{
           address: null,
           payment: null,
+          comment: '',
         },
+        order_loading: false,
         payment_methods: [],
         payment_methods_loading: false,
 // {product_id:1,quantity:20,discount_id:-1},{product_id:1,quantity:40,discount_id:1}
@@ -42,12 +44,21 @@ const StoreModule = {
           context.cart_settings.address = address;
         },
 
+        clearCart(context){
+          context.cart = [];
+          context.cart_settings.address = null;
+          context.cart_settings.payment = null;
+        },
+
         addToCart(context,product){
-          let res = context.cart.find(s_product => (s_product.product_id == product.product_id && s_product.discount_id == product.discount_id))
-          if(res){
-              res.quantity += product.quantity;
+          let index = context.cart.findIndex(s_product => (s_product.product_id == product.product_id && s_product.discount_id == product.discount_id))
+
+          if(index != -1){
+              context.cart[index].quantity = context.cart[index].quantity + product.quantity;
           }
-          context.cart.push(product);
+          else{
+            context.cart.push(product);
+          }
         },
 
         deleteFromCart(context,product){
@@ -57,6 +68,10 @@ const StoreModule = {
               context.cart.splice(i,1);
             }
           }
+        },
+
+        setOrderLoading(context,value){
+          context.order_loading = value;
         }
 
     },
@@ -187,6 +202,78 @@ const StoreModule = {
           })
           return cart;
         },
+
+        order(context, silent=false){
+          //get all StoreProducts and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Order")
+          context.commit('setOrderLoading',true);
+          let token = localStorage.getItem('jwtToken');
+
+          //prepare order for server
+          let cart = context.state.cart;
+          let products = [];
+          products = cart.map((prod) => {
+            return {  product_id: prod.product_id, discount_id: prod.discount_id, quantity: prod.quantity };
+          });
+          let order = {
+            products: products,
+            address: context.state.cart_settings.address,
+            address_id: context.state.cart_settings.address.address_id,
+            payment_type_id: context.state.cart_settings.payment.payment_type_id,
+            comment: context.state.cart_settings.comment,
+          }
+
+          if(context.state.cart_settings.address.address_id == -5){
+            order.is_new_address = true;
+          }
+          else{
+            order.is_new_address = false;
+          }
+
+          console.log("Leci orderek",order)
+
+          axios.post(context.getters.getServerAddress +'/store/order', order,{ headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save PaymentTypes data in vuex store
+              console.log(data)
+              
+              context.commit('ssetOrderLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setsetOrderLoading',false);
+            }); 
+      },
         
     },
 

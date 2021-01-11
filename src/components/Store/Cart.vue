@@ -31,15 +31,15 @@
         
             <v-stepper-items class="full-height cart-items">
                 <v-stepper-content class="pa-0 full-height" step="1">
-                    <Cart1 @next="r1Complete" />
+                    <Cart1 @next="r1Complete" @clearCart="step = 1"/>
                 </v-stepper-content>
         
                 <v-stepper-content class="pa-0 full-height" step="2">
-                    <Cart2 @next="r2Complete" @back="r2Back"/>
+                    <Cart2 @next="r2Complete" @back="r2Back" @clearCart="step = 1"/>
                 </v-stepper-content>
         
                 <v-stepper-content class="pa-0 full-height" step="3">
-                    <Cart3 @next="r3Complete" @back="r3Back"/>
+                    <Cart3 @next="r3Complete" @back="r3Back" @clearCart="step = 1"/>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
@@ -73,38 +73,14 @@ export default {
             this.step = 2;
         },
 
-        r2Complete(data){
-            console.log(data);
+        r2Complete(){
             this.step = 3;
-            this.personal_details = data;
         },
 
-        r3Complete(data){
-            console.log(data);
-            this.address = data;
-
-            if(this.account != null && this.personal_details != null && this.address != null){
-                let r_data = {
-                    account: this.account,
-                    personal_data: this.personal_details,
-                    address: this.address,
-                }
-                this.$store.dispatch('register', r_data)
-                .then((result) =>{
-                    console.log(result);
-                    if(result == true){
-                        console.log("zarejestrowaned");
-                        this.$router.push({ name: 'RegisterSuccess'});
-                    }
-                },(error) =>{
-                    if(error == "cannot create"){
-                        alert("Nie udało się utworzyć konta")
-                    }
-                    else{
-                        console.log("problem z połączeniem");
-                    }
-                })
-            }
+        r3Complete(){
+            console.log("Próba orderu");
+            
+            this.$store.dispatch('order');
             
         },
 

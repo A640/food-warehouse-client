@@ -59,6 +59,9 @@
                                 </v-overlay>
                             </div>
                         </v-card>
+
+                        <v-btn outlined @click="clearCart()" class="mt-5" color="rgba(0,0,0,0.5)" >Wyczyść koszyk</v-btn>
+
                     </v-col>
                     <v-col>
                         <v-card >
@@ -72,9 +75,11 @@
                                 <div class="order-button cell">
                                     <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Kupuję i płacę</v-btn>
                                 </div>
-                                <p class="detail-claim cell">Produkty zostaną dostarczone w ciągu maksymalnie 5 dni roboczych</p>
+                                <p class="detail-claim cell">Klikając przycisk "kupuję i płacę" akceptujesz regulamin sklepu i zobowiązujesz się do uregulowania płatności względem {{store_name}}</p>
                             </div>
                         </v-card>
+
+                        
 
                         <!-- special offers -->
                     </v-col>
@@ -122,6 +127,11 @@ export default {
                 this.products = result;
                 this.loading = false;
             })
+        },
+
+        clearCart(){
+            this.$store.commit('clearCart');
+            this.$emit('clearCart');
         }
 
     },
@@ -135,6 +145,10 @@ export default {
 
         cart_settings(){
             return this.$store.getters.getCartSettings;
+        },
+
+        store_name(){
+            return this.$store.getters.getStoreName;
         }
     },
 
@@ -329,6 +343,7 @@ export default {
         margin-top: 1rem;
         font-weight: 400;
         color: rgba(0, 0, 0, 0.5);
+        text-align: start;
     }
 
     .quantity-label{
