@@ -8,23 +8,19 @@
             <p class="detail mb-2">{{address.postal_code}}, {{address.town}}</p>
             <p class="detail mb-0">{{address.country}}</p>
         </div>
-        <EditAddress @editedAddress="editAddress" v-if="editable" :address_in="address" class="edit"/>
+        <v-btn depressed v-if="editable" @click="deleteAddress"><v-icon>mdi-delete</v-icon></v-btn>
     </v-card>
 </template>
 
 <script>
-import EditAddress from '@/components/Popups/EditAddress.vue'
+
 export default {
     name: 'AddressCard',
 
     data() {
         return {
-            add: {},
+            
         }
-    },
-
-    components:{
-        EditAddress,
     },
 
     props:{
@@ -45,9 +41,9 @@ export default {
 
     methods: {
 
-        editAddress(address){
-            this.address = address;
-            this.$emit("editAddress2",address);
+        deleteAddress(){
+            // this.$emit("deleteAddress",this.address.address_id);
+            this.$store.commit('deleteAddress',this.address.address_id);
         },
 
         clicked(){
@@ -56,11 +52,7 @@ export default {
     },
 
     watch:{
-        // address(val){
-        //     if(val){
-        //         this.add = val;
-        //     }
-        // }
+
     }
 }
 </script>

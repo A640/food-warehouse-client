@@ -6,6 +6,7 @@ const AccountModule = {
         login: '',
         remember_me: true,
         addresses: [],
+        custom_addresses: [],
         addresses_loading: false,
     },
 
@@ -15,6 +16,14 @@ const AccountModule = {
         },
         setAddresses(context,addresses){
           context.addresses = addresses;
+        },
+        addAddress(context,address){
+          context.custom_addresses.push(address);
+        },
+        deleteAddress(context,a_id){
+          let index = context.custom_addresses.findIndex(a => a.address_id == a_id)
+          console.log("adIndex",index)
+          context.custom_addresses.splice(index,1);
         },
         setAddressesLoading(context,value){
           context.addresses_loading = value;
@@ -236,7 +245,7 @@ const AccountModule = {
 
     getters: {
         getAddresses(context){
-          return context.addresses;
+          return context.addresses.concat(context.custom_addresses);
         },
         getAddressesLoading(context){
           return context.addresses_loading;

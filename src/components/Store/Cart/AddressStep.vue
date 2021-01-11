@@ -18,7 +18,7 @@
 
                         <v-item-group mandatory v-model="choosen_address" >
                             <v-item v-slot="{ active, toggle }" class="mb-3" v-for="address in addresses" :key="address.address_id" >
-                                <Address @addressClicked="toggle" @editAddress2="editNewAddress" :address="address" :editable="address.address_id == -5" :elevation="active ? 5 : 1" :class="active ? 'active-address' : ''"/>
+                                <Address @addressClicked="toggle" @deleteAddress="deleteAddress" :address="address" :editable="address.address_id == -5" :elevation="active ? 5 : 1" :class="active ? 'active-address' : ''"/>
                             </v-item>
                         </v-item-group>
 
@@ -84,7 +84,6 @@ export default {
     data() {
         return{
             loading:true,
-            addresses: [],
             payment_method: null,
             choosen_address: null,
             new_address_added: false,
@@ -105,15 +104,15 @@ export default {
             this.loading = true;
             this.$store.dispatch('getAllAddresses').then(() => {
                 this.$store.dispatch('getAllPaymentMethods').then(() => {
-                    console.log('add2',this.$store.getters.getAddresses);
-                    let temp = this.$store.getters.getAddresses;
-                    console.log('add3',typeof(temp));
+                    console.log('addLoadingAtInit',this.$store.getters.getAddresses);
+                    // let temp = this.$store.getters.getAddresses;
+                    // console.log('add3',typeof(temp));
                     // if(typeof (this.$store.getters.getAddresses) == 'object'){
                     //     this.addresses.push(this.$store.getters.getAddresses);
                     // }else{
                     //     this.addresses = this.$store.getters.getAddresses;
                     // }
-                    this.addresses = this.$store.getters.getAddresses;
+                    // this.addresses = this.$store.getters.getAddresses;
                     this.loading = false;
                 })
             })
@@ -124,11 +123,10 @@ export default {
             this.new_address_added = true;
         },
 
-        editNewAddress(address){
-            console.log("adObject",address)
-            let index = this.addresses.findIndex(a => a.address_id == address.address_id)
+        deleteAddress(a_id){
+            let index = this.addresses.findIndex(a => a.address_id == a_id)
             console.log("adIndex",index)
-            this.addresses[index] = address;
+            this.addresses.splice(index,1);
         }
 
     },
@@ -146,6 +144,9 @@ export default {
             else{
                 return false;
             }
+        },
+        addresses(){
+            return this.$store.getters.getAddresses;
         }
     },
 

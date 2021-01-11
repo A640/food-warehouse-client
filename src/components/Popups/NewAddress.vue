@@ -80,7 +80,8 @@ export default {
 
        saveAddress(){
            this.address.address_id = -5;
-           this.$emit('newAddress',this.address);
+        //    this.$emit('newAddress',this.address);
+            this.$store.commit('addAddress',this.address);
            this.clear();
            this.closeDialog();
        },
