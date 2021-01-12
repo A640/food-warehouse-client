@@ -120,8 +120,10 @@ export default {
             this.loading = true;
             this.$store.dispatch('getCartProducts').then((result) => {
                 this.products = result;
-                this.loading = false;
-            })
+                this.$store.dispatch('getAllAddresses').then(() => {
+                this.$store.dispatch('getAllPaymentMethods').then(() => {
+                    this.loading = false;
+            })})});
         },
 
         clearCart(){
