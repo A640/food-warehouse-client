@@ -144,6 +144,11 @@ const routes = [
         path: '',
         name: 'Customer_Orders',
         component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/OrderList.vue'),
+      },
+      {
+        path: '/details/:id',
+        name: 'Order_Details',
+        component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/OrderDetails.vue'),
         props: true,
       },
     ]

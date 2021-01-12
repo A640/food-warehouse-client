@@ -78,7 +78,7 @@ export default {
 
     methods: {
        showDetails(){
-           this.$route.push({name: 'Order_Details', params:{id: this.order.order.order_id}});
+           this.$router.push({name: 'Order_Details', params:{id: this.order.order.order_id}});
        }
     },
 }

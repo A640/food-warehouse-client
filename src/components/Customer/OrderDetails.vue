@@ -4,43 +4,59 @@
         <div class="detail-area">
             <v-container>
                 <v-row>
+                    <v-col cols="12" md="1" >
+                        <v-card height="3rem" class="center-content  d-flex" @click="showOrdersList()">
+                           <v-icon class="ml-3">mdi-arrow-left</v-icon>
+                        </v-card>
+                    </v-col>
+                    
+                </v-row>
+                <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Produkty w koszyku:</v-card-title> 
+                           <v-card-title>Zamówienie numer {{order.order_id}}</v-card-title> 
                         </v-card>
                     </v-col>
                     
                 </v-row>
                 <v-row>
                     <v-col cols="12" md="8">
+
+
+                        <p class="mb-5">Adres</p>
+                            <Address class="mb-5" :address="address" />
+
+                        <p class="mb-5">Metoda płatności</p>
+                            <v-card class="mb-5 center-content  d-flex">
+                                <v-card-title class="center">{{payment.payment_type}}</v-card-title>
+                            </v-card>
+
+                        <p class="mb-5">Uwagi do zamówienia</p>
+                            
+                            <v-textarea
+                                :disabled="true" 
+                                class="input"
+                                label="Brak uwag do zamówienia"
+                                min-height="1rem"
+                                solo 
+                                v-model="order.comment"
+                            />
+                            
+
+                        <p class="mb-5">Produkty</p>
                         <v-card min-height="8rem">
                             <div class="card-container">
                                 <!-- Product list -->
                                 <v-form v-model="validated">
-                                    <!-- placeholder for empty cart -->
-                                    <v-card-subtitle class="text-center" v-if="products.length < 1" >Koszyk jest pusty
-                                        <p>wróc do <router-link :to="{name: 'Store_Grid'}" class="cell__link">sklepu</router-link> i dodaj coś</p></v-card-subtitle>
-
-                                    <!-- products -->
                                     <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.discount_id)">
-                                        <Product class="mb-4 ml-4"  :product="product" @Deleted="loadData()"/>
+                                        <Product class="mb-4 ml-4"  :removable="false" :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
                                             <v-card-subtitle>Ilość</v-card-subtitle>
                                             <div class="quantity-cell">
-                                                <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) - 1"><v-icon>mdi-minus</v-icon></v-btn>
-                                                <v-text-field
-                                                    class="quantity-input centered-input"
-                                                    type="number"
-                                                    v-model="product.quantity"
-                                                    :rules="[value => (value || '') <= product.max || 'Za dużo',
-                                                        value => !!value || 'Usuń produkt',
-                                                        value => (value || '') >= 0 || 'Nie może być ujemna',
-                                                    ]"
-                                                    flat
-                                                    solo
-                                                />
-                                                <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) + 1"><v-icon>mdi-plus</v-icon></v-btn>
+                                                
+                                                <p class="quantity-label centered-input" >{{product.quantity}}</p>
+                                               
                                             </div>
                                             
                                         </v-card>
@@ -51,62 +67,93 @@
                                 
                                 
 
-                                <!-- Loader -->
-                                <v-overlay
-                                    :absolute="true"
-                                    :value="loading"
-                                >
-                                    <v-progress-circular
-                                        indeterminate
-                                        color="amber"
-                                    ></v-progress-circular>
-                                </v-overlay>
+                                
                             </div>
                         </v-card>
-
-                        <!-- clear cart -->
-                        <!-- <v-btn outlined @click="clearCart()" class="mt-5" color="rgba(0,0,0,0.5)" >Wyczyść koszyk</v-btn> -->
 
                     </v-col>
                     <v-col>
-                        <v-card >
-                            <div class="card-container cell">
-                                <h3 class="cell" >
-                                    
-                                    Razem:
-                                </h3>
-                                <p  class="cell details-price ">{{total}} zł</p>
-                                <p class="cell details-unit "></p>
-                                <div class="order-button cell">
-                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Przejdź do dostawy</v-btn>
+
+                        <p class="mb-5">Wartość</p>
+                            <v-card class="mb-5" >
+                                <div class="card-container cell">
+                                    <h3 class="cell"> Wartość zamówienia:</h3>
+                                    <p  class="cell details-price ">{{payment.value}} zł</p>
                                 </div>
-                                <p class="detail-claim cell">Produkty zostaną dostarczone w ciągu maksymalnie 5 dni roboczych</p>
-                            </div>
-                        </v-card>
+                            </v-card>
+
+                        <p class="mb-5">Status zamówienia</p>
+                            <v-card class="mb-5">
+                                <div class="card-container cell">
+                                    <h3 class="cell">{{state}}</h3>
+                                </div>
+                            </v-card>
+
+                        <p class="mb-5">Wycofaj zamówienie</p>
+                            <v-card class="mb-5 d-flex pt-5 pb-5">
+
+                                <v-btn depressed class="center-btn"  v-if="cancellable" >Wycofaj zamówienie</v-btn>
+                                <v-card-subtitle v-else>Nie można już wycofać zamówienia</v-card-subtitle>
+                                
+                            </v-card>
+
+                        <p class="mb-5">Reklamacja</p>
+                            <v-card class="mb-5 d-flex pt-5 pb-5">
+
+                                <v-btn depressed class="center-btn"  v-if="cancellable" >Złóż reklamację</v-btn>
+                                <v-card-subtitle v-else>Nie można już wycofać zamówienia</v-card-subtitle>
+                                
+                            </v-card>
+
+                        
 
                         <!-- special offers -->
                     </v-col>
                 </v-row>
             </v-container>
         </div>
+
+        <!-- Loader -->
+        <v-overlay
+            :absolute="true"
+            :value="loading"
+        >
+            <v-progress-circular
+                indeterminate
+                color="amber"
+            ></v-progress-circular>
+        </v-overlay>
         
     </div>
 </template>
 
 <script>
 import Product from '@/components/Store/Cart/ProductMiniCart.vue'
+import Address from '@/components/Store/Cart/AddressCard.vue'
+
 export default {
 
     components: {
         Product,
+        Address,
+    },
+
+    props:{
+        id:{
+            default: -1,
+        }
     },
     
     data() {
         return{
             loading:true,
+            order: {},
+            address: {},
+            payment: {},
+            delivery: {},
             products: [],
             validated: false,
-
+            order_comment: '',
            
         }
 
@@ -123,12 +170,25 @@ export default {
 
         loadData(){
             this.loading = true;
-            this.$store.dispatch('getCartProducts').then((result) => {
-                this.products = result;
-                this.$store.dispatch('getAllAddresses').then(() => {
-                this.$store.dispatch('getAllPaymentMethods').then(() => {
+            this.$store.dispatch('getAllOrders').then(() => {
+                let id;
+                if(this.id != -1){
+                    id = Number.parseInt(this.id);
+                }
+                else{
+                    id = Number.parseInt(this.$route.params.id);
+                }
+                
+                this.$store.dispatch('getOrderData',id).then((result) => {
+                    this.order = result.order;
+                    this.address = result.delivery.address;
+                    this.payment = result.payment;
+                    this.delivery = result.delivery;
+                    this.products = result.products;
                     this.loading = false;
-            })})});
+                })
+            })
+            
         },
 
         clearCart(){
@@ -136,15 +196,48 @@ export default {
             this.$emit('clearCart');
         },
 
+        showOrdersList(){
+            this.$router.push({name:'Customer_Orders'});
+        }
+
     },
 
     computed:{
-        total(){
-            let total = 0;
-            this.products.forEach((p) =>{ total += Number.parseFloat(p.sell_price) * Number.parseInt(p.quantity)});
-            return total;
+
+        state(){
+            if(this.order.order_state == "PENDING"){
+                return "Oczekujące";
+            }else if(this.order.order_state == "REGISTERED"){
+                return 'Przyjęte';
+            }else if(this.order.order_state == "CANCELED"){
+                return 'Anulowane';
+            }else if(this.order.order_state == "COMPLETING"){
+                return 'W trakcie kompletacji'
+            }else if(this.order.order_state == "READY TO DELIVER"){
+                return 'Gotowy do dostarczenia'
+            }else if(this.order.order_state == "OUT FOR DELIVERY"){
+                return 'W drodze do klienta'
+            }else if(this.order.order_state == "DELIVERED"){
+                return 'Dostarczono'
+            }else if(this.order.order_state == "RETURNED"){
+                return 'Zwrócone'
+            }else{
+                return 'Nieznany'
+            }
+        },
+
+        cancellable(){
+            if(this.order.order_state == "PENDING" || this.order.order_state == "REGISTERED"){
+                return true;
+            }else{
+                return false;
+            }
         }
     },
+
+
+
+   
 
     mounted() {
         this.loadData();
@@ -159,7 +252,7 @@ export default {
         width: 100%;
         height: 100%;
         /* background-color: rgb(75, 156, 236); */
-        
+        position: relative;
         align-self: center;
         /* border-radius: 10px; */
         /* padding: 2rem; */
@@ -168,6 +261,10 @@ export default {
         justify-content: center; */
 
 
+    }
+
+    .center-btn{
+        margin: 0 auto !important;
     }
 
     .product-cell{
@@ -179,6 +276,10 @@ export default {
         width: 100%;
         display: flex;
         align-items: baseline;
+    }
+
+    .center{
+        margin: 0 auto !important;
     }
 
     .cart-products{
@@ -258,7 +359,7 @@ export default {
         display: inline;
         text-decoration: none;
         font-weight: 600;
-        color: rgba(0, 0, 0, 0.9);
+        color: #007E33;
     }
 
     .error{
@@ -333,9 +434,10 @@ export default {
         margin-top: 1rem;
         font-weight: 400;
         color: rgba(0, 0, 0, 0.5);
+        text-align: start;
     }
 
-    .quantity-input{
+    .quantity-label{
         width: 5rem;
         margin: 0 auto;
         font-size: 1.3rem;
@@ -344,7 +446,7 @@ export default {
 
     }
 
-    .centered-input >>> input {
+    .centered-input {
       text-align: center
     }
 

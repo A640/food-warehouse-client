@@ -8,8 +8,8 @@ const StoreModule = {
         store_products_loading: false,
         cart: [],
         cart_settings:{
-          address: null,
-          payment: null,
+          address: {},
+          payment: {},
           comment: '',
           order_id: null,
           payment_id: null,
@@ -73,8 +73,8 @@ const StoreModule = {
 
         clearCart(context){
           context.cart = [];
-          context.cart_settings.address = null;
-          context.cart_settings.payment = null;
+          context.cart_settings.address = {};
+          context.cart_settings.payment = {};
           context.cart_settings.comment = '';
           context.cart_settings.order_id = null;
           context.cart_settings.payment_id = null;
@@ -207,6 +207,11 @@ const StoreModule = {
       
         getStoreProductData(context, id){
             let res = context.state.store_products.find(store_product => store_product.product_id == id);
+            return res;
+        },
+
+        getOrderData(context, id){
+            let res = context.state.orders.find(order => order.order.order_id == id);
             return res;
         },
 
