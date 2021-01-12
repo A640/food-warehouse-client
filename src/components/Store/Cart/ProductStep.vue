@@ -19,7 +19,7 @@
                                 <v-form v-model="validated">
                                     <!-- placeholder for empty cart -->
                                     <v-card-subtitle class="text-center" v-if="products.length < 1" >Koszyk jest pusty
-                                        <p>wróc do <router-link :to="{name: 'Store_Grid'}" class="cell__link">sklepu</router-link> i dodaj coś</p></v-card-subtitle>
+                                        <p>wróć do <router-link :to="{name: 'Store_Grid'}" class="cell__link">sklepu</router-link> i dodaj coś</p></v-card-subtitle>
 
                                     <!-- products -->
                                     <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.discount_id)">

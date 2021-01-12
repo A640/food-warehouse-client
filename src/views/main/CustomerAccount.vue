@@ -61,19 +61,26 @@
         </div>
         
         <div id="content">
-            <router-view :key="$route.path" />
+          
+            
+
+            <Edit/>
+
+
+
+
         </div>
     </div>
 </template>
 
 <script>
-
+import Edit from '@/components/Customer/CustomerSettings.vue'
 
 
 export default {
 
     components:{
-
+        Edit,
     },
 
 

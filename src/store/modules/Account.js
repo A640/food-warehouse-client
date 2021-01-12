@@ -9,6 +9,8 @@ const AccountModule = {
         addresses: [],
         custom_addresses: [],
         addresses_loading: false,
+        account: {},
+        account_loading: false,
     },
 
     mutations: {
@@ -17,6 +19,12 @@ const AccountModule = {
         },
         setName(context,name){
           context.name = name;
+        },
+        setAccount(context,account){
+          context.account = account;
+        },
+        setAccountLoading(context,value){
+          context.account_loading = value;
         },
         setAddresses(context,addresses){
           context.addresses = addresses;
@@ -274,6 +282,104 @@ const AccountModule = {
               }
             }); 
         } , 
+
+
+        getAccount(context,silent=false){
+          console.log("Gecik name")
+
+          context.commit('setAccountLoading',true);
+
+          let token = localStorage.getItem('jwtToken')
+          return  axios.get(context.getters.getServerAddress +'/account', { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Addresses data in vuex store
+              console.log(data)
+              context.commit('setAccount',data.data.result);
+              context.commit('setAccountLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setAccountLoading',false);
+            }); 
+        } , 
+
+        
+
+        updateAccount(context,obj){
+          console.log("Update Account")
+
+          context.commit('setAccountLoading',true);
+
+          let token = localStorage.getItem('jwtToken')
+          console.log('Update Account', obj)
+          return  axios.post(context.getters.getServerAddress +'/account/settings',obj, { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+    
+             
+              //connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+              
+             
+    
+              //save Addresses data in vuex store
+              console.log(data)
+              
+              context.commit('setAccountLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                
+                //if connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+                
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setAccountLoading',false);
+            }); 
+        } ,
       
         getAccountData(context,id){
             //search for account data in employees if not found, search in customers
@@ -299,7 +405,13 @@ const AccountModule = {
         },
         getName(context){
           return context.name;
-        }
+        },
+        getAccount(context){
+          return context.account;
+        },
+        getAccountLoading(context){
+          return context.account_loading;
+        },
     },
 };
 

@@ -192,8 +192,8 @@ export default {
                 this.c_apartment_num = this.address_obj.apartment_number
                 this.c_town = this.address_obj.town
                 let postal = this.address_obj.postal_code.split('-'); 
-                this.c_pc1 = Number.parseInt(postal[0]);
-                this.c_pc2 = Number.parseInt(postal[1]);
+                this.c_pc1 = postal[0];
+                this.c_pc2 = postal[1];
                 this.c_country = this.address_obj.country;
                 this.address_id = this.address_obj.address_id;
                 
@@ -206,7 +206,7 @@ export default {
                     this.c_building_num = address.building_number
                     this.c_apartment_num = address.apartment_number
                     this.c_town = address.town
-                    let postal = address.postal_code.split(' - ');
+                    let postal = address.postal_code.split('-');
                     this.c_pc1 = postal[0];
                     this.c_pc2 = postal[1];
                     this.c_country = address.country;
@@ -225,7 +225,7 @@ export default {
         validate (val) {
             if(val == true){
                 if(this.allValidated()){
-                    let pc = String(this.c_pc1) + " - " + String(this.c_pc2);
+                    let pc = String(this.c_pc1) + "-" + String(this.c_pc2);
                     console.log(pc)
 
                     let address = {
