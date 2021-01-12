@@ -4,6 +4,7 @@ const AccountModule = {
 
     state: { 
         login: '',
+        name: '',
         remember_me: true,
         addresses: [],
         custom_addresses: [],
@@ -13,6 +14,9 @@ const AccountModule = {
     mutations: {
         setLogin(context,login){
           context.login = login;
+        },
+        setName(context,name){
+          context.name = name;
         },
         setAddresses(context,addresses){
           context.addresses = addresses;
@@ -227,6 +231,49 @@ const AccountModule = {
               context.commit('setAddressesLoading',false);
             }); 
         } , 
+
+        getName(context,silent=false){
+          console.log("Gecik name")
+
+          let token = localStorage.getItem('jwtToken')
+          axios.get(context.getters.getServerAddress +'/account/name', { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Addresses data in vuex store
+              console.log(data)
+              context.commit('setName',data.data.result);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+            }); 
+        } , 
       
         getAccountData(context,id){
             //search for account data in employees if not found, search in customers
@@ -249,6 +296,9 @@ const AccountModule = {
         },
         getAddressesLoading(context){
           return context.addresses_loading;
+        },
+        getName(context){
+          return context.name;
         }
     },
 };

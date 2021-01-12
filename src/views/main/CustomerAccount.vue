@@ -3,37 +3,12 @@
         <div id="bar">
             <h2 @click="showMainStore()" class="appbar__title">{{ store_name }}</h2>
             
-            <div class="search">
-                <v-combobox
-                    class="mt-2"
-                    label="Czego szukasz?"
-                    clearable
-                    solo
-                    background-color="#f0f2f5"
-                    hide-selected
-                    flat
-                    hide-details=true
-                    v-model="i_search"
-                    :items="products"
-                    
-                ></v-combobox>
+            <div class="section-title">
+                Moje konto
             </div>
 
             <div>
-                <v-badge
-                    :content="cart_count"
-                    :value="cart_count"
-                    color="green lighten-2"
-                    class="mr-10"
-                    overlap
-                    
-                >
-                    <v-btn depressed @click="showCart()">
-                        <v-icon>mdi-cart</v-icon>
-                    </v-btn>
-                    
-                    
-                </v-badge>
+               
                 
 
                 <v-menu
@@ -68,7 +43,7 @@
             
                     <v-list>
                         <v-list-item link :to="{name: 'Customer_Account'}">
-                            <v-list-item-title class="c-text"  >Moje konto</v-list-item-title>
+                            <v-list-item-title class="c-text" >Moje konto</v-list-item-title>
                         </v-list-item>
             
                         <v-list-item link :to="{name: 'Customer_Orders'}">
@@ -233,6 +208,12 @@ export default {
         width: 50%;
         display: flex;
         align-items: center;
+    }
+
+    .section-title{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
+        font-size: 1.2rem;
     }
 
 

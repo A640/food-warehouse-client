@@ -58,6 +58,10 @@
                                 </v-overlay>
                             </div>
                         </v-card>
+
+                        <!-- clear cart -->
+                        <!-- <v-btn outlined @click="clearCart()" class="mt-5" color="rgba(0,0,0,0.5)" >Wyczyść koszyk</v-btn> -->
+
                     </v-col>
                     <v-col>
                         <v-card >
@@ -118,7 +122,12 @@ export default {
                 this.products = result;
                 this.loading = false;
             })
-        }
+        },
+
+        clearCart(){
+            this.$store.commit('clearCart');
+            this.$emit('clearCart');
+        },
 
     },
 

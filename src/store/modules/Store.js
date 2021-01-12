@@ -14,6 +14,11 @@ const StoreModule = {
           order_id: null,
           payment_id: null,
         },
+
+        orders: [],
+        orders_loading: false,
+
+
         order_loading: false,
         payment_methods: [],
         payment_methods_loading: false,
@@ -52,6 +57,18 @@ const StoreModule = {
 
         setPaymentId(context,id){
           context.cart_settings.payment_id = id;
+        },
+
+        setOrderComment(context,comment){
+          context.cart_settings.comment = comment;
+        },
+
+        setOrders(context,orders){
+          context.orders = orders;
+        },
+
+        setOrdersLoading(context,value){
+          context.orders_loading = value;
         },
 
         clearCart(context){
@@ -358,8 +375,57 @@ const StoreModule = {
           }
         }
         
+      },
+
+      getAllOrders(context, silent=false){
+        //get all Orders and their User info from server
+        //silent option is mainly for not hide reconnected banner
+  
+        console.log("Gecik customer")
+        context.commit('setOrdersLoading',true);
+        let token = localStorage.getItem('jwtToken')
+        axios.get(context.getters.getServerAddress +'/account/orders', { headers: { Authorization: `Bearer ${token}` } })
+          .then( (data) => {
+  
+            if(!silent){
+              //connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+            }
+           
+  
+            //save Orders data in vuex store
+            console.log(data)
+            context.commit('setOrders',data.data.result);
+            context.commit('setOrdersLoading',false);
+          })
+          .catch( (error) =>{
+  
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+  
+              context.dispatch('noConnectionChange',true);
+  
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+  
+              if(!silent){
+                 //if connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+
+              if(error.response.status == 403){
+                context.dispatch('forbiddenResponse');
+              }
+             
+            }
+            context.commit('setOrdersLoading',false);
+          }); 
         
-    },
+        
+      },
         
     },
 
@@ -383,6 +449,14 @@ const StoreModule = {
 
         getCartSettings(context){
           return context.cart_settings;
+        },
+
+        getOrders(context){
+          return context.orders;
+        },
+
+        getOrdersLoading(context){
+          return context.orders_loading;
         },
         
         isOnlinePayment(context){

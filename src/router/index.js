@@ -127,15 +127,36 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/components/PopupContents/ProductPopup.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/OrderMini.vue')
   },
 
   {
     path: '/payment',
     name: 'Payment',
-    component: () => import(/* webpackChunkName: "about" */ '../views/main/Payment.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '@/views/main/Payment.vue'),
     props: true,
   },
+  {
+    path: '/customer/orders',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/main/CustomerOrders.vue'),
+    children:[
+      {
+        path: '',
+        name: 'Customer_Orders',
+        component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/OrderList.vue'),
+        props: true,
+      },
+    ]
+  },
+  {
+    path: '/customer/account',
+    name: 'Customer_Account',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/main/CustomerAccount.vue'),
+    
+  },
+
+
+  
 ]
 
 const router = new VueRouter({

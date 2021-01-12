@@ -23,6 +23,16 @@
                                 <v-card-title class="center">{{cart_settings.payment.payment_type}}</v-card-title>
                             </v-card>
 
+                        <p class="mb-5">Uwagi do zamówienia (opcjonalnie)</p>
+                            
+                            <v-textarea 
+                                class="input"
+                                label="Wpisz tutaj swoje uwagi do zamówienia"
+                                solo 
+                                v-model="order_comment"
+                            />
+                            
+
                         <p class="mb-5">Produkty</p>
                         <v-card min-height="8rem">
                             <div class="card-container">
@@ -106,7 +116,7 @@ export default {
             loading:true,
             products: [],
             validated: false,
-
+            order_comment: '',
            
         }
 
@@ -149,6 +159,12 @@ export default {
 
         store_name(){
             return this.$store.getters.getStoreName;
+        }
+    },
+
+    watch:{
+        order_comment(val){
+            this.$store.commit('setOrderComment',val)
         }
     },
 

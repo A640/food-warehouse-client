@@ -14,7 +14,7 @@
                 <v-divider></v-divider>
         
                 <v-stepper-step
-                :editable="step > 0"
+                :editable="step > 1"
                 edit-icon="mdi-check"
                 :complete="step > 2"
                 step="2"
@@ -24,7 +24,7 @@
         
                 <v-divider></v-divider>
         
-                <v-stepper-step :editable="step > 0" edit-icon="mdi-check" step="3">
+                <v-stepper-step :editable="step > 2" edit-icon="mdi-check" step="3">
                 Podsumowanie
                 </v-stepper-step>
             </v-stepper-header>

@@ -1,36 +1,30 @@
 <template>
     <div class="cell">
-        <v-card class="flex-row">
-            
-                
-            <v-img :src="product.image" class="round-fix"  max-height="100%" max-width="9rem" />
+        <v-card class="pa-5 mt-5" @click="showDetails()">
             <!-- <div class="mini-img">
 
             </div> -->
             
             <div class="details">
-                <h3 class="details-mini-title" >{{product.name}}</h3>
-                <p  class=" details-producer ">{{product.producer_name}}</p>
-                <div class="flex-end last" v-if="product.discount_id != -1" >
-                    <p 
-                            
-                        class="cell details-price "
-                    >Data ważności: <v-chip
-                                        label
-                                        class="mr-2"
-                                        color="amber"
-                                    >
-                                        <b>{{ product.due_to }}</b>
-                                    </v-chip>
-                    </p>
-                    <v-spacer></v-spacer>
-                    <p :class="removable ? 'details-mini-price' : 'details-mini-price2'" >{{product.sell_price}} zł</p>         
+                <div class="ml-4">
+                    <h3 class="details-mini-title mt-0" >Zamówienie numer {{order.order.order_id}}</h3>
+                    <p  class=" details-producer mb-0">{{state}}</p>
                 </div>
-                <div class="flex-end last" v-else >
-                    <p :class="removable ? 'details-mini-price' : 'details-mini-price2'" >{{product.sell_price}} zł</p>         
+
+                <div class="details">
+                    <div class="mr-5" >
+                        <p class="details-mini-title mt-0">Produktów</p>
+                        <p class="details-mini-title mb-0 text-center">{{order.products.length}}</p>         
+                    </div>
+                    
+                    <div class="mr-4 ml-5" >
+                        <p class="details-mini-title mt-0">Wartość</p>
+                        <p class="details-mini-title mb-0 text-center">{{order.payment.value}} zł</p>         
+                    </div>
                 </div>
+                
+                
             </div>
-            <v-btn  depressed v-if="removable" class="close-btn" @click="deleteFromCart()"><v-icon>mdi-close</v-icon></v-btn>
             
         </v-card>
     </div>
@@ -41,11 +35,11 @@
 export default {
 
     props:{
-        product:{
+        order:{
             type: Object,
             required: true,
         },
-        removable:{
+        cancellable:{
             type: Boolean,
             default: true,
         },
@@ -58,15 +52,34 @@ export default {
 
     },
 
-    methods: {
-        deleteFromCart(){
-            let i = {
-                product_id: this.product.product_id,
-                discount_id: this.product.discount_id,
+    computed:{
+        state(){
+            if(this.order.order.order_state == "PENDING"){
+                return "Oczekujące";
+            }else if(this.order.order.order_state == "REGISTERED"){
+                return 'Przyjęte';
+            }else if(this.order.order.order_state == "CANCELED"){
+                return 'Anulowane';
+            }else if(this.order.order.order_state == "COMPLETING"){
+                return 'W trakcie kompletacji'
+            }else if(this.order.order.order_state == "READY TO DELIVER"){
+                return 'Gotowy do dostarczenia'
+            }else if(this.order.order.order_state == "OUT FOR DELIVERY"){
+                return 'W drodze do klienta'
+            }else if(this.order.order.order_state == "DELIVERED"){
+                return 'Dostarczono'
+            }else if(this.order.order.order_state == "RETURNED"){
+                return 'Zwrócone'
+            }else{
+                return 'Nieznany'
             }
-            this.$store.commit('deleteFromCart',i);
-            this.$emit('Deleted');
-        }
+        },
+    },
+
+    methods: {
+       showDetails(){
+           this.$route.push({name: 'Order_Details', params:{id: this.order.order.order_id}});
+       }
     },
 }
 </script>
@@ -101,6 +114,8 @@ export default {
         background-color: rgba(0, 0, 0, 0) !important;
     }
 
+    
+
 
 
     .cell{
@@ -110,6 +125,7 @@ export default {
         height: 100%;
         margin: 0 auto;
         margin-bottom: 0.25rem;
+        max-width: 800px;
         /* border: 1px solid red; */
     }
 
@@ -122,8 +138,8 @@ export default {
     }
 
     .details{
-        margin-left: 2rem;
-        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
     }
 
     .details-mini-title{
