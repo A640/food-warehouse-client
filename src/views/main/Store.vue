@@ -126,6 +126,9 @@ export default {
         user_name(){
             let n = this.$store.getters.getName;
             return n.name + ' ' + n.surname;
+        },
+        reconnected(){
+            return this.$store.getters.getReconnected;
         }
     },
 
@@ -143,6 +146,7 @@ export default {
             }
         }
     },
+
 
 
     mounted() {

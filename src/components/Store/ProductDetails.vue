@@ -7,7 +7,7 @@
                         <v-card>
                             <v-img
                                 height="30rem"
-                                src="@/assets/b.jpg"
+                                :src="product.image"
                                 @click="details()"
                             ></v-img>
                         </v-card>
@@ -122,26 +122,40 @@ export default {
         }
     },
 
+    methods:{
+        load_data(){
+
+            let temp_id = Number.parseInt(this.$route.params.id);
+            console.log('ID init ',temp_id)
+            this.$store.dispatch('getStoreProductData',temp_id)
+            .then( (product) => {
+                console.log(product);
+                if(product){
+                    this.product = product;
+                }
+                else{
+                    this.$store.dispatch('getOneProduct', temp_id).then( (result) => {
+                        console.log('dociągnięcie', result)
+                        if(result == undefined || result === 'no product found' || result == null){
+                            this.$router.push({name:'Store404'});
+                        }
+                        else{
+                            this.product = result;
+                        }
+                    })
+                }
+            })
+        }
+    },
+
     mounted(){
-        
-        let temp_id = Number.parseInt(this.$route.params.id);
-        console.log('ID init ',temp_id)
-        this.$store.dispatch('getStoreProductData',temp_id)
-        .then( (product) => {
-            console.log(product);
-            if(product){
-                this.product = product;
-            }
-            else{
-                this.$router.push({name:'Store404'});
-            }
-        })
+        this.load_data();
     },
 
     computed:{
-        store_name(){
-            return this.$store.getters.getStoreName;
-        }
+        reconnected(){
+            return this.$store.getters.getReconnected;
+        },
     },
 
 

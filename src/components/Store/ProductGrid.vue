@@ -42,12 +42,22 @@ export default {
 
         products(){
             return this.$store.getters.getStoreProducts;
+        },
+
+        reconnected(){
+            return this.$store.getters.getReconnected;
         }
 
 
     },
 
-
+     watch:{
+        reconnected(val){
+        if(val){
+            this.$store.dispatch('getAllStoreProducts',true);
+        }
+        }
+    },
 
 
     mounted(){

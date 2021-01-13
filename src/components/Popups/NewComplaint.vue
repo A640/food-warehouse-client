@@ -99,7 +99,7 @@ export default {
         },
 
         closeDialog(){
-            this.content = false;
+            this.content = '';
             this.dialog = false;
         }
     },

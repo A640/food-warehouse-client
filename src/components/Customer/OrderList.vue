@@ -43,7 +43,7 @@ export default {
         },
 
         orders(){
-            return this.$store.getters.getOrders;
+            return this.$store.getters.getOrdersSortedDesc;
         },
 
         loading(){

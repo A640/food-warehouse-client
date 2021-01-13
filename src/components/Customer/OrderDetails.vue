@@ -48,7 +48,7 @@
                             <div class="card-container">
                                 <!-- Product list -->
                                 <v-form v-model="validated">
-                                    <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.discount_id)">
+                                    <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.due_to)">
                                         <Product class="mb-4 ml-4"  :removable="false" :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
@@ -92,15 +92,16 @@
                         <p class="mb-5">Wycofaj zamówienie</p>
                             <v-card class="mb-5 d-flex pt-5 pb-5">
 
-                                <Cancel class="center-btn"  v-if="cancellable" :id="order.order_id" @updateOrderDetails="loadData()"/>
+                                <Cancel class="center-btn"  v-if="cancellable" :id="order.order_id" @updateOrderDetails="loadData(true)"/>
                                 <v-card-subtitle v-else >Nie można już wycofać zamówienia</v-card-subtitle>
                                 
                             </v-card>
 
                         <p class="mb-5">Reklamacja</p>
-                            <v-card class="mb-5 d-flex pt-5 pb-5">
-
-                                <NewComplaint  :id="order.order_id" @updateOrderDetails="loadData()" />
+                            <v-card class="mb-5 cc-card pt-5 pb-5">
+                                <NewComplaint  :id="order.order_id" @updateOrderDetails="loadData(true)" class="mb-2"/>
+                                <Complaint v-for="complaint in complaints" :key="complaint.complaint_id" :complaint="complaint" class="mt-3" @updateOrderDetails="loadData(true)"/>
+                                
                                 <!-- <v-card-subtitle >Nie można już wycofać zamówienia</v-card-subtitle> -->
                                 
                             </v-card>
@@ -132,6 +133,7 @@ import Product from '@/components/Store/Cart/ProductMiniCart.vue'
 import Address from '@/components/Store/Cart/AddressCard.vue'
 import Cancel from '@/components/Popups/CancelOrder.vue'
 import NewComplaint from '@/components/Popups/NewComplaint.vue'
+import Complaint from '@/components/Popups/ComplaintResponse.vue'
 
 export default {
 
@@ -140,6 +142,7 @@ export default {
         Address,
         Cancel,
         NewComplaint,
+        Complaint,
     },
 
     props:{
@@ -158,7 +161,7 @@ export default {
             products: [],
             validated: false,
             order_comment: '',
-           
+            complaints: [],
         }
 
     },
@@ -172,28 +175,61 @@ export default {
             
         },
 
-        loadData(){
+        loadData(force=false){
             this.loading = true;
-            this.$store.dispatch('getAllOrders').then(() => {
-                let id;
-                if(this.id != -1 && this.id !== null && this.id != undefined){
-                    id = Number.parseInt(this.id);
+            
+            let id;
+            if(this.id != -1 && this.id !== null && this.id != undefined){
+                id = Number.parseInt(this.id);
+            }
+            else{
+                id = Number.parseInt(this.$route.params.id);
+            }
+
+            if(force){
+                console.log('force reload');
+                this.getFromServer(id);
+            }
+            else{
+                this.getFromStore(id);
+            } 
+            
+        },
+
+        getFromStore(id){
+            this.$store.dispatch('getOrderData',id).then((result) => {
+                    console.log('load order', result);
+                    if(result == null || result == undefined){
+                        this.getFromServer(id);
+                    }
+                    else{
+                        this.order = result.order;
+                        this.address = result.delivery.address;
+                        this.payment = result.payment;
+                        this.delivery = result.delivery;
+                        this.complaints = result.complaints;
+                        this.products = result.products;
+                        this.loading = false;
+                    }
+                
+                })
+        },
+
+        getFromServer(id){
+            this.$store.dispatch('getOneOrder',id).then((result) => {
+                if(result == null || result == undefined){
+                    this.$router.push({name: 'Order_404'});
                 }
                 else{
-                    id = Number.parseInt(this.$route.params.id);
-                }
-                
-                this.$store.dispatch('getOrderData',id).then((result) => {
                     this.order = result.order;
                     this.address = result.delivery.address;
                     this.payment = result.payment;
                     this.delivery = result.delivery;
+                    this.complaints = result.complaints;
                     this.products = result.products;
                     this.loading = false;
-                })
-                
+                }
             })
-            
         },
 
         clearCart(){
@@ -266,6 +302,11 @@ export default {
         justify-content: center; */
 
 
+    }
+
+    .cc-card{
+        display: flex;
+        flex-direction: column;
     }
 
     .center-btn{

@@ -52,6 +52,46 @@ const routes = [
     ]
   },
   {
+    path: '/manager',
+    name: 'Manager',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue'),
+    children:[
+      {
+        path: 'employees',
+        name: 'Admin_Employees',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/EmployeeTable.vue'),
+      },
+      {
+        path: 'customers',
+        name: 'Admin_Customers',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/CustomerTable.vue'),
+      },
+      {
+        path: 'vehicles',
+        name: 'Admin_Vehicles',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/VehicleTable.vue'),
+      },
+      {
+        path: 'producers',
+        name: 'Admin_Producers',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProducerTable.vue'),
+      },
+      {
+        path: 'warehouses',
+        name: 'Admin_Warehouses',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/WarehouseTable.vue'),
+      },
+      {
+        path: 'products',
+        name: 'Admin_Products',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProductTable.vue'),
+      },
+    ]
+  },
+  {
     path: '/register',
     name: 'Register',
     // route level code-splitting
@@ -150,6 +190,11 @@ const routes = [
         name: 'Order_Details',
         component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/OrderDetails.vue'),
         props: true,
+      },
+      {
+        path: 'order-404',
+        name: 'Order_404',
+        component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/Order404.vue'),
       },
     ]
   },
