@@ -3,8 +3,8 @@
 
         <v-form v-model="form_valid" ref="CustomerForm">
             <div class="first cell">
-            <p class="mb-5">Moje dane</p>
-            <v-btn depressed :color="edit_mode ? 'blue lighten-1' : '' " @click="edit_mode ? cancell() : edit_mode = true"> <v-icon :dark="edit_mode">mdi-pencil</v-icon> </v-btn>
+            <p class="mb-5 section-title">Moje dane</p>
+            <v-btn depressed :color="edit_mode ? 'rgb(130, 180, 170)' : '' " @click="edit_mode ? cancell() : edit_mode = true"> <v-icon :color="edit_mode ? 'rgb(255,255,255)' : 'rgb(0,0,0)'">mdi-pencil</v-icon> </v-btn>
         </div>
         
        <div class="cell ">
@@ -117,7 +117,7 @@
             ></v-text-field>
         </div>
         <div class="cell">
-            <v-switch v-model="is_company" :disabled="!edit_mode" label="Mam firmę"></v-switch>
+            <v-switch v-model="is_company" color="rgb(130, 180, 170)" :disabled="!edit_mode" label="Mam firmę"></v-switch>
         </div>
         
 
@@ -262,7 +262,7 @@
             <div class="cell__popup-buttons">
                 <v-btn text class="mr-2 mb-5" @click="cancell()">Anuluj</v-btn>
                 <v-btn 
-                color="#1877F2" 
+                color="rgb(130, 180, 170)" 
                 class="mb-5" 
                 dark 
                 @click="save()"

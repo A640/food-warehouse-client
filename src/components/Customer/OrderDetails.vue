@@ -35,7 +35,7 @@
                             
                             <v-textarea
                                 :disabled="true" 
-                                class="input"
+                                class="input-bold input"
                                 label="Brak uwag do zamówienia"
                                 min-height="1rem"
                                 solo 
@@ -92,16 +92,16 @@
                         <p class="mb-5">Wycofaj zamówienie</p>
                             <v-card class="mb-5 d-flex pt-5 pb-5">
 
-                                <v-btn depressed class="center-btn"  v-if="cancellable" >Wycofaj zamówienie</v-btn>
-                                <v-card-subtitle v-else>Nie można już wycofać zamówienia</v-card-subtitle>
+                                <Cancel class="center-btn"  v-if="cancellable" :id="order.order_id" @updateOrderDetails="loadData()"/>
+                                <v-card-subtitle v-else >Nie można już wycofać zamówienia</v-card-subtitle>
                                 
                             </v-card>
 
                         <p class="mb-5">Reklamacja</p>
                             <v-card class="mb-5 d-flex pt-5 pb-5">
 
-                                <v-btn depressed class="center-btn"  v-if="cancellable" >Złóż reklamację</v-btn>
-                                <v-card-subtitle v-else>Nie można już wycofać zamówienia</v-card-subtitle>
+                                <NewComplaint  :id="order.order_id" @updateOrderDetails="loadData()" />
+                                <!-- <v-card-subtitle >Nie można już wycofać zamówienia</v-card-subtitle> -->
                                 
                             </v-card>
 
@@ -130,12 +130,16 @@
 <script>
 import Product from '@/components/Store/Cart/ProductMiniCart.vue'
 import Address from '@/components/Store/Cart/AddressCard.vue'
+import Cancel from '@/components/Popups/CancelOrder.vue'
+import NewComplaint from '@/components/Popups/NewComplaint.vue'
 
 export default {
 
     components: {
         Product,
         Address,
+        Cancel,
+        NewComplaint,
     },
 
     props:{
@@ -172,7 +176,7 @@ export default {
             this.loading = true;
             this.$store.dispatch('getAllOrders').then(() => {
                 let id;
-                if(this.id != -1){
+                if(this.id != -1 && this.id !== null && this.id != undefined){
                     id = Number.parseInt(this.id);
                 }
                 else{
@@ -187,6 +191,7 @@ export default {
                     this.products = result.products;
                     this.loading = false;
                 })
+                
             })
             
         },
@@ -455,6 +460,12 @@ export default {
         text-decoration: line-through;
         color: rgba(50, 50, 50, 0.5);
         font-weight: 600;
+    }
+
+    .input-bold >>> textarea:disabled{
+        color: rgba(0,0,0,1) !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
     }
 
 

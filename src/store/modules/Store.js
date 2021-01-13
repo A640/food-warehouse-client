@@ -116,7 +116,7 @@ const StoreModule = {
       
             console.log("Gecik store_product")
             context.commit('setStoreProductsLoading',true);
-            axios.get(context.getters.getServerAddress +'/store/products')
+            return  axios.get(context.getters.getServerAddress +'/store/products')
               .then( (data) => {
       
                 if(!silent){
@@ -164,7 +164,7 @@ const StoreModule = {
           console.log("Gecik payment-type")
           context.commit('setPaymentMethodsLoading',true);
           let token = localStorage.getItem('jwtToken');
-          axios.get(context.getters.getServerAddress +'/payment-type', { headers: { Authorization: `Bearer ${token}` }})
+          return axios.get(context.getters.getServerAddress +'/payment-type', { headers: { Authorization: `Bearer ${token}` }})
             .then( (data) => {
     
               if(!silent){
@@ -211,6 +211,7 @@ const StoreModule = {
         },
 
         getOrderData(context, id){
+          console.log('get order data',id)
             let res = context.state.orders.find(order => order.order.order_id == id);
             return res;
         },
@@ -320,6 +321,104 @@ const StoreModule = {
             }); 
       },
 
+      cancelOrder(context, id){
+        //get all Orders and their User info from server
+        //silent option is mainly for not hide reconnected banner
+  
+        console.log("Cancel order")
+        
+        let token = localStorage.getItem('jwtToken')
+        return axios.put(context.getters.getServerAddress +'/account/order/' + id, null,{ headers: { Authorization: `Bearer ${token}` } })
+          .then( (data) => {
+  
+           
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
+            
+           
+  
+            //save Orders data in vuex store
+            console.log(data)
+
+          })
+          .catch( (error) =>{
+  
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+  
+              context.dispatch('noConnectionChange',true);
+  
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+  
+              
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+              
+
+              if(error.response.status == 403){
+                context.dispatch('forbiddenResponse');
+              }
+             
+            }
+           
+          }); 
+        
+        
+      },
+
+      submitComplaint(context, obj){
+        //get all Orders and their User info from server
+        //silent option is mainly for not hide reconnected banner
+  
+        console.log("New complaint")
+        
+        let token = localStorage.getItem('jwtToken')
+        return axios.post(context.getters.getServerAddress +'/order/complaint', obj,{ headers: { Authorization: `Bearer ${token}` } })
+          .then( (data) => {
+  
+           
+            //connected to server, hide no connection banner
+            context.dispatch('noConnectionChange',false);
+            
+           
+  
+            //save Orders data in vuex store
+            console.log(data)
+
+          })
+          .catch( (error) =>{
+  
+            if(error.toJSON().message == "Network Error"){
+              //if can't connect to server
+  
+              context.dispatch('noConnectionChange',true);
+  
+            }else{
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+  
+              
+              //if connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+              
+
+              if(error.response.status == 403){
+                context.dispatch('forbiddenResponse');
+              }
+             
+            }
+           
+          }); 
+        
+        
+      },
+
       payForOrder(context, success){
         //get all StoreProducts and their User info from server
         //silent option is mainly for not hide reconnected banner
@@ -386,10 +485,10 @@ const StoreModule = {
         //get all Orders and their User info from server
         //silent option is mainly for not hide reconnected banner
   
-        console.log("Gecik customer")
+        console.log("Gecik customer orders")
         context.commit('setOrdersLoading',true);
         let token = localStorage.getItem('jwtToken')
-        axios.get(context.getters.getServerAddress +'/account/orders', { headers: { Authorization: `Bearer ${token}` } })
+        return axios.get(context.getters.getServerAddress +'/account/orders', { headers: { Authorization: `Bearer ${token}` } })
           .then( (data) => {
   
             if(!silent){
