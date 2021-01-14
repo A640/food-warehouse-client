@@ -56,15 +56,14 @@
               <div class="cluster fix ml-5">
                 <p class="cluster-title">Dane klienta:</p>
                 <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.personal_data.phone_number}}</span></p>
-                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.personal_data.firm_name" >{{item.personal_data.firm_name}}</span><span v-else class="detail detail-value">-</span></p>
-                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.personal_data.tax_id" >{{item.personal_data.tax_id}}</span><span v-else class="detail detail-value">-</span></p>
+                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.account.email}}</span></p>
+                <p class="detail detail-title">Rabat: <span class="detail detail-value" v-if="item.personal_data.discount > 0">{{item.personal_data.discount}} %</span><span class="detail detail-value" v-else>brak</span></p>
               </div>
               <v-divider vertical inset class="mr-10" />
               <div class="cluster fix">
-                <p class="cluster-title">Konto:</p>
-                <p class="detail detail-title">Login: <span class="detail detail-value">{{item.account.username}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.account.email}}</span></p>
-                <p class="detail detail-title">Poziom uprawnień: <span class="detail detail-value">{{item.account.permission}}</span></p>
+                <p class="cluster-title">Firma:</p>
+                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.personal_data.firm_name" >{{item.personal_data.firm_name}}</span><span v-else class="detail detail-value">-</span></p>
+                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.personal_data.tax_id" >{{item.personal_data.tax_id}}</span><span v-else class="detail detail-value">-</span></p>
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster ">

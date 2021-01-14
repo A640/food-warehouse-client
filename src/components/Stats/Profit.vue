@@ -5,30 +5,30 @@
     extends: Line,
     data () {
       return {
-          created: false,
+        created: false,
       }
     },
 
 
     computed:{
         c_data(){
-            let dat = this.$store.getters.getOrdersStats;
+            let dat = this.$store.getters.getProfitStats;
             let  datacollection =  {
                 labels: dat.dates,
                 datasets: [
                     {
-                        label: 'Zamówienia',
-                        borderColor: '#f69119',
+                        label: 'Zysk ze sprzedaży',
+                        borderColor: '#82b4aa',
                         pointBackgroundColor: 'rgba(0,0,0,0)',
                         pointBorderColor: 'rgba(0,0,0,0)',
-                        pointHoverBorderColor: '#f69119',
+                        pointHoverBorderColor: '#82b4aa',
                         pointHoverBackgroundColor: '#fff',
                         pointHoverRadius: 10,
                         pointHitRadius: 50,
                         pointHoverBorderWidth: 1,
                         borderWidth: 1,
-                        backgroundColor: '#f6911966',
-                        data: dat.amounts,
+                        backgroundColor: '#82b4aa91',
+                        data: dat.profits,
                     }
                 ]
             };
@@ -68,7 +68,7 @@
               label: (tooltipItem, data) => {
                 let dataset = data.datasets[tooltipItem.datasetIndex]
                 let currentValue = dataset.data[tooltipItem.index]
-                return `${currentValue.toLocaleString()}`
+                return `${currentValue.toLocaleString()} zł`
               }
             }
           },
@@ -91,17 +91,17 @@
 
     watch:{
         data(val) {
-            if(this.created){
-                console.log('watch',val)
-                this.$data._chart.update();
-            }
+          if(this.created){
+            console.log('watch',val)
+            this.$data._chart.update();
+          }
+            
         }
     },
 
     mounted () {
-        this.$store.dispatch('getOrdersStats').then( () => {
-            this.renderChart(this.c_data.datacollection, this.c_data.options);
-            this.created = true;
+        this.$store.dispatch('getProfitStats').then( () => {
+            this.renderChart(this.c_data.datacollection, this.c_data.options)
         })
     }
   }

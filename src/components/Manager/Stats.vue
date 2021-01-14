@@ -4,19 +4,21 @@
             <v-row>
                 <v-col>
                     <v-card class="pa-5">
-                        <v-item-group mandatory>
-                            <v-item v-slot="{ active, toggle }" v-for="category in categories" :key="category.value" class="mr-1 ml-1">
-                                <v-chip
-                                    label
-                                    dark
-                                    :outlined="!active"
-                                    @click="toggle; swichChart(category.link)"
-                                    :color="active ? category.color : 'rgba(0,0,0,0.6)' "
-                                > 
-                                    {{category.text}} 
-                                </v-chip>
-                            </v-item>
-                        </v-item-group>
+                        
+                        <v-chip
+                            v-for="category in categories" 
+                            :key="category.value"  
+                            class="mr-1 ml-1"
+                            label
+                            dark
+                            :outlined="path != category.link"
+                            @click="swichChart(category.link)"
+                            :color="path == category.link ? category.color : 'rgba(0,0,0,0.6)' "
+                        > 
+                            {{category.text}} 
+                            
+                        </v-chip>
+                        
                     </v-card>
                 </v-col>
             </v-row>
@@ -41,9 +43,9 @@ export default {
         return {
             categories:[
                 {text: 'zamówienia', value: 1, link: 'Manager_Stats_Orders', color: '#f69119'},
-                {text: 'zysk', value: 2},
-                {text: 'produkty', value: 3},
-            ]
+                {text: 'zysk', value: 2 , link:'Manager_Stats_Sell-Profit', color:'#82b4aa'},
+                {text: 'produkty', value: 3, link: 'Manager_Stats_Top-Products', color:'#4795bf'},
+            ],
         }
     },
 
@@ -55,8 +57,15 @@ export default {
         }
     },
 
+    computed:{
+        path(){
+            return this.$route.name;
+        }
+    },
+
+
     mounted(){
-        this.swichChart('Manager_Stats_Orders');
+        //this.swichChart('Manager_Stats_Orders');
     },
 
 }

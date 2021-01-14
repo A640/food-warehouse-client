@@ -1,8 +1,8 @@
 <script>
-  import { Line } from 'vue-chartjs'
+  import { Bar } from 'vue-chartjs'
 
   export default {
-    extends: Line,
+    extends: Bar,
     data () {
       return {
           created: false,
@@ -12,23 +12,37 @@
 
     computed:{
         c_data(){
-            let dat = this.$store.getters.getOrdersStats;
+            let dat = this.$store.getters.getProductsStats;
             let  datacollection =  {
-                labels: dat.dates,
+                labels: dat.products,
                 datasets: [
                     {
-                        label: 'Zamówienia',
-                        borderColor: '#f69119',
-                        pointBackgroundColor: 'rgba(0,0,0,0)',
-                        pointBorderColor: 'rgba(0,0,0,0)',
-                        pointHoverBorderColor: '#f69119',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverRadius: 10,
-                        pointHitRadius: 50,
-                        pointHoverBorderWidth: 1,
+                        label: 'Produkty',
+                        borderColor: '#4795bf',
+                        // pointBackgroundColor: 'rgba(0,0,0,0)',
+                        // pointBorderColor: 'rgba(0,0,0,0)',
+                        // pointHoverBorderColor: '#f69119',
+                        // pointHoverBackgroundColor: '#fff',
+                        // pointHoverRadius: 10,
+                        // pointHitRadius: 50,
+                        // pointHoverBorderWidth: 1,
                         borderWidth: 1,
-                        backgroundColor: '#f6911966',
-                        data: dat.amounts,
+                        backgroundColor: '#5898bb',
+                        data: dat.quantities_regular,
+                    },
+                     {
+                        label: 'Produkty przecenione',
+                        borderColor: '#8ca6b3',
+                        // pointBackgroundColor: 'rgba(0,0,0,0)',
+                        // pointBorderColor: 'rgba(0,0,0,0)',
+                        // pointHoverBorderColor: '#f69119',
+                        // pointHoverBackgroundColor: '#fff',
+                        // pointHoverRadius: 10,
+                        // pointHitRadius: 50,
+                        // pointHoverBorderWidth: 1,
+                        borderWidth: 1,
+                        backgroundColor: '#b1d0e0',
+                        data: dat.quantities_discount,
                     }
                 ]
             };
@@ -38,6 +52,7 @@
                 ticks: {
                     beginAtZero: true
                 },
+                stacked: true,
                 gridLines: {
                     display: true
                 }
@@ -45,7 +60,8 @@
                 xAxes: [ {
                 gridLines: {
                     display: true
-                }
+                },
+                stacked: true,
                 }]
             },
           tooltips: {
@@ -68,7 +84,7 @@
               label: (tooltipItem, data) => {
                 let dataset = data.datasets[tooltipItem.datasetIndex]
                 let currentValue = dataset.data[tooltipItem.index]
-                return `${currentValue.toLocaleString()}`
+                return `${currentValue.toLocaleString()} ${dataset.label}`
               }
             }
           },
@@ -99,7 +115,7 @@
     },
 
     mounted () {
-        this.$store.dispatch('getOrdersStats').then( () => {
+        this.$store.dispatch('getProductsStats').then( () => {
             this.renderChart(this.c_data.datacollection, this.c_data.options);
             this.created = true;
         })

@@ -99,6 +99,16 @@ const routes = [
             name: 'Manager_Stats_Orders',
             component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Orders.vue'),
           },
+          {
+            path: 'sell-profit',
+            name: 'Manager_Stats_Sell-Profit',
+            component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Profit.vue'),
+          },
+          {
+            path: 'top-products',
+            name: 'Manager_Stats_Top-Products',
+            component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Products.vue'),
+          },
         ],
       },
     ]

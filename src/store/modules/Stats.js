@@ -10,6 +10,9 @@ const StatsModule = {
         profit_stats: [],
         profit_stats_loading: false,
 
+        products_stats: [],
+        products_stats_loading: false,
+
     },
 
     mutations: {
@@ -28,6 +31,14 @@ const StatsModule = {
 
         setProfitStatsLoading(context, value){
             context.profit_stats_loading = value;
+        },
+
+        setProductsStats(context,data){
+            context.products_stats = data;
+        },
+
+        setProductsStatsLoading(context, value){
+            context.products_stats_loading = value;
         },
 
     },
@@ -128,9 +139,56 @@ const StatsModule = {
               }
               context.commit('setProfitStatsLoading',false);
             }); 
-      },
+        },
       
         
+        getProductsStats(context, silent=false){
+          //get all ProductsStats and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik ProductsStats")
+          context.commit('setProductsStatsLoading',true);
+          let token = localStorage.getItem('jwtToken')
+          return axios.get(context.getters.getServerAddress +'/statistic/product', { headers: { Authorization: `Bearer ${token}` } })
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save ProductsStats data in vuex store
+              console.log(data)
+              context.commit('setProductsStats',data.data.result);
+              context.commit('setProductsStatsLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setProductsStatsLoading',false);
+            }); 
+        },
     },
 
     getters: {
@@ -149,6 +207,14 @@ const StatsModule = {
 
         getProfitStatsLoading(context){
             return context.profit_stats_loading;
+        }, 
+
+        getProductsStats(context){
+            return context.products_stats;
+        },
+
+        getProductsStatsLoading(context){
+            return context.products_stats_loading;
         }, 
 
     },
