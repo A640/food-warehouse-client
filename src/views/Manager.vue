@@ -54,7 +54,72 @@
                     elevation="2"
                     color="#ffffff"
                 >
+                    <!-- title -->
                     <h2 class="appbar__title">{{ title }}</h2>
+
+                    <v-spacer></v-spacer>
+
+                    <v-badge
+                        :content="12"
+                        :value="1"
+                        color="green lighten-2"
+                        class="mr-10"
+                        overlap
+                        
+                    >
+                        <v-btn depressed @click="showCart()">
+                            <v-icon>mdi-email</v-icon>
+                            <!-- <v-icon>mdi-email-outline</v-icon> -->
+                        </v-btn>
+                        
+                        
+                    </v-badge>
+
+                    <!-- account menu -->
+                    <v-menu
+                        v-model="mini_menu"
+                        :close-on-content-click="true"
+                        :nudge-width="200"
+                        offset-y
+                        bottom
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                                depressed
+                                v-on="on"
+                                v-bind="attrs"
+                            >
+                                <v-icon>mdi-account</v-icon>
+                            </v-btn>
+                        </template>
+                
+                        <v-card>
+                        <v-list>
+                            <v-list-item>
+                
+                            <v-list-item-content>
+                                <v-list-item-subtitle class="mb-2">Zalogowany jako:</v-list-item-subtitle>
+                                <v-list-item-title class="menu-name">{{user_name}}</v-list-item-title>
+                            </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                
+                        <v-divider></v-divider>
+                
+                        <v-list>
+                            <v-list-item link :to="{name: 'Customer_Account'}">
+                                <v-list-item-title class="c-text"  >Moje konto</v-list-item-title>
+                            </v-list-item>
+                
+                            <v-list-item link :to="{name: 'Customer_Orders'}">
+                                <v-list-item-title class="c-text"  >Moje dane</v-list-item-title>
+                            </v-list-item>
+                            <v-list-item link>
+                                <v-list-item-title class="c-text">Wyloguj</v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                        </v-card>
+                    </v-menu>
                 </v-app-bar>
             </div>
             
@@ -82,17 +147,23 @@ export default {
         return {
         drawer: true,
         items: [
-            { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
-            { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Customers' },
-            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Vehicles' },
-            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Warehouses'},
-            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Producers' },
-            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Products' },
+            { title: 'Pracownicy', icon: 'mdi-account', link: 'Manager_Employees' },
+            { title: 'Klienci', icon: 'mdi-account-group', link: 'Manager_Customers' },
+            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Manager_Vehicles' },
+            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Manager_Warehouses'},
+            { title: 'Producenci', icon: 'mdi-food', link: 'Manager_Producers' },
+            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Manager_Products' },
+            { title: 'Statystyki', icon: 'mdi-chart-line', link: 'Manager_Stats' },
         ],
         mini: true,
-        title: 'Pracownicy'
+        title: 'Pracownicy',
+        mini_menu: false,
         }
-    }
+    },
+
+    mounted() {
+        this.$store.dispatch('getName')
+    },
 }
 </script>
 

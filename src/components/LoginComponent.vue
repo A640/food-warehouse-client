@@ -73,7 +73,7 @@ export default {
                     this.$router.push({ name: 'Admin'});
                 } else if(result == 'Manager'){
                     console.log("przechodzimy na menedżera");
-                    this.$router.push({ name: 'Admin'});
+                    this.$router.push({ name: 'Manager'});
                 } else if(result == 'Employee'){
                     console.log("przechodzimy na pracownika");
                     this.$router.push({ name: 'Admin'});

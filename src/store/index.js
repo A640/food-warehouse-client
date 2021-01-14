@@ -12,6 +12,7 @@ import ProducerModule from './modules/Producer.js'
 import WarehouseModule from './modules/Warehouse.js'
 import ProductModule from './modules/Product.js'
 import StoreModule from './modules/Store.js'
+import StatsModule from './modules/Stats.js'
 
 Vue.use(Vuex)
 
@@ -95,6 +96,7 @@ export default new Vuex.Store({
     warehouse: WarehouseModule,
     product: ProductModule,
     store: StoreModule,
+    stats: StatsModule,
 
   },
 

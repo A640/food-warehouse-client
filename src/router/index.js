@@ -57,37 +57,49 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/Manager.vue'),
     children:[
       {
         path: 'employees',
-        name: 'Admin_Employees',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/EmployeeTable.vue'),
+        name: 'Manager_Employees',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/EmployeeTable-Manager.vue'),
       },
       {
         path: 'customers',
-        name: 'Admin_Customers',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/CustomerTable.vue'),
+        name: 'Manager_Customers',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/CustomerTable-Manager.vue'),
       },
       {
         path: 'vehicles',
-        name: 'Admin_Vehicles',
+        name: 'Manager_Vehicles',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/VehicleTable.vue'),
       },
       {
         path: 'producers',
-        name: 'Admin_Producers',
+        name: 'Manager_Producers',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProducerTable.vue'),
       },
       {
         path: 'warehouses',
-        name: 'Admin_Warehouses',
+        name: 'Manager_Warehouses',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/WarehouseTable.vue'),
       },
       {
         path: 'products',
-        name: 'Admin_Products',
+        name: 'Manager_Products',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProductTable.vue'),
+      },
+      {
+        path: 'stats',
+        name: 'Manager_Stats',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Manager/Stats.vue'),
+        children:[
+          {
+            path: 'orders',
+            name: 'Manager_Stats_Orders',
+            component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Orders.vue'),
+          },
+        ],
       },
     ]
   },
