@@ -60,6 +60,22 @@
                     <v-spacer></v-spacer>
 
                     <v-badge
+                        :content="alert_count"
+                        :value="true"
+                        color="amber darken-2"
+                        class="mr-10"
+                        overlap
+                        v-if="alert_count > 0"
+                    >
+                        <v-btn depressed @click="showAlerts()">
+                            <v-icon color="amber darken-2">mdi-alert</v-icon>
+                            <!-- <v-icon>mdi-email-outline</v-icon> -->
+                        </v-btn>
+                        
+                        
+                    </v-badge>
+
+                    <v-badge
                         :content="12"
                         :value="1"
                         color="green lighten-2"
@@ -155,11 +171,32 @@ export default {
             { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Manager_Products' },
             { title: 'Statystyki', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
+            { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Manager_Alerts' },
         ],
         mini: true,
         title: 'Pracownicy',
         mini_menu: false,
         }
+    },
+
+
+    methods: {
+        showAlerts(){
+            if(this.$route.name != 'Manager_Alerts'){
+                this.$router.push({ name: 'Manager_Alerts'});
+            }
+        }
+    },
+
+    computed:{
+        alert_count(){
+            return this.$store.getters.getAlertsCount;
+        },
+
+        user_name(){
+            let n = this.$store.getters.getName;
+            return n.name + ' ' + n.surname;
+        },
     },
 
     mounted() {
@@ -183,6 +220,16 @@ export default {
     .bar__appbar{
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         margin-bottom: 1rem;
+    }
+
+    .menu-name{
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+    }
+
+    .c-text{
+        text-align: center;
     }
 
     .nav__navbar{

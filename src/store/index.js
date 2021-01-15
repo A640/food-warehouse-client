@@ -13,6 +13,7 @@ import WarehouseModule from './modules/Warehouse.js'
 import ProductModule from './modules/Product.js'
 import StoreModule from './modules/Store.js'
 import StatsModule from './modules/Stats.js'
+import MessageModule from './modules/Message.js'
 
 Vue.use(Vuex)
 
@@ -97,7 +98,8 @@ export default new Vuex.Store({
     product: ProductModule,
     store: StoreModule,
     stats: StatsModule,
-
+    message: MessageModule
+    
   },
 
   getters: {

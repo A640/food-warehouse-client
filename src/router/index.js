@@ -111,6 +111,11 @@ const routes = [
           },
         ],
       },
+      {
+        path: 'system-alerts',
+        name: 'Manager_Alerts',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Manager/SystemAlerts.vue'),
+      },
     ]
   },
   {
