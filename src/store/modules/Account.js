@@ -11,6 +11,9 @@ const AccountModule = {
         addresses_loading: false,
         account: {},
         account_loading: false,
+
+        employee_account: {},
+        employee_account_loading: false,
     },
 
     mutations: {
@@ -25,6 +28,12 @@ const AccountModule = {
         },
         setAccountLoading(context,value){
           context.account_loading = value;
+        },
+        setEmployeeAccount(context,account){
+          context.employee_account = account;
+        },
+        setEmployeeAccountLoading(context,value){
+          context.employee_account_loading = value;
         },
         setAddresses(context,addresses){
           context.addresses = addresses;
@@ -331,6 +340,53 @@ const AccountModule = {
             }); 
         } , 
 
+        getEmployeeAccount(context,silent=false){
+          console.log("Gecik name")
+
+          context.commit('setEmployeeAccountLoading',true);
+
+          let token = localStorage.getItem('jwtToken')
+          return  axios.get(context.getters.getServerAddress +'/employee/account', { headers: { Authorization: `Bearer ${token}` }})
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Addresses data in vuex store
+              console.log(data)
+              context.commit('setEmployeeAccount',data.data.result);
+              context.commit('setEmployeeAccountLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setEmployeeAccountLoading',false);
+            }); 
+        } , 
+
         
 
         updateAccount(context,obj){
@@ -411,6 +467,12 @@ const AccountModule = {
         },
         getAccountLoading(context){
           return context.account_loading;
+        },
+        getEmployeeAccount(context){
+          return context.employee_account;
+        },
+        getEmployeeAccountLoading(context){
+          return context.employee_account_loading;
         },
     },
 };

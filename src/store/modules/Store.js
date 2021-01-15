@@ -260,7 +260,7 @@ const StoreModule = {
             return res;
         },
 
-        getOrderData(context, id){
+        getOrderDataCustomer(context, id){
           console.log('get order data',id)
             let res = context.state.orders.find(order => order.order.order_id == id);
             return res;
@@ -580,7 +580,7 @@ const StoreModule = {
         
       },
 
-      getAllOrders(context, silent=false){
+      getAllCustomerOrders(context, silent=false){
         //get all Orders and their User info from server
         //silent option is mainly for not hide reconnected banner
   
@@ -629,7 +629,7 @@ const StoreModule = {
         
       },
 
-      getOneOrder(context, id){
+      getOneCustomerOrder(context, id){
         //get all Orders and their User info from server
         //silent option is mainly for not hide reconnected banner
   
@@ -699,17 +699,17 @@ const StoreModule = {
           return context.cart_settings;
         },
 
-        getOrders(context){
+        getOrdersCustomer(context){
           return context.orders;
         },
         
         // getOrdersSortedAsc(context){
         //   return context.orders.sort((a,b) => Number.parseInt(a.order.order_id) - Number.parseInt(b.order.order_id));
         // },
-        getOrdersSortedDesc(context){
+        getOrdersSortedDescCustomer(context){
           return context.orders.sort((a,b) => Number.parseInt(b.order.order_id) - Number.parseInt(a.order.order_id));
         },
-        getOrdersLoading(context){
+        getOrdersLoadingCustomer(context){
           return context.orders_loading;
         },
         

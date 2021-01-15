@@ -24,6 +24,16 @@
             </v-row>
             <v-row>
                 <v-col>
+                    <!-- placeholder while loading data -->
+                    <!-- <v-card v-if="loading" class="pa-5">
+                    <v-skeleton-loader 
+                        class="pr-5 pl-5"
+                        type="image"
+                    >
+                    </v-skeleton-loader>
+                    </v-card> -->
+
+                    <!-- chart -->
                     <v-card class="pa-5">
                         <router-view :key="$route.path" /> 
                     </v-card>
@@ -60,7 +70,17 @@ export default {
     computed:{
         path(){
             return this.$route.name;
-        }
+        },
+        // loading(){
+        //     if(this.$store.getters.getOrdersStatsLoading
+        //         || this.$store.getters.getProfitStatsLoading
+        //         || this.$store.getters.getProductsStatsLoading ){
+        //         return true;
+        //     }
+        //     else{
+        //         return false;
+        //     }
+        // }
     },
 
 

@@ -43,11 +43,11 @@ export default {
         },
 
         orders(){
-            return this.$store.getters.getOrdersSortedDesc;
+            return this.$store.getters.getOrdersSortedDescCustomer;
         },
 
         loading(){
-            return this.$store.getters.getOrdersLoading;
+            return this.$store.getters.getOrdersLoadingCustomer;
         }
 
     },
@@ -56,7 +56,7 @@ export default {
 
 
     mounted(){
-        this.$store.dispatch('getAllOrders')
+        this.$store.dispatch('getAllCustomerOrders')
     }
 
 

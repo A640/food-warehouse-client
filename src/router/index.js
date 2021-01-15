@@ -116,7 +116,24 @@ const routes = [
         name: 'Manager_Alerts',
         component: () => import(/* webpackChunkName: "about" */ '../components/Manager/SystemAlerts.vue'),
       },
+      {
+        path: 'orders',
+        name: 'Manager_Orders',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/OrderTable.vue'),
+      },
     ]
+  },
+  {
+    path: '/order/:id',
+    name: 'Order_Details_2',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Manager/OrderDetails.vue'),
+    props: true,
+  },
+  {
+    path: '/order/not-found',
+    name: 'Order_404_2',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Manager/Order404.vue'),
+    props: true,
   },
   {
     path: '/register',
@@ -230,6 +247,14 @@ const routes = [
     name: 'Customer_Account',
     component: () => import(/* webpackChunkName: "about" */ '@/views/main/CustomerAccount.vue'),
     
+  },
+  {
+    path: '/employee/account',
+    name: 'Employee_Account',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '@/components/Employee/EmployeeSettings.vue')
   },
 
 

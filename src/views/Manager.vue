@@ -123,11 +123,7 @@
                         <v-divider></v-divider>
                 
                         <v-list>
-                            <v-list-item link :to="{name: 'Customer_Account'}">
-                                <v-list-item-title class="c-text"  >Moje konto</v-list-item-title>
-                            </v-list-item>
-                
-                            <v-list-item link :to="{name: 'Customer_Orders'}">
+                            <v-list-item link :to="{name: 'Employee_Account'}">
                                 <v-list-item-title class="c-text"  >Moje dane</v-list-item-title>
                             </v-list-item>
                             <v-list-item link>
@@ -172,6 +168,7 @@ export default {
             { title: 'Statystyki', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Manager_Alerts' },
+            { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Manager_Orders' },
         ],
         mini: true,
         title: 'Pracownicy',
@@ -184,6 +181,7 @@ export default {
         showAlerts(){
             if(this.$route.name != 'Manager_Alerts'){
                 this.$router.push({ name: 'Manager_Alerts'});
+                this.title = 'Komunikaty systemowe';
             }
         }
     },
