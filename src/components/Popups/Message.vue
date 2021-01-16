@@ -247,6 +247,7 @@ export default {
 
     .message{
         border-bottom: solid 1px #e8eef1;
+        /* border-top: solid 1px #e8eef1; */
     }
 
 </style>

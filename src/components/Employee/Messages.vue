@@ -23,14 +23,14 @@
                 </v-subheader>
                 <Message v-for="message in unread" :key="message.message_id" :message="message" @reloadMessages="loadData()"/>
             </v-list>
-            <v-list>
+            <v-list class="mt-5">
                 <v-subheader>
                     Przeczytane <span class="ml-4"> {{read.length > 0 ? read.length : ''}} </span>
                     <v-divider class="ml-2"></v-divider>
                 </v-subheader>
                 <Message v-for="message in read" :key="message.message_id" :message="message" @reloadMessages="loadData()"/>
             </v-list>
-            <v-list>
+            <v-list class="mt-5">
                 
                 <v-subheader>
                     Wysłane <span class="ml-4"> {{sent.length > 0 ? sent.length : ''}} </span>

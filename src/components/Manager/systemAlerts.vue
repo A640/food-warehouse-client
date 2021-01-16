@@ -83,10 +83,10 @@ export default {
     }
 
     .dan{
-        border: solid 1px red !important;
+        border: solid 3px red !important;
     }
 
     .war{
-         border: solid 1px rgb(255, 217, 0) !important;
+         border: solid 3px rgb(255, 217, 0) !important;
     }
 </style>
