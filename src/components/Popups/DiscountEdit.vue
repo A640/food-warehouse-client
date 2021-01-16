@@ -88,15 +88,14 @@ export default {
     methods: {
 
         submit(){
-            if(this.content != '' && this.id !== null && this.id !== undefined){
+            if(this.i_discount != '' && this.id !== null && this.id !== undefined 
+            && this.i_discount >= 0 && this.i_discount < 100){
                 this.loading = true;
                 let obj = {
-                    order_id: this.id,
-                    content: this.content,
+                    id: this.id,
+                    discount: this.i_discount,
                 }
-                this.$store.dispatch('submitComplaint',obj).then( () => {
-                    this.content = '';
-                    this.$emit('updateOrderDetails');
+                this.$store.dispatch('updateDiscount',obj).then( () => {
                     this.loading = false;
                     this.dialog = false;
                 })
@@ -105,7 +104,6 @@ export default {
         },
 
         closeDialog(){
-            this.content = '';
             this.dialog = false;
         }
     },

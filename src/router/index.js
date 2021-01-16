@@ -121,6 +121,11 @@ const routes = [
         name: 'Manager_Orders',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/OrderTable.vue'),
       },
+      {
+        path: 'messages',
+        name: 'Manager_Messages',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Employee/Messages.vue'),
+      },
     ]
   },
   {

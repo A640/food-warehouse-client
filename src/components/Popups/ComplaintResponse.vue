@@ -26,7 +26,7 @@
                     
                     <v-textarea
                         solo
-                        disabled
+                        readonly
                         v-model="complaint.content"
                         class="cell input"
                         :rules="c_rules"
@@ -38,7 +38,7 @@
                         <p class="section-title">Rozpatrzono: {complaint.decision_date}}</p>
                         <v-textarea
                             solo
-                            disabled
+                            readonly
                             v-model="complaint.decision"
                             class="cell input"
                             :rules="c_rules"

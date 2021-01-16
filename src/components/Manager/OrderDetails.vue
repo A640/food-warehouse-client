@@ -35,7 +35,7 @@
                         <p class="mb-5">Uwagi do zamówienia</p>
                             
                             <v-textarea
-                                :disabled="true" 
+                                readonly
                                 class="input-bold input"
                                 label="Brak uwag do zamówienia"
                                 min-height="1rem"

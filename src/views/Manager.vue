@@ -76,14 +76,14 @@
                     </v-badge>
 
                     <v-badge
-                        :content="12"
-                        :value="1"
+                        :content="messages_count"
+                        :value="messages_count > 0"
                         color="green lighten-2"
                         class="mr-10"
                         overlap
                         
                     >
-                        <v-btn depressed @click="showCart()">
+                        <v-btn depressed @click="showMessages()">
                             <v-icon>mdi-email</v-icon>
                             <!-- <v-icon>mdi-email-outline</v-icon> -->
                         </v-btn>
@@ -169,6 +169,7 @@ export default {
             // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Manager_Alerts' },
             { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Manager_Orders' },
+             { title: 'Wiadomości', icon: 'mdi-email', link: 'Manager_Messages' },
         ],
         mini: true,
         title: 'Pracownicy',
@@ -183,12 +184,22 @@ export default {
                 this.$router.push({ name: 'Manager_Alerts'});
                 this.title = 'Komunikaty systemowe';
             }
+        },
+        showMessages(){
+            if(this.$route.name != 'Manager_Messages'){
+                this.$router.push({ name: 'Manager_Messages'});
+                this.title = 'Wiadomości';
+            }
         }
     },
 
     computed:{
         alert_count(){
             return this.$store.getters.getAlertsCount;
+        },
+
+        messages_count(){
+            return this.$store.getters.getMessagesCount;
         },
 
         user_name(){
@@ -198,7 +209,10 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch('getName')
+        this.$store.dispatch('getName');
+        this.$store.dispatch('getMessages');
+        this.$store.dispatch('getUnreadMessagesCount');
+        this.$store.dispatch('getAlerts');
     },
 }
 </script>

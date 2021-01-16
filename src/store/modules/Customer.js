@@ -332,6 +332,58 @@ const CustomerModule = {
             }); 
       },
 
+      updateDiscount(context,data){
+        return new Promise(function(resolve,reject){
+          //get authorization token
+          let token = localStorage.getItem('jwtToken')
+  
+            // if updating existing Customer and User data
+            axios.put(context.getters.getServerAddress + '/customer/discount/' + data.id, data.discount,{ headers: { Authorization: `Bearer ${token}` }})
+            .then((response) =>{
+              console.log(response);
+  
+              //connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+  
+              if (response.status === 200) {
+                //if updated successfully
+                resolve(true);
+  
+              }else{
+                reject(response);
+              }
+  
+            })
+            .catch( (error) =>{
+  
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+  
+                context.dispatch('noConnectionChange',true);
+  
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+
+                //if connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+  
+                
+                
+              }
+              reject(error);
+            });
+  
+          
+        });
+    },
+
       
   
         getCustomerData(context, id){
