@@ -47,51 +47,47 @@
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
             <div class="bg">
-              <p class="detail details-name">Zamówienie nr: {{item.complaint.complaint_id}}</p>
-              <p class="detail details-id">Status: {{item.complaint.complaint_state_display}}</p>
+              <p class="detail details-name">Zamówienie nr: {{item.order.order.order_id}}</p>
+              <p class="detail details-id">Status: {{item.order.order.order_state_display}}</p>
+              <p class="detail detail-title">Data złożenia zamówienia: <span class="detail detail-value" >{{item.order.order.date}}</span></p>
+              <p class="detail detail-title">Data złożenia reklamacji: <span class="detail detail-value" >{{item.complaint.send_date}}</span></p>
+              <p class="detail detail-title">Data rozpatrzenia reklamacji: <span class="detail detail-value" >{{item.complaint.decision_date}}</span></p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Zamówienie:</p>
-                <p class="detail detail-title">Produktów: <span class="detail detail-value">{{item.products.length}}</span></p>
-                <p class="detail detail-title">Reklamacji: <span class="detail detail-value">{{item.complaints.length}}</span></p>
-                <p class="detail detail-title">Data złożenia: <span class="detail detail-value">{{item.complaint.date}}</span></p>
+                <p class="cluster-title">Zamawiający:</p>
+                <p class="detail detail-title"><span class="detail detail-value">{{item.order.customer.name + ' ' + item.order.customer.surname}}</span></p>
+                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.order.customer.phone_number}}</span></p>
+                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.order.customer.firm_name != null">{{item.order.customer.firm_name}}</span>
+                <span class="detail detail-value" v-else>-</span></p>
+                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.order.customer.tax_id != null">{{item.order.customer.tax_id}}</span>
+                <span class="detail detail-value" v-else>-</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster ">
                 <p class="cluster-title">Płatność:</p>
-                <p class="detail detail-title">Rodzaj płatności: <span class="detail detail-value">{{item.payment.payment_type}}</span></p>
-                <p class="detail detail-title">Kwota: <span class="detail detail-value">{{item.payment.value_display}}</span></p>
-                <p class="detail detail-title">Status: <span class="detail detail-value">{{item.payment.payment_state_display}}</span></p>
+                <p class="detail detail-title">Rodzaj płatności: <span class="detail detail-value">{{item.order.payment.payment_type}}</span></p>
+                <p class="detail detail-title">Kwota: <span class="detail detail-value">{{item.order.payment.value_display}}</span></p>
+                <p class="detail detail-title">Status: <span class="detail detail-value">{{item.order.payment.payment_state_display}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster ">
                 <p class="cluster-title">Adres dostawy:</p>
-                <p class="detail detail-value"><span v-if="item.delivery.address.street" class="detail detail-value" >{{item.delivery.address.street}}</span>
-                {{item.delivery.address.building_number}}
-                <span v-if="item.delivery.address.apartment_number" class="detail detail-value" >/ {{item.delivery.address.apartment_number}}</span>
+                <p class="detail detail-value"><span v-if="item.order.delivery.address.street" class="detail detail-value" >{{item.order.delivery.address.street}}</span>
+                {{item.order.delivery.address.building_number}}
+                <span v-if="item.order.delivery.address.apartment_number" class="detail detail-value" >/ {{item.order.delivery.address.apartment_number}}</span>
                 </p>
-                <p class="detail detail-value">{{item.delivery.address.postal_code}}, {{item.delivery.address.town}}</p>
-                <p class="detail detail-value">{{item.delivery.address.country}}</p>
+                <p class="detail detail-value">{{item.order.delivery.address.postal_code}}, {{item.order.delivery.address.town}}</p>
+                <p class="detail detail-value">{{item.order.delivery.address.country}}</p>
               </div>
             </div>
             <v-divider  inset class="ml-10 mr-10 mt-2" />
             <div class="details-container">
-              <div class="cluster fix ml-5">
-                <p class="cluster-title">Zamawiający:</p>
-                <p class="detail detail-title"><span class="detail detail-value">{{item.customer.name + ' ' + item.customer.surname}}</span></p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.customer.phone_number}}</span></p>
-                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.customer.firm_name != null">{{item.customer.firm_name}}</span>
-                <span class="detail detail-value" v-else>-</span></p>
-                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.customer.tax_id != null">{{item.customer.tax_id}}</span>
-                <span class="detail detail-value" v-else>-</span></p>
-              </div>
-              <v-divider vertical inset class="ml-10 mr-10 mb-1" />
-              <div class="cluster">
+              <div class="cluster ml-5">
                 <p class="cluster-title">Dostawa:</p>
-                <p class="detail detail-title">Wydano z magazynu: <span class="detail detail-value" v-if="item.delivery.remove_from_storage_date">{{item.delivery.remove_from_storage_date}}</span>
+                <p class="detail detail-title">Wydano z magazynu: <span class="detail detail-value" v-if="item.order.delivery.remove_from_storage_date">{{item.order.delivery.remove_from_storage_date}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
-                <p class="detail detail-title">Dostarczono: <span class="detail detail-value" v-if="item.delivery.delivery_date">{{item.delivery.delivery_date}}</span>
+                <p class="detail detail-title">Dostarczono: <span class="detail detail-value" v-if="item.order.delivery.delivery_date">{{item.order.delivery.delivery_date}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
               </div>
             </div>
@@ -99,8 +95,8 @@
             <v-divider  inset class="ml-10 mr-10 mt-2" />
 
             <div class="cluster mt-4 mb-4 ml-5">
-              <v-btn outlined @click="showDetails(item.complaint.complaint_id)">Wyświetl podsumowanie zamówienia</v-btn>
-              
+              <Complaint :complaint="item" @pdateComplaintsDetails="reloadData()" />
+              <v-btn outlined @click="showDetails(item.order.order.order_id)">Wyświetl podsumowanie zamówienia</v-btn>
             </div>
 
             <v-divider  inset class="ml-10 mr-10 mt-2" />
@@ -123,13 +119,13 @@
 </template>
 
 <script>
-
+import Complaint from '@/components/Popups/ComplaintResponse - Manager.vue'
 
 
 export default {
 
     components: {
-
+      Complaint,
     },
 
     data () {
@@ -138,16 +134,22 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Numer zamówienia',
+          text: 'Numer reklamacji',
           align: 'start',
           value: 'complaint.complaint_id',
         },
-        { text: 'Status', value: 'complaint.complaint_state_display' },
+        { text: 'Status reklamacji', value: 'complaint.state_display' },
+        { text: "Data złożenia reklamacji", value: "complaint.send_date", align:'center'},
+        {
+          text: 'Numer zamówienia',
+          align: 'start',
+          value: 'order.order.order_id',
+        },
         { text: 'Zamawiający', value: 'customer_name' },
-        { text: 'Liczba produktów', value: 'products.length', align: 'center'  },
-        { text: 'Status płatności', value: 'payment.payment_state_display',  },
-        { text: "Kwota", value: "payment.value_display", align:'right'},
-        { text: "Data", value: "complaint.date", align:'center'}
+        { text: "Kwota zamówienia", value: "order.payment.value_display", align:'right'},
+        { text: 'Status płatności', value: 'order.payment.payment_state_display',  },
+        
+        
       ],
       complaints: [],
       expanded: [],
@@ -163,6 +165,10 @@ export default {
         
         this.$router.push({ name: 'Order_Details_2', params: {id: id}});
         
+      },
+
+      reloadData(){
+        this.$store.dispatch('getAllComplaints');
       }
       
   },
@@ -194,62 +200,62 @@ export default {
         let complaints = newValue.map((o) => {
           
           //order state change for displaying
-          if(o.complaint.complaint_state == "PENDING"){
-                o.complaint.complaint_state_display =  "Oczekujące";
-            }else if(o.complaint.complaint_state == "REGISTERED"){
-                o.complaint.complaint_state_display =  'Przyjęte';
-            }else if(o.complaint.complaint_state == "CANCELED"){
-                o.complaint.complaint_state_display =  'Anulowane';
-            }else if(o.complaint.complaint_state == "COMPLETING"){
-                o.complaint.complaint_state_display =  'W trakcie kompletacji';
-            }else if(o.complaint.complaint_state == "READY TO DELIVER"){
-                o.complaint.complaint_state_display =  'Gotowy do dostarczenia';
-            }else if(o.complaint.complaint_state == "OUT FOR DELIVERY"){
-                o.complaint.complaint_state_display =  'W drodze do klienta';
-            }else if(o.complaint.complaint_state == "DELIVERED"){
-                o.complaint.complaint_state_display =  'Dostarczono';
-            }else if(o.complaint.complaint_state == "RETURNED"){
-                o.complaint.complaint_state_display =  'Zwrócone';
+          if(o.order.order.order_state == "PENDING"){
+                o.order.order.order_state_display =  "Oczekujące";
+            }else if(o.order.order.order_state == "REGISTERED"){
+                o.order.order.order_state_display =  'Przyjęte';
+            }else if(o.order.order.order_state == "CANCELED"){
+                o.order.order.order_state_display =  'Anulowane';
+            }else if(o.order.order.order_state == "COMPLETING"){
+                o.order.order.order_state_display =  'W trakcie kompletacji';
+            }else if(o.order.order.order_state == "READY TO DELIVER"){
+                o.order.order.order_state_display =  'Gotowy do dostarczenia';
+            }else if(o.order.order.order_state == "OUT FOR DELIVERY"){
+                o.order.order.order_state_display =  'W drodze do klienta';
+            }else if(o.order.order.order_state == "DELIVERED"){
+                o.order.order.order_state_display =  'Dostarczono';
+            }else if(o.order.order.order_state == "RETURNED"){
+                o.order.order.order_state_display =  'Zwrócone';
             }else{
-                o.complaint.complaint_state_display =  'Nieznany';
+                o.order.order.order_state_display =  'Nieznany';
           }
 
           //payment state for diplaying
-          if(o.payment.payment_state == "IN PROGRESS"){
-                o.payment.payment_state_display =  "W trakcie";
-            }else if(o.payment.payment_state == "COMPLETED"){
-                o.payment.payment_state_display =  'Opłacona';
-            }else if(o.payment.payment_state == "REJECTED"){
-                o.payment.payment_state_display =  'Odrzucona';
-            }else if(o.payment.payment_state == "CANCELED"){
-                o.payment.payment_state_display =  'Wycofana';
-            }else if(o.payment.payment_state == "WAITING FOR PAYMENT"){
-                o.payment.payment_state_display =  'Oczekuje na uregulowanie';
+          if(o.order.payment.payment_state == "IN PROGRESS"){
+                o.order.payment.payment_state_display =  "W trakcie";
+            }else if(o.order.payment.payment_state == "COMPLETED"){
+                o.order.payment.payment_state_display =  'Opłacona';
+            }else if(o.order.payment.payment_state == "REJECTED"){
+                o.order.payment.payment_state_display =  'Odrzucona';
+            }else if(o.order.payment.payment_state == "CANCELED"){
+                o.order.payment.payment_state_display =  'Wycofana';
+            }else if(o.order.payment.payment_state == "WAITING FOR PAYMENT"){
+                o.order.payment.payment_state_display =  'Oczekuje na uregulowanie';
             }else{
-                o.payment.payment_state_display =  'Nieznany';
+                o.order.payment.payment_state_display =  'Nieznany';
           }
 
           //complaint state
           
-          // if(this.complaint.state == 'REGISTERED'){
-          //     return 'zarejestrowana'
-          // }else if(this.complaint.state == 'READ'){
-          //     return 'odczytana'
-          // }else if(this.complaint.state == 'ACCEPTED'){
-          //     return 'rozpatrzona pozytywnie'
-          // }else if(this.complaint.state == 'REJECTED'){
-          //     return 'odrzucona'
-          // }else if(this.complaint.state == 'DECISION'){
-          //     return 'wydano decyzję'
-          // }else if(this.complaint.state == 'CANCELED'){
-          //     return 'wycofana'
-          // }else{
-          //     return 'nierozpoznano'
-          // }
+          if(o.complaint.state == 'REGISTERED'){
+              o.complaint.state_display =  'zarejestrowana'
+          }else if(o.complaint.state == 'READ'){
+              o.complaint.state_display =  'odczytana'
+          }else if(o.complaint.state == 'ACCEPTED'){
+              o.complaint.state_display =  'rozpatrzona pozytywnie'
+          }else if(o.complaint.state == 'REJECTED'){
+              o.complaint.state_display =  'odrzucona'
+          }else if(o.complaint.state == 'DECISION'){
+              o.complaint.state_display =  'wydano decyzję'
+          }else if(o.complaint.state == 'CANCELED'){
+              o.complaint.state_display =  'wycofana'
+          }else{
+              o.complaint.state_display =  'nierozpoznano'
+          }
         
 
-          o.customer_name = o.customer.name + ' ' + o.customer.surname + ' ' + o.customer.firm_name;
-          o.payment.value_display = o.payment.value + " zł";
+          o.customer_name = o.order.customer.name + ' ' + o.order.customer.surname + ' ' + o.order.customer.firm_name;
+          o.order.payment.value_display = o.order.payment.value + " zł";
 
 
             return o;

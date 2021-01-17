@@ -2,12 +2,12 @@
     <v-dialog v-model="dialog" max-width="800px">
         <template v-slot:[`activator`]="{ on }">
             <div class="center-btn">
-                <v-btn v-on="on" depressed  @click="dialog=true" class="">
-                    Reklamacja nr {{complaint.complaint_id}}
+                <v-btn v-on="on" outlined  @click="dialog=true" class="">
+                    Reklamacja nr {{complaint.complaint.complaint_id}}
                 </v-btn>
                 <p :class="{    'section-title':true, 
-                                'accepted': complaint.state == 'ACCEPTED',
-                                'rejected': complaint.state == 'REJECTED',             
+                                'accepted': complaint.complaint.state == 'ACCEPTED',
+                                'rejected': complaint.complaint.state == 'REJECTED',             
                    }">Status: {{state}}</p>
             </div>
             
@@ -20,62 +20,61 @@
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
                     <div class="cell">
-                        <p class="title">Zgłoszenie klienta</p>
-                        <p class="section-title">Do zamówienia nr: <router-link :to="{name: 'Order_Details_2' , params: { id:  order.order_id }}" class="cell__link">{{ order.order_id }}</router-link></p>
-                        <p class="section-title">Wysłano: {{complaint.send_date}}</p>
+                        <p class="section-title">Do zamówienia nr: <router-link :to="{name: 'Order_Details_2' , params: { id:  complaint.order.order.order_id }}" class="cell__link">{{ complaint.order.order.order_id }}</router-link></p>
+                        <p class="section-title">Złożono: {{complaint.complaint.send_date}}</p>
                     </div>
                     
-                    <p class="title" >Treść zażalenia</p>
+                    <p class="section-title cell mt-10" >Treść zażalenia</p>
                     <v-textarea
                         solo
                         readonly
-                        v-model="complaint.content"
+                        v-model="complaint.complaint.content"
                         class="cell input"
                         :rules="c_rules"
                         label="Brak treści"
                     />
 
 
-                    <p class="title" >Decyzja</p>
+                    <p class="section-title cell" >Decyzja</p>
                     <v-autocomplete
                         solo
                         class="cell input"
                         :items="decision_options"
-                        :readonly="complaint.state != 'REGISTERED' && complaint.state != 'READ'"
+                        :readonly="complaint.complaint.state != 'REGISTERED' && complaint.complaint.state != 'READ'"
                         v-model="decision"
                     />
 
                     
                     
                     <div class="cell">
-                        <p class="title" >Uzasadnienie decyzji</p>
-                        <p class="section-title" v-if="complaint.decision_date != null" >Rozpatrzono: {complaint.decision_date}}</p>
+                        <p class="section-title" >Uzasadnienie decyzji</p>
+                        <p class="section-title" v-if="complaint.complaint.decision_date != null" >Rozpatrzono: {{complaint.complaint.decision_date}}</p>
                         <v-textarea
                             solo
-                            :readonly="complaint.state != 'REGISTERED' && complaint.state != 'READ'"
-                            v-model="decision_explain"
-                            class="cell input"
+                            :readonly="complaint.complaint.state != 'REGISTERED' && complaint.complaint.state != 'READ'"
+                            v-model="decision_explanation"
+                            class="input"
                             :rules="c_rules"
                             label="Brak treści"
                         />
                     </div>
 
-                    <div v-if="complaint.state == 'REGISTERED' || complaint.state == 'READ'" class="cell">
+                    <div v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" class="cell">
                         <!-- <p class="title" >Odpowiedź</p> -->
                         <p class="section-title">Reklamacja oczekuje na rozpatrzenie</p>
                     </div>
 
-                    <div v-if="complaint.state == 'ACCEPTED'" class="cell">
+                    <div v-if="complaint.complaint.state == 'ACCEPTED'" class="cell">
                         <p class="title" >Odpowiedź</p>
                         <p class="section-title accepted">Reklamacja została rozpatrzona pozytywnie</p>
                     </div>
 
-                    <div v-if="complaint.state == 'REJECTED'" class="cell">
+                    <div v-if="complaint.complaint.state == 'REJECTED'" class="cell">
                         <p class="title" >Odpowiedź</p>
                         <p class="section-title rejected">Reklamacja została odrzucona</p>
                     </div>
 
-                    <div v-if="complaint.state == 'CANCELED'" class="cell">
+                    <div v-if="complaint.complaint.state == 'CANCELED'" class="cell">
                         <!-- <p class="title" >Odpowiedź</p> -->
                         <p class="section-title">Reklamacja została wycofana przez klienta</p>
                     </div>
@@ -86,9 +85,10 @@
 
                     <div class="cell">
                         <div class="cell__popup-buttons">
-                            <v-btn text v-if="complaint.state == 'REGISTERED' || complaint.state == 'READ'" @click="cancelComplaint()">Wycofaj reklamację</v-btn>
-                            <v-spacer />
-                            <v-btn text class=" mb-5" @click="closeDialog()">Ok</v-btn>
+                            <v-spacer v-if="complaint.complaint.state != 'REGISTERED' && complaint.complaint.state != 'READ'"></v-spacer>
+                            <v-btn text class=" mb-5" @click="closeDialog()">Zamknij</v-btn>
+                            <v-spacer v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" />
+                            <v-btn dark color="amber darken-2" v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" @click="addComplaintDecision()">Rozpatrz reklamację</v-btn>
                         </div>
                     </div>
 
@@ -131,64 +131,102 @@ export default {
     data() {
         return {
             dialog: false,
-            c_rules: [
-                value => !!value || 'Treść zażalenia nie może być pusta',
-            ],
             loading: false,
             decision_options: [{text: 'Rozpatrz reklamację pozytywnie', value: 'ACCEPTED'},
                                 {text: 'Odrzuć reklamację', value: 'REJECTED'},
-                                {text: 'Rozpatrz reklamację pozytywnie', value: 'DECISION'}
+                                {text: 'Wydaj niestandardową decyzję', value: 'DECISION'}
             
-            ]
+            ],
+            decision_explanation: '',
+            decision: '',
         }
     },
 
     methods: {
 
-        cancelComplaint(){
+        addComplaintDecision(){
+            if(this.decision == 'ACCEPTED' || this.decision == 'REJECTED'){
+                this.saveDecision();
+            }
+            else{
+                if(this.decision_explanation != ''){
+                    this.saveDecision();
+                }
+            }
+        },
+
+        saveDecision(){
             this.loading = true;
-            this.$store.dispatch('cancelComplaint',this.complaint.complaint_id).then( () => {
-                this.$emit('updateOrderDetails');
+            let obj = {
+                complaint_id: this.complaint.complaint.complaint_id,
+                decision_state: this.decision,
+                decision_content: this.decision_explanation,
+            }
+            this.$store.dispatch('addComplaintResponse',obj).then( () => {
+                this.$emit('updateComplaintsDetails');
                 this.loading = false;
                 this.dialog = false;
             })
-            
-           
         },
 
         closeDialog(){
             this.dialog = false;
+        },
+
+        loadData(){
+            if(this.complaint.complaint.decision != null){
+                this.decision_explanation = this.complaint.complaint.decision;
+            }
+            if(this.complaint.complaint.state == 'ACCEPTED' ||
+            this.complaint.complaint.state == 'REJECTED' ||
+            this.complaint.complaint.state == 'DECISION' ){
+                this.decision = this.complaint.complaint.state;
+            }
+            
         }
     },
 
     computed:{
         state(){
-            if(this.complaint.state == 'REGISTERED'){
+            if(this.complaint.complaint.state == 'REGISTERED'){
                 return 'zarejestrowana'
-            }else if(this.complaint.state == 'READ'){
+            }else if(this.complaint.complaint.state == 'READ'){
                 return 'odczytana'
-            }else if(this.complaint.state == 'ACCEPTED'){
+            }else if(this.complaint.complaint.state == 'ACCEPTED'){
                 return 'rozpatrzona pozytywnie'
-            }else if(this.complaint.state == 'REJECTED'){
+            }else if(this.complaint.complaint.state == 'REJECTED'){
                 return 'odrzucona'
-            }else if(this.complaint.state == 'DECISION'){
+            }else if(this.complaint.complaint.state == 'DECISION'){
                 return 'wydano decyzję'
-            }else if(this.complaint.state == 'CANCELED'){
+            }else if(this.complaint.complaint.state == 'CANCELED'){
                 return 'wycofana'
             }else{
                 return 'nierozpoznano'
             }
         },
         class(){
-            if(this.complaint.state == 'ACCEPTED'){
+            if(this.complaint.complaint.state == 'ACCEPTED'){
                 return 'accepted';
-            }else if(this.complaint.state == 'REJECTED'){
+            }else if(this.complaint.complaint.state == 'REJECTED'){
                 return 'rejected';
             }else{
                 return 'neutral';
             }
+        },
+
+        c_rules(){
+            if(this.decision == 'DECISION'){
+                return  [ value => !!value || 'Treść uzasadnienia nie może być pusta', ];
+            }
+            else{
+                return [];
+            }
         }
-    }
+    },
+
+    mounted() {
+        this.loadData();
+    },
     
 }
 </script>

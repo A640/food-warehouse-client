@@ -35,7 +35,7 @@ const ComplaintModule = {
               let token = localStorage.getItem('jwtToken')
       
               // creating new Complaint and new User
-              axios.post(context.getters.getServerAddress +'/complaint',data,{ headers: { Authorization: `Bearer ${token}` }})
+              axios.post(context.getters.getServerAddress +'/complaint', data, { headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
       
                   //connected to server, hide no connection banner
@@ -96,7 +96,7 @@ const ComplaintModule = {
                
       
                 //save Complaints data in vuex store
-                console.log(data)
+                console.log("complaints",data)
                 context.commit('setComplaints',data.data.result);
                 context.commit('setComplaintsLoading',false);
               })
