@@ -126,6 +126,11 @@ const routes = [
         name: 'Manager_Messages',
         component: () => import(/* webpackChunkName: "about" */ '../components/Employee/Messages.vue'),
       },
+      {
+        path: 'complaints',
+        name: 'Manager_Complaints',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ComplaintTable.vue'),
+      },
     ]
   },
   {
@@ -216,7 +221,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/components/Customer/OrderMini.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/components/Editors/BatchInWarehouseEditor.vue')
   },
 
   {

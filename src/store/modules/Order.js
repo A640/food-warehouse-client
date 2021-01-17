@@ -19,6 +19,11 @@ const OrderModule = {
             context.orders_loading = value;
         },
 
+        clearOrder(context){
+          context.orders = [];
+          context.orders_loading = false;
+        },
+
     },
 
     actions: {

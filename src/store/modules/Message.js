@@ -61,6 +61,26 @@ const MessageModule = {
             context.products_stats_loading = value;
         },
 
+
+        clearMessage(context){
+          context.system_alerts = {
+              expiring_batches: null,
+              running_out_products: null,
+              storages_running_out_of_space: null,
+          };
+          context.system_alerts_loading = false;
+
+          context.messages = [];
+          context.unread_messages = 0;
+          context.messages_loading = false;
+
+          context.profit_stats = [];
+          context.profit_stats_loading = false;
+
+          context.products_stats = [];
+          context.products_stats_loading = false;
+        },
+
     },
 
     actions: {

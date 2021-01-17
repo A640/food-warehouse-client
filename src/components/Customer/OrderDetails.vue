@@ -107,7 +107,7 @@
 
                         <p class="mb-5">Reklamacja</p>
                             <v-card class="mb-5 cc-card pt-5 pb-5">
-                                <NewComplaint  :id="order.order_id" @updateOrderDetails="loadData(true)" class="mb-2"/>
+                                <NewComplaint  :id="order.order_id" @updateOrderDetails="loadData(true)" class="mb-2" v-if="order.order_state != 'CANCELED'"/>
                                 <Complaint v-for="complaint in complaints" :key="complaint.complaint_id" :complaint="complaint" class="mt-3" @updateOrderDetails="loadData(true)"/>
                                 
                                 <!-- <v-card-subtitle >Nie można już wycofać zamówienia</v-card-subtitle> -->

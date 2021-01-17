@@ -18,7 +18,11 @@ const ProductModule = {
         setProductsLoading(context, value){
             context.products_loading = value;
         },
-
+        
+        clearProduct(context){
+          context.products = [];
+          context.products_loading = false;
+        },
     },
 
     actions: {

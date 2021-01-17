@@ -41,6 +41,17 @@ const StatsModule = {
             context.products_stats_loading = value;
         },
 
+        clearStats(context){
+          context.orders_stats = [];
+          context.orders_stats_loading = false;
+
+          context.profit_stats = [];
+          context.profit_stats_loading = false;
+
+          context.products_stats = [];
+          context.products_stats_loading = false;
+        },
+
     },
 
     actions: {

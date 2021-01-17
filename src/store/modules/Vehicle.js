@@ -19,6 +19,11 @@ const VehicleModule = {
             context.vehicles_loading = value;
         },
 
+        clearVehicle(context){
+          context.vehicles = [];
+          context.vehicles_loading = false;
+        },
+
     },
 
     actions: {

@@ -127,7 +127,7 @@
                                 <v-list-item-title class="c-text"  >Moje dane</v-list-item-title>
                             </v-list-item>
                             <v-list-item link>
-                                <v-list-item-title class="c-text">Wyloguj</v-list-item-title>
+                                <v-list-item-title class="c-text" @click="logout()" >Wyloguj</v-list-item-title>
                             </v-list-item>
                         </v-list>
                         </v-card>
@@ -169,7 +169,8 @@ export default {
             // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Manager_Alerts' },
             { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Manager_Orders' },
-             { title: 'Wiadomości', icon: 'mdi-email', link: 'Manager_Messages' },
+            { title: 'Wiadomości', icon: 'mdi-email', link: 'Manager_Messages' },
+            { title: 'Reklamacje', icon: 'mdi-account-alert', link: 'Manager_Complaints' },
         ],
         mini: true,
         title: 'Pracownicy',
@@ -190,7 +191,10 @@ export default {
                 this.$router.push({ name: 'Manager_Messages'});
                 this.title = 'Wiadomości';
             }
-        }
+        },
+        logout(){
+            this.$store.dispatch('logout')
+        },
     },
 
     computed:{

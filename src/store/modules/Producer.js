@@ -19,6 +19,11 @@ const ProducerModule = {
             context.producers_loading = value;
         },
 
+        clearProducer(context){
+          context.producers = [];
+          context.producers_loading = false;
+        },
+
     },
 
     actions: {

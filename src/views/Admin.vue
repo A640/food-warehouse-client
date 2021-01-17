@@ -54,7 +54,84 @@
                     elevation="2"
                     color="#ffffff"
                 >
+                    <!-- title -->
                     <h2 class="appbar__title">{{ title }}</h2>
+
+                    <v-spacer></v-spacer>
+
+                    <v-badge
+                        :content="alert_count"
+                        :value="true"
+                        color="amber darken-2"
+                        class="mr-10"
+                        overlap
+                        v-if="alert_count > 0"
+                    >
+                        <v-btn depressed @click="showAlerts()">
+                            <v-icon color="amber darken-2">mdi-alert</v-icon>
+                            <!-- <v-icon>mdi-email-outline</v-icon> -->
+                        </v-btn>
+                        
+                        
+                    </v-badge>
+
+                    <v-badge
+                        :content="messages_count"
+                        :value="messages_count > 0"
+                        color="green lighten-2"
+                        class="mr-10"
+                        overlap
+                        
+                    >
+                        <v-btn depressed @click="showMessages()">
+                            <v-icon>mdi-email</v-icon>
+                            <!-- <v-icon>mdi-email-outline</v-icon> -->
+                        </v-btn>
+                        
+                        
+                    </v-badge>
+
+                    <!-- account menu -->
+                    <v-menu
+                        v-model="mini_menu"
+                        :close-on-content-click="true"
+                        :nudge-width="200"
+                        offset-y
+                        bottom
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                                depressed
+                                v-on="on"
+                                v-bind="attrs"
+                            >
+                                <v-icon>mdi-account</v-icon>
+                            </v-btn>
+                        </template>
+                
+                        <v-card>
+                        <v-list>
+                            <v-list-item>
+                
+                            <v-list-item-content>
+                                <v-list-item-subtitle class="mb-2">Zalogowany jako:</v-list-item-subtitle>
+                                <v-list-item-title class="menu-name">{{user_name}}</v-list-item-title>
+                            </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                
+                        <v-divider></v-divider>
+                
+                        <v-list>
+                            <v-list-item link :to="{name: 'Employee_Account'}">
+                                <v-list-item-title class="c-text"  >Moje dane</v-list-item-title>
+                            </v-list-item>
+                            <v-list-item link>
+                                <v-list-item-title class="c-text" @click="logout()">Wyloguj</v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                        </v-card>
+                    </v-menu>
                 </v-app-bar>
             </div>
             
@@ -92,7 +169,48 @@ export default {
         mini: true,
         title: 'Pracownicy'
         }
-    }
+    },
+
+
+    methods: {
+        showAlerts(){
+            if(this.$route.name != 'Manager_Alerts'){
+                this.$router.push({ name: 'Manager_Alerts'});
+                this.title = 'Komunikaty systemowe';
+            }
+        },
+        showMessages(){
+            if(this.$route.name != 'Manager_Messages'){
+                this.$router.push({ name: 'Manager_Messages'});
+                this.title = 'Wiadomości';
+            }
+        },
+        logout(){
+            this.$store.dispatch('logout')
+        },
+    },
+
+    computed:{
+        alert_count(){
+            return this.$store.getters.getAlertsCount;
+        },
+
+        messages_count(){
+            return this.$store.getters.getMessagesCount;
+        },
+
+        user_name(){
+            let n = this.$store.getters.getName;
+            return n.name + ' ' + n.surname;
+        },
+    },
+
+    mounted() {
+        this.$store.dispatch('getName');
+        this.$store.dispatch('getMessages');
+        this.$store.dispatch('getUnreadMessagesCount');
+        this.$store.dispatch('getAlerts');
+    },
 }
 </script>
 

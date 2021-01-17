@@ -19,6 +19,11 @@ const CustomerModule = {
             context.customers_loading = value;
         },
 
+        clearCustomer(context){
+          context.customers = [];
+          context.customers_loading = false;
+        },
+
     },
 
     actions: {

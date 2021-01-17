@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '@/router'
 
 const AccountModule = {
 
@@ -48,6 +49,20 @@ const AccountModule = {
         },
         setAddressesLoading(context,value){
           context.addresses_loading = value;
+        },
+
+        clearAccount(context){
+          context.login =  '';
+          context.name =  '';
+          context.remember_me =  true;
+          context.addresses =  [];
+          context.custom_addresses =  [];
+          context.addresses_loading =  false;
+          context.account =  {};
+          context.account_loading =  false;
+
+          context.employee_account =  {};
+          context.employee_account_loading =  false;
         }
     },
 
@@ -111,6 +126,14 @@ const AccountModule = {
                   }
                 });
             });
+        },
+
+
+        logout(context){
+            localStorage.setItem('jwtToken', null);
+            context.dispatch('clearEverything').then(() => {
+                router.push({ name: 'Login'});
+            }) 
         },
 
         checkLogin(context,login){
@@ -473,6 +496,15 @@ const AccountModule = {
         },
         getEmployeeAccountLoading(context){
           return context.employee_account_loading;
+        },
+        getIsLoggedIn(){
+          let t = localStorage.getItem('jwtToken');
+          if( t != null && t != 'null'){
+            return true;
+          }
+          else{
+            return false;
+          }
         },
     },
 };

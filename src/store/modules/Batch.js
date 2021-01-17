@@ -1,40 +1,35 @@
 import axios from 'axios'
 
-const WarehouseModule = {
+const OrderModule = {
 
     state: { 
 
-        warehouses: [],
-        warehouses_loading: false,
+        orders: [],
+        orders_loading: false,
 
     },
 
     mutations: {
 
-        setWarehouses(context,data){
-            context.warehouses = data;
+        setOrders(context,data){
+            context.orders = data;
         },
 
-        setWarehousesLoading(context, value){
-            context.warehouses_loading = value;
-        },
-
-        clearWarehouse(context){
-          context.warehouses = [];
-          context.warehouses_loading = false;
+        setOrdersLoading(context, value){
+            context.orders_loading = value;
         },
 
     },
 
     actions: {
 
-        editWarehouse(context,data){
+        editOrder(context,data){
             return new Promise(function(resolve,reject){
               //get authorization token
               let token = localStorage.getItem('jwtToken')
       
-                // if updating existing Warehouse and User data
-                axios.put(context.getters.getServerAddress + '/storage',data,{ headers: { Authorization: `Bearer ${token}` }})
+                // if updating existing Order and User data
+                axios.put(context.getters.getServerAddress + '/order',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
                   console.log(response);
       
@@ -80,13 +75,13 @@ const WarehouseModule = {
             });
         },
     
-        addWarehouse(context,data){
+        addOrder(context,data){
             return new Promise(function(resolve,reject){
               //get authorization token
               let token = localStorage.getItem('jwtToken')
       
-              // creating new Warehouse and new User
-              axios.post(context.getters.getServerAddress +'/storage',data,{ headers: { Authorization: `Bearer ${token}` }})
+              // creating new Order and new User
+              axios.post(context.getters.getServerAddress +'/order',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
       
                   //connected to server, hide no connection banner
@@ -129,13 +124,13 @@ const WarehouseModule = {
             });
         },
 
-      deleteWarehouse(context,id){
+      deleteOrder(context,id){
           return new Promise(function(resolve,reject){
             //get authorization token
             let token = localStorage.getItem('jwtToken')
     
-            // creating new Warehouse and new User
-            axios.delete(context.getters.getServerAddress + '/storage/' + id,{ headers: { Authorization: `Bearer ${token}` }})
+            // creating new Order and new User
+            axios.delete(context.getters.getServerAddress + '/order/' + id,{ headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -184,14 +179,14 @@ const WarehouseModule = {
           });
       },
 
-      deleteManyWarehouses(context,ids){
+      deleteManyOrders(context,ids){
           return new Promise(function(resolve,reject){
             //get authorization token
             let token = localStorage.getItem('jwtToken')
             console.log("deleteMany");
             console.log(ids);
-            // creating new Warehouse and new User
-            axios.delete(context.getters.getServerAddress + '/storage',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
+            // creating new Order and new User
+            axios.delete(context.getters.getServerAddress + '/order',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -234,14 +229,14 @@ const WarehouseModule = {
           });
       },
 
-      getAllWarehouses(context, silent=false){
-            //get all Warehouses and their User info from server
+      getAllOrders(context, silent=false){
+            //get all Orders and their User info from server
             //silent option is mainly for not hide reconnected banner
       
-            console.log("Gecik warehouse")
-            context.commit('setWarehousesLoading',true);
+            console.log("Gecik order")
+            context.commit('setOrdersLoading',true);
             let token = localStorage.getItem('jwtToken')
-            axios.get(context.getters.getServerAddress +'/storage', { headers: { Authorization: `Bearer ${token}` } })
+            axios.get(context.getters.getServerAddress +'/order', { headers: { Authorization: `Bearer ${token}` } })
               .then( (data) => {
       
                 if(!silent){
@@ -250,10 +245,10 @@ const WarehouseModule = {
                 }
                
       
-                //save Warehouses data in vuex store
+                //save Orders data in vuex store
                 console.log(data)
-                context.commit('setWarehouses',data.data.result);
-                context.commit('setWarehousesLoading',false);
+                context.commit('setOrders',data.data.result);
+                context.commit('setOrdersLoading',false);
               })
               .catch( (error) =>{
       
@@ -278,33 +273,76 @@ const WarehouseModule = {
                   }
                  
                 }
-                context.commit('setWarehousesLoading',false);
+                context.commit('setOrdersLoading',false);
               }); 
         },
+
+
+        getOneOrder(context, id){
+          //get all Orders and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik one order")
+          context.commit('setOrdersLoading',true);
+          let token = localStorage.getItem('jwtToken')
+          return axios.get(context.getters.getServerAddress +'/order/' + id, { headers: { Authorization: `Bearer ${token}` } })
+            .then( (data) => {
+    
+             
+              //connected to server, hide no connection banner
+              context.dispatch('noConnectionChange',false);
+              
+             
+    
+              //save Orders data in vuex store
+              console.log(data);
+              return data.data.result;
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                
+                //if connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+                
+  
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setOrdersLoading',false);
+            }); 
+        },
       
-        getWarehouseData(context, id){
-            let res = context.state.warehouses.find(warehouse => warehouse.storage.storage_id == id);
+        getOrderData(context, id){
+            let res = context.state.orders.find(order => order.order.order_id == id);
             return res;
         },
-        getWarehouseAddress(context, id){
-          let res = context.state.warehouses.find(warehouse => warehouse.storage.storage_id == id);
-          return res.address;
-        },
-
         
     },
 
     getters: {
 
-        getWarehouses(context){
-            return context.warehouses;
+        getOrders(context){
+            return context.orders;
         },
 
-        getWarehousesLoading(context){
-            return context.warehouses_loading;
+        getOrdersLoading(context){
+            return context.orders_loading;
         },  
 
     },
 };
 
-export default WarehouseModule;
+export default OrderModule;

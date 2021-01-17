@@ -22,7 +22,7 @@ const StoreModule = {
         order_loading: false,
         payment_methods: [],
         payment_methods_loading: false,
-// {product_id:1,quantity:20,discount_id:-1},{product_id:1,quantity:40,discount_id:1}
+
     },
 
     mutations: {
@@ -102,6 +102,27 @@ const StoreModule = {
 
         setOrderLoading(context,value){
           context.order_loading = value;
+        },
+
+        clearStore(context){
+          context.store_products = [];
+          context.store_products_loading = false;
+          context.cart = [];
+          context.cart_settings ={
+            address: {},
+            payment: {},
+            comment: '',
+            order_id: null,
+            payment_id: null,
+          };
+
+          context.orders = [];
+          context.orders_loading = false;
+
+
+          context.order_loading = false;
+          context.payment_methods = [];
+          context.payment_methods_loading = false;
         }
 
     },

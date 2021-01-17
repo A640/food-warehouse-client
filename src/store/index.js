@@ -15,6 +15,7 @@ import StoreModule from './modules/Store.js'
 import StatsModule from './modules/Stats.js'
 import MessageModule from './modules/Message.js'
 import OrderModule from './modules/Order.js'
+import ComplaintModule from './modules/Complaint.js'
 
 Vue.use(Vuex)
 
@@ -40,10 +41,29 @@ export default new Vuex.Store({
     setReconnected(context,value){
       context.reconnected = value;
     },
+
+    
     
   },
 
   actions: {
+
+
+    clearEverything(context){
+      context.commit('clearAccount');
+      context.commit('clearBatch');
+      context.commit('clearComplaint');
+      context.commit('clearCustomer');
+      context.commit('clearEmployee');
+      context.commit('clearMessage');
+      context.commit('clearOrder');
+      context.commit('clearProducer');
+      context.commit('clearProduct');
+      context.commit('clearStats');
+      context.commit('clearStore');
+      context.commit('clearVehicle');
+      context.commit('clearWarehouse');
+    },
 
     noConnectionChange(context,noConnection){
       context.commit('setNoConnection',noConnection)
@@ -101,6 +121,7 @@ export default new Vuex.Store({
     stats: StatsModule,
     message: MessageModule,
     order: OrderModule,
+    complaint: ComplaintModule,
     
   },
 

@@ -35,8 +35,9 @@
                     
                 </v-badge>
                 
-
+                
                 <v-menu
+                    v-if="loggedIn"
                     v-model="mini_menu"
                     :close-on-content-click="true"
                     :nudge-width="200"
@@ -75,11 +76,22 @@
                             <v-list-item-title class="c-text"  >Moje zamówienia</v-list-item-title>
                         </v-list-item>
                         <v-list-item link>
-                            <v-list-item-title class="c-text">Wyloguj</v-list-item-title>
+                            <v-list-item-title class="c-text" @click="logout()" >Wyloguj</v-list-item-title>
                         </v-list-item>
                     </v-list>
                     </v-card>
                 </v-menu>
+
+
+                <v-btn
+                    v-else
+                    depressed
+                    v-on="on"
+                    v-bind="attrs"
+                    @click="loginRedirect()"
+                >
+                    Zaloguj się
+                </v-btn>
             </div>
             
            
@@ -129,6 +141,9 @@ export default {
         },
         reconnected(){
             return this.$store.getters.getReconnected;
+        },
+        loggedIn(){
+            return this.$store.getters.getIsLoggedIn;
         }
     },
 
@@ -144,13 +159,25 @@ export default {
             if(this.$route.name != 'Store_Cart'){
                 this.$router.push({ name: 'Store_Cart'});
             }
+        },
+        loginRedirect(){
+            console.log(this.$route.name);
+            if(this.$route.name != 'Login'){
+                this.$router.push({ name: 'Login'});
+            }
+        },
+        logout(){
+            this.$store.dispatch('logout')
         }
+
     },
 
 
 
     mounted() {
-        this.$store.dispatch('getName')
+        if(this.loggedIn){
+            this.$store.dispatch('getName')
+        }
     },
 
 

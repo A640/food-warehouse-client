@@ -19,6 +19,10 @@ const EmployeeModule = {
             context.employees_loading = value;
         },
 
+        clearEmployee(context){
+          context.employees = [];
+          context.employees_loading = false;
+        },
     },
 
     actions: {
