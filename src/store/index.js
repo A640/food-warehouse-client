@@ -16,6 +16,7 @@ import StatsModule from './modules/Stats.js'
 import MessageModule from './modules/Message.js'
 import OrderModule from './modules/Order.js'
 import ComplaintModule from './modules/Complaint.js'
+import BatchModule from './modules/Batch.js'
 
 Vue.use(Vuex)
 
@@ -122,6 +123,7 @@ export default new Vuex.Store({
     message: MessageModule,
     order: OrderModule,
     complaint: ComplaintModule,
+    batch: BatchModule,
     
   },
 

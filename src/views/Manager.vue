@@ -171,6 +171,7 @@ export default {
             { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Manager_Orders' },
             { title: 'Wiadomości', icon: 'mdi-email', link: 'Manager_Messages' },
             { title: 'Reklamacje', icon: 'mdi-account-alert', link: 'Manager_Complaints' },
+             { title: 'Partie produktów', icon: 'mdi-tag-multiple', link: 'Manager_Batch' },
         ],
         mini: true,
         title: 'Pracownicy',

@@ -1,35 +1,40 @@
 import axios from 'axios'
 
-const OrderModule = {
+const BatchModule = {
 
     state: { 
 
-        orders: [],
-        orders_loading: false,
+        batches: [],
+        batches_loading: false,
 
     },
 
     mutations: {
 
-        setOrders(context,data){
-            context.orders = data;
+        setBatches(context,data){
+            context.batches = data;
         },
 
-        setOrdersLoading(context, value){
-            context.orders_loading = value;
+        setBatchesLoading(context, value){
+            context.batches_loading = value;
         },
+
+        clearBatch(context){
+            context.batches = [];
+            context.batches_loading = false;
+        }
 
     },
 
     actions: {
 
-        editOrder(context,data){
+        editBatch(context,data){
             return new Promise(function(resolve,reject){
               //get authorization token
               let token = localStorage.getItem('jwtToken')
       
-                // if updating existing Order and User data
-                axios.put(context.getters.getServerAddress + '/order',data,{ headers: { Authorization: `Bearer ${token}` }})
+                // if updating existing Batch and User data
+                axios.put(context.getters.getServerAddress + '/batch',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
                   console.log(response);
       
@@ -75,13 +80,13 @@ const OrderModule = {
             });
         },
     
-        addOrder(context,data){
+        addBatch(context,data){
             return new Promise(function(resolve,reject){
               //get authorization token
               let token = localStorage.getItem('jwtToken')
       
-              // creating new Order and new User
-              axios.post(context.getters.getServerAddress +'/order',data,{ headers: { Authorization: `Bearer ${token}` }})
+              // creating new Batch and new User
+              axios.post(context.getters.getServerAddress +'/batch',data,{ headers: { Authorization: `Bearer ${token}` }})
                 .then((response) =>{
       
                   //connected to server, hide no connection banner
@@ -124,13 +129,13 @@ const OrderModule = {
             });
         },
 
-      deleteOrder(context,id){
+      deleteBatch(context,id){
           return new Promise(function(resolve,reject){
             //get authorization token
             let token = localStorage.getItem('jwtToken')
     
-            // creating new Order and new User
-            axios.delete(context.getters.getServerAddress + '/order/' + id,{ headers: { Authorization: `Bearer ${token}` }})
+            // creating new Batch and new User
+            axios.delete(context.getters.getServerAddress + '/batch/delete' , id,{ headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -179,14 +184,14 @@ const OrderModule = {
           });
       },
 
-      deleteManyOrders(context,ids){
+      deleteManyBatches(context,ids){
           return new Promise(function(resolve,reject){
             //get authorization token
             let token = localStorage.getItem('jwtToken')
             console.log("deleteMany");
             console.log(ids);
-            // creating new Order and new User
-            axios.delete(context.getters.getServerAddress + '/order',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
+            // creating new Batch and new User
+            axios.delete(context.getters.getServerAddress + '/batch',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -229,14 +234,14 @@ const OrderModule = {
           });
       },
 
-      getAllOrders(context, silent=false){
-            //get all Orders and their User info from server
+      getAllBatches(context, silent=false){
+            //get all Batches and their User info from server
             //silent option is mainly for not hide reconnected banner
       
-            console.log("Gecik order")
-            context.commit('setOrdersLoading',true);
+            console.log("Gecik batch")
+            context.commit('setBatchesLoading',true);
             let token = localStorage.getItem('jwtToken')
-            axios.get(context.getters.getServerAddress +'/order', { headers: { Authorization: `Bearer ${token}` } })
+            axios.get(context.getters.getServerAddress +'/batch', { headers: { Authorization: `Bearer ${token}` } })
               .then( (data) => {
       
                 if(!silent){
@@ -245,10 +250,10 @@ const OrderModule = {
                 }
                
       
-                //save Orders data in vuex store
-                console.log(data)
-                context.commit('setOrders',data.data.result);
-                context.commit('setOrdersLoading',false);
+                //save Batches data in vuex store
+                console.log('batch',data)
+                context.commit('setBatches',data.data.result);
+                context.commit('setBatchesLoading',false);
               })
               .catch( (error) =>{
       
@@ -273,19 +278,19 @@ const OrderModule = {
                   }
                  
                 }
-                context.commit('setOrdersLoading',false);
+                context.commit('setBatchesLoading',false);
               }); 
         },
 
 
-        getOneOrder(context, id){
-          //get all Orders and their User info from server
+        getOneBatch(context, id){
+          //get all Batches and their User info from server
           //silent option is mainly for not hide reconnected banner
     
-          console.log("Gecik one order")
-          context.commit('setOrdersLoading',true);
+          console.log("Gecik one batch")
+          context.commit('setBatchesLoading',true);
           let token = localStorage.getItem('jwtToken')
-          return axios.get(context.getters.getServerAddress +'/order/' + id, { headers: { Authorization: `Bearer ${token}` } })
+          return axios.get(context.getters.getServerAddress +'/batch/' + id, { headers: { Authorization: `Bearer ${token}` } })
             .then( (data) => {
     
              
@@ -294,7 +299,7 @@ const OrderModule = {
               
              
     
-              //save Orders data in vuex store
+              //save Batches data in vuex store
               console.log(data);
               return data.data.result;
             })
@@ -321,12 +326,12 @@ const OrderModule = {
                 }
                
               }
-              context.commit('setOrdersLoading',false);
+              context.commit('setBatchesLoading',false);
             }); 
         },
       
-        getOrderData(context, id){
-            let res = context.state.orders.find(order => order.order.order_id == id);
+        getBatchData(context, id){
+            let res = context.state.batches.find(batch => batch.batch.batch_id == id);
             return res;
         },
         
@@ -334,15 +339,15 @@ const OrderModule = {
 
     getters: {
 
-        getOrders(context){
-            return context.orders;
+        getBatches(context){
+            return context.batches;
         },
 
-        getOrdersLoading(context){
-            return context.orders_loading;
+        getBatchesLoading(context){
+            return context.batches_loading;
         },  
 
     },
 };
 
-export default OrderModule;
+export default BatchModule;

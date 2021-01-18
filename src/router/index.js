@@ -131,6 +131,11 @@ const routes = [
         name: 'Manager_Complaints',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ComplaintTable.vue'),
       },
+      {
+        path: 'batch',
+        name: 'Manager_Batch',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/BatchTable.vue'),
+      },
     ]
   },
   {

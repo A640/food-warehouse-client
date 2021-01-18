@@ -7,6 +7,7 @@
                 class="mt-2"
                 clearable
                 solo 
+                type="number"
                 hide-details=true
                 v-model="i_batch_number"
                 :items="products"
@@ -62,6 +63,7 @@
                     class="mt-5"
                     locale="pl-pl"
                     :first-day-of-week="1"
+                    :rules="r_product"
                 ></v-date-picker>
             </v-row>
         </form>
@@ -74,7 +76,7 @@
                 class="mt-4"
                 v-model="i_warehouse"
                 :items="warehouses"
-                :rules="r_warehouse"
+                :rules="r_product"
                 auto-select-first
             ></v-autocomplete>
         </div>
@@ -88,7 +90,7 @@
                 label=""
                 solo
                 v-model="i_warehouse_quantity"
-                :rules="r_warehouse_quantity"
+                :rules="r_prod_quantity"
                 v-on:keyup.enter.stop
             ></v-text-field>
         </form>
@@ -99,7 +101,7 @@
 <script>
 export default {
 
-    name: 'VehicleEditor',
+    name: 'BatchEditor',
 
     props: {
         pid: {
@@ -134,17 +136,17 @@ export default {
                 // value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
-            r_prod_year: [
+            r_prod_quantity: [
                 value => !!value || 'To pole jest wymagane!',
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 // value => (value || '').length == 4 || 'Rok musi być 4-cyfrowy',
-                value => value > 1800 || 'Nieprawidłowa wartość',
+                value => value > 0 || 'Wartość musi być większa od 0',
             ],
 
-            r_reg_no: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+            r_discount: [
+                // value => value != '' || 'To pole jest wymagane!',
+                value => value >= 0 || 'Wartość musi być większa od 0',
+                value => value < 100 || 'Wartość musi być mniejsza niż 100',
             ],
 
             r_driver: [
@@ -226,14 +228,15 @@ export default {
             if(val == true){
                 if(this.allValidated()){
                     let batch_in_warehouse = {
-                        batch_number: this.batch_number,
-                        product_id: this.product,
-                        prod_quantity: this.prod_quantity,
-                        discount: this.discount,
-                        eat_by_date: new Date(this.eat_by_date),
-                        warehouse: this.warehouse,
-                        warehouse_quantity: this.warehouse_quantity,
+                        batch_number: this.i_batch_number,
+                        product_id: this.i_product,
+                        prod_quantity: this.i_prod_quantity,
+                        discount: this.i_discount,
+                        eat_by_date: this.i_eat_by_date,
+                        warehouse: this.i_warehouse,
+                        warehouse_quantity: this.i_warehouse_quantity,
                     }
+                    console.log('batchUpdateData',batch_in_warehouse);
 
                     this.$emit('dataUpdate',batch_in_warehouse);
                     this.$emit('allValidated',true);

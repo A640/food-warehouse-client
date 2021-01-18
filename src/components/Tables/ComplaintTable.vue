@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj pracownika"
+          label="Wyszukaj reklamację"
           single-line
           hide-details
         ></v-text-field>
