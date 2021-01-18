@@ -135,7 +135,7 @@ const BatchModule = {
             let token = localStorage.getItem('jwtToken')
     
             // creating new Batch and new User
-            axios.delete(context.getters.getServerAddress + '/batch/delete' , id,{ headers: { Authorization: `Bearer ${token}` }})
+            axios.put(context.getters.getServerAddress + '/batch/delete' , id,{ headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner
@@ -143,7 +143,7 @@ const BatchModule = {
                 console.log(response);
                 if (response.status === 200) {
                   // if added successfully
-                  if(response.data.result.deleted){
+                  if(response.data){
                     resolve(true)
                   }
                   else{
@@ -157,6 +157,7 @@ const BatchModule = {
     
               })
               .catch( (error) =>{
+                console.log('err',error)
     
                 if(error.toJSON().message == "Network Error"){
                   //if can't connect to server
@@ -191,7 +192,7 @@ const BatchModule = {
             console.log("deleteMany");
             console.log(ids);
             // creating new Batch and new User
-            axios.delete(context.getters.getServerAddress + '/batch',{ data: ids, headers: { Authorization: `Bearer ${token}` }})
+            axios.put(context.getters.getServerAddress + '/batch/delete-many', ids, {headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
     
                 //connected to server, hide no connection banner

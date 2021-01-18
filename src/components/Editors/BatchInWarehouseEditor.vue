@@ -7,7 +7,6 @@
                 class="mt-2"
                 clearable
                 solo 
-                hide-details=true
                 v-model="i_batch_number"
                 :items="batches"
                 :rules="r_batch_number"
@@ -128,7 +127,7 @@ export default {
 
 
             r_batch_number: [
-                // value => !!value || 'To pole jest wymagane!',
+                value => !!value || 'To pole jest wymagane!',
                 // value => (value || '').length <= 10 || 'Maksymalnie 10 znaków',
                 // value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],

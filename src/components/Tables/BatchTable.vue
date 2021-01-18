@@ -103,7 +103,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">Anuluj</v-btn>
-                <delete-many name="Usuwanie zaznaczonych pracowników" :count="selected.length" type="pracowników" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many name="Usuwanie zaznaczonych partii produktów" :count="selected.length" type="partii produktów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>
@@ -157,7 +157,7 @@ export default {
 
       deleteMany(){
         let delete_ids = this.selected.map( (batch) => {
-            return batch.personal_data.batch_id;
+            return batch.batch_id;
         })
         // console.log(delete_ids);
         this.$store.dispatch('deleteManyBatches',delete_ids)
@@ -183,7 +183,7 @@ export default {
             // if added  successfully (resolved promise) clear popup and close
             
             this.$store.dispatch('getAllBatches');
-            this.$refs['del' + id ].dialogClose();
+            this.$refs['del' + id.batch_id ].dialogClose();
             
         })
         .catch((err) => {
