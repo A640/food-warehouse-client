@@ -159,12 +159,19 @@ export default {
         return {
         drawer: true,
         items: [
-            { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
+             { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
             { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Customers' },
             { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Vehicles' },
             { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Warehouses'},
             { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Producers' },
             { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Products' },
+            { title: 'Statystyki', icon: 'mdi-chart-line', link: 'Admin_Stats_Orders' },
+            // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Admin_Stats_Orders' },
+            { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Admin_Alerts' },
+            { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Admin_Orders' },
+            { title: 'Wiadomości', icon: 'mdi-email', link: 'Admin_Messages' },
+            { title: 'Reklamacje', icon: 'mdi-account-alert', link: 'Admin_Complaints' },
+             { title: 'Partie produktów', icon: 'mdi-tag-multiple', link: 'Admin_Batch' },
         ],
         mini: true,
         title: 'Pracownicy'
@@ -174,14 +181,14 @@ export default {
 
     methods: {
         showAlerts(){
-            if(this.$route.name != 'Manager_Alerts'){
-                this.$router.push({ name: 'Manager_Alerts'});
+            if(this.$route.name != 'Admin_Alerts'){
+                this.$router.push({ name: 'Admin_Alerts'});
                 this.title = 'Komunikaty systemowe';
             }
         },
         showMessages(){
-            if(this.$route.name != 'Manager_Messages'){
-                this.$router.push({ name: 'Manager_Messages'});
+            if(this.$route.name != 'Admin_Messages'){
+                this.$router.push({ name: 'Admin_Messages'});
                 this.title = 'Wiadomości';
             }
         },
