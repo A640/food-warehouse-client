@@ -16,7 +16,7 @@
                 <v-icon dark>mdi-menu</v-icon>
             </v-list-item-icon>
     
-            <v-list-item-title class="item-color">Administrator</v-list-item-title>
+            <v-list-item-title class="item-color">Dostawca</v-list-item-title>
     
             <v-btn
                 icon
@@ -59,21 +59,6 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-badge
-                        :content="alert_count"
-                        :value="true"
-                        color="amber darken-2"
-                        class="mr-10"
-                        overlap
-                        v-if="alert_count > 0"
-                    >
-                        <v-btn depressed @click="showAlerts()">
-                            <v-icon color="amber darken-2">mdi-alert</v-icon>
-                            <!-- <v-icon>mdi-email-outline</v-icon> -->
-                        </v-btn>
-                        
-                        
-                    </v-badge>
 
                     <v-badge
                         :content="messages_count"
@@ -127,7 +112,7 @@
                                 <v-list-item-title class="c-text"  >Moje dane</v-list-item-title>
                             </v-list-item>
                             <v-list-item link>
-                                <v-list-item-title class="c-text" @click="logout()">Wyloguj</v-list-item-title>
+                                <v-list-item-title class="c-text" @click="logout()" >Wyloguj</v-list-item-title>
                             </v-list-item>
                         </v-list>
                         </v-card>
@@ -159,36 +144,29 @@ export default {
         return {
         drawer: true,
         items: [
-             { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
-            { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Customers' },
-            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Vehicles' },
-            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Warehouses'},
-            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Producers' },
-            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Products' },
-            { title: 'Statystyki', icon: 'mdi-chart-line', link: 'Admin_Stats_Orders' },
-            // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Admin_Stats_Orders' },
-            { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Admin_Alerts' },
-            { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Admin_Orders' },
-            { title: 'Wiadomości', icon: 'mdi-email', link: 'Admin_Messages' },
-            { title: 'Reklamacje', icon: 'mdi-account-alert', link: 'Admin_Complaints' },
-             { title: 'Partie produktów', icon: 'mdi-tag-multiple', link: 'Admin_Batch' },
+            // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Employee_Stats_Orders' },
+            { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Supplier_Orders' },
+            { title: 'Wiadomości', icon: 'mdi-email', link: 'Supplier_Messages' },
+            { title: 'Pojazd', icon: 'mdi-truck', link: 'Supplier_Vehicle' },
+             
         ],
-        mini_menu: true,
-        title: 'Pracownicy'
+        mini: true,
+        title: 'Pracownicy',
+        mini_menu: false,
         }
     },
 
 
     methods: {
         showAlerts(){
-            if(this.$route.name != 'Admin_Alerts'){
-                this.$router.push({ name: 'Admin_Alerts'});
+            if(this.$route.name != 'Manager_Alerts'){
+                this.$router.push({ name: 'Manager_Alerts'});
                 this.title = 'Komunikaty systemowe';
             }
         },
         showMessages(){
-            if(this.$route.name != 'Admin_Messages'){
-                this.$router.push({ name: 'Admin_Messages'});
+            if(this.$route.name != 'Manager_Messages'){
+                this.$router.push({ name: 'Manager_Messages'});
                 this.title = 'Wiadomości';
             }
         },
@@ -198,9 +176,7 @@ export default {
     },
 
     computed:{
-        alert_count(){
-            return this.$store.getters.getAlertsCount;
-        },
+        
 
         messages_count(){
             return this.$store.getters.getMessagesCount;
@@ -216,7 +192,6 @@ export default {
         this.$store.dispatch('getName');
         this.$store.dispatch('getMessages');
         this.$store.dispatch('getUnreadMessagesCount');
-        this.$store.dispatch('getAlerts');
     },
 }
 </script>
@@ -236,6 +211,16 @@ export default {
     .bar__appbar{
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         margin-bottom: 1rem;
+    }
+
+    .menu-name{
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+    }
+
+    .c-text{
+        text-align: center;
     }
 
     .nav__navbar{

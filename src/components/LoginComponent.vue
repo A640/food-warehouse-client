@@ -76,10 +76,10 @@ export default {
                     this.$router.push({ name: 'Manager'});
                 } else if(result == 'Employee'){
                     console.log("przechodzimy na pracownika");
-                    this.$router.push({ name: 'Admin'});
+                    this.$router.push({ name: 'Employee'});
                 } else if(result == 'Supplier'){
                     console.log("przechodzimy na dostawcę");
-                    this.$router.push({ name: 'Admin'});
+                    this.$router.push({ name: 'Supplier'});
                 } else if(result == 'Customer'){
                     console.log("przechodzimy na klienta");
                     this.$router.push({ name: 'Store_Grid'});

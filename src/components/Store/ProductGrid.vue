@@ -28,8 +28,6 @@ export default {
 
     data () {
         return {
-            i_search: '',
-            e_search: '',
             products_search: [],
 
         }
@@ -40,8 +38,38 @@ export default {
             return this.$store.getters.getStoreName;
         },
 
+        search(){
+            if(this.$store.getters.getSearch != undefined && this.$store.getters.getSearch != null){
+                if(typeof(this.$store.getters.getSearch) == String){
+                    return this.$store.getters.getSearch;
+                }
+                else{
+                    return this.$store.getters.getSearch.text;
+                }
+            }
+            else{
+                return '';
+            }
+            
+            
+        },
+
         products(){
-            return this.$store.getters.getStoreProducts;
+            if(this.search == '' || this.search == null){
+                return this.$store.getters.getStoreProducts
+            }
+            else{
+                return this.$store.getters.getStoreProducts.filter(item => {
+                    return (item.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                    item.description.toLowerCase().includes(this.search.toLowerCase())   ||
+                    item.short_description.toLowerCase().includes(this.search.toLowerCase()) ||
+                    item.producer_name.toLowerCase().includes(this.search.toLowerCase())   ||
+                    String(item.product_id).includes(this.search.toLowerCase()) ||
+                    String(item.sell_price).includes(this.search.toLowerCase()) ||
+                    item.category.toLowerCase().includes(this.search.toLowerCase()));
+            });
+            }
+            
         },
 
         reconnected(){

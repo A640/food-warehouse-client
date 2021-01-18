@@ -282,6 +282,54 @@ const OrderModule = {
               }); 
         },
 
+        getAllOrdersSupplier(context, silent=false){
+          //get all Orders and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik order")
+          context.commit('setOrdersLoading',true);
+          let token = localStorage.getItem('jwtToken')
+          axios.get(context.getters.getServerAddress +'/supplier/order', { headers: { Authorization: `Bearer ${token}` } })
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Orders data in vuex store
+              console.log(data)
+              context.commit('setOrders',data.data.result);
+              context.commit('setOrdersLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setOrdersLoading',false);
+            }); 
+      },
+
 
         getOneOrder(context, id){
           //get all Orders and their User info from server
@@ -336,7 +384,7 @@ const OrderModule = {
             let token = localStorage.getItem('jwtToken')
     
               // if updating existing Order and User data
-              axios.put(context.getters.getServerAddress + '/order' + data.state + '/' + data.id,null,{ headers: { Authorization: `Bearer ${token}` }})
+              axios.put(context.getters.getServerAddress + '/order/' + data.state + '/' + data.id,null,{ headers: { Authorization: `Bearer ${token}` }})
               .then((response) =>{
                 console.log(response);
     

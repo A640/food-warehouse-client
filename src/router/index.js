@@ -227,9 +227,42 @@ const routes = [
     ]
   },
   {
+    path: '/supplier',
+    name: 'Supplier',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Supplier.vue'),
+    children:[
+      
+      {
+        path: 'orders',
+        name: 'Supplier_Orders',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/Supplier/OrderTable - Supplier.vue'),
+      },
+      {
+        path: 'messages',
+        name: 'Supplier_Messages',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Employee/Messages.vue'),
+      },
+      {
+        path: 'vehicle',
+        name: 'Supplier_Vehicle',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Employee/VehicleInfo.vue'),
+      },
+     
+    ]
+  },
+  {
     path: '/order/:id',
     name: 'Order_Details_2',
     component: () => import(/* webpackChunkName: "about" */ '../components/Manager/OrderDetails.vue'),
+    props: true,
+  },
+  {
+    path: '/s-order/:id',
+    name: 'Order_Details_3',
+    component: () => import(/* webpackChunkName: "about" */ '../components/Employee/OrderDetails - Supplier.vue'),
     props: true,
   },
   {

@@ -23,6 +23,8 @@ const StoreModule = {
         payment_methods: [],
         payment_methods_loading: false,
 
+        search: ''
+
     },
 
     mutations: {
@@ -71,6 +73,10 @@ const StoreModule = {
           context.orders_loading = value;
         },
 
+        setSearch(context,value){
+          context.search = value;
+        },
+
         clearCart(context){
           context.cart = [];
           context.cart_settings.address = {};
@@ -78,6 +84,7 @@ const StoreModule = {
           context.cart_settings.comment = '';
           context.cart_settings.order_id = null;
           context.cart_settings.payment_id = null;
+          context.search = '';
         },
 
         addToCart(context,product){
@@ -742,6 +749,10 @@ const StoreModule = {
           else{
             return true;
           }
+        },
+
+        getSearch(context){
+          return context.search;
         }
 
     },

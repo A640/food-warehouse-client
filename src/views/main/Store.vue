@@ -172,6 +172,12 @@ export default {
 
     },
 
+    watch:{
+        i_search(val){
+            this.$store.commit('setSearch',val);
+        }
+    },
+
 
 
     mounted() {

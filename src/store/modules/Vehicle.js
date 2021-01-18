@@ -281,6 +281,54 @@ const VehicleModule = {
                 context.commit('setVehiclesLoading',false);
               }); 
         },
+
+        getSupplierVehicle(context, silent=false){
+          //get all Vehicles and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik vehicle")
+          context.commit('setVehiclesLoading',true);
+          let token = localStorage.getItem('jwtToken')
+          return axios.get(context.getters.getServerAddress +'/supplier/vehicle', { headers: { Authorization: `Bearer ${token}` } })
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Vehicles data in vuex store
+              console.log('s-vehicle',data)
+              context.commit('setVehiclesLoading',false);
+              return data.data.result;
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setVehiclesLoading',false);
+            }); 
+      },
       
         getVehicleData(context, id){
             let res = context.state.vehicles.find(vehicle => vehicle.car_info.car_id == id);
