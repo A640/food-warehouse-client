@@ -49,6 +49,53 @@ const routes = [
         name: 'Admin_Products',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ProductTable.vue'),
       },
+      {
+        path: 'stats',
+        name: 'Admin_Stats',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Manager/Stats.vue'),
+        children:[
+          {
+            path: 'orders',
+            name: 'Admin_Stats_Orders',
+            component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Orders.vue'),
+          },
+          {
+            path: 'sell-profit',
+            name: 'Admin_Stats_Sell-Profit',
+            component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Profit.vue'),
+          },
+          {
+            path: 'top-products',
+            name: 'Admin_Stats_Top-Products',
+            component: () => import(/* webpackChunkName: "about" */ '../components/Stats/Products.vue'),
+          },
+        ],
+      },
+      {
+        path: 'system-alerts',
+        name: 'Admin_Alerts',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Manager/SystemAlerts.vue'),
+      },
+      {
+        path: 'orders',
+        name: 'Admin_Orders',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/OrderTable.vue'),
+      },
+      {
+        path: 'messages',
+        name: 'Admin_Messages',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Employee/Messages.vue'),
+      },
+      {
+        path: 'complaints',
+        name: 'Admin_Complaints',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/ComplaintTable.vue'),
+      },
+      {
+        path: 'batch',
+        name: 'Admin_Batch',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/BatchTable.vue'),
+      },
     ]
   },
   {
@@ -136,6 +183,47 @@ const routes = [
         name: 'Manager_Batch',
         component: () => import(/* webpackChunkName: "about" */ '../components/Tables/BatchTable.vue'),
       },
+    ]
+  },
+  {
+    path: '/employee',
+    name: 'Employee',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Employee.vue'),
+    children:[
+      {
+        path: 'products',
+        name: 'Employee_Products',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/Employee/ProductTable - Employee.vue'),
+      },
+      {
+        path: 'orders',
+        name: 'Employee_Orders',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/Employee/OrderTable - Employee.vue'),
+      },
+      {
+        path: 'batch',
+        name: 'Employee_Batch',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/BatchTable.vue'),
+      },
+      {
+        path: 'warehouses',
+        name: 'Employee_Warehouses',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/Employee/WarehouseTable - Employee.vue'),
+      },
+      {
+        path: 'messages',
+        name: 'Employee_Messages',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Employee/Messages.vue'),
+      },
+      {
+        path: 'alerts',
+        name: 'Employee_Alerts',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Manager/SystemAlerts.vue'),
+      },
+     
     ]
   },
   {
