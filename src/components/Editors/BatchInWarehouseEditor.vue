@@ -7,10 +7,9 @@
                 class="mt-2"
                 clearable
                 solo 
-                type="number"
                 hide-details=true
                 v-model="i_batch_number"
-                :items="products"
+                :items="batches"
                 :rules="r_batch_number"
             ></v-combobox>
         </form>
@@ -104,7 +103,11 @@ export default {
     name: 'BatchEditor',
 
     props: {
-        pid: {
+        batch_id: {
+            default: -1,
+        },
+        warehouse_id: {
+            type: Number,
             default: -1,
         },
         validate: {
@@ -125,9 +128,9 @@ export default {
 
 
             r_batch_number: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 10 || 'Maksymalnie 10 znaków',
-                value => (value || '').length >= 1 || 'Minimum 1 znak',
+                // value => !!value || 'To pole jest wymagane!',
+                // value => (value || '').length <= 10 || 'Maksymalnie 10 znaków',
+                // value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
             r_product: [
@@ -166,21 +169,20 @@ export default {
             return false
         },
 
-        loadData(id){ 
-           this.$store.dispatch('getVehicleData',id)
+        loadData(obj){ 
+           this.$store.dispatch('getBatchData',obj)
            .then( (result) => {
-
-
                if(result != null){
-                    //load data from vuex store
-                    // this.i_batch_number = result.
-                    // this.i_product: '',
-                    // this.i_prod_quantity: 0,
-                    // this.i_discount: 0,
-                    // this.i_eat_by_date: new Date().toISOString().substr(0, 10),
-                    // this.i_warehouse: '',
-                    // this.i_warehouse_quantity: 0,
                     console.log('znaleziono batch', result)
+                    //load data from vuex store
+                    this.i_batch_number = result.batch.batch_no;
+                    this.i_product = result.batch.product.product.product_id;
+                    this.i_prod_quantity = result.batch.packages_quantity; 
+                    this.i_discount = result.batch.discount;
+                    this.i_eat_by_date = result.batch.eat_by_date;
+                    this.i_warehouse = this.warehouse_id;
+                    this.i_warehouse_quantity = result.storage.quantity;
+                    
                }
               
            })
@@ -204,8 +206,8 @@ export default {
         batches(){
             //load possible batches
 
-            let batches = this.$store.getters.getEmployees.map( (employee) => {
-                return {text: employee.personal_data.name + ' ' + employee.personal_data.surname, value: employee.personal_data.employee_id}
+            let batches = this.$store.getters.getBatches.map( (o) => {
+                return {text: o.batch_no + ' - ' + o.product.product.name, value: o.batch_no}
             })
             return batches;
             
@@ -247,24 +249,77 @@ export default {
             }
         },
 
+        i_batch_number(val) {
+
+            if( val != null && val != ''){
+                if(typeof(val) == String){
+                 if(val != ''){
+                    this.$store.dispatch('getBatchDataShort',val)
+                    .then( (result) => {
+                        if(result != null){
+                                console.log('znaleziono batch', result)
+                                //load data from vuex store
+                                this.i_batch_number = result.batch_no;
+                                this.i_product = result.product.product.product_id;
+                                this.i_prod_quantity = result.packages_quantity; 
+                                this.i_discount = result.discount;
+                                this.i_eat_by_date = result.eat_by_date;
+                                
+                        }
+                        
+                    })
+                }
+            }
+            else{
+                this.$store.dispatch('getBatchDataShort',val.value)
+                    .then( (result) => {
+                        if(result != null){
+                                console.log('znaleziono batch', result)
+                                //load data from vuex store
+                                this.i_batch_number = result.batch_no;
+                                this.i_product = result.product.product.product_id;
+                                this.i_prod_quantity = result.packages_quantity; 
+                                this.i_discount = result.discount;
+                                this.i_eat_by_date = result.eat_by_date;
+                                
+                        }
+                        
+                    })
+            }
+            }
+
+            
+           
+        }
+
     },
 
     mounted() {
-        if(this.pid == -1){
-            this.i_brand = '';
-            this.i_model = '';
-            this.i_prod_year = 1990;
-            this.i_reg_no = '';
-            this.i_insurance = new Date().toISOString().substr(0, 10);
-            this.i_inspection = new Date().toISOString().substr(0, 10);
-            this.i_driver = '';
-        }
-        else{
-            this.loadData(this.pid);
-        }
-        this.$store.dispatch('getAllEmployees');
-        this.$store.dispatch('getAllProducts');
-        this.$store.dispatch('getAllWarehouses');
+        let p1 = this.$store.dispatch('getAllEmployees');
+        let p2 = this.$store.dispatch('getAllProducts');
+        let p3 = this.$store.dispatch('getAllWarehouses');
+
+        Promise.all([p1,p2,p3]).then(() =>{
+            console.log('promise all')
+            if(this.batch_id == -1){
+                this.i_brand = '';
+                this.i_model = '';
+                this.i_prod_year = 1990;
+                this.i_reg_no = '';
+                this.i_insurance = new Date().toISOString().substr(0, 10);
+                this.i_inspection = new Date().toISOString().substr(0, 10);
+                this.i_driver = '';
+            }
+            else{
+                let obj={
+                    batch_id: this.batch_id,
+                    warehouse_id: this.warehouse_id,
+                }
+                this.loadData(obj);
+            }
+        })
+        
+        
     },
 
 }

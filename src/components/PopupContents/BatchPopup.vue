@@ -8,7 +8,8 @@
         </div>
 
         <batch-editor
-            :pid="batch_id" 
+            :batch_id="batch_id" 
+            :warehouse_id="warehouse_id"
             :validate="validate_trigger_v" 
             @dataUpdate="updateDataBatch" 
             @allValidated="validateV"
@@ -56,6 +57,10 @@ export default {
 
     props:{
         batch_id:{
+            type: Number,
+            default: -1,
+        },
+        warehouse_id:{
             type: Number,
             default: -1,
         },

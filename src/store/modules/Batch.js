@@ -330,10 +330,22 @@ const BatchModule = {
             }); 
         },
       
-        getBatchData(context, id){
-            let res = context.state.batches.find(batch => batch.batch.batch_id == id);
+        getBatchData(context, obj){
+            let b = context.state.batches.find(batch => batch.batch_id == obj.batch_id);
+            let s = b.storages.find(storage => storage.storage.storage_id == obj.warehouse_id);
+            let res = {
+              batch: b,
+              storage: s,
+            }
             return res;
         },
+
+        getBatchDataShort(context, no){
+          console.log('short', no)
+          let res = context.state.batches.find(batch => batch.batch_no == no);
+          console.log('short', res)
+          return res;
+      },
         
     },
 
