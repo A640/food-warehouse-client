@@ -23,8 +23,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 
-    adress: "localhost",
-    port: 8090,
     store_name:  'HURTOWNIA DEMO',
 
     no_connection: false,
@@ -128,10 +126,6 @@ export default new Vuex.Store({
   },
 
   getters: {
-
-    getServerAddress(context){
-      return 'http://' + context.adress + ':' + String(context.port)
-    },
 
     getNoConnection(context){
       return context.no_connection;
