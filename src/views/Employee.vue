@@ -176,14 +176,14 @@ export default {
 
     methods: {
         showAlerts(){
-            if(this.$route.name != 'Manager_Alerts'){
-                this.$router.push({ name: 'Manager_Alerts'});
+            if(this.$route.name != 'Employee_Alerts'){
+                this.$router.push({ name: 'Employee_Alerts'});
                 this.title = 'Komunikaty systemowe';
             }
         },
         showMessages(){
-            if(this.$route.name != 'Manager_Messages'){
-                this.$router.push({ name: 'Manager_Messages'});
+            if(this.$route.name != 'Employee_Messages'){
+                this.$router.push({ name: 'Employee_Messages'});
                 this.title = 'Wiadomości';
             }
         },

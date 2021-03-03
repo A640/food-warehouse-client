@@ -158,15 +158,9 @@ export default {
 
 
     methods: {
-        showAlerts(){
-            if(this.$route.name != 'Manager_Alerts'){
-                this.$router.push({ name: 'Manager_Alerts'});
-                this.title = 'Komunikaty systemowe';
-            }
-        },
         showMessages(){
-            if(this.$route.name != 'Manager_Messages'){
-                this.$router.push({ name: 'Manager_Messages'});
+            if(this.$route.name != 'Supplier_Messages'){
+                this.$router.push({ name: 'Supplier_Messages'});
                 this.title = 'Wiadomości';
             }
         },

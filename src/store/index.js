@@ -25,7 +25,7 @@ export default new Vuex.Store({
 
     adress: "localhost",
     port: 8090,
-    store_name:  'STYRTA_POL',
+    store_name:  'HURTOWNIA',
 
     no_connection: false,
     reconnected: false,
