@@ -3,7 +3,6 @@ import axios from 'axios'
 const ProductModule = {
 
     state: { 
-
         products: [],
         products_loading: false,
 
@@ -233,52 +232,60 @@ const ProductModule = {
           });
       },
 
-      getAllProducts(context, silent=false){
+      getAllProducts(context){
             //get all Products and their User info from server
             //silent option is mainly for not hide reconnected banner
       
             console.log("Gecik product")
             context.commit('setProductsLoading',true);
-            let token = localStorage.getItem('jwtToken')
-            axios.get(context.getters.getServerAddress +'/product', { headers: { Authorization: `Bearer ${token}` } })
-              .then( (data) => {
+
+            setTimeout(()=>{
+              context.commit('setProductsLoading',false);
+            },1000)
+
+
+
+
+            // let token = localStorage.getItem('jwtToken')
+            // axios.get(context.getters.getServerAddress +'/product', { headers: { Authorization: `Bearer ${token}` } })
+            //   .then( (data) => {
       
-                if(!silent){
-                  //connected to server, hide no connection banner
-                  context.dispatch('noConnectionChange',false);
-                }
+            //     if(!silent){
+            //       //connected to server, hide no connection banner
+            //       context.dispatch('noConnectionChange',false);
+            //     }
                
       
-                //save Products data in vuex store
-                console.log(data)
-                context.commit('setProducts',data.data.result);
-                context.commit('setProductsLoading',false);
-              })
-              .catch( (error) =>{
+            //     //save Products data in vuex store
+            //     console.log(data)
+            //     context.commit('setProducts',data.data.result);
+                
+            //   })
+            //   .catch( (error) =>{
       
-                if(error.toJSON().message == "Network Error"){
-                  //if can't connect to server
+            //     if(error.toJSON().message == "Network Error"){
+            //       //if can't connect to server
       
-                  context.dispatch('noConnectionChange',true);
+            //       context.dispatch('noConnectionChange',true);
       
-                }else{
-                  // Request made and server responded
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
+            //     }else{
+            //       // Request made and server responded
+            //       console.log(error.response.data);
+            //       console.log(error.response.status);
+            //       console.log(error.response.headers);
       
-                  if(!silent){
-                     //if connected to server, hide no connection banner
-                    context.dispatch('noConnectionChange',false);
-                  }
+            //       if(!silent){
+            //          //if connected to server, hide no connection banner
+            //         context.dispatch('noConnectionChange',false);
+            //       }
 
-                  if(error.response.status == 403){
-                    context.dispatch('forbiddenResponse');
-                  }
+            //       if(error.response.status == 403){
+            //         context.dispatch('forbiddenResponse');
+            //       }
                  
-                }
-                context.commit('setProductsLoading',false);
-              }); 
+            //     }
+            //     context.commit('setProductsLoading',false);
+            //   }); 
         },
       
         getProductData(context, id){

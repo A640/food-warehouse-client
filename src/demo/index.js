@@ -103,6 +103,26 @@ export default new Vuex.Store({
       console.log("Got FORBIDDEN 403 response from server");
       //fallback to login component
       router.push({ name: 'Login'});
+    },
+
+    authenticateUser(context,permissionLevel){
+
+      let authenticated = false;
+
+      if(typeof(permissionLevel) == String){
+        if(context.state.account.account.permission == permissionLevel){
+          authenticated = true;
+        }
+      }
+      else{
+        if(permissionLevel.includes(context.state.account.account.permission)){
+          authenticated = true;
+        }
+      }
+
+      if(!authenticated){
+        context.dispatch('forbiddenResponse');
+      }
     }
 
   },

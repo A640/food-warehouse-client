@@ -4,7 +4,7 @@ const StoreModule = {
 
     state: { 
 
-        store_products: [],
+        store_products: null,
         store_products_loading: false,
         cart: [],
         cart_settings:{
@@ -138,101 +138,48 @@ const StoreModule = {
 
         
 
-      getAllStoreProducts(context, silent=false){
+      getAllStoreProducts(context){
             //get all StoreProducts and their User info from server
             //silent option is mainly for not hide reconnected banner
       
             console.log("Gecik store_product")
             context.commit('setStoreProductsLoading',true);
-            return  axios.get(context.getters.getServerAddress +'/store/products')
-              .then( (data) => {
-      
-                if(!silent){
-                  //connected to server, hide no connection banner
-                  context.dispatch('noConnectionChange',false);
-                }
-               
-      
-                //save StoreProducts data in vuex store
-                console.log(data)
-                context.commit('setStoreProducts',data.data.result);
-                context.commit('setStoreProductsLoading',false);
-              })
-              .catch( (error) =>{
-      
-                if(error.toJSON().message == "Network Error"){
-                  //if can't connect to server
-      
-                  context.dispatch('noConnectionChange',true);
-      
-                }else{
-                  // Request made and server responded
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-      
-                  if(!silent){
-                     //if connected to server, hide no connection banner
-                    context.dispatch('noConnectionChange',false);
-                  }
 
-                  if(error.response.status == 403){
-                    context.dispatch('forbiddenResponse');
-                  }
-                 
-                }
+            if(context.store_products == null){
+              let products = require("../products.js");
+              context.commit('setStoreProducts',products.array);
+              context.commit('setStoreProductsLoading',false);
+            }
+            else{
+              setTimeout(()=>{
                 context.commit('setStoreProductsLoading',false);
-              }); 
+              },1000)
+            }
+           
         },
 
         getOneProduct(context, id){
           //get all StoreProducts and their User info from server
           //silent option is mainly for not hide reconnected banner
     
-          console.log("Gecik store_product")
+          console.log("Gecik one_store_product")
           context.commit('setStoreProductsLoading',true);
-          return  axios.get(context.getters.getServerAddress +'/store/product/' + id)
-            .then( (data) => {
-    
-              
-              //connected to server, hide no connection banner
-              context.dispatch('noConnectionChange',false);
-              
-             
-    
-              //save StoreProducts data in vuex store
-              console.log(data)
-              return data.data.result;
-            })
-            .catch( (error) =>{
-    
-              if(error.toJSON().message == "Network Error"){
-                //if can't connect to server
-    
-                context.dispatch('noConnectionChange',true);
-    
-              }else{
-                // Request made and server responded
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-    
-                
-                //if connected to server, hide no connection banner
-                context.dispatch('noConnectionChange',false);
-                
+          console.log('tesst',context);
 
-                if(error.response.status == 403){
-                  context.dispatch('forbiddenResponse');
-                }
+          if(context.state.store_products == null){
+            context.dispatch('getAllStoreProducts')
+          }
 
-                if(error.response.status == 400){
-                  return 'no product found'
-                }
-               
-              }
-              context.commit('setStoreProductsLoading',false);
-            }); 
+          let product = context.state.store_products.find(product => product.product_id == id)
+
+          if(product == null){
+            context.commit('setStoreProductsLoading',false);
+            return 'no product found'
+          }
+          else{
+            context.commit('setStoreProductsLoading',false);
+            return product;
+          }
       },
 
         getAllPaymentMethods(context, silent=false){
@@ -284,6 +231,9 @@ const StoreModule = {
       },
       
         getStoreProductData(context, id){
+            if(context.state.store_products == null){
+              context.dispatch('getAllStoreProducts')
+            }
             let res = context.state.store_products.find(store_product => store_product.product_id == id);
             return res;
         },
@@ -295,6 +245,7 @@ const StoreModule = {
         },
 
         getCartProducts(context){
+          context.dispatch('authenticateUser','Customer');
           let cart = context.state.cart
           cart.map((prod) =>{
             let p = context.state.store_products.find(store_product => store_product.product_id == prod.product_id)
@@ -708,7 +659,13 @@ const StoreModule = {
     getters: {
 
         getStoreProducts(context){
-            return context.store_products;
+            if(context.store_products == null){
+              return [];
+            }
+            else{
+              return context.store_products;
+            }
+            
         },
 
         getStoreProductsLoading(context){
