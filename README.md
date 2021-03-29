@@ -12,6 +12,22 @@ handling orders, issuing invoices, displaying alerts on situations such as e.g. 
 simplifying and improving contact with the customer by enabling him to place and manage orders
 directly in the program as well as tracking the status of every order.
 
+## Table of contents
+
+- [Food warehouse project description](#food-warehouse-project-description)
+  - [Introduction](#introduction)
+  - [Creators and their roles in project](#creators-and-their-roles-in-project)
+  - [Technologies](#technologies)
+  - [Features](#features)
+      - [As guest user](#as-guest-user)
+      - [As customer](#as-customer)
+      - [As employee](#as-employee)
+      - [As manager](#as-manager)
+      - [As admin](#as-admin)
+      - [As delivery man](#as-delivery-man)
+      - [System features](#system-features)
+- [Installation and usage](#installation-and-usage)
+ 
 
 
 # Food warehouse project description
