@@ -162,4 +162,41 @@ yarn lint
 
 
 
+## Screenshots
+### UI is currently in Polish
+  
+**E-store page**
+<a href="https://drive.google.com/uc?export=view&id=1wmV6u75OwwszGjMTOHcBvEJtEiPY96kJ"><img src="https://drive.google.com/uc?export=view&id=1wmV6u75OwwszGjMTOHcBvEJtEiPY96kJ" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Product details**
+<a href="https://drive.google.com/uc?export=view&id=1Z3jHr_Cc--6NIIqqUrjwZYRDy2lu_eac"><img src="https://drive.google.com/uc?export=view&id=1Z3jHr_Cc--6NIIqqUrjwZYRDy2lu_eac" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Product details mobile**
+<a href="https://drive.google.com/uc?export=view&id=11Gs6RrQvMruVnnHDUO4gjeehthJOGFWl"><img src="https://drive.google.com/uc?export=view&id=11Gs6RrQvMruVnnHDUO4gjeehthJOGFWl" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Cart**
+<a href="https://drive.google.com/uc?export=view&id=1FG9Zswt9QQEyuHj5qXPpdyvdc3IB7Z4s"><img src="https://drive.google.com/uc?export=view&id=1FG9Zswt9QQEyuHj5qXPpdyvdc3IB7Z4s" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+<a href="https://drive.google.com/uc?export=view&id=1f6Qwn27HW3yH1a_B7hKhVfMat5UK2PwI"><img src="https://drive.google.com/uc?export=view&id=1f6Qwn27HW3yH1a_B7hKhVfMat5UK2PwI" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+<a href="https://drive.google.com/uc?export=view&id=1boJmEzQ1UXb25MeEW_ZFmbGsJywQOdlx"><img src="https://drive.google.com/uc?export=view&id=1boJmEzQ1UXb25MeEW_ZFmbGsJywQOdlx" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Manager panel**
+<a href="https://drive.google.com/uc?export=view&id=1EDxipDEN7gCPR5HOiw6bChV7QCcYDY-5"><img src="https://drive.google.com/uc?export=view&id=1EDxipDEN7gCPR5HOiw6bChV7QCcYDY-5" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Manager product list**
+<a href="https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm"><img src="https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Stats**
+<a href="https://drive.google.com/uc?export=view&id=1KWPUh1sJH-o47v5pGKjcbSPcSyLO7gaY"><img src="https://drive.google.com/uc?export=view&id=1KWPUh1sJH-o47v5pGKjcbSPcSyLO7gaY" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+<a href="https://drive.google.com/uc?export=view&id=1L2-9qfCjSgHfMC8qxZjgv9CCqM_agffU"><img src="https://drive.google.com/uc?export=view&id=1L2-9qfCjSgHfMC8qxZjgv9CCqM_agffU" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+<a href="https://drive.google.com/uc?export=view&id=1AwLwZXmLQyZrxzmPPSxAc4XejzI94jV9"><img src="https://drive.google.com/uc?export=view&id=1AwLwZXmLQyZrxzmPPSxAc4XejzI94jV9" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Product list**
+<a href="https://drive.google.com/uc?export=view&id=<FILEID>"><img src="https://drive.google.com/uc?export=view&id=<FILEID>" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Add new product**
+<a href="https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm"><img src="https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+  
+**Admin panel**
+<a href="https://drive.google.com/uc?export=view&id=1_JXdPYMRz8S1wI1V-fKiWYgGs-QVUlET"><img src="https://drive.google.com/uc?export=view&id=1_JXdPYMRz8S1wI1V-fKiWYgGs-QVUlET" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
+
 
