@@ -167,47 +167,42 @@ yarn lint
 ### UI is currently in Polish
   
 **E-store page**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1wmV6u75OwwszGjMTOHcBvEJtEiPY96kJ)](https://drive.google.com/uc?export=view&id=1wmV6u75OwwszGjMTOHcBvEJtEiPY96kJ)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/store.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/store.png?raw=true)
 
   
 **Product details**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1Z3jHr_Cc--6NIIqqUrjwZYRDy2lu_eac)](https://drive.google.com/uc?export=view&id=1Z3jHr_Cc--6NIIqqUrjwZYRDy2lu_eac)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/product%20details.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/product%20details.png?raw=true)
 
   
 **Product details mobile**
-[![click here to view image](https://drive.google.com/uc?export=view&id=11Gs6RrQvMruVnnHDUO4gjeehthJOGFWl)](https://drive.google.com/uc?export=view&id=11Gs6RrQvMruVnnHDUO4gjeehthJOGFWl)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/product%20details%20mobile.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/product%20details%20mobile.png?raw=true)
 
   
 **Cart**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1FG9Zswt9QQEyuHj5qXPpdyvdc3IB7Z4s)](https://drive.google.com/uc?export=view&id=1FG9Zswt9QQEyuHj5qXPpdyvdc3IB7Z4s)
-[![click here to view image](https://drive.google.com/uc?export=view&id=1f6Qwn27HW3yH1a_B7hKhVfMat5UK2PwI)](https://drive.google.com/uc?export=view&id=1f6Qwn27HW3yH1a_B7hKhVfMat5UK2PwI)
-[![click here to view image](https://drive.google.com/uc?export=view&id=1boJmEzQ1UXb25MeEW_ZFmbGsJywQOdlx)](https://drive.google.com/uc?export=view&id=1boJmEzQ1UXb25MeEW_ZFmbGsJywQOdlx)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/cart%201.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/cart%201.png?raw=true)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/cart%202.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/cart%202.png?raw=true)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/cart%203.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/cart%203.png?raw=true)
 
   
 **Manager panel**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1EDxipDEN7gCPR5HOiw6bChV7QCcYDY-5)](https://drive.google.com/uc?export=view&id=1EDxipDEN7gCPR5HOiw6bChV7QCcYDY-5)
-
-  
-**Manager product list**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm)](https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/manager%20-%20employee.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/manager%20-%20employee.png?raw=true)
 
   
 **Stats**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1KWPUh1sJH-o47v5pGKjcbSPcSyLO7gaY)](https://drive.google.com/uc?export=view&id=1KWPUh1sJH-o47v5pGKjcbSPcSyLO7gaY)
-[![click here to view image](https://drive.google.com/uc?export=view&id=1L2-9qfCjSgHfMC8qxZjgv9CCqM_agffU)](https://drive.google.com/uc?export=view&id=1L2-9qfCjSgHfMC8qxZjgv9CCqM_agffU)
-[![click here to view image](https://drive.google.com/uc?export=view&id=1AwLwZXmLQyZrxzmPPSxAc4XejzI94jV9)](https://drive.google.com/uc?export=view&id=1AwLwZXmLQyZrxzmPPSxAc4XejzI94jV9)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/stats%201.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/stats%201.png?raw=true)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/stats%202.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/stats%202.png?raw=true)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/stats%203.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/stats%203.png?raw=true)
 
   
 **Product list**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm)](https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/manager%20-%20products.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/manager%20-%20products.png?raw=true)
 
   
 **Add new product**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm)](https://drive.google.com/uc?export=view&id=1mFS_HFajuNMLxMMnvqbsdC32LJzLT1Zm)
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/manager%20-%20add%20product.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/manager%20-%20add%20product.png?raw=true)
 
   
 **Admin panel**
-[![click here to view image](https://drive.google.com/uc?export=view&id=1_JXdPYMRz8S1wI1V-fKiWYgGs-QVUlET)](https://drive.google.com/uc?export=view&id=1_JXdPYMRz8S1wI1V-fKiWYgGs-QVUlET)
-
+[![click here to view image](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/admin%20-%20vehicle.png)](https://github.com/A640/food-warehouse-client/blob/assets/screenshots/admin%20-%20vehicle.png?raw=true)
 
 
