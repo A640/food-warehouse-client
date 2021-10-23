@@ -10,6 +10,7 @@
         </div>
         
         <div id="content">
+            <h1>{{ $t("welcome") }}</h1>
             <transition name="slide-fade" mode="out-in">
                <v-btn outlined @click="showStore()">Katalog produktów</v-btn>
             </transition>
