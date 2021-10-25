@@ -10,6 +10,9 @@
     "street": "Street"
   },
   "cancel": "Cancel",
+  "common": {
+    "optional": "optional"
+  },
   "companyName": "Company name",
   "email": "E-mail",
   "errors": {
@@ -40,6 +43,7 @@
     "cancel": "Cancel your order",
     "cancelError": "The order can no longer be canceled",
     "comments": "Comments to order",
+    "commentsPlaceholder": "Enter your order comments here",
     "complaint": "Complaint",
     "dateOrdered": "Order date",
     "orderNumber": "Order number",

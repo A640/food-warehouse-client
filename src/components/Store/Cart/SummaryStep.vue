@@ -23,11 +23,11 @@
                                 <v-card-title class="center">{{cart_settings.payment.payment_type}}</v-card-title>
                             </v-card>
 
-                        <p class="mb-5">{{ $t("orders.comments") }} (opcjonalnie)</p>
+                        <p class="mb-5">{{ $t("orders.comments") }} {{ $t("common.optional") }}</p>
                             
                             <v-textarea 
-                                class="input"
-                                label="Wpisz tutaj swoje {{ $t("orders.comments") }}"
+                                class="input" 
+                                :label="$t('orders.commentsPlaceholder')" 
                                 solo 
                                 v-model="order_comment"
                             />

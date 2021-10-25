@@ -10,6 +10,9 @@
     "street": "Ulica"
   },
   "cancel": "Anuluj",
+  "common": {
+    "optional": "opcjonalnie"
+  },
   "companyName": "Nazwa firmy",
   "email": "E-mail",
   "errors": {
@@ -40,6 +43,7 @@
     "cancel": "Wycofaj zamówienie",
     "cancelError": "Nie można już wycofać zamówienia",
     "comments": "Uwagi do zamówienia",
+    "commentsPlaceholder": "Wpisz tutaj swoje uwagi do zamówienia",
     "complaint": "Reklamacja",
     "dateOrdered": "Data złożenia zamówienia",
     "orderNumber": "Zamówienie numer",
