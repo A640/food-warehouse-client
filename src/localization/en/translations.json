@@ -1,3 +1,88 @@
 {
-  "welcome": "Welcome on our page"
+  "account": "Account",
+  "address": {
+    "address": "Address",
+    "apartmentNumber": "Apartment number",
+    "buildingNumber": "Building number",
+    "city": "City",
+    "country": "Country",
+    "postCode": "Post code",
+    "street": "Street"
+  },
+  "cancel": "Cancel",
+  "companyName": "Company name",
+  "email": "E-mail",
+  "errors": {
+    "emailInvalid": "Email address is invalid",
+    "emailTaken": "This email is already registered! Please enter a different address.",
+    "invalidCodeFormat": "Invalid code format",
+    "loginTaken": "This login is already taken! Choose different one.",
+    "max": "Maximum {{count}} characters",
+    "min": "Minimum {{number}} characters",
+    "mustContainDigits": "The code must contain {{count}} digits",
+    "orderNotFound": "The selected order was not found",
+    "passCount": "Password must contain at least {{count}} characters",
+    "passDigit": "At least one digit is required",
+    "passLower": "At least one lower case character is required",
+    "passNotMatch": "The given passwords do not match",
+    "passRetype": "Please enter your password again",
+    "passUpper": "At least one upper case character is required",
+    "phoneDigits": "Minumum 9 digits",
+    "required": "This field is required!"
+  },
+  "firstName": "First name",
+  "haveCompany": "I have a company",
+  "lastName": "Last name",
+  "login": "Login",
+  "myData": "My data",
+  "notChanged": "not changed",
+  "orders": {
+    "cancel": "Cancel your order",
+    "cancelError": "The order can no longer be canceled",
+    "comments": "Comments to order",
+    "complaint": "Complaint",
+    "dateOrdered": "Order date",
+    "orderNumber": "Order number",
+    "ordersList": "order list",
+    "products": "Products",
+    "state": {
+      "CANCELED": "Canceled",
+      "COMPLETING": "During picking",
+      "DELIVERED": "Delivered",
+      "OUT_FOR_DELIVERY": "On the way to the customer",
+      "PENDING": "Pending",
+      "READY_TO_DELIVER": "Ready to ship",
+      "REGISTERED": "Registered",
+      "RETURNED": "Returned",
+      "UNKNOWN": "Unknown"
+    },
+    "status": "Order status",
+    "value": "Order value"
+  },
+  "password": "Password",
+  "passwordRepeat": "Repeat password",
+  "payment": {
+    "paymentMethod": "Payment method",
+    "state": {
+      "CANCELED": "Payment canceled",
+      "COMPLETED": "Paid",
+      "IN_PROGRESS": "Payment is in progress",
+      "REJECTED": "Payment declined",
+      "UNKNOWN": "Unknown",
+      "WAITING_FOR_PAYMENT": "The order is pending waiting for payment"
+    },
+    "value": "Value"
+  },
+  "personalData": "Personal data",
+  "phone": "Phone number",
+  "products": {
+    "products": "Products",
+    "quantity": "Quantity"
+  },
+  "returnTo": "Return to",
+  "save": "Save",
+  "taxID": "Tax ID",
+  "welcome": {
+    "inner": "This is supper inner text"
+  }
 }

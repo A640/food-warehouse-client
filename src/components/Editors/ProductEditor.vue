@@ -148,29 +148,29 @@ export default {
             image: null,
 
             r_name: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
             r_category: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
             ],
 
             r_price: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '') >= 0 || 'Cena nie może być ujemna',
             ],
 
             r_producer: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
             ],
 
             r_short_description: [
-                value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
+                value => (value || '').length <= 64 || this.$t('errors.max', {count: '64'}),
             ],
 
             r_image: [

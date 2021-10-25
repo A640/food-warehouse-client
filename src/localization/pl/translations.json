@@ -1,3 +1,88 @@
 {
-  "welcome": "Witaj na naszej stronie"
+  "account": "Konto",
+  "address": {
+    "address": "Adres",
+    "apartmentNumber": "Numer mieszkania",
+    "buildingNumber": "Numer budynku",
+    "city": "Miejscowość",
+    "country": "Kraj",
+    "postCode": "Kod pocztowy",
+    "street": "Ulica"
+  },
+  "cancel": "Anuluj",
+  "companyName": "Nazwa firmy",
+  "email": "E-mail",
+  "errors": {
+    "emailInvalid": "Adres e-mail jest nieprawidłowy",
+    "emailTaken": "Ten email jest już w użyciu! Podaj inny adres.",
+    "invalidCodeFormat": "Nieprawidłowy format kodu",
+    "loginTaken": "Ten login jest zajęty! Wybierz inny login.",
+    "max": "Maksymalnie {{count}} znaki",
+    "min": "Minimum {{number}} znaki",
+    "mustContainDigits": "Kod musi zawierać {{count}} cyfry",
+    "orderNotFound": "Nie znaleziono wybranego zamówienia",
+    "passCount": "Hasło musi zawierać co najmniej {{count}} znaków",
+    "passDigit": "Wymagana conajmniej jedna cyfra",
+    "passLower": "Wymagana co najmniej jedna mała litera",
+    "passNotMatch": "Podane hasła nie zgadzają się ze sobą",
+    "passRetype": "Podaj ponownie hasło",
+    "passUpper": "Wymagana co najmniej jedna duża litera",
+    "phoneDigits": "Minimum 9 cyfr",
+    "required": "To pole jest wymagane!"
+  },
+  "firstName": "Imię",
+  "haveCompany": "Mam firmę",
+  "lastName": "Nazwisko",
+  "login": "Login",
+  "myData": "Moje dane",
+  "notChanged": "nie zmieniono",
+  "orders": {
+    "cancel": "Wycofaj zamówienie",
+    "cancelError": "Nie można już wycofać zamówienia",
+    "comments": "Uwagi do zamówienia",
+    "complaint": "Reklamacja",
+    "dateOrdered": "Data złożenia zamówienia",
+    "orderNumber": "Zamówienie numer",
+    "ordersList": "listy zamówień",
+    "products": "Produktów",
+    "state": {
+      "CANCELED": "Anulowane",
+      "COMPLETING": "W trakcie kompletacji",
+      "DELIVERED": "Dostarczone",
+      "OUT_FOR_DELIVERY": "W drodze do klienta",
+      "PENDING": "Oczekujące",
+      "READY_TO_DELIVER": "Gotowy do wysyłki",
+      "REGISTERED": "Przyjęte",
+      "RETURNED": "Zwrócone",
+      "UNKNOWN": "Nieznany"
+    },
+    "status": "Status zamówienia",
+    "value": "Wartość zamówienia"
+  },
+  "password": "Hasło",
+  "passwordRepeat": "Powtórz hasło",
+  "payment": {
+    "paymentMethod": "Metoda płatności",
+    "state": {
+      "CANCELED": "Płatność wycofana",
+      "COMPLETED": "Opłacono",
+      "IN_PROGRESS": "W trakcie płatnoći",
+      "REJECTED": "Płatność odrzucona",
+      "UNKNOWN": "Nieznany",
+      "WAITING_FOR_PAYMENT": "Zamówienie oczekuje na opłacenie"
+    },
+    "value": "Wartość"
+  },
+  "personalData": "Dane osobowe",
+  "phone": "Teflon",
+  "products": {
+    "products": "Produkty",
+    "quantity": "Ilość"
+  },
+  "returnTo": "Wróć do",
+  "save": "Zapisz",
+  "taxID": "NIP",
+  "welcome": {
+    "inner": "Super polski inner text"
+  }
 }

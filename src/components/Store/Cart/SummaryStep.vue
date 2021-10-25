@@ -18,22 +18,22 @@
                         <p class="mb-5">Adres</p>
                             <Address class="mb-5" :address="cart_settings.address" />
 
-                        <p class="mb-5">Metoda płatności</p>
+                        <p class="mb-5">{{ $t("payment.paymentMethod") }}</p>
                             <v-card class="mb-5 center-content  d-flex">
                                 <v-card-title class="center">{{cart_settings.payment.payment_type}}</v-card-title>
                             </v-card>
 
-                        <p class="mb-5">Uwagi do zamówienia (opcjonalnie)</p>
+                        <p class="mb-5">{{ $t("orders.comments") }} (opcjonalnie)</p>
                             
                             <v-textarea 
                                 class="input"
-                                label="Wpisz tutaj swoje uwagi do zamówienia"
+                                label="Wpisz tutaj swoje {{ $t("orders.comments") }}"
                                 solo 
                                 v-model="order_comment"
                             />
                             
 
-                        <p class="mb-5">Produkty</p>
+                        <p class="mb-5">{{ $t("products.products") }}</p>
                         <v-card min-height="8rem">
                             <div class="card-container">
                                 <!-- Product list -->

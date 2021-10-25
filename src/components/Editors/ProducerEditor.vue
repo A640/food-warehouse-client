@@ -65,20 +65,20 @@ export default {
 
 
             r_firm_name: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
             ],
 
             r_phone: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
-                value => (value || '').length >= 9 || 'Minimum 9 cyfr',
+                value => (value || '').length >= 9 || this.$t('errors.phoneDigits'),
             ],
 
             r_email: [
-                value => !!value || 'To pole jest wymagane!',
-                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail musi być poprawny'
+                value => !!value || this.$t('errors.required'),
+                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t('errors.emailInvalid')
             ],
         }
     },

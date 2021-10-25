@@ -164,7 +164,7 @@ export default {
             { title: 'Pojazdy', icon: 'mdi-truck', link: 'Manager_Vehicles' },
             { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Manager_Warehouses'},
             { title: 'Producenci', icon: 'mdi-food', link: 'Manager_Producers' },
-            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Manager_Products' },
+            { title: '{{ $t("products.products") }}', icon: 'mdi-tag-outline', link: 'Manager_Products' },
             { title: 'Statystyki', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Manager_Alerts' },

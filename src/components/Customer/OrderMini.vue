@@ -7,18 +7,18 @@
             
             <div class="details">
                 <div class="ml-4">
-                    <h3 class="details-mini-title mt-0" >Zamówienie numer {{order.order.order_id}}</h3>
+                    <h3 class="details-mini-title mt-0" >{{ $t("orders.orderNumber") }} {{order.order.order_id}}</h3>
                     <p  class=" details-producer mb-0">{{state}}</p>
                 </div>
 
                 <div class="details">
                     <div class="mr-5" >
-                        <p class="details-mini-title mt-0">Produktów</p>
+                        <p class="details-mini-title mt-0">{{ $t("orders.products") }}</p>
                         <p class="details-mini-title mb-0 text-center">{{order.products.length}}</p>         
                     </div>
                     
                     <div class="mr-4 ml-5" >
-                        <p class="details-mini-title mt-0">Wartość</p>
+                        <p class="details-mini-title mt-0">{{ $t("orders.value") }}</p>
                         <p class="details-mini-title mb-0 text-center">{{order.payment.value}} zł</p>         
                     </div>
                 </div>
@@ -54,24 +54,24 @@ export default {
 
     computed:{
         state(){
-            if(this.order.order.order_state == "PENDING"){
-                return "Oczekujące";
-            }else if(this.order.order.order_state == "REGISTERED"){
-                return 'Przyjęte';
-            }else if(this.order.order.order_state == "CANCELED"){
-                return 'Anulowane';
-            }else if(this.order.order.order_state == "COMPLETING"){
-                return 'W trakcie kompletacji'
-            }else if(this.order.order.order_state == "READY TO DELIVER"){
-                return 'Gotowy do dostarczenia'
-            }else if(this.order.order.order_state == "OUT FOR DELIVERY"){
-                return 'W drodze do klienta'
-            }else if(this.order.order.order_state == "DELIVERED"){
-                return 'Dostarczono'
-            }else if(this.order.order.order_state == "RETURNED"){
-                return 'Zwrócone'
+            if(this.order.order_state == "PENDING"){
+                return this.$t('orders.state.PENDING');
+            }else if(this.order.order_state == "REGISTERED"){
+                return this.$t('orders.state.REGISTERED');
+            }else if(this.order.order_state == "CANCELED"){
+                return this.$t('orders.state.CANCELED');
+            }else if(this.order.order_state == "COMPLETING"){
+                return this.$t('orders.state.COMPLETING');
+            }else if(this.order.order_state == "READY TO DELIVER"){
+                return this.$t('orders.state.READY_TO_DELIVER');
+            }else if(this.order.order_state == "OUT FOR DELIVERY"){
+                return this.$t('orders.state.OUT_FOR_DELIVERY');
+            }else if(this.order.order_state == "DELIVERED"){
+                return this.$t('orders.state.DELIVERED');
+            }else if(this.order.order_state == "RETURNED"){
+                return this.$t('orders.state.RETURNED');
             }else{
-                return 'Nieznany'
+                return this.$t('orders.state.UNKNOWN');
             }
         },
     },

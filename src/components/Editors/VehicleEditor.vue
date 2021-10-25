@@ -120,32 +120,32 @@ export default {
             i_driver: '',
 
             r_brand: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
             ],
 
             r_model: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
             r_prod_year: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 // value => (value || '').length == 4 || 'Rok musi być 4-cyfrowy',
                 value => value > 1800 || 'Nieprawidłowa wartość',
             ],
 
             r_reg_no: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 16 || this.$t('errors.max', {count: '16'}),
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
             ],
 
             r_driver: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
             ]
         }
     },

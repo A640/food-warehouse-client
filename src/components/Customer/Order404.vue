@@ -3,12 +3,12 @@
         <div class="component-404">
             <v-icon class="ico">mdi-close-circle</v-icon>
 
-            <h2 class="title">Nie znaleziono wybranego zamówienia</h2>
+            <h2 class="title">{{ $t("errors.orderNotFound") }}</h2>
             
 
             <div class="cell align-center footer">
-                <p>Wróc do
-                <router-link :to="{name: 'Customer_Orders'}" class="cell__link">listy zamówień</router-link>
+                <p>{{ $t("returnTo") }}
+                <router-link :to="{name: 'Customer_Orders'}" class="cell__link">{{ $t("orders.ordersList") }}</router-link>
                 </p>
             </div>       
         </div>

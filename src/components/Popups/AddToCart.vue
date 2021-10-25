@@ -108,7 +108,7 @@ export default {
             dialog: false,
             i_count: 1,
             r_count: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '') >= 0 || 'Ilość nie może być ujemna',
                 value => (value || '') <= this.max || 'Ilość nie może być większa niż maksymalna liczba sztuk',
             ],

@@ -95,27 +95,27 @@ export default {
 
 
             r_login: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',  
             ],
             r_email: [
-                value => !!value || 'To pole jest wymagane!',
-                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail musi być poprawny'
+                value => !!value || this.$t('errors.required'),
+                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t('errors.emailInvalid')
             ],
 
             r_password: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length >= 8 || 'Hasło musi zawierać conajmniej 8 znaków',
-                value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
-                v => !v || /[a-z]+/.test(v) || 'Wymagana conajmniej jedna mała litera',
-                v => !v || /[A-Z]+/.test(v) || 'Wymagana conajmniej jedna duża litera',
-                v => !v || /[0-9]+/.test(v) || 'Wymagana conajmniej jedna cyfra',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length >= 8 || this.$t('errors.passCount', {count: '8'} ),
+                value => (value || '').length <= 256 || this.$t('errors.max', {count: '256'} ),
+                v => !v || /[a-z]+/.test(v) || this.$t('errors.passLower'),
+                v => !v || /[A-Z]+/.test(v) || this.$t('errors.passUpper'),
+                v => !v || /[0-9]+/.test(v) || this.$t('errors.passDigit'),
             ],
 
             r_password2: [
-                (value) => !!value || 'Podaj ponownie hasło',
-                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
+                (value) => !!value || this.$t('errors.passRetype'),
+                (value) => value === this.c_password || this.$t('errors.passNotMatch'),
             ]
         }
 
@@ -176,7 +176,7 @@ export default {
                 //check if login is already in database
                 this.$store.dispatch('checkLogin',val).then(valid => {
                     //show custom error if login in database
-                    this.e_login = valid ?  ['Ten login jest zajęty! Wybierz inny login.'] : [];
+                    this.e_login = valid ?  [this.$t('errors.loginTaken')] : [];
                 })
             }
             
@@ -190,7 +190,7 @@ export default {
                 //check if email is already in database
                 this.$store.dispatch('checkEmail',val).then(valid => {
                     //show custom error if email in database
-                    this.e_email = valid ?  ['Ten email jest już w użyciu! Podaj inny adres.'] : [];
+                    this.e_email = valid ?  [this.$t('errors.emailTaken')] : [];
                 })
             }
         },

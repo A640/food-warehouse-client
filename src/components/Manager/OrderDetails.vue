@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Zamówienie numer {{order.order_id}}</v-card-title> 
+                           <v-card-title>{{ $t("orders.orderNumber") }} {{order.order_id}}</v-card-title> 
                         </v-card>
                     </v-col>
                     
@@ -26,13 +26,13 @@
                         <p class="mb-5">Adres</p>
                             <Address class="mb-5" :address="address" />
 
-                        <p class="mb-5">Metoda płatności</p>
+                        <p class="mb-5">{{ $t("payment.paymentMethod") }}</p>
                             <v-card class="mb-5 center-content  d-flex flex-column">
                                 <v-card-title class="center">{{payment.payment_type}}</v-card-title>
                                 <v-card-subtitle class="center">{{payment_state}}</v-card-subtitle>
                             </v-card>
 
-                        <p class="mb-5">Uwagi do zamówienia</p>
+                        <p class="mb-5">{{ $t("orders.comments") }}</p>
                             
                             <v-textarea
                                 readonly

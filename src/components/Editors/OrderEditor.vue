@@ -131,39 +131,39 @@ export default {
             address_id: null,
 
             r_street: [
-                value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
+                value => (value || '').length <= 64 || this.$t('errors.max', {count: '64'}),,
             ],
 
             r_building_num: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 16 || this.$t('errors.max', {count: '16'}),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_apartment_num: [
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+                value => (value || '').length <= 16 || this.$t('errors.max', {count: '16'}),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_town: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 128 || 'Maksymalnie 128 znaki',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 128 || this.$t('errors.max', {count: '128'}),
             ],
 
             r_pc1: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length == 2 || 'Kod musi zawierać 2 cyfry',
-                v => !v || /[0-9]{2}/.test(v) || 'Nieprawidłowy format kodu',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length == 2 || this.$t('errors.mustContainDigits', {count: '2'}),
+                v => !v || /[0-9]{2}/.test(v) || this.$t('errors.invalidCodeFormat'),
             ],
 
             r_pc2: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length == 3 || 'Kod musi zawierać 3 cyfry',
-                v => !v || /[0-9]{3}/.test(v) || 'Nieprawidłowy format kodu',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length == 3 || this.$t('errors.mustContainDigits', {count: '3'}),
+                v => !v || /[0-9]{3}/.test(v) || this.$t('errors.invalidCodeFormat'),
             ],
 
             r_country: [
-                 value => !!value || 'To pole jest wymagane!',
+                 value => !!value || this.$t('errors.required'),
             ],
 
             country: [],

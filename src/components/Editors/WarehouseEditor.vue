@@ -71,19 +71,19 @@ export default {
 
 
             r_name: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
             r_capacity: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 value => (value || '') >= 0 || 'Pojemność nie może być ujemna',
             ],
 
             r_manager: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
             ],
 
 

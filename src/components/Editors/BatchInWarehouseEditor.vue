@@ -127,32 +127,32 @@ export default {
 
 
             r_batch_number: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // value => (value || '').length <= 10 || 'Maksymalnie 10 znaków',
                 // value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
             r_product: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 // value => (value || '').length >= 1 || 'Minimum 1 znak',
             ],
 
             r_prod_quantity: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 // value => (value || '').length == 4 || 'Rok musi być 4-cyfrowy',
                 value => value > 0 || 'Wartość musi być większa od 0',
             ],
 
             r_discount: [
-                // value => value != '' || 'To pole jest wymagane!',
+                // value => value != '' || this.$t('errors.required'),
                 value => value >= 0 || 'Wartość musi być większa od 0',
                 value => value < 100 || 'Wartość musi być mniejsza niż 100',
             ],
 
             r_driver: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
             ],
 
 

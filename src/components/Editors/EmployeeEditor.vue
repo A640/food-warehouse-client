@@ -81,28 +81,28 @@ export default {
             c_salary: 0,
 
             r_name: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_surname: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_position: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_salary: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => value < 100000 || 'Zbyt duża wartość',
                 value => value >= 0 || 'Nie można wprowadzić wartości ujemnej',
             ],

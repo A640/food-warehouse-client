@@ -7,7 +7,7 @@
             
 
             <div class="cell align-center footer">
-                <p>Wróc do
+                <p>{{ $t("returnTo") }}
                 <router-link :to="{name: 'Store_Grid'}" class="cell__link">katalogu produktów</router-link>
                 </p>
             </div>       

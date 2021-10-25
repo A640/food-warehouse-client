@@ -92,29 +92,29 @@ export default {
             c_tax: '',
 
             r_name: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
             ],
 
             r_surname: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
                 value => (value || '').length >= 3 || 'Minimum 3 znaki',
             ],
 
             r_phone: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
-                value => (value || '').length >= 9 || 'Minimum 9 cyfr',
+                value => (value || '').length >= 9 || this.$t('errors.phoneDigits'),
             ],
 
             r_company: [],
             r_tax: [],
 
             r_password2: [
-                (value) => !!value || 'Podaj ponownie hasło',
-                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
+                (value) => !!value || this.$t('errors.passRetype'),
+                (value) => value === this.c_password || this.$t('errors.passNotMatch'),
             ],
         }
     },
@@ -155,13 +155,13 @@ export default {
             console.log(val)
             if(val){
                 this.r_company = [
-                    value => !!value || 'To pole jest wymagane!',
-                    value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
+                    value => !!value || this.$t('errors.required'),
+                    value => (value || '').length <= 256 || this.$t('errors.max', {count: '256'} ),
                     value => (value || '').length >= 3 || 'Minimum 3 znaki',
                 ];
 
                 this.r_tax = [
-                    value => !!value || 'To pole jest wymagane!',
+                    value => !!value || this.$t('errors.required'),
                     value => (value || '').length == 12 || 'NIP powinien zawierać 12 znaków',
                 ];
             }

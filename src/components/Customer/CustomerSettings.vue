@@ -3,16 +3,16 @@
 
         <v-form v-model="form_valid" ref="CustomerForm">
             <div class="first cell">
-            <p class="mb-5 section-title">Moje dane</p>
+            <p class="mb-5 section-title">{{ $t("myData") }}</p>
             <v-btn depressed :color="edit_mode ? 'rgb(130, 180, 170)' : '' " @click="edit_mode ? cancell() : edit_mode = true"> <v-icon :color="edit_mode ? 'rgb(255,255,255)' : 'rgb(0,0,0)'">mdi-pencil</v-icon> </v-btn>
         </div>
         
        <div class="cell ">
-            <p class="section-title">Konto</p>
+            <p class="section-title">{{ $t("account") }}</p>
         </div>
 
        <div class="cell">
-            <label class="cell__label">Login</label>
+            <label class="cell__label">{{ $t("login") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">E-mail</label>
+            <label class="cell__label">{{ $t("email") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -41,10 +41,10 @@
 
         
         <div class="cell">
-            <label class="cell__label">Hasło</label>
+            <label class="cell__label">{{ $t("password") }}</label>
             <v-text-field
                 class="input"
-                :label="password_rules.length == 0 ? 'nie zmieniono' : ''"
+                :label="password_rules.length == 0 ? $t('notChanged') : ''"
                 solo
                 :disabled="!edit_mode"
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
@@ -57,10 +57,10 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Powtórz hasło</label>
+            <label class="cell__label">{{ $t("passwordRepeat") }}</label>
             <v-text-field
                 class="input"
-                :label="password_rules.length == 0 ? 'nie zmieniono' : ''"
+                :label="password_rules.length == 0 ? $t('notChanged') : ''"
                 solo
                 :disabled="!edit_mode"
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
@@ -76,10 +76,10 @@
 
         <!-- customer -->
 
-        <p class="cell mt-10 mb-3 section-title">Dane osobowe</p>
+        <p class="cell mt-10 mb-3 section-title">{{ $t("personalData") }}</p>
 
         <div class="cell">
-            <label class="cell__label">Imie</label>
+            <label class="cell__label">{{ $t("firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -92,7 +92,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Nazwisko</label>
+            <label class="cell__label">{{ $t("lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -105,7 +105,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Teflon</label>
+            <label class="cell__label">{{ $t("phone") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -117,12 +117,12 @@
             ></v-text-field>
         </div>
         <div class="cell">
-            <v-switch v-model="is_company" color="rgb(130, 180, 170)" :disabled="!edit_mode" label="Mam firmę"></v-switch>
+            <v-switch v-model="is_company" color="rgb(130, 180, 170)" :disabled="!edit_mode" :label="$t('haveCompany')"></v-switch>
         </div>
         
 
         <div class="cell" v-if="is_company">
-            <label class="cell__label">Nazwa firmy</label>
+            <label class="cell__label">{{ $t("companyName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -135,7 +135,7 @@
         </div>
 
         <div class="cell" v-if="is_company">
-            <label class="cell__label">NIP</label>
+            <label class="cell__label">{{ $t("taxID") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -152,10 +152,10 @@
 
         <!-- Adress -->
 
-        <p class="cell mt-10 mb-3 section-title">Adres</p>
+        <p class="cell mt-10 mb-3 section-title">{{ $t("address.address") }}</p>
 
          <div class="cell">
-                <label class="cell__label">Ulica</label>
+                <label class="cell__label">{{ $t("address.address") }}</label>
                 <v-text-field
                     class="input"
                     label=""
@@ -170,7 +170,7 @@
 
             <div class="cell double">
                 <div class="mr-5">
-                    <label class="cell__label">Numer budynku</label>
+                    <label class="cell__label">{{ $t("address.buildingNumber") }}</label>
                     <v-text-field
                         class="input"
                         label=""
@@ -182,7 +182,7 @@
                     ></v-text-field>
                 </div>
                 <div class="ml-5">
-                    <label class="cell__label">Numer mieszkania</label>
+                    <label class="cell__label">{{ $t("address.apartmentNumber") }}</label>
                     <v-text-field
                         class="input"
                         label=""
@@ -202,7 +202,7 @@
             </div>
 
             <div class="cell">
-                <label class="cell__label">Miejscowość</label>
+                <label class="cell__label">{{ $t("address.city") }}</label>
                 <v-text-field
                     class="input"
                     label=""
@@ -215,7 +215,7 @@
             </div>
 
             <div class="cell" >
-                <label class="cell__label">Kod pocztowy</label>
+                <label class="cell__label">{{ $t("address.postCode") }}</label>
                 <div class="double">
                     <v-text-field
                     class="pc-input input inline mr-5"
@@ -247,7 +247,7 @@
 
 
             <div class="cell">
-                <label class="cell__label">Kraj</label>
+                <label class="cell__label">{{ $t("address.country") }}</label>
                 <v-autocomplete
                     solo
                     :disabled="!edit_mode"
@@ -260,13 +260,13 @@
 
         <div class="cell" v-if="edit_mode">
             <div class="cell__popup-buttons">
-                <v-btn text class="mr-2 mb-5" @click="cancell()">Anuluj</v-btn>
+                <v-btn text class="mr-2 mb-5" @click="cancell()">{{ $t("cancel") }}</v-btn>
                 <v-btn 
                 color="rgb(130, 180, 170)" 
                 class="mb-5" 
                 dark 
                 @click="save()"
-                >Zapisz</v-btn>
+                >{{ $t("save") }}</v-btn>
             </div>
         </div>
         </v-form>
@@ -322,27 +322,27 @@ export default {
 
 
             r_login: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',  
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),  
             ],
             r_email: [
-                value => !!value || 'To pole jest wymagane!',
-                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail musi być poprawny'
+                value => !!value || this.$t('errors.required'),
+                v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t('errors.emailInvalid')
             ],
 
             r_password: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length >= 8 || 'Hasło musi zawierać conajmniej 8 znaków',
-                value => (value || '').length <= 256 || 'Maksymalnie 256 znaków',
-                v => !v || /[a-z]+/.test(v) || 'Wymagana conajmniej jedna mała litera',
-                v => !v || /[A-Z]+/.test(v) || 'Wymagana conajmniej jedna duża litera',
-                v => !v || /[0-9]+/.test(v) || 'Wymagana conajmniej jedna cyfra',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length >= 8 || this.$t('errors.passCount', {count: '8'} ),
+                value => (value || '').length <= 256 || this.$t('errors.max', {count: '256'} ),
+                v => !v || /[a-z]+/.test(v) || this.$t('errors.passLower'),
+                v => !v || /[A-Z]+/.test(v) || this.$t('errors.passUpper'),
+                v => !v || /[0-9]+/.test(v) || this.$t('errors.passDigit'),
             ],
 
             r_password2: [
-                (value) => !!value || 'Podaj ponownie hasło',
-                (value) => value === this.c_password || 'Podane hasła nie zgadzają się ze sobą',
+                (value) => !!value || this.$t('errors.passRetype'),
+                (value) => value === this.c_password || this.$t('errors.passNotMatch'),
             ],
 
 
@@ -356,21 +356,21 @@ export default {
             c_tax: '',
 
             r_name: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'}),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_surname: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'}),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_phone: [
-                value => !!value || 'To pole jest wymagane!',
+                value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
-                value => (value || '').length >= 9 || 'Minimum 9 cyfr',
+                value => (value || '').length >= 9 || this.$t('errors.phoneDigits'),
             ],
 
             r_company: [],
@@ -388,39 +388,39 @@ export default {
             address_id: null,
 
             r_street: [
-                value => (value || '').length <= 64 || 'Maksymalnie 64 znaki',
+                value => (value || '').length <= 64 || this.$t('errors.max', {count: '64'}),
             ],
 
             r_building_num: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 16 || this.$t('errors.max', {count: '16'}),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_apartment_num: [
-                value => (value || '').length <= 16 || 'Maksymalnie 16 znaków',
+                value => (value || '').length <= 16 || this.$t('errors.max', {count: '16'}),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_town: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length <= 128 || 'Maksymalnie 128 znaki',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length <= 128 || this.$t('errors.max', {count: '128'}),
             ],
 
             r_pc1: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length == 2 || 'Kod musi zawierać 2 cyfry',
-                v => !v || /[0-9]{2}/.test(v) || 'Nieprawidłowy format kodu',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length == 2 || this.$t('errors.mustContainDigits', {count: '2'}),
+                v => !v || /[0-9]{2}/.test(v) || this.$t('errors.invalidCodeFormat'),
             ],
 
             r_pc2: [
-                value => !!value || 'To pole jest wymagane!',
-                value => (value || '').length == 3 || 'Kod musi zawierać 3 cyfry',
-                v => !v || /[0-9]{3}/.test(v) || 'Nieprawidłowy format kodu',
+                value => !!value || this.$t('errors.required'),
+                value => (value || '').length == 3 || this.$t('errors.mustContainDigits', {count: '3'}),
+                v => !v || /[0-9]{3}/.test(v) || this.$t('errors.invalidCodeFormat'),
             ],
 
             r_country: [
-                 value => !!value || 'To pole jest wymagane!',
+                 value => !!value || this.$t('errors.required'),
             ],
 
             country: [],
@@ -594,7 +594,7 @@ export default {
                 //check if login is already in database
                 this.$store.dispatch('checkLogin',val).then(valid => {
                     //show custom error if login in database
-                    this.e_login = valid ?  ['Ten login jest zajęty! Wybierz inny login.'] : [];
+                    this.e_login = valid ?  [this.$t('errors.loginTaken')] : [];
                 })
             }
             
@@ -608,7 +608,7 @@ export default {
                 //check if email is already in database
                 this.$store.dispatch('checkEmail',val).then(valid => {
                     //show custom error if email in database
-                    this.e_email = valid ?  ['Ten email jest już w użyciu! Podaj inny adres.'] : [];
+                    this.e_email = valid ?  [this.$t('errors.emailTaken')] : [];
                 })
             }
         },

@@ -12,12 +12,18 @@ import pl from '@/localization/pl/translations.json'
 Vue.use(VueI18Next);
 
 i18next.init({
-  lng: 'pl',
+  supportedLngs: ['en', 'pl'],
+  lng: 'en',
   fallbackLng: "en",
-    resources: {
-        en: { translation: en },
-        pl: { translation: pl },
-    }
+  detection: {
+    order: [ 'path', 'cookie', 'htmlTag'],
+    caches: ['cookie'],
+  },
+  
+  resources: {
+      en: { translation: en },
+      pl: { translation: pl },
+  }
 });
 
 const i18n = new VueI18Next(i18next);

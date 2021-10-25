@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Zamówienie numer {{order.order_id}}</v-card-title> 
+                           <v-card-title>{{ $t("orders.orderNumber") }} {{order.order_id}}</v-card-title> 
                         </v-card>
                     </v-col>
                     
@@ -23,16 +23,16 @@
                     <v-col cols="12" md="8">
 
 
-                        <p class="mb-5">Adres</p>
+                        <p class="mb-5">{{ $t("address.address") }}</p>
                             <Address class="mb-5" :address="address" />
 
-                        <p class="mb-5">Metoda płatności</p>
+                        <p class="mb-5">{{ $t("payment.paymentMethod") }}</p>
                             <v-card class="mb-5 center-content  d-flex flex-column">
                                 <v-card-title class="center">{{payment.payment_type}}</v-card-title>
                                 <v-card-subtitle class="center">{{payment_state}}</v-card-subtitle>
                             </v-card>
 
-                        <p class="mb-5">Uwagi do zamówienia</p>
+                        <p class="mb-5">{{ $t("orders.comments") }}</p>
                             
                             <v-textarea
                                 readonly 
@@ -44,7 +44,7 @@
                             />
                             
 
-                        <p class="mb-5">Produkty</p>
+                        <p class="mb-5">{{ $t("products.products") }}</p>
                         <v-card min-height="8rem">
                             <div class="card-container">
                                 <!-- Product list -->
@@ -53,7 +53,7 @@
                                         <Product class="mb-4 ml-4"  :removable="false" :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
-                                            <v-card-subtitle>Ilość</v-card-subtitle>
+                                            <v-card-subtitle>{{ $t("products.quantity") }}</v-card-subtitle>
                                             <div class="quantity-cell">
                                                 
                                                 <p class="quantity-label centered-input" >{{product.quantity}}</p>
@@ -75,37 +75,37 @@
                     </v-col>
                     <v-col>
 
-                        <p class="mb-5">Wartość</p>
+                        <p class="mb-5">{{ $t("payment.value") }}</p>
                             <v-card class="mb-5" >
                                 <div class="card-container cell">
-                                    <h3 class="cell"> Wartość zamówienia:</h3>
+                                    <h3 class="cell">{{ $t("orders.value") }}:</h3>
                                     <p  class="cell details-price ">{{payment.value}} zł</p>
                                 </div>
                             </v-card>
 
-                        <p class="mb-5">Status zamówienia</p>
+                        <p class="mb-5">{{ $t("orders.status") }}</p>
                             <v-card class="mb-5">
                                 <div class="card-container cell">
                                     <h3 class="cell">{{state}}</h3>
                                 </div>
                             </v-card>
 
-                        <p class="mb-5">Data złożenia zamówienia</p>
+                        <p class="mb-5">{{ $t("orders.dateOrdered") }}</p>
                             <v-card class="mb-5">
                                 <div class="card-container cell">
                                     <h3 class="cell">{{order.date}}</h3>
                                 </div>
                             </v-card>
 
-                        <p class="mb-5">Wycofaj zamówienie</p>
+                        <p class="mb-5">{{ $t("orders.cancel") }}</p>
                             <v-card class="mb-5 d-flex pt-5 pb-5">
 
                                 <Cancel class="center-btn"  v-if="cancellable" :id="order.order_id" @updateOrderDetails="loadData(true)"/>
-                                <v-card-subtitle v-else >Nie można już wycofać zamówienia</v-card-subtitle>
+                                <v-card-subtitle v-else >{{ $t("orders.cancelError") }}</v-card-subtitle>
                                 
                             </v-card>
 
-                        <p class="mb-5">Reklamacja</p>
+                        <p class="mb-5">{{ $t("orders.complaint") }}</p>
                             <v-card class="mb-5 cc-card pt-5 pb-5">
                                 <NewComplaint  :id="order.order_id" @updateOrderDetails="loadData(true)" class="mb-2" v-if="order.order_state != 'CANCELED'"/>
                                 <Complaint v-for="complaint in complaints" :key="complaint.complaint_id" :complaint="complaint" class="mt-3" @updateOrderDetails="loadData(true)"/>
@@ -252,40 +252,40 @@ export default {
 
         state(){
             if(this.order.order_state == "PENDING"){
-                return "Oczekujące";
+                return this.$t('orders.state.PENDING');
             }else if(this.order.order_state == "REGISTERED"){
-                return 'Przyjęte';
+                return this.$t('orders.state.REGISTERED');
             }else if(this.order.order_state == "CANCELED"){
-                return 'Anulowane';
+                return this.$t('orders.state.CANCELED');
             }else if(this.order.order_state == "COMPLETING"){
-                return 'W trakcie kompletacji'
+                return this.$t('orders.state.COMPLETING');
             }else if(this.order.order_state == "READY TO DELIVER"){
-                return 'Gotowy do dostarczenia'
+                return this.$t('orders.state.READY_TO_DELIVER');
             }else if(this.order.order_state == "OUT FOR DELIVERY"){
-                return 'W drodze do klienta'
+                return this.$t('orders.state.OUT_FOR_DELIVERY');
             }else if(this.order.order_state == "DELIVERED"){
-                return 'Dostarczono'
+                return this.$t('orders.state.DELIVERED');
             }else if(this.order.order_state == "RETURNED"){
-                return 'Zwrócone'
+                return this.$t('orders.state.RETURNED');
             }else{
-                return 'Nieznany'
+                return this.$t('orders.state.UNKNOWN');
             }
         },
 
         payment_state(){
             //payment state for diplaying
             if(this.payment.payment_state == "IN PROGRESS"){
-                    return  "W trakcie płatnoći";
+                    return  this.$t('payment.state.IN_PROGRESS');
                 }else if(this.payment.payment_state == "COMPLETED"){
-                    return  'Opłacono';
+                    return  this.$t('payment.state.COMPLETED');
                 }else if(this.payment.payment_state == "REJECTED"){
-                    return  'Płatność odrzucona';
+                    return  this.$t('payment.state.REJECTED');
                 }else if(this.payment.payment_state == "CANCELED"){
-                    return  'Płatność Wycofana';
+                    return  this.$t('payment.state.CANCELED');
                 }else if(this.payment.payment_state == "WAITING FOR PAYMENT"){
-                    return  'Płatność oczekuje na uregulowanie';
+                    return  this.$t('payment.state.WAITING_FOR_PAYMENT');
                 }else{
-                    return  'Nieznany';
+                    return  this.$t('payment.state.UNKNOWN');
             }
         },
 
