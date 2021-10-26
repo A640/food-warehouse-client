@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">NR Partii</label>
+            <label class="cell__label">{{ $t("batch.batchNumber") }}</label>
            <v-combobox
                 class="mt-2"
                 clearable
@@ -14,7 +14,7 @@
         </form>
 
         <div class="cell">
-            <label class="cell__label">Produkt</label>
+            <label class="cell__label">{{ $t("products.product") }}</label>
             <v-autocomplete
                 solo
                 class="mt-4"
@@ -26,7 +26,7 @@
         </div>
 
         <form class="cell">
-            <label class="cell__label">Ilość jednostek produktu na 1 europaletę</label>
+            <label class="cell__label">{{ $t("batch.productQuantity") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -38,7 +38,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Zniżka</label>
+            <label class="cell__label">{{ $t("common.discount") }}</label>
             <v-text-field
                 type="number"
                 class="input"
@@ -53,7 +53,7 @@
         
 
         <form class="cell" >
-            <label class="cell__label">Termin przydatności do spożycia</label>
+            <label class="cell__label">{{ $t("batch.useByDate") }}</label>
             <v-row justify="space-around">
                 <v-date-picker
                     v-model="i_eat_by_date"
@@ -68,7 +68,7 @@
 
 
         <div class="cell">
-            <label class="cell__label">Magazyn</label>
+            <label class="cell__label">{{ $t("common.warehouse") }}</label>
             <v-autocomplete
                 solo
                 class="mt-4"
@@ -81,7 +81,7 @@
 
 
         <form class="cell">
-            <label class="cell__label">Ile europalet dodać do magazynu:</label>
+            <label class="cell__label">{{ $t("batch.addNumber") }}:</label>
             <v-text-field
                 type="number"
                 class="input"
@@ -129,26 +129,26 @@ export default {
             r_batch_number: [
                 value => !!value || this.$t('errors.required'),
                 // value => (value || '').length <= 10 || 'Maksymalnie 10 znaków',
-                // value => (value || '').length >= 1 || 'Minimum 1 znak',
+                // value => (value || '').length >= 1 || this.$t('errors.min1', {count: '1'} ),
             ],
 
             r_product: [
                 value => !!value || this.$t('errors.required'),
-                // value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                // value => (value || '').length >= 1 || 'Minimum 1 znak',
+                // value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                // value => (value || '').length >= 1 || this.$t('errors.min1', {count: '1'} ),
             ],
 
             r_prod_quantity: [
                 value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 // value => (value || '').length == 4 || 'Rok musi być 4-cyfrowy',
-                value => value > 0 || 'Wartość musi być większa od 0',
+                value => value > 0 || this.$t('errors.greaterThan', {number: '0'} ),
             ],
 
             r_discount: [
                 // value => value != '' || this.$t('errors.required'),
-                value => value >= 0 || 'Wartość musi być większa od 0',
-                value => value < 100 || 'Wartość musi być mniejsza niż 100',
+                value => value >= 0 || this.$t('errors.greaterThan', {number: '0'} ),
+                value => value < 100 || this.$t('errors.lessThan', {number: '100'} ),
             ],
 
             r_driver: [

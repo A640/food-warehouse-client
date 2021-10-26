@@ -1,7 +1,7 @@
 <template>
     <v-form ref="employeeForm" @submit.prevent="nextStep">
         <form class="cell">
-            <label class="cell__label">Imie</label>
+            <label class="cell__label">{{ $t("firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -13,7 +13,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Nazwisko</label>
+            <label class="cell__label">{{ $t("lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -25,7 +25,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Nazwa stanowiska</label>
+            <label class="cell__label">{{ $t("employee.jobTitle") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -38,7 +38,7 @@
 
 
         <form class="cell">
-            <label class="cell__label">Wypłata</label>
+            <label class="cell__label">{{ $t("employee.salary") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -82,29 +82,29 @@ export default {
 
             r_name: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_surname: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_position: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
                 // v => !v || /^\d*$/.test(v) || 'Nieprawidłowy format numeru',
             ],
 
             r_salary: [
                 value => !!value || this.$t('errors.required'),
-                value => value < 100000 || 'Zbyt duża wartość',
-                value => value >= 0 || 'Nie można wprowadzić wartości ujemnej',
+                value => value < 100000 || this.$t('errors.tooHigh'),
+                value => value >= 0 || this.$t('errors.negativeValue'),
             ],
 
         }

@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Marka</label>
+            <label class="cell__label">{{ $t("vehicle.brand") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -14,7 +14,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Model</label>
+            <label class="cell__label">{{ $t("vehicle.model") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Rok produkcji</label>
+            <label class="cell__label">{{ $t("vehicle.productionYear") }}</label>
             <v-text-field
                 type="number"
                 class="input"
@@ -39,7 +39,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">NR Rejestracyjny</label>
+            <label class="cell__label">{{ $t("vehicle.plateNumber") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -53,7 +53,7 @@
         
 
         <form class="cell" >
-            <label class="cell__label">Ubezpieczenie ważne do: </label>
+            <label class="cell__label">{{ $t("vehicle.insuranceValidUntil") }}: </label>
             <v-row justify="space-around">
                 <v-date-picker
                     v-model="i_insurance"
@@ -66,7 +66,7 @@
         </form>
 
         <form class="cell" >
-            <label class="cell__label">Przegląd ważny do: </label>
+            <label class="cell__label">{{ $t("vehicle.mot") }}: </label>
             <v-row justify="space-around">
                 <v-date-picker
                     v-model="i_inspection"
@@ -79,7 +79,7 @@
         </form>
 
         <div class="cell">
-            <label class="cell__label">Kierowca</label>
+            <label class="cell__label">{{ $t("vehicle.mot") }}</label>
             <v-autocomplete
                 solo
                 class="mt-4"
@@ -121,27 +121,27 @@ export default {
 
             r_brand: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_model: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 1 || 'Minimum 1 znak',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 1 || this.$t('errors.min1', {count: '1'} ),
             ],
 
             r_prod_year: [
                 value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
                 // value => (value || '').length == 4 || 'Rok musi być 4-cyfrowy',
-                value => value > 1800 || 'Nieprawidłowa wartość',
+                value => value > 1800 || this.$t('errors.invalidValue'),
             ],
 
             r_reg_no: [
                 value => !!value || this.$t('errors.required'),
                 value => (value || '').length <= 16 || this.$t('errors.max', {count: '16'}),
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_driver: [

@@ -9,20 +9,43 @@
     "postCode": "Kod pocztowy",
     "street": "Ulica"
   },
+  "batch": {
+    "addNumber": "Ile europalet dodać do magazynu",
+    "batchNumber": "NR Partii",
+    "productQuantity": "Ilość jednostek produktu na 1 europaletę",
+    "useByDate": "Termin przydatności do spożycia"
+  },
   "cancel": "Anuluj",
   "common": {
-    "optional": "opcjonalnie"
+    "companyName": "Nazwa firmy",
+    "discount": "Zniżka",
+    "email": "E-mail",
+    "optional": "opcjonalnie",
+    "phone": "Teflon",
+    "taxID": "NIP",
+    "warehouse": "Magazyn"
   },
   "companyName": "Nazwa firmy",
   "email": "E-mail",
+  "employee": {
+    "jobTitle": "Nazwa stanowiska",
+    "salary": "Wynagrodzenie"
+  },
   "errors": {
     "emailInvalid": "Adres e-mail jest nieprawidłowy",
     "emailTaken": "Ten email jest już w użyciu! Podaj inny adres.",
+    "formats": "Obsługiwane formaty plików to: {{formats}}",
+    "greaterThan": "Wartość musi być większa od {{number}}",
+    "imageSmallerThan": "Obraz powinien być mniejszy niż {{count}}MB!",
     "invalidCodeFormat": "Nieprawidłowy format kodu",
+    "invalidValue": "Nieprawidłowa wartość",
+    "lessThan": "Wartość musi być mniejsza niż {{number}}",
     "loginTaken": "Ten login jest zajęty! Wybierz inny login.",
     "max": "Maksymalnie {{count}} znaki",
-    "min": "Minimum {{number}} znaki",
+    "min": "Minimum {{count}} znaki",
+    "min1": "Minimum {{count}} znak",
     "mustContainDigits": "Kod musi zawierać {{count}} cyfry",
+    "negativeValue": "Nie można wprowadzić wartości ujemnej",
     "orderNotFound": "Nie znaleziono wybranego zamówienia",
     "passCount": "Hasło musi zawierać co najmniej {{count}} znaków",
     "passDigit": "Wymagana conajmniej jedna cyfra",
@@ -31,7 +54,9 @@
     "passRetype": "Podaj ponownie hasło",
     "passUpper": "Wymagana co najmniej jedna duża litera",
     "phoneDigits": "Minimum 9 cyfr",
-    "required": "To pole jest wymagane!"
+    "required": "To pole jest wymagane!",
+    "taxIDInvalid": "NIP powinien zawierać {{count}} znaków",
+    "tooHigh": "Zbyt duża wartość"
   },
   "firstName": "Imię",
   "haveCompany": "Mam firmę",
@@ -80,12 +105,37 @@
   "personalData": "Dane osobowe",
   "phone": "Teflon",
   "products": {
+    "buyPrice": "Cena po jakiej magazyn <b>kupuje</b> jednostkę produktu",
+    "category": "Kategoria",
+    "description": "Opis",
+    "manufacturer": "Producent",
+    "name": "Nazwa",
+    "photo": "Zdjęcie produktu",
+    "product": "Produkt",
     "products": "Produkty",
-    "quantity": "Ilość"
+    "quantity": "Ilość",
+    "requiresRefrigeration": "Wymaga przechowywania w chłodni",
+    "sellPrice": "Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu",
+    "shortDescription": "Skrócony opis"
   },
   "returnTo": "Wróć do",
   "save": "Zapisz",
   "taxID": "NIP",
+  "vehicle": {
+    "brand": "Marka",
+    "driver": "Kierowca",
+    "insuranceValidUntil": "Ubezpieczenie ważne do",
+    "model": "Model",
+    "mot": "Przegląd ważny do",
+    "plateNumber": "NR Rejestracyjny",
+    "productionYear": "Rok produkcji"
+  },
+  "warehouse": {
+    "capacity": "Pojemność",
+    "freezer": "Chłodnia",
+    "manager": "Zarządca",
+    "name": "Nazwa"
+  },
   "welcome": {
     "inner": "Super polski inner text"
   }

@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Nazwa firmy</label>
+            <label class="cell__label">{{ $t("common.companyName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -14,7 +14,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Telefon</label>
+            <label class="cell__label">{{ $t("common.phone") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Email</label>
+            <label class="cell__label">{{ $t("common.email") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -66,8 +66,8 @@ export default {
 
             r_firm_name: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_phone: [

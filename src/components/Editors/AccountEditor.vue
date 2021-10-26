@@ -3,7 +3,7 @@
         <v-form ref="accountForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Login</label>
+            <label class="cell__label">{{ $t("login") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -16,7 +16,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">E-mail</label>
+            <label class="cell__label">{{ $t("email") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -30,10 +30,10 @@
 
         
         <form class="cell">
-            <label class="cell__label">Hasło</label>
+            <label class="cell__label">{{ $t("password") }}</label>
             <v-text-field
                 class="input"
-                :label="password_rules.length == 0 ? 'nie zmieniono' : ''"
+                :label="password_rules.length == 0 ? $t('notChanged') : ''"
                 solo
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="passwd_show ? 'text' : 'password'"
@@ -45,10 +45,10 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Powtórz hasło</label>
+            <label class="cell__label">{{ $t("passwordRepeat") }}</label>
             <v-text-field
                 class="input"
-                :label="password_rules.length == 0 ? 'nie zmieniono' : ''"
+                :label="password_rules.length == 0 ? $t('notChanged') : ''"
                 solo
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="passwd_show ? 'text' : 'password'"
@@ -96,8 +96,8 @@ export default {
 
             r_login: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaki',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',  
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),  
             ],
             r_email: [
                 value => !!value || this.$t('errors.required'),

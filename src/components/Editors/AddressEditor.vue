@@ -2,7 +2,7 @@
     <div>
         <v-form ref="addressForm" @submit.prevent="nextStep">
             <form class="cell">
-                <label class="cell__label">Ulica</label>
+                <label class="cell__label">{{ $t("address.street") }}</label>
                 <v-text-field
                     class="input"
                     label=""
@@ -16,7 +16,7 @@
 
             <form class="cell double">
                 <div class="mr-5">
-                    <label class="cell__label">Numer budynku</label>
+                    <label class="cell__label">{{ $t("address.buildingNumber") }}</label>
                     <v-text-field
                         class="input"
                         label=""
@@ -27,7 +27,7 @@
                     ></v-text-field>
                 </div>
                 <div class="ml-5">
-                    <label class="cell__label">Numer mieszkania</label>
+                    <label class="cell__label">{{ $t("address.apartmentNumber") }}</label>
                     <v-text-field
                         class="input"
                         label=""
@@ -46,7 +46,7 @@
             </form>
 
             <form class="cell">
-                <label class="cell__label">Miejscowość</label>
+                <label class="cell__label">{{ $t("address.city") }}</label>
                 <v-text-field
                     class="input"
                     label=""
@@ -58,7 +58,7 @@
             </form>
 
             <form class="cell" >
-                <label class="cell__label">Kod pocztowy</label>
+                <label class="cell__label">{{ $t("address.postCode") }}</label>
                 <div class="double">
                     <v-text-field
                     class="pc-input input inline mr-5"
@@ -88,7 +88,7 @@
 
 
             <div class="cell">
-                <label class="cell__label">Kraj</label>
+                <label class="cell__label">{{ $t("address.country") }}</label>
                 <v-autocomplete
                     solo
                     :rules="r_country"

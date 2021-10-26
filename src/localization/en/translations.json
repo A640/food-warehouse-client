@@ -9,20 +9,43 @@
     "postCode": "Post code",
     "street": "Street"
   },
+  "batch": {
+    "addNumber": "How many Euro-pallets to add to the warehouse",
+    "batchNumber": "Batch NO",
+    "productQuantity": "Number of product units per 1 Euro-pallet",
+    "useByDate": "Eat by date"
+  },
   "cancel": "Cancel",
   "common": {
-    "optional": "optional"
+    "companyName": "Company name",
+    "discount": "Discount",
+    "email": "E-mail",
+    "optional": "optional",
+    "phone": "Phone number",
+    "taxID": "Tax ID",
+    "warehouse": "Warehouse"
   },
   "companyName": "Company name",
   "email": "E-mail",
+  "employee": {
+    "jobTitle": "Job title",
+    "salary": "Salary"
+  },
   "errors": {
     "emailInvalid": "Email address is invalid",
     "emailTaken": "This email is already registered! Please enter a different address.",
+    "formats": "The supported file formats are: {{formats}}",
+    "greaterThan": "Value must be greater than {{number}}",
+    "imageSmallerThan": "The image size should be less than {{count}}MB!",
     "invalidCodeFormat": "Invalid code format",
+    "invalidValue": "Invalid value",
+    "lessThan": "The value must be less than {{number}}",
     "loginTaken": "This login is already taken! Choose different one.",
     "max": "Maximum {{count}} characters",
-    "min": "Minimum {{number}} characters",
+    "min": "Minimum {{count}} characters",
+    "min1": "Minimum {{count}} character",
     "mustContainDigits": "The code must contain {{count}} digits",
+    "negativeValue": "You cannot enter a negative value here",
     "orderNotFound": "The selected order was not found",
     "passCount": "Password must contain at least {{count}} characters",
     "passDigit": "At least one digit is required",
@@ -31,7 +54,9 @@
     "passRetype": "Please enter your password again",
     "passUpper": "At least one upper case character is required",
     "phoneDigits": "Minumum 9 digits",
-    "required": "This field is required!"
+    "required": "This field is required!",
+    "taxIDInvalid": "Tax ID should contain {{count}} characters",
+    "tooHigh": "Value is too high"
   },
   "firstName": "First name",
   "haveCompany": "I have a company",
@@ -80,12 +105,37 @@
   "personalData": "Personal data",
   "phone": "Phone number",
   "products": {
+    "buyPrice": "The price at which the warehouse <b>buys</b> a product unit",
+    "category": "Category",
+    "description": "Description",
+    "manufacturer": "Manufacturer",
+    "name": "Name",
+    "photo": "Product photo",
+    "product": "Product",
     "products": "Products",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "requiresRefrigeration": "Requires refrigeration",
+    "sellPrice": "The price at which the warehouse <b>sells</b> a product unit",
+    "shortDescription": "Short description"
   },
   "returnTo": "Return to",
   "save": "Save",
   "taxID": "Tax ID",
+  "vehicle": {
+    "brand": "Brand",
+    "driver": "Driver",
+    "insuranceValidUntil": "Insurance valid until",
+    "model": "Model",
+    "mot": "MOT valid until",
+    "plateNumber": "Plate number",
+    "productionYear": "Production year"
+  },
+  "warehouse": {
+    "capacity": "Capacity",
+    "freezer": "Walk-in freezer",
+    "manager": "Manager",
+    "name": "Name"
+  },
   "welcome": {
     "inner": "This is supper inner text"
   }

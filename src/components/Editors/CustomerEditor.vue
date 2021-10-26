@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Imie</label>
+            <label class="cell__label">{{ $t("firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -14,7 +14,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Nazwisko</label>
+            <label class="cell__label">{{ $t("lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Teflon</label>
+            <label class="cell__label">{{ $t("phone") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -37,12 +37,12 @@
             ></v-text-field>
         </form>
         <div class="cell">
-            <v-switch v-model="is_company" label="Mam firmę"></v-switch>
+            <v-switch v-model="is_company" :label="$t('haveCompany')"></v-switch>
         </div>
         
 
         <form class="cell" v-if="is_company">
-            <label class="cell__label">Nazwa firmy</label>
+            <label class="cell__label">{{ $t("companyName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -54,7 +54,7 @@
         </form>
 
         <form class="cell" v-if="is_company">
-            <label class="cell__label">NIP</label>
+            <label class="cell__label">{{ $t("taxID") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -93,14 +93,14 @@ export default {
 
             r_name: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_surname: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_phone: [
@@ -157,12 +157,12 @@ export default {
                 this.r_company = [
                     value => !!value || this.$t('errors.required'),
                     value => (value || '').length <= 256 || this.$t('errors.max', {count: '256'} ),
-                    value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                    value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
                 ];
 
                 this.r_tax = [
                     value => !!value || this.$t('errors.required'),
-                    value => (value || '').length == 12 || 'NIP powinien zawierać 12 znaków',
+                    value => (value || '').length == 12 || this.$t('errors.taxIDInvalid', {count: '12'} ),
                 ];
             }
             else{

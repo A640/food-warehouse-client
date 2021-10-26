@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Nazwa</label>
+            <label class="cell__label">{{ $t("warehouse.name") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -14,7 +14,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Pojemność</label>
+            <label class="cell__label">{{ $t("warehouse.capacity") }}</label>
             <v-text-field
                 class="input"
                 type="number"
@@ -27,7 +27,7 @@
         </form>
 
         <div class="cell">
-            <label class="cell__label">Zarządca</label>
+            <label class="cell__label">{{ $t("warehouse.manager") }}</label>
             <v-autocomplete
                 solo
                 class="mt-4"
@@ -39,7 +39,7 @@
         </div>
 
         <form class="cell">
-            <v-switch inset v-model="i_is_cold_storage" label="Chłodnia"></v-switch>
+            <v-switch inset v-model="i_is_cold_storage" :label="$t('warehouse.freezer')"></v-switch>
         </form>
 
        
@@ -72,14 +72,14 @@ export default {
 
             r_name: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 1 || 'Minimum 1 znak',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 1 || this.$t('errors.min1', {count: '1'} ),
             ],
 
             r_capacity: [
                 value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
-                value => (value || '') >= 0 || 'Pojemność nie może być ujemna',
+                value => (value || '') >= 0 || this.$t('errors.negativeValue'),
             ],
 
             r_manager: [

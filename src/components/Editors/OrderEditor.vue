@@ -131,7 +131,7 @@ export default {
             address_id: null,
 
             r_street: [
-                value => (value || '').length <= 64 || this.$t('errors.max', {count: '64'}),,
+                value => (value || '').length <= 64 || this.$t('errors.max', {count: '64'}),
             ],
 
             r_building_num: [

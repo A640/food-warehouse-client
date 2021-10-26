@@ -155,7 +155,7 @@
         <p class="cell mt-10 mb-3 section-title">{{ $t("address.address") }}</p>
 
          <div class="cell">
-                <label class="cell__label">{{ $t("address.address") }}</label>
+                <label class="cell__label">{{ $t("address.street") }}</label>
                 <v-text-field
                     class="input"
                     label=""

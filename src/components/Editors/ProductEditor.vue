@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">Nazwa</label>
+            <label class="cell__label">{{ $t("products.name") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -14,7 +14,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Kategoria</label>
+            <label class="cell__label">{{ $t("products.category") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Skrócony opis</label>
+            <label class="cell__label">{{ $t("products.shortDescription") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -38,7 +38,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Opis</label>
+            <label class="cell__label">{{ $t("products.description") }}</label>
             <v-textarea
                 class="input"
                 label=""
@@ -61,7 +61,7 @@
         <v-file-input 
             v-model="upload_image"
             class="cell"
-            label="Zdjęcie produktu"
+            :label="$t('products.photo')"
             filled
             show-size
             :rules="r_image"
@@ -71,7 +71,7 @@
         
 
         <div class="cell">
-            <label class="cell__label">Producent</label>
+            <label class="cell__label">{{ $t("products.manufacturer") }}</label>
             <v-autocomplete
                 solo
                 class="mt-4"
@@ -84,11 +84,11 @@
 
 
         <form class="cell">
-            <v-switch inset v-model="i_needs_cold" label="Wymaga przechowywania w chłodni"></v-switch>
+            <v-switch inset v-model="i_needs_cold" :label="$t('products.requiresRefrigeration')"></v-switch>
         </form>
 
         <form class="cell">
-            <label class="cell__label">Cena po jakiej magazyn <b>kupuje</b> jednostkę produktu </label>
+            <label class="cell__label">{{ $t("products.buyPrice") }}</label>
             <v-text-field
                 class="input"
                 type="number"
@@ -101,7 +101,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu </label>
+            <label class="cell__label">{{ $t("products.sellPrice") }}</label>
             <v-text-field
                 class="input"
                 type="number"
@@ -149,20 +149,20 @@ export default {
 
             r_name: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 1 || 'Minimum 1 znak',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 1 || this.$t('errors.min1', {count: '1'} ),
             ],
 
             r_category: [
                 value => !!value || this.$t('errors.required'),
                 // v => !v || /^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v) || 'Nieprawidłowy numer telefonu',
-                value => (value || '').length <= 32 || 'Maksymalnie 32 znaków',
-                value => (value || '').length >= 3 || 'Minimum 3 znaki',
+                value => (value || '').length <= 32 || this.$t('errors.max', {count: '32'} ),
+                value => (value || '').length >= 3 || this.$t('errors.min', {count: '3'} ),
             ],
 
             r_price: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '') >= 0 || 'Cena nie może być ujemna',
+                value => (value || '') >= 0 || this.$t('errors.negativeValue'),
             ],
 
             r_producer: [
@@ -174,8 +174,8 @@ export default {
             ],
 
             r_image: [
-                value => !value || value.size < 5000000 || 'Obraz powinien być mniejszy niż 5 MB!',
-                value => !value || (value.type == 'image/jpeg' || value.type == 'image/jpg' || value.type == 'image/png' || value.type == 'image/gif') || 'Obsługiwane formaty plików to: JPG, JPEG, PNG, GIF'
+                value => !value || value.size < 5000000 || this.$t('errors.imageSmallerThan', {count: '5'}),
+                value => !value || (value.type == 'image/jpeg' || value.type == 'image/jpg' || value.type == 'image/png' || value.type == 'image/gif') || this.$t('errors.formats', {formats: 'JPG, JPEG, PNG, GIF'})
             ],
 
 

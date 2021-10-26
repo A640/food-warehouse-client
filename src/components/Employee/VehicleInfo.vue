@@ -56,7 +56,7 @@
         
 
         <form class="cell" >
-            <label class="cell__label">Ubezpieczenie ważne do: </label>
+            <label class="cell__label">{{ $t("vehicle.insuranceValidUntil") }}: </label>
             <v-row justify="space-around">
                 <v-date-picker
                     readonly
@@ -70,7 +70,7 @@
         </form>
 
         <form class="cell" >
-            <label class="cell__label">Przegląd ważny do: </label>
+            <label class="cell__label">{{ $t("vehicle.mot") }}: </label>
             <v-row justify="space-around">
                 <v-date-picker
                     readonly
