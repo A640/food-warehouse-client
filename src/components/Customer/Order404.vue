@@ -7,7 +7,7 @@
             
 
             <div class="cell align-center footer">
-                <p>{{ $t("returnTo") }}
+                <p>{{ $t("common.returnTo") }}
                 <router-link :to="{name: 'Customer_Orders'}" class="cell__link">{{ $t("orders.ordersList") }}</router-link>
                 </p>
             </div>       

@@ -3,15 +3,15 @@
 
         
         <div class="first cell">
-            <p class="mb-5 section-title">Moje dane</p>
+            <p class="mb-5 section-title">{{ $t("common.myData") }}</p>
         </div>
         
        <div class="cell ">
-            <p class="section-title">Konto</p>
+            <p class="section-title">{{ $t("common.account") }}</p>
         </div>
 
        <div class="cell">
-            <label class="cell__label">Login</label>
+            <label class="cell__label">{{ $t("common.login") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -23,7 +23,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">E-mail</label>
+            <label class="cell__label">{{ $t("common.email") }}</label>
             <v-text-field
                 class="input"
                 label=""

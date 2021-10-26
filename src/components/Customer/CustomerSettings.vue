@@ -3,16 +3,16 @@
 
         <v-form v-model="form_valid" ref="CustomerForm">
             <div class="first cell">
-            <p class="mb-5 section-title">{{ $t("myData") }}</p>
+            <p class="mb-5 section-title">{{ $t("common.myData") }}</p>
             <v-btn depressed :color="edit_mode ? 'rgb(130, 180, 170)' : '' " @click="edit_mode ? cancell() : edit_mode = true"> <v-icon :color="edit_mode ? 'rgb(255,255,255)' : 'rgb(0,0,0)'">mdi-pencil</v-icon> </v-btn>
         </div>
         
        <div class="cell ">
-            <p class="section-title">{{ $t("account") }}</p>
+            <p class="section-title">{{ $t("common.account") }}</p>
         </div>
 
        <div class="cell">
-            <label class="cell__label">{{ $t("login") }}</label>
+            <label class="cell__label">{{ $t("common.login") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">{{ $t("email") }}</label>
+            <label class="cell__label">{{ $t("common.email") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -41,10 +41,10 @@
 
         
         <div class="cell">
-            <label class="cell__label">{{ $t("password") }}</label>
+            <label class="cell__label">{{ $t("common.password") }}</label>
             <v-text-field
                 class="input"
-                :label="password_rules.length == 0 ? $t('notChanged') : ''"
+                :label="password_rules.length == 0 ? $t('common.notChanged') : ''"
                 solo
                 :disabled="!edit_mode"
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
@@ -57,10 +57,10 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">{{ $t("passwordRepeat") }}</label>
+            <label class="cell__label">{{ $t("common.passwordRepeat") }}</label>
             <v-text-field
                 class="input"
-                :label="password_rules.length == 0 ? $t('notChanged') : ''"
+                :label="password_rules.length == 0 ? $t('common.notChanged') : ''"
                 solo
                 :disabled="!edit_mode"
                 :append-icon="passwd_show ? 'mdi-eye' : 'mdi-eye-off'"
@@ -76,10 +76,10 @@
 
         <!-- customer -->
 
-        <p class="cell mt-10 mb-3 section-title">{{ $t("personalData") }}</p>
+        <p class="cell mt-10 mb-3 section-title">{{ $t("common.personalData") }}</p>
 
         <div class="cell">
-            <label class="cell__label">{{ $t("firstName") }}</label>
+            <label class="cell__label">{{ $t("common.firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -92,7 +92,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">{{ $t("lastName") }}</label>
+            <label class="cell__label">{{ $t("common.lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -105,7 +105,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">{{ $t("phone") }}</label>
+            <label class="cell__label">{{ $t("common.phone") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -117,12 +117,12 @@
             ></v-text-field>
         </div>
         <div class="cell">
-            <v-switch v-model="is_company" color="rgb(130, 180, 170)" :disabled="!edit_mode" :label="$t('haveCompany')"></v-switch>
+            <v-switch v-model="is_company" color="rgb(130, 180, 170)" :disabled="!edit_mode" :label="$t('common.haveCompany')"></v-switch>
         </div>
         
 
         <div class="cell" v-if="is_company">
-            <label class="cell__label">{{ $t("companyName") }}</label>
+            <label class="cell__label">{{ $t("common.companyName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -135,7 +135,7 @@
         </div>
 
         <div class="cell" v-if="is_company">
-            <label class="cell__label">{{ $t("taxID") }}</label>
+            <label class="cell__label">{{ $t("common.taxID") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -260,13 +260,13 @@
 
         <div class="cell" v-if="edit_mode">
             <div class="cell__popup-buttons">
-                <v-btn text class="mr-2 mb-5" @click="cancell()">{{ $t("cancel") }}</v-btn>
+                <v-btn text class="mr-2 mb-5" @click="cancell()">{{ $t("common.cancel") }}</v-btn>
                 <v-btn 
                 color="rgb(130, 180, 170)" 
                 class="mb-5" 
                 dark 
                 @click="save()"
-                >{{ $t("save") }}</v-btn>
+                >{{ $t("common.save") }}</v-btn>
             </div>
         </div>
         </v-form>
