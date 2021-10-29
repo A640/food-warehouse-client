@@ -35,7 +35,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Poziom uprawnień</label>
+            <label class="cell__label">{{ $t("employee.permissionsLevel") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -51,10 +51,10 @@
 
         <!-- employee -->
 
-        <p class="cell mt-10 mb-3 section-title">Dane firmowe</p>
+        <p class="cell mt-10 mb-3 section-title">{{ $t("employee.corporateData") }}</p>
 
         <div class="cell">
-            <label class="cell__label">Imie</label>
+            <label class="cell__label">{{ $t("common.firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -66,7 +66,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Nazwisko</label>
+            <label class="cell__label">{{ $t("common.lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -78,7 +78,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Pensja</label>
+            <label class="cell__label">{{ $t("employee.salary") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -90,7 +90,7 @@
         </div>
 
         <div class="cell">
-            <label class="cell__label">Stanowisko</label>
+            <label class="cell__label">{{ $t("employee.jobTitle") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -203,7 +203,7 @@ export default {
                 return res.text;
             }
             else{
-                return 'Nierozpoznano'
+                return this.$t('common.notRecognized')
             }
         }
             

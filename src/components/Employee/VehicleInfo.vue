@@ -2,10 +2,10 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
 
-        <p class="cell title">Przydzielony pojazd</p>
+        <p class="cell title">{{ $t("vehicle.assignedVehicle") }}</p>
 
         <form class="cell">
-            <label class="cell__label">Marka</label>
+            <label class="cell__label">{{ $t("vehicle.brand") }}</label>
             <v-text-field
                 readonly
                 class="input"
@@ -17,7 +17,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Model</label>
+            <label class="cell__label">{{ $t("vehicle.model") }}</label>
             <v-text-field
                 readonly
                 class="input"
@@ -29,7 +29,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">Rok produkcji</label>
+            <label class="cell__label">{{ $t("vehicle.productionYear") }}</label>
             <v-text-field
                 readonly
                 type="number"
@@ -42,7 +42,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">NR Rejestracyjny</label>
+            <label class="cell__label">{{ $t("vehicle.plateNumber") }}</label>
             <v-text-field
                 readonly
                 class="input"

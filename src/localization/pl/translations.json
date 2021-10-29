@@ -1,5 +1,4 @@
 {
-  "account": "Konto",
   "address": {
     "address": "Adres",
     "apartmentNumber": "Numer mieszkania",
@@ -15,20 +14,35 @@
     "productQuantity": "Ilość jednostek produktu na 1 europaletę",
     "useByDate": "Termin przydatności do spożycia"
   },
-  "cancel": "Anuluj",
   "common": {
+    "account": "Konto",
+    "cancel": "Anuluj",
+    "company": "Firma",
     "companyName": "Nazwa firmy",
     "discount": "Zniżka",
     "email": "E-mail",
+    "firstName": "Imię",
+    "haveCompany": "Mam firmę",
+    "lastName": "Nazwisko",
+    "login": "Login",
+    "myData": "Moje dane",
+    "notChanged": "nie zmieniono",
+    "notRecognized": "Nie rozpoznano",
     "optional": "opcjonalnie",
+    "password": "Hasło",
+    "passwordRepeat": "Powtórz hasło",
+    "personalData": "Dane osobowe",
     "phone": "Teflon",
+    "returnTo": "Wróć do",
+    "save": "Zapisz",
     "taxID": "NIP",
+    "value": "Wartość",
     "warehouse": "Magazyn"
   },
-  "companyName": "Nazwa firmy",
-  "email": "E-mail",
   "employee": {
+    "corporateData": "Dane firmowe",
     "jobTitle": "Nazwa stanowiska",
+    "permissionsLevel": "Poziom uprawnień",
     "salary": "Wynagrodzenie"
   },
   "errors": {
@@ -58,12 +72,11 @@
     "taxIDInvalid": "NIP powinien zawierać {{count}} znaków",
     "tooHigh": "Zbyt duża wartość"
   },
-  "firstName": "Imię",
-  "haveCompany": "Mam firmę",
-  "lastName": "Nazwisko",
-  "login": "Login",
-  "myData": "Moje dane",
-  "notChanged": "nie zmieniono",
+  "messages": {
+    "read": "Przeczytane",
+    "sent": "Wysłane",
+    "unread": "Nieprzeczytane"
+  },
   "orders": {
     "cancel": "Wycofaj zamówienie",
     "cancelError": "Nie można już wycofać zamówienia",
@@ -74,6 +87,7 @@
     "orderNumber": "Zamówienie numer",
     "ordersList": "listy zamówień",
     "products": "Produktów",
+    "purchaser": "Zamawiający",
     "state": {
       "CANCELED": "Anulowane",
       "COMPLETING": "W trakcie kompletacji",
@@ -88,8 +102,6 @@
     "status": "Status zamówienia",
     "value": "Wartość zamówienia"
   },
-  "password": "Hasło",
-  "passwordRepeat": "Powtórz hasło",
   "payment": {
     "paymentMethod": "Metoda płatności",
     "state": {
@@ -102,8 +114,6 @@
     },
     "value": "Wartość"
   },
-  "personalData": "Dane osobowe",
-  "phone": "Teflon",
   "products": {
     "buyPrice": "Cena po jakiej magazyn <b>kupuje</b> jednostkę produktu",
     "category": "Kategoria",
@@ -118,10 +128,8 @@
     "sellPrice": "Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu",
     "shortDescription": "Skrócony opis"
   },
-  "returnTo": "Wróć do",
-  "save": "Zapisz",
-  "taxID": "NIP",
   "vehicle": {
+    "assignedVehicle": "Przydzielony pojazd",
     "brand": "Marka",
     "driver": "Kierowca",
     "insuranceValidUntil": "Ubezpieczenie ważne do",
@@ -134,7 +142,8 @@
     "capacity": "Pojemność",
     "freezer": "Chłodnia",
     "manager": "Zarządca",
-    "name": "Nazwa"
+    "name": "Nazwa",
+    "warehouse": "Magazyn"
   },
   "welcome": {
     "inner": "Super polski inner text"

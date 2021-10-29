@@ -79,7 +79,7 @@
         </form>
 
         <div class="cell">
-            <label class="cell__label">{{ $t("vehicle.mot") }}</label>
+            <label class="cell__label">{{ $t("vehicle.driver") }}</label>
             <v-autocomplete
                 solo
                 class="mt-4"

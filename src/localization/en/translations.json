@@ -1,5 +1,4 @@
 {
-  "account": "Account",
   "address": {
     "address": "Address",
     "apartmentNumber": "Apartment number",
@@ -15,20 +14,35 @@
     "productQuantity": "Number of product units per 1 Euro-pallet",
     "useByDate": "Eat by date"
   },
-  "cancel": "Cancel",
   "common": {
+    "account": "Account",
+    "cancel": "Cancel",
+    "company": "Company",
     "companyName": "Company name",
     "discount": "Discount",
     "email": "E-mail",
+    "firstName": "First name",
+    "haveCompany": "I have a company",
+    "lastName": "Last name",
+    "login": "Login",
+    "myData": "My data",
+    "notChanged": "not changed",
+    "notRecognized": "Not recognized",
     "optional": "optional",
+    "password": "Password",
+    "passwordRepeat": "Repeat password",
+    "personalData": "Personal data",
     "phone": "Phone number",
+    "returnTo": "Return to",
+    "save": "Save",
     "taxID": "Tax ID",
+    "value": "Value",
     "warehouse": "Warehouse"
   },
-  "companyName": "Company name",
-  "email": "E-mail",
   "employee": {
+    "corporateData": "Corporate data",
     "jobTitle": "Job title",
+    "permissionsLevel": "Permissions level",
     "salary": "Salary"
   },
   "errors": {
@@ -58,12 +72,11 @@
     "taxIDInvalid": "Tax ID should contain {{count}} characters",
     "tooHigh": "Value is too high"
   },
-  "firstName": "First name",
-  "haveCompany": "I have a company",
-  "lastName": "Last name",
-  "login": "Login",
-  "myData": "My data",
-  "notChanged": "not changed",
+  "messages": {
+    "read": "Read",
+    "sent": "Sent",
+    "unread": "Unread"
+  },
   "orders": {
     "cancel": "Cancel your order",
     "cancelError": "The order can no longer be canceled",
@@ -74,6 +87,7 @@
     "orderNumber": "Order number",
     "ordersList": "order list",
     "products": "Products",
+    "purchaser": "Purchaser",
     "state": {
       "CANCELED": "Canceled",
       "COMPLETING": "During picking",
@@ -88,8 +102,6 @@
     "status": "Order status",
     "value": "Order value"
   },
-  "password": "Password",
-  "passwordRepeat": "Repeat password",
   "payment": {
     "paymentMethod": "Payment method",
     "state": {
@@ -102,8 +114,6 @@
     },
     "value": "Value"
   },
-  "personalData": "Personal data",
-  "phone": "Phone number",
   "products": {
     "buyPrice": "The price at which the warehouse <b>buys</b> a product unit",
     "category": "Category",
@@ -118,10 +128,8 @@
     "sellPrice": "The price at which the warehouse <b>sells</b> a product unit",
     "shortDescription": "Short description"
   },
-  "returnTo": "Return to",
-  "save": "Save",
-  "taxID": "Tax ID",
   "vehicle": {
+    "assignedVehicle": "Assigned vehicle",
     "brand": "Brand",
     "driver": "Driver",
     "insuranceValidUntil": "Insurance valid until",
@@ -134,7 +142,8 @@
     "capacity": "Capacity",
     "freezer": "Walk-in freezer",
     "manager": "Manager",
-    "name": "Name"
+    "name": "Name",
+    "warehouse": "Warehouse"
   },
   "welcome": {
     "inner": "This is supper inner text"

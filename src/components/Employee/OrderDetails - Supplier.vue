@@ -23,7 +23,7 @@
                     <v-col cols="12" md="8">
 
 
-                        <p class="mb-5">Adres</p>
+                        <p class="mb-5">{{ $t("address.address") }}</p>
                             <Address class="mb-5" :address="address" />
 
                         <p class="mb-5">{{ $t("payment.paymentMethod") }}</p>
@@ -53,7 +53,7 @@
                                         <Product class="mb-4 ml-4"  :removable="false" :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
-                                            <v-card-subtitle>Ilość</v-card-subtitle>
+                                            <v-card-subtitle>{{ $t("products.quantity") }}</v-card-subtitle>
                                             <div class="quantity-cell">
                                                 
                                                 <p class="quantity-label centered-input" >{{product.quantity}}</p>
@@ -75,35 +75,35 @@
                     </v-col>
                     <v-col>
 
-                        <p class="mb-5">Wartość</p>
+                        <p class="mb-5">{{ $t("common.value") }}</p>
                             <v-card class="mb-5" >
                                 <div class="card-container cell">
-                                    <h3 class="cell"> Wartość zamówienia:</h3>
+                                    <h3 class="cell">{{ $t("orders.value") }}:</h3>
                                     <p  class="cell details-price ">{{payment.value}} zł</p>
                                 </div>
                             </v-card>
 
-                        <p class="mb-5">Status zamówienia</p>
+                        <p class="mb-5">{{ $t("orders.status") }}</p>
                             <v-card class="mb-5">
                                 <div class="card-container cell">
                                     <h3 class="cell">{{state}}</h3>
                                 </div>
                             </v-card>
 
-                        <p class="mb-5">Data złożenia zamówienia</p>
+                        <p class="mb-5">{{ $t("orders.dateOrdered") }}</p>
                             <v-card class="mb-5">
                                 <div class="card-container cell">
                                     <h3 class="cell">{{order.date}}</h3>
                                 </div>
                             </v-card>
 
-                        <p class="mb-5">Zamawiający</p>
+                        <p class="mb-5">{{ $t("orders.purchaser") }}</p>
                             <v-card class="mb-5">
                                 <div class="card-container cell">
                                     <h4 class="cell">{{customer.name + ' ' + customer.surname}}</h4>
-                                    <p class="cell">Firma: {{customer.firm_name}}</p>
-                                    <p class="cell">Nip: {{customer.tax_id}}</p>
-                                    <p class="cell">Telefon: {{customer.phone_number}}</p>
+                                    <p class="cell">{{ $t("common.company") }}: {{customer.firm_name}}</p>
+                                    <p class="cell">{{ $t("common.taxID") }}: {{customer.tax_id}}</p>
+                                    <p class="cell">{{ $t("common.phone") }}: {{customer.phone_number}}</p>
                                 </div>
                             </v-card>
 
@@ -244,40 +244,40 @@ export default {
 
         state(){
             if(this.order.order_state == "PENDING"){
-                return "Oczekujące";
+                return this.$t('orders.state.PENDING');
             }else if(this.order.order_state == "REGISTERED"){
-                return 'Przyjęte';
+                return this.$t('orders.state.REGISTERED');
             }else if(this.order.order_state == "CANCELED"){
-                return 'Anulowane';
+                return this.$t('orders.state.CANCELED');
             }else if(this.order.order_state == "COMPLETING"){
-                return 'W trakcie kompletacji'
+                return this.$t('orders.state.COMPLETING');
             }else if(this.order.order_state == "READY TO DELIVER"){
-                return 'Gotowy do dostarczenia'
+                return this.$t('orders.state.READY_TO_DELIVER');
             }else if(this.order.order_state == "OUT FOR DELIVERY"){
-                return 'W drodze do klienta'
+                return this.$t('orders.state.OUT_FOR_DELIVERY');
             }else if(this.order.order_state == "DELIVERED"){
-                return 'Dostarczono'
+                return this.$t('orders.state.DELIVERED');
             }else if(this.order.order_state == "RETURNED"){
-                return 'Zwrócone'
+                return this.$t('orders.state.RETURNED');
             }else{
-                return 'Nieznany'
+                return this.$t('orders.state.UNKNOWN');
             }
         },
 
         payment_state(){
             //payment state for diplaying
             if(this.payment.payment_state == "IN PROGRESS"){
-                    return  "W trakcie płatnoći";
+                    return  this.$t('payment.state.IN_PROGRESS');
                 }else if(this.payment.payment_state == "COMPLETED"){
-                    return  'Opłacono';
+                    return  this.$t('payment.state.COMPLETED');
                 }else if(this.payment.payment_state == "REJECTED"){
-                    return  'Płatność odrzucona';
+                    return  this.$t('payment.state.REJECTED');
                 }else if(this.payment.payment_state == "CANCELED"){
-                    return  'Płatność Wycofana';
+                    return  this.$t('payment.state.CANCELED');
                 }else if(this.payment.payment_state == "WAITING FOR PAYMENT"){
-                    return  'Płatność oczekuje na uregulowanie';
+                    return  this.$t('payment.state.WAITING_FOR_PAYMENT');
                 }else{
-                    return  'Nieznany';
+                    return  this.$t('payment.state.UNKNOWN');
             }
         },
 

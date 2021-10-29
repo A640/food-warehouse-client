@@ -18,14 +18,14 @@
 
             <v-list >
                 <v-subheader>
-                    Nieprzeczytane <span class="ml-4"> {{unread.length > 0 ? unread.length : ''}} </span>
+                    {{ $t("messages.unread") }} <span class="ml-4"> {{unread.length > 0 ? unread.length : ''}} </span>
                     <v-divider class="ml-2"></v-divider>
                 </v-subheader>
                 <Message v-for="message in unread" :key="message.message_id" :message="message" @reloadMessages="loadData()"/>
             </v-list>
             <v-list class="mt-5">
                 <v-subheader>
-                    Przeczytane <span class="ml-4"> {{read.length > 0 ? read.length : ''}} </span>
+                    {{ $t("messages.read") }} <span class="ml-4"> {{read.length > 0 ? read.length : ''}} </span>
                     <v-divider class="ml-2"></v-divider>
                 </v-subheader>
                 <Message v-for="message in read" :key="message.message_id" :message="message" @reloadMessages="loadData()"/>
@@ -33,7 +33,7 @@
             <v-list class="mt-5">
                 
                 <v-subheader>
-                    Wysłane <span class="ml-4"> {{sent.length > 0 ? sent.length : ''}} </span>
+                    {{ $t("messages.sent") }} <span class="ml-4"> {{sent.length > 0 ? sent.length : ''}} </span>
                     <v-divider class="ml-2"></v-divider>
                 </v-subheader>
                 <Message v-for="message in sent" :key="message.message_id" :message="message" sent @reloadMessages="loadData()"/>
