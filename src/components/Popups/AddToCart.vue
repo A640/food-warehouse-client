@@ -50,7 +50,7 @@
                     <div class="order-button cell">
                         <p  class="details-price text-right">Razem: <span class="total">{{total}} zł</span></p>
                         <div>
-                            <v-btn text class="mr-5" @click="closeDialog()">Anuluj</v-btn>
+                            <v-btn text class="mr-5" @click="closeDialog()">{{ $t("common.cancel") }}</v-btn>
                             <v-btn :color="sale ? 'amber' : 'green lighten-1'"   elevation=2 @click="add()" :dark="total > 0" :disabled="!(total > 0)" >Dodaj</v-btn>
                         </div>
                         

@@ -6,7 +6,7 @@
  
 
         <div class="cell ">
-            <p class="section-title">Producent żywności</p>
+            <p class="section-title">{{ $t("common.foodProducer") }}</p>
         </div>
 
         <edit-producer
@@ -17,7 +17,7 @@
         />
 
          <div class="cell ">
-            <p class="section-title">Adres</p>
+            <p class="section-title">{{ $t("address.address") }}</p>
         </div>
 
         <edit-address
@@ -30,13 +30,13 @@
 
         <div class="cell">
             <div class="cell__popup-buttons">
-                <v-btn text class="mr-2 mb-5" @click="scope.close_popup">Anuluj</v-btn>
+                <v-btn text class="mr-2 mb-5" @click="scope.close_popup">{{ $t("common.cancel") }}</v-btn>
                 <v-btn 
                 color="#1877F2" 
                 class="mb-5" 
                 dark 
                 @click="validate()"
-                >Zapisz</v-btn>
+                >{{ $t("common.save") }}</v-btn>
             </div>
         </div>
 

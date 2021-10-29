@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col cols="12" md="8" >
 
-                        <p class="mb-5">Adres</p>
+                        <p class="mb-5">{{ $t("address.address") }}</p>
 
                         <v-item-group mandatory v-model="choosen_address" >
                             <v-item v-slot="{ active, toggle }" class="mb-3" v-for="address in addresses" :key="address.address_id" :value="address" >

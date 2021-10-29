@@ -4,7 +4,7 @@
         <div>
             <!-- content of popup inserted into popup slot -->
         <div class="cell ">
-            <p class="section-title">Konto</p>
+            <p class="section-title">{{ $t("common.account") }}</p>
         </div>
 
         <edit-account 
@@ -17,7 +17,7 @@
 
         
         <div class="cell">
-            <label class="cell__label">Rodzaj użytkownika</label>
+            <label class="cell__label">{{ $t("common.userType") }}</label>
             <v-autocomplete
                 solo
                 v-model="c_user_type"
@@ -27,7 +27,7 @@
         
 
         <div class="cell ">
-            <p class="section-title">Pracownik</p>
+            <p class="section-title">{{ $t("employee.employee") }}</p>
         </div>
 
         <edit-employee
@@ -39,13 +39,13 @@
 
         <div class="cell">
             <div class="cell__popup-buttons">
-                <v-btn text class="mr-2 mb-5" @click="scope.close_popup">Anuluj</v-btn>
+                <v-btn text class="mr-2 mb-5" @click="scope.close_popup">{{ $t("common.cancel") }}</v-btn>
                 <v-btn 
                 color="#1877F2" 
                 class="mb-5" 
                 dark 
                 @click="validate()"
-                >Zapisz</v-btn>
+                >{{ $t("common.save") }}</v-btn>
             </div>
         </div>
 
@@ -224,8 +224,24 @@ export default {
     },
 
     mounted() {
-        let module = require("@/assets/userTypes.js");
-        this.u_types = module.array;
+        // let module = require("@/assets/userTypes.js");
+        // this.u_types = module.array;
+        this.u_types = [{
+            "text": this.$t('common.userTypes.admin'),
+            "value": "Admin"
+        }, {
+            "text": this.$t('common.userTypes.manager'),
+            "value": "Manager"
+        }, {
+            "text": this.$t('common.userTypes.employee'),
+            "value": "Employee"
+        }, {
+            "text": this.$t('common.userTypes.courier'),
+            "value": "Supplier"
+        }, {
+            "text": this.$t('common.userTypes.customer'),
+            "value": "Customer"
+        }];
     },
 }
 </script>

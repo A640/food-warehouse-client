@@ -11,6 +11,7 @@
   "batch": {
     "addNumber": "Ile europalet dodać do magazynu",
     "batchNumber": "NR Partii",
+    "productLot": "Partia produktu",
     "productQuantity": "Ilość jednostek produktu na 1 europaletę",
     "useByDate": "Termin przydatności do spożycia"
   },
@@ -19,9 +20,11 @@
     "cancel": "Anuluj",
     "company": "Firma",
     "companyName": "Nazwa firmy",
+    "customer": "Klient",
     "discount": "Zniżka",
     "email": "E-mail",
     "firstName": "Imię",
+    "foodProducer": "Producent żywności",
     "haveCompany": "Mam firmę",
     "lastName": "Nazwisko",
     "login": "Login",
@@ -37,11 +40,20 @@
     "returnTo": "Wróć do",
     "save": "Zapisz",
     "taxID": "NIP",
+    "userType": "Rodzaj użytkownika",
+    "userTypes": {
+      "admin": "Administrator",
+      "courier": "Kurier",
+      "customer": "Klient",
+      "employee": "Pracownik",
+      "manager": "Menedżer"
+    },
     "value": "Wartość",
     "warehouse": "Magazyn"
   },
   "employee": {
     "corporateData": "Dane firmowe",
+    "employee": "Pracownik",
     "jobTitle": "Nazwa stanowiska",
     "permissionsLevel": "Poziom uprawnień",
     "salary": "Wynagrodzenie"
@@ -143,7 +155,8 @@
     "model": "Model",
     "mot": "Przegląd ważny do",
     "plateNumber": "NR Rejestracyjny",
-    "productionYear": "Rok produkcji"
+    "productionYear": "Rok produkcji",
+    "vehicle": "Pojazd"
   },
   "warehouse": {
     "capacity": "Pojemność",

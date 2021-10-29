@@ -11,6 +11,7 @@
   "batch": {
     "addNumber": "How many Euro-pallets to add to the warehouse",
     "batchNumber": "Batch NO",
+    "productLot": "Product lot",
     "productQuantity": "Number of product units per 1 Euro-pallet",
     "useByDate": "Eat by date"
   },
@@ -19,9 +20,11 @@
     "cancel": "Cancel",
     "company": "Company",
     "companyName": "Company name",
+    "customer": "Customer",
     "discount": "Discount",
     "email": "E-mail",
     "firstName": "First name",
+    "foodProducer": "Food producer",
     "haveCompany": "I have a company",
     "lastName": "Last name",
     "login": "Login",
@@ -37,11 +40,20 @@
     "returnTo": "Return to",
     "save": "Save",
     "taxID": "Tax ID",
+    "userType": "User type",
+    "userTypes": {
+      "admin": "Admin",
+      "courier": "Courier",
+      "customer": "Customer",
+      "employee": "Employee",
+      "manager": "Manager"
+    },
     "value": "Value",
     "warehouse": "Warehouse"
   },
   "employee": {
     "corporateData": "Corporate data",
+    "employee": "Employee",
     "jobTitle": "Job title",
     "permissionsLevel": "Permissions level",
     "salary": "Salary"
@@ -143,7 +155,8 @@
     "model": "Model",
     "mot": "MOT valid until",
     "plateNumber": "Plate number",
-    "productionYear": "Production year"
+    "productionYear": "Production year",
+    "vehicle": "Vehicle"
   },
   "warehouse": {
     "capacity": "Capacity",

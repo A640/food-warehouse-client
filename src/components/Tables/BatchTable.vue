@@ -102,7 +102,7 @@
       </v-data-table>
 
       <div v-if="delete_many_mode" class="right-buttons">
-                <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">Anuluj</v-btn>
+                <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
                 <delete-many name="Usuwanie zaznaczonych partii produktów" :count="selected.length" type="partii produktów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>

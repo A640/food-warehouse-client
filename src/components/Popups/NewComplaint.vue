@@ -23,7 +23,7 @@
 
                     <div class="cell">
                         <div class="cell__popup-buttons">
-                            <v-btn text class="mr-2 mb-5" @click="closeDialog()">Anuluj</v-btn>
+                            <v-btn text class="mr-2 mb-5" @click="closeDialog()">{{ $t("common.cancel") }}</v-btn>
                             <v-btn 
                             color="#1877F2" 
                             class="mb-5" 

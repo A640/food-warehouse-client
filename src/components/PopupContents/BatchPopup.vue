@@ -4,7 +4,7 @@
         <div>
             <!-- content of popup inserted into popup slot -->
         <div class="cell ">
-            <p class="section-title">Partia produktu</p>
+            <p class="section-title">{{ $t("batch.productLot") }}</p>
         </div>
 
         <batch-editor
@@ -17,13 +17,13 @@
 
         <div class="cell">
             <div class="cell__popup-buttons">
-                <v-btn text class="mr-2 mb-5" @click="scope.close_popup">Anuluj</v-btn>
+                <v-btn text class="mr-2 mb-5" @click="scope.close_popup">{{ $t("common.cancel") }}</v-btn>
                 <v-btn 
                 color="#1877F2" 
                 class="mb-5" 
                 dark 
                 @click="validate()"
-                >Zapisz</v-btn>
+                >{{ $t("common.save") }}</v-btn>
             </div>
         </div>
 

@@ -37,7 +37,7 @@
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn text class="mb-3" @click="dialog = false">Anuluj</v-btn>
+                <v-btn text class="mb-3" @click="dialog = false">{{ $t("common.cancel") }}</v-btn>
                 <v-btn 
                  color="red lighten-1" 
                  class="mb-3 mr-2" 

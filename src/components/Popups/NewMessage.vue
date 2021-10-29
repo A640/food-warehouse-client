@@ -36,7 +36,7 @@
                     
                      <div class="cell">
                         <div class="cell__popup-buttons">
-                            <v-btn text class=" mb-5" @click="closeDialog()">Anuluj</v-btn>
+                            <v-btn text class=" mb-5" @click="closeDialog()">{{ $t("common.cancel") }}</v-btn>
                             <v-spacer></v-spacer>
                             <v-btn depressed class=" mb-5" @click="sendMessage()">Wyślij</v-btn>
                         </div>

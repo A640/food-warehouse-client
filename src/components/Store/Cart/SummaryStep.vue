@@ -15,7 +15,7 @@
                     <v-col cols="12" md="8">
 
 
-                        <p class="mb-5">Adres</p>
+                        <p class="mb-5">{{ $t("address.address") }}</p>
                             <Address class="mb-5" :address="cart_settings.address" />
 
                         <p class="mb-5">{{ $t("payment.paymentMethod") }}</p>
