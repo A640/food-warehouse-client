@@ -33,6 +33,7 @@
     "passwordRepeat": "Powtórz hasło",
     "personalData": "Dane osobowe",
     "phone": "Teflon",
+    "profit": "Zysk",
     "returnTo": "Wróć do",
     "save": "Zapisz",
     "taxID": "NIP",
@@ -46,6 +47,11 @@
     "salary": "Wynagrodzenie"
   },
   "errors": {
+    "alerts": {
+      "expirationDate": "Kończy się termin ważności",
+      "outOfSpace": "Kończy się miejsce w magazynie",
+      "outOfStock": "Kończą się zapasy produktu"
+    },
     "emailInvalid": "Adres e-mail jest nieprawidłowy",
     "emailTaken": "Ten email jest już w użyciu! Podaj inny adres.",
     "formats": "Obsługiwane formaty plików to: {{formats}}",
@@ -85,6 +91,7 @@
     "complaint": "Reklamacja",
     "dateOrdered": "Data złożenia zamówienia",
     "orderNumber": "Zamówienie numer",
+    "orders": "Zamówienia",
     "ordersList": "listy zamówień",
     "products": "Produktów",
     "purchaser": "Zamawiający",

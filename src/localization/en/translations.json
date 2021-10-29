@@ -33,6 +33,7 @@
     "passwordRepeat": "Repeat password",
     "personalData": "Personal data",
     "phone": "Phone number",
+    "profit": "Profit",
     "returnTo": "Return to",
     "save": "Save",
     "taxID": "Tax ID",
@@ -46,6 +47,11 @@
     "salary": "Salary"
   },
   "errors": {
+    "alerts": {
+      "expirationDate": "Expiration date ends",
+      "outOfSpace": "The warehouse is running out of space",
+      "outOfStock": "Product is running out of stock"
+    },
     "emailInvalid": "Email address is invalid",
     "emailTaken": "This email is already registered! Please enter a different address.",
     "formats": "The supported file formats are: {{formats}}",
@@ -85,6 +91,7 @@
     "complaint": "Complaint",
     "dateOrdered": "Order date",
     "orderNumber": "Order number",
+    "orders": "Orders",
     "ordersList": "order list",
     "products": "Products",
     "purchaser": "Purchaser",

@@ -25,19 +25,19 @@ export default {
             let al = this.$store.getters.getAlerts;
             if(al.expiring_batches != null){
                 al.expiring_batches.map((a) => {
-                a.title = "Kończy się termin ważności",
+                a.title = this.$t('errors.alerts.expirationDate'),
                 a.danger = false;
                 a.warning = true;
                 return a;
                 });
                 al.running_out_products.map((a) => {
-                    a.title = "Kończą się zapasy produktu",
+                    a.title = this.$t('errors.alerts.outOfStock'),
                     a.danger = false;
                     a.warning = true;
                     return a;
                 });
                 al.storages_running_out_of_space.map((a) => {
-                    a.title = "Kończy się miejsce w magazynie",
+                    a.title = this.$t('errors.alerts.outOfSpace'),
                     a.danger = true;
                     a.warning = false;
                     return a;

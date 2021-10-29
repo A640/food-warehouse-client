@@ -52,9 +52,9 @@ export default {
     data() {
         return {
             categories:[
-                {text: 'zamówienia', value: 1, link: 'Manager_Stats_Orders', color: '#f69119'},
-                {text: 'zysk', value: 2 , link:'Manager_Stats_Sell-Profit', color:'#82b4aa'},
-                {text: 'produkty', value: 3, link: 'Manager_Stats_Top-Products', color:'#4795bf'},
+                {text: this.$t('orders.orders'), value: 1, link: 'Manager_Stats_Orders', color: '#f69119'},
+                {text: this.$t('common.profit'), value: 2 , link:'Manager_Stats_Sell-Profit', color:'#82b4aa'},
+                {text: this.$t('products.products'), value: 3, link: 'Manager_Stats_Top-Products', color:'#4795bf'},
             ],
         }
     },
