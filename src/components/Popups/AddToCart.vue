@@ -1,12 +1,12 @@
 <template >
     <v-dialog v-model="dialog" max-width="800px">
         <template v-slot:[`activator`]="{ on }">
-            <v-btn :color="sale ? 'amber' : 'green lighten-1'" v-on="on" class="pull-right" dark elevation=2>Zamów</v-btn>
+            <v-btn :color="sale ? 'amber' : 'green lighten-1'" v-on="on" class="pull-right" dark elevation=2>{{ $t("store.order") }}</v-btn>
         </template>
         <div class="pop-card">
             <div class="pop-wrapper">
                 <div class="cell pop-title">
-                    <h2 class="pop-title__text">Dodaj do koszyka</h2>
+                    <h2 class="pop-title__text">{{ $t("store.addToCart") }}</h2>
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
@@ -15,7 +15,7 @@
                     <p 
                         v-if="sale" 
                         class="cell details-price "
-                    >Data ważności: <v-chip
+                    >{{ $t("store.expirationDate") }}: <v-chip
                                         label
                                         class="mr-2"
                                         color="amber"
@@ -24,9 +24,9 @@
                                     </v-chip>
                     </p>
 
-                    <p  class="cell details-price ">Cena za sztukę: <span class="price">{{ price }}</span></p>
+                    <p  class="cell details-price ">{{ $t("store.pricePerItem") }}: <span class="price">{{ price }}</span></p>
 
-                    <p class="cell details-price ">Ilość:</p>
+                    <p class="cell details-price ">{{ $t("products.quantity") }}:</p>
                     <v-form class="cell" v-model="form">
                         
                         <div class="double">
@@ -41,17 +41,17 @@
                                 v-on:keyup.enter.stop
                             ></v-text-field>
 
-                            <p>z {{ max }} sztuk</p>
+                            <p>{{ $t("store.maxQuantity", {count: max}) }}</p>
 
                         </div>
                         
                     </v-form>
                     
                     <div class="order-button cell">
-                        <p  class="details-price text-right">Razem: <span class="total">{{total}} zł</span></p>
+                        <p  class="details-price text-right">{{ $t("store.total") }}: <span class="total">{{total}} zł</span></p>
                         <div>
                             <v-btn text class="mr-5" @click="closeDialog()">{{ $t("common.cancel") }}</v-btn>
-                            <v-btn :color="sale ? 'amber' : 'green lighten-1'"   elevation=2 @click="add()" :dark="total > 0" :disabled="!(total > 0)" >Dodaj</v-btn>
+                            <v-btn :color="sale ? 'amber' : 'green lighten-1'"   elevation=2 @click="add()" :dark="total > 0" :disabled="!(total > 0)" >{{ $t("common.add") }}</v-btn>
                         </div>
                         
                     </div>
@@ -109,8 +109,8 @@ export default {
             i_count: 1,
             r_count: [
                 value => !!value || this.$t('errors.required'),
-                value => (value || '') >= 0 || 'Ilość nie może być ujemna',
-                value => (value || '') <= this.max || 'Ilość nie może być większa niż maksymalna liczba sztuk',
+                value => (value || '') >= 0 || this.$t('errors.quantityNegative'),
+                value => (value || '') <= this.max || this.$t('errors.maxQuantity'),
             ],
             form: false,
         }

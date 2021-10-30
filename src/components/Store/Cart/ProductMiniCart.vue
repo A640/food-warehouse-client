@@ -15,7 +15,7 @@
                     <p 
                             
                         class="cell details-price "
-                    >Data ważności: <v-chip
+                    >{{ $t("store.expirationDate") }}: <v-chip
                                         label
                                         class="mr-2"
                                         color="amber"

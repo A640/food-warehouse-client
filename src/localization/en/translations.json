@@ -17,6 +17,8 @@
   },
   "common": {
     "account": "Account",
+    "actionIrreversible": "This action cannot be undone!",
+    "add": "Add",
     "cancel": "Cancel",
     "company": "Company",
     "companyName": "Company name",
@@ -26,6 +28,7 @@
     "firstName": "First name",
     "foodProducer": "Food producer",
     "haveCompany": "I have a company",
+    "id": "ID",
     "lastName": "Last name",
     "login": "Login",
     "myData": "My data",
@@ -74,6 +77,7 @@
     "lessThan": "The value must be less than {{number}}",
     "loginTaken": "This login is already taken! Choose different one.",
     "max": "Maximum {{count}} characters",
+    "maxQuantity": "Quantity must not exceed the maximum number of items",
     "min": "Minimum {{count}} characters",
     "min1": "Minimum {{count}} character",
     "mustContainDigits": "The code must contain {{count}} digits",
@@ -86,6 +90,7 @@
     "passRetype": "Please enter your password again",
     "passUpper": "At least one upper case character is required",
     "phoneDigits": "Minumum 9 digits",
+    "quantityNegative": "Quantity cannot be negative",
     "required": "This field is required!",
     "taxIDInvalid": "Tax ID should contain {{count}} characters",
     "tooHigh": "Value is too high"
@@ -98,10 +103,13 @@
   "orders": {
     "cancel": "Cancel your order",
     "cancelError": "The order can no longer be canceled",
+    "cancellationQuestion": "Are you sure you want to delete the selected order?",
     "comments": "Comments to order",
     "commentsPlaceholder": "Enter your order comments here",
     "complaint": "Complaint",
     "dateOrdered": "Order date",
+    "noCancel": "Do not delete",
+    "orderCancellation": "Order cancellation",
     "orderNumber": "Order number",
     "orders": "Orders",
     "ordersList": "order list",
@@ -146,6 +154,14 @@
     "requiresRefrigeration": "Requires refrigeration",
     "sellPrice": "The price at which the warehouse <b>sells</b> a product unit",
     "shortDescription": "Short description"
+  },
+  "store": {
+    "addToCart": "Add to cart",
+    "expirationDate": "Expiration date",
+    "maxQuantity": "max {{count}}",
+    "order": "Order",
+    "pricePerItem": "Price per item",
+    "total": "Total"
   },
   "vehicle": {
     "assignedVehicle": "Assigned vehicle",

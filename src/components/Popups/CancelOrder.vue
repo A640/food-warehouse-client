@@ -2,11 +2,11 @@
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:[`activator`]="{ on }">
             <v-btn v-on="on" depressed  @click="dialog=true" class="center-btn">
-                Wycofaj zamówienie
+                {{ $t("orders.cancel") }}
             </v-btn>
         </template>
         <v-card v-if="loading" class="loader">
-            <p>Wycofywanie zamówienia</p>
+            <p>{{ $t("orders.orderCancellation") }}</p>
             <v-progress-circular
                 indeterminate
                 color="red"
@@ -14,28 +14,28 @@
         </v-card>
         <v-card v-else >
             <v-card-title>
-                <h2 class="mb-2 mt-3">Wycofaj zamówieine</h2>
+                <h2 class="mb-2 mt-3">{{ $t("orders.cancel") }}</h2>
                 <br/>
             </v-card-title>
             <v-card-subtitle>
-                ID: {{ id }}
+                {{ $t("common.id") }}: {{ id }}
             </v-card-subtitle>
 
             <v-card-text>
-                <p class="mb-1">Czy napewno chcesz usunąć wycofać wybrane zamówienie?</p>
-                <p class="mt-0">Tej akcji nie można cofnąć!</p>
+                <p class="mb-1">{{ $t("orders.cancellationQuestion") }}</p>
+                <p class="mt-0">{{ $t("common.actionIrreversible") }}</p>
             </v-card-text>
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn text class="mb-3" @click="dialog = false">{{ $t("common.cancel") }}</v-btn>
+                <v-btn text class="mb-3" @click="dialog = false">{{ $t("orders.notCancel") }}</v-btn>
                 <v-btn 
                  color="red lighten-1" 
                  class="mb-3 mr-2" 
                  elevation="1"
                  dark 
                  @click="cancelConfirm()"
-                >Wycofaj</v-btn>
+                >{{ $t("orders.cancel") }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>

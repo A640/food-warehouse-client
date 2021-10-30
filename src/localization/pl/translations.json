@@ -17,6 +17,8 @@
   },
   "common": {
     "account": "Konto",
+    "actionIrreversible": "Tej akcji nie można cofnąć!",
+    "add": "Dodaj",
     "cancel": "Anuluj",
     "company": "Firma",
     "companyName": "Nazwa firmy",
@@ -26,6 +28,7 @@
     "firstName": "Imię",
     "foodProducer": "Producent żywności",
     "haveCompany": "Mam firmę",
+    "id": "ID",
     "lastName": "Nazwisko",
     "login": "Login",
     "myData": "Moje dane",
@@ -74,6 +77,7 @@
     "lessThan": "Wartość musi być mniejsza niż {{number}}",
     "loginTaken": "Ten login jest zajęty! Wybierz inny login.",
     "max": "Maksymalnie {{count}} znaki",
+    "maxQuantity": "Ilość nie może być większa niż maksymalna liczba sztuk",
     "min": "Minimum {{count}} znaki",
     "min1": "Minimum {{count}} znak",
     "mustContainDigits": "Kod musi zawierać {{count}} cyfry",
@@ -86,6 +90,7 @@
     "passRetype": "Podaj ponownie hasło",
     "passUpper": "Wymagana co najmniej jedna duża litera",
     "phoneDigits": "Minimum 9 cyfr",
+    "quantityNegative": "Ilość nie może być ujemna",
     "required": "To pole jest wymagane!",
     "taxIDInvalid": "NIP powinien zawierać {{count}} znaków",
     "tooHigh": "Zbyt duża wartość"
@@ -98,10 +103,13 @@
   "orders": {
     "cancel": "Wycofaj zamówienie",
     "cancelError": "Nie można już wycofać zamówienia",
+    "cancellationQuestion": "Czy napewno chcesz usunąć wycofać wybrane zamówienie?",
     "comments": "Uwagi do zamówienia",
     "commentsPlaceholder": "Wpisz tutaj swoje uwagi do zamówienia",
     "complaint": "Reklamacja",
     "dateOrdered": "Data złożenia zamówienia",
+    "noCancel": "Pozostaw zamówienie",
+    "orderCancellation": "Wycofywanie zamówienia",
     "orderNumber": "Zamówienie numer",
     "orders": "Zamówienia",
     "ordersList": "listy zamówień",
@@ -146,6 +154,14 @@
     "requiresRefrigeration": "Wymaga przechowywania w chłodni",
     "sellPrice": "Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu",
     "shortDescription": "Skrócony opis"
+  },
+  "store": {
+    "addToCart": "Dodaj do koszyka",
+    "expirationDate": "Data ważności",
+    "maxQuantity": "z {{count}} sztuk",
+    "order": "Zamów",
+    "pricePerItem": "Cena za sztukę",
+    "total": "Razem"
   },
   "vehicle": {
     "assignedVehicle": "Przydzielony pojazd",
