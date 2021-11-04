@@ -6,22 +6,22 @@
         <div class="pop-card">
             <div class="pop-wrapper">
                 <div class="cell pop-title">
-                    <h2 class="pop-title__text">Nowa wiadomość</h2>
+                    <h2 class="pop-title__text">{{ $t("messages.newMessage") }}</h2>
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
                     
                     <v-form v-model="validated" class="cell" ref="detailsForm" @submit.prevent="nextStep">
-                        <label class="cell__label">Treść</label>
+                        <label class="cell__label">{{ $t("messages.content") }}</label>
                         <v-textarea
                             solo
                             v-model="content"
                             class="input mt-10"
-                            label="Wpisz treść wiadomości"
+                            :label="$t('messages.enterMessageText')"
                             :rules="c_rules"
                         />
 
-                        <label class="cell__label">Adresat</label>
+                        <label class="cell__label">{{ $t("messages.messageRecipient") }}</label>
                         <v-autocomplete
                             solo
                             class="mt-4"
@@ -38,7 +38,7 @@
                         <div class="cell__popup-buttons">
                             <v-btn text class=" mb-5" @click="closeDialog()">{{ $t("common.cancel") }}</v-btn>
                             <v-spacer></v-spacer>
-                            <v-btn depressed class=" mb-5" @click="sendMessage()">Wyślij</v-btn>
+                            <v-btn depressed class=" mb-5" @click="sendMessage()">{{ $t("messages.send") }}</v-btn>
                         </div>
                     </div>
 
@@ -83,10 +83,10 @@ export default {
 
 
             c_rules: [
-                value => !!value || 'Treść wiadomości nie może być pusta',
+                value => !!value || this.$t('errors.messageContentEmpty'),
             ],
             r_employee: [
-                value => !!value || 'Musisz wybrać adresata',
+                value => !!value || this.$t('errors.recipientNotSelected'),
             ],
 
             loading: false,

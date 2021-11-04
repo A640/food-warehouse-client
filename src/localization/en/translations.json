@@ -10,6 +10,7 @@
   },
   "batch": {
     "addNumber": "How many Euro-pallets to add to the warehouse",
+    "batch": "Batch",
     "batchNumber": "Batch NO",
     "productLot": "Product lot",
     "productQuantity": "Number of product units per 1 Euro-pallet",
@@ -20,10 +21,12 @@
     "actionIrreversible": "This action cannot be undone!",
     "add": "Add",
     "cancel": "Cancel",
+    "close": "Close",
     "company": "Company",
     "companyName": "Company name",
     "customer": "Customer",
     "discount": "Discount",
+    "edit": "Edit",
     "email": "E-mail",
     "firstName": "First name",
     "foodProducer": "Food producer",
@@ -32,8 +35,10 @@
     "lastName": "Last name",
     "login": "Login",
     "myData": "My data",
+    "newCaps": "NEW",
     "notChanged": "not changed",
     "notRecognized": "Not recognized",
+    "ok": "Ok",
     "optional": "optional",
     "password": "Password",
     "passwordRepeat": "Repeat password",
@@ -42,7 +47,10 @@
     "profit": "Profit",
     "returnTo": "Return to",
     "save": "Save",
+    "status": "Status",
+    "submitted": "Submitted",
     "taxID": "Tax ID",
+    "to": "To",
     "userType": "User type",
     "userTypes": {
       "admin": "Admin",
@@ -53,6 +61,43 @@
     },
     "value": "Value",
     "warehouse": "Warehouse"
+  },
+  "complaint": {
+    "complaint": "Complaint",
+    "complaintNo": "Complaint no.",
+    "considerComplain": "Save",
+    "considered": "Considered",
+    "content": "Complaint content",
+    "decision": "Decision",
+    "decisionsOptions": {
+      "ACCEPTED": "Accept the complaint",
+      "DECISION": "Issue a custom decision",
+      "REJECTED": "Reject the complaint"
+    },
+    "forOrderNo": "For order no",
+    "newComplaint": "New Complaint",
+    "noContent": "No content",
+    "reasons": "Reasons for the decision",
+    "reply": "Reply",
+    "state": {
+      "ACCEPTED": "The complaint was approved",
+      "CANCELED": "The complaint was withdrawn by the customer",
+      "REJECTED": "The complaint was rejected",
+      "WAITING": "The complaint is waiting for consideration"
+    },
+    "stateShort": {
+      "ACCEPTED": "Accepted",
+      "CANCELED": "Canceled",
+      "DECISION": "Decission was issued",
+      "READ": "Read",
+      "REGISTERED": "Registered",
+      "REJECTED": "Rejected",
+      "UNKNOWN": "Unknown"
+    },
+    "submitComplaint": "Submit complaint",
+    "submitNewComplaint": "Submit new complaint",
+    "withdrawComplaint": "Withdraw your complaint",
+    "yourComplaint": "Your complaint"
   },
   "employee": {
     "corporateData": "Corporate data",
@@ -67,8 +112,11 @@
       "outOfSpace": "The warehouse is running out of space",
       "outOfStock": "Product is running out of stock"
     },
+    "contentComplaintEmpty": "The content of complaint cannot be empty",
     "emailInvalid": "Email address is invalid",
     "emailTaken": "This email is already registered! Please enter a different address.",
+    "emptyJustification": "The content of the justification cannot be empty",
+    "emptyValue": "Value cannot be empty",
     "formats": "The supported file formats are: {{formats}}",
     "greaterThan": "Value must be greater than {{number}}",
     "imageSmallerThan": "The image size should be less than {{count}}MB!",
@@ -78,10 +126,13 @@
     "loginTaken": "This login is already taken! Choose different one.",
     "max": "Maximum {{count}} characters",
     "maxQuantity": "Quantity must not exceed the maximum number of items",
+    "messageContentEmpty": "The message content cannot be empty",
     "min": "Minimum {{count}} characters",
     "min1": "Minimum {{count}} character",
     "mustContainDigits": "The code must contain {{count}} digits",
     "negativeValue": "You cannot enter a negative value here",
+    "noContent": "No content",
+    "notGreaterThan": "The value cannot be greater than {{count}}!",
     "orderNotFound": "The selected order was not found",
     "passCount": "Password must contain at least {{count}} characters",
     "passDigit": "At least one digit is required",
@@ -91,12 +142,19 @@
     "passUpper": "At least one upper case character is required",
     "phoneDigits": "Minumum 9 digits",
     "quantityNegative": "Quantity cannot be negative",
+    "recipientNotSelected": "You have to select a recipient",
     "required": "This field is required!",
     "taxIDInvalid": "Tax ID should contain {{count}} characters",
     "tooHigh": "Value is too high"
   },
   "messages": {
+    "content": "Content",
+    "enterMessageText": "Enter the message text",
+    "messageRecipient": "Message recipient",
+    "newMessage": "New message",
     "read": "Read",
+    "readDate": "Read",
+    "send": "Send",
     "sent": "Sent",
     "unread": "Unread"
   },
@@ -140,6 +198,20 @@
       "WAITING_FOR_PAYMENT": "The order is pending waiting for payment"
     },
     "value": "Value"
+  },
+  "popups": {
+    "areYouSureDelete": "Are you sure you want to delete",
+    "batchDeleteConfirmationText": "Are you sure you want to remove product batch no {{batch_no}} from warehouse {{warehouse}}?",
+    "delete": "Delete",
+    "deleteSelected": "Delete selected",
+    "deletingInProgress": "Deleting in progress",
+    "discountPercent": "Enter the discount percentage (value from 0 to 100 without the \"%\" symbol)",
+    "discountValue": "Discount value",
+    "editCustomerDiscount": "Edit customer discount",
+    "editShippingAddress": "Edit the shipping address",
+    "generalDeleteConfirmationText": "Are you sure you want to delete {{type}} {{name}}?",
+    "newShippingAddress": "New the shipping address",
+    "selected": "Selected"
   },
   "products": {
     "buyPrice": "The price at which the warehouse <b>buys</b> a product unit",

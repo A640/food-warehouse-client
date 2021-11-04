@@ -6,7 +6,7 @@
             </v-btn>
         </template>
         <v-card v-if="loading" class="loader">
-            <p>Trwa usuwanie</p>
+            <p>{{ $t("popups.deletingInProgress") }}</p>
             <v-progress-circular
                 indeterminate
                 color="red"
@@ -18,12 +18,12 @@
                 <br/>
             </v-card-title>
             <v-card-subtitle>
-                ID: {{ id }}
+                {{ $t("common.id") }}: {{ id }}
             </v-card-subtitle>
 
             <v-card-text>
-                <p class="mb-1">Czy napewno chcesz usunąć {{ type }} {{ name }}?</p>
-                <p class="mt-0">Tej akcji nie można cofnąć!</p>
+                <p class="mb-1">{{ $t("popups.generalDeleteConfirmationText", {'type': type, 'name': name}) }}</p>
+                <p class="mt-0">{{ $t("common.actionIrreversible") }}</p>
             </v-card-text>
 
             <v-card-actions>
@@ -35,7 +35,7 @@
                  elevation="1"
                  dark 
                  @click="deleteConfirm()"
-                >Usuń</v-btn>
+                >{{ $t("popups.delete") }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>

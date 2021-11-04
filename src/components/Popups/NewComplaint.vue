@@ -2,13 +2,13 @@
     <v-dialog v-model="dialog" max-width="800px">
         <template v-slot:[`activator`]="{ on }">
             <v-btn v-on="on" depressed  @click="dialog=true" class="center-btn">
-                Złóż nową reklamację
+                {{ $t("complaint.submitNewComplaint") }}
             </v-btn>
         </template>
         <div class="pop-card">
             <div class="pop-wrapper">
                 <div class="cell pop-title">
-                    <h2 class="pop-title__text">Nowa reklamacja</h2>
+                    <h2 class="pop-title__text">{{ $t("complaint.newComplaint") }}</h2>
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
@@ -29,7 +29,7 @@
                             class="mb-5" 
                             dark 
                             @click="submitComplaint()"
-                            >złóż reklamację</v-btn>
+                            >{{ $t("complaint.submitComplaint") }}</v-btn>
                         </div>
                     </div>
 
@@ -73,7 +73,7 @@ export default {
             dialog: false,
             content: '',
             c_rules: [
-                value => !!value || 'Treść zażalenia nie może być pusta',
+                value => !!value || this.$t('errors.contentComplaintEmpty'),
             ],
             loading: false,
         }

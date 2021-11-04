@@ -5,7 +5,7 @@
                     <v-list-item-content class="ml-5 mr-5" >
                         <v-list-item-title class="message-title mb-3 mt-4">
                             <span class="message-sender">{{title}}</span>
-                            <v-chip v-if="message.state == 'SENT' && !sent" color="green lighten-1" dark label small class="ml-2">NOWA</v-chip>
+                            <v-chip v-if="message.state == 'SENT' && !sent" color="green lighten-1" dark label small class="ml-2">{{ $t("common.newCaps") }}</v-chip>
                             <v-icon v-if="message.state == 'READ' && sent" small class="ml-2" color="rgb(130, 180, 170)">mdi-check-circle</v-icon>
                             <v-spacer></v-spacer>
                             <span class="message-date">{{message.send_date}}</span>
@@ -25,7 +25,7 @@
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
                     <div class="cell">
                         <span class="message-sender">{{title}}</span>
-                        <p class="message-date">Wysłano: {{message.send_date}}</p>
+                        <p class="message-date">{{ $t("messages.sent") }}: {{message.send_date}}</p>
                     </div>
                     
                     <v-textarea
@@ -34,15 +34,15 @@
                         auto-grow
                         v-model="message.content"
                         class="cell input mt-10"
-                        label="Brak treści"
+                        :label="$t('errors.noContent')"
                     />
 
-                    <p class="cell message-date" v-if="message.state == 'READ'">Odczytano: {{message.read_date}}</p>
+                    <p class="cell message-date" v-if="message.state == 'READ'">{{ $t("messages.readDate") }}: {{message.read_date}}</p>
 
                     
                      <div class="cell">
                         <div class="cell__popup-buttons">
-                            <v-btn text class=" mb-5" @click="closeDialog()">Ok</v-btn>
+                            <v-btn text class=" mb-5" @click="closeDialog()">{{ $t("common.ok") }}</v-btn>
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@ export default {
     computed:{
         title(){
             if(this.sent){
-                return 'Do: ' + this.message.receiver.name + ' ' + this.message.receiver.surname; 
+                return this.$t('common.to') + ': ' + this.message.receiver.name + ' ' + this.message.receiver.surname; 
             }
             else{
                 return this.message.sender.name + ' ' + this.message.sender.surname;

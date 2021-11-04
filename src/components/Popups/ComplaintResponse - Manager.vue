@@ -3,39 +3,39 @@
         <template v-slot:[`activator`]="{ on }">
             <div class="center-btn">
                 <v-btn v-on="on" outlined  @click="dialog=true" class="">
-                    Reklamacja nr {{complaint.complaint.complaint_id}}
+                    {{ $t("complaint.complaintNo") }} {{complaint.complaint.complaint_id}}
                 </v-btn>
                 <p :class="{    'section-title':true, 
                                 'accepted': complaint.complaint.state == 'ACCEPTED',
                                 'rejected': complaint.complaint.state == 'REJECTED',             
-                   }">Status: {{state}}</p>
+                   }">{{ $t("common.status") }}: {{state}}</p>
             </div>
             
         </template>
         <div class="pop-card">
             <div class="pop-wrapper">
                 <div class="cell pop-title">
-                    <h2 class="pop-title__text">Reklamacja</h2>
+                    <h2 class="pop-title__text">{{ $t("complaint.complaint") }}</h2>
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
                     <div class="cell">
-                        <p class="section-title">Do zamówienia nr: <router-link :to="{name: 'Order_Details_2' , params: { id:  complaint.order.order.order_id }}" class="cell__link">{{ complaint.order.order.order_id }}</router-link></p>
-                        <p class="section-title">Złożono: {{complaint.complaint.send_date}}</p>
+                        <p class="section-title">{{ $t("complaint.forOrderNo") }}: <router-link :to="{name: 'Order_Details_2' , params: { id:  complaint.order.order.order_id }}" class="cell__link">{{ complaint.order.order.order_id }}</router-link></p>
+                        <p class="section-title">{{ $t("common.submitted") }}: {{complaint.complaint.send_date}}</p>
                     </div>
                     
-                    <p class="section-title cell mt-10" >Treść zażalenia</p>
+                    <p class="section-title cell mt-10" >{{ $t("complaint.content") }}</p>
                     <v-textarea
                         solo
                         readonly
                         v-model="complaint.complaint.content"
                         class="cell input"
                         :rules="c_rules"
-                        label="Brak treści"
+                        :label="$t('complaint.noContent')"
                     />
 
 
-                    <p class="section-title cell" >Decyzja</p>
+                    <p class="section-title cell" >{{ $t("complaint.decision") }}</p>
                     <v-autocomplete
                         solo
                         class="cell input"
@@ -47,36 +47,36 @@
                     
                     
                     <div class="cell">
-                        <p class="section-title" >Uzasadnienie decyzji</p>
-                        <p class="section-title" v-if="complaint.complaint.decision_date != null" >Rozpatrzono: {{complaint.complaint.decision_date}}</p>
+                        <p class="section-title" >{{ $t("complaint.reasons") }}</p>
+                        <p class="section-title" v-if="complaint.complaint.decision_date != null" >{{ $t("complaint.considered") }}: {{complaint.complaint.decision_date}}</p>
                         <v-textarea
                             solo
                             :readonly="complaint.complaint.state != 'REGISTERED' && complaint.complaint.state != 'READ'"
                             v-model="decision_explanation"
                             class="input"
                             :rules="c_rules"
-                            label="Brak treści"
+                            :label="$t('complaint.noContent')"
                         />
                     </div>
 
                     <div v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" class="cell">
                         <!-- <p class="title" >Odpowiedź</p> -->
-                        <p class="section-title">Reklamacja oczekuje na rozpatrzenie</p>
+                        <p class="section-title">{{ $t("complaint.state.WAITING") }}</p>
                     </div>
 
                     <div v-if="complaint.complaint.state == 'ACCEPTED'" class="cell">
-                        <p class="title" >Odpowiedź</p>
-                        <p class="section-title accepted">Reklamacja została rozpatrzona pozytywnie</p>
+                        <p class="title" >{{ $t("complaint.reply") }}</p>
+                        <p class="section-title accepted">{{ $t("complaint.state.ACCEPTED") }}</p>
                     </div>
 
                     <div v-if="complaint.complaint.state == 'REJECTED'" class="cell">
-                        <p class="title" >Odpowiedź</p>
-                        <p class="section-title rejected">Reklamacja została odrzucona</p>
+                        <p class="title" >{{ $t("complaint.reply") }}</p>
+                        <p class="section-title rejected">{{ $t("complaint.state.REJECTED") }}</p>
                     </div>
 
                     <div v-if="complaint.complaint.state == 'CANCELED'" class="cell">
                         <!-- <p class="title" >Odpowiedź</p> -->
-                        <p class="section-title">Reklamacja została wycofana przez klienta</p>
+                        <p class="section-title">{{ $t("complaint.state.CANCELED") }}</p>
                     </div>
                     
 
@@ -86,9 +86,9 @@
                     <div class="cell">
                         <div class="cell__popup-buttons">
                             <v-spacer v-if="complaint.complaint.state != 'REGISTERED' && complaint.complaint.state != 'READ'"></v-spacer>
-                            <v-btn text class=" mb-5" @click="closeDialog()">Zamknij</v-btn>
+                            <v-btn text class=" mb-5" @click="closeDialog()">{{ $t("common.close") }}</v-btn>
                             <v-spacer v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" />
-                            <v-btn dark color="amber darken-2" v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" @click="addComplaintDecision()">Rozpatrz reklamację</v-btn>
+                            <v-btn dark color="amber darken-2" v-if="complaint.complaint.state == 'REGISTERED' || complaint.complaint.state == 'READ'" @click="addComplaintDecision()">{{ $t("complaint.considerComplain") }}</v-btn>
                         </div>
                     </div>
 
@@ -132,9 +132,9 @@ export default {
         return {
             dialog: false,
             loading: false,
-            decision_options: [{text: 'Rozpatrz reklamację pozytywnie', value: 'ACCEPTED'},
-                                {text: 'Odrzuć reklamację', value: 'REJECTED'},
-                                {text: 'Wydaj niestandardową decyzję', value: 'DECISION'}
+            decision_options: [{text: this.$t('complaint.decisionsOptions.ACCEPTED'), value: 'ACCEPTED'},
+                                {text: this.$t('complaint.decisionsOptions.REJECTED'), value: 'REJECTED'},
+                                {text: this.$t('complaint.decisionsOptions.DECISION'), value: 'DECISION'}
             
             ],
             decision_explanation: '',
@@ -189,19 +189,19 @@ export default {
     computed:{
         state(){
             if(this.complaint.complaint.state == 'REGISTERED'){
-                return 'zarejestrowana'
+                return this.$t('complaint.stateShort.REGISTERED');
             }else if(this.complaint.complaint.state == 'READ'){
-                return 'odczytana'
+                return this.$t('complaint.stateShort.READ');
             }else if(this.complaint.complaint.state == 'ACCEPTED'){
-                return 'rozpatrzona pozytywnie'
+                return this.$t('complaint.decisionsOptions.ACCEPTED')
             }else if(this.complaint.complaint.state == 'REJECTED'){
-                return 'odrzucona'
+                return this.$t('complaint.stateShort.REJECTED');
             }else if(this.complaint.complaint.state == 'DECISION'){
-                return 'wydano decyzję'
+                return this.$t('complaint.stateShort.DECISION');
             }else if(this.complaint.complaint.state == 'CANCELED'){
-                return 'wycofana'
+                return this.$t('complaint.stateShort.CANCELED');
             }else{
-                return 'nierozpoznano'
+                return this.$t('complaint.stateShort.UNKNOWN');
             }
         },
         class(){
@@ -216,7 +216,7 @@ export default {
 
         c_rules(){
             if(this.decision == 'DECISION'){
-                return  [ value => !!value || 'Treść uzasadnienia nie może być pusta', ];
+                return  [ value => !!value || this.$t('errors.emptyJustification'), ];
             }
             else{
                 return [];

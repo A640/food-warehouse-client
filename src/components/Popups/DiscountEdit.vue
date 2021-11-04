@@ -8,18 +8,18 @@
         <div class="pop-card">
             <div class="pop-wrapper">
                 <div class="cell pop-title">
-                    <h2 class="pop-title__text">Edytuj rabat dla klienta</h2>
+                    <h2 class="pop-title__text">{{ $t("popups.editCustomerDiscount") }}</h2>
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">
-                    <p class="cell pop-subtitle">Wpisz procent rabatu (wartość od 0 do 100 bez symbolu "%")</p>
+                    <p class="cell pop-subtitle">{{ $t("popups.discountPercent") }}</p>
                     <v-text-field
                         solo
                         type="number"
                         v-model="i_discount"
                         class="cell input"
                         :rules="c_rules"
-                        label="Wartość rabatu"
+                        :label="$t('popups.discountValue')"
                     />
 
                     <div class="cell">
@@ -77,9 +77,9 @@ export default {
             dialog: false,
             i_discount: 0,
             c_rules: [
-                value => !!value || 'Wartość nie może być pusta',
-                value => value >= 0 || 'Wartość nie może być ujemna!',
-                value => value <= 100 || 'Wartość nie może być większ niż 100!',
+                value => !!value || this.$t('errors.emptyValue'),
+                value => value >= 0 || this.$t('errors.negativeValue'),
+                value => value <= 100 || this.$t('errors.notGreaterThan', {count: '100'}),
             ],
             loading: false,
         }

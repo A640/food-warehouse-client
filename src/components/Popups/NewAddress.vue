@@ -8,7 +8,7 @@
         <div class="pop-card">
             <div class="pop-wrapper">
                 <div class="cell pop-title">
-                    <h2 class="pop-title__text">Nowy adres dostawy</h2>
+                    <h2 class="pop-title__text">{{ $t("popups.newShippingAddress") }}</h2>
                 </div>
                 
                 <simplebar class="pop-content" data-simplebar-auto-hide="false">

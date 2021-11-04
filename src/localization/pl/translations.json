@@ -10,6 +10,7 @@
   },
   "batch": {
     "addNumber": "Ile europalet dodać do magazynu",
+    "batch": "Partia",
     "batchNumber": "NR Partii",
     "productLot": "Partia produktu",
     "productQuantity": "Ilość jednostek produktu na 1 europaletę",
@@ -20,10 +21,12 @@
     "actionIrreversible": "Tej akcji nie można cofnąć!",
     "add": "Dodaj",
     "cancel": "Anuluj",
+    "close": "Zamknij",
     "company": "Firma",
     "companyName": "Nazwa firmy",
     "customer": "Klient",
     "discount": "Zniżka",
+    "edit": "Edytuj",
     "email": "E-mail",
     "firstName": "Imię",
     "foodProducer": "Producent żywności",
@@ -32,8 +35,10 @@
     "lastName": "Nazwisko",
     "login": "Login",
     "myData": "Moje dane",
+    "newCaps": "NOWA",
     "notChanged": "nie zmieniono",
     "notRecognized": "Nie rozpoznano",
+    "ok": "Ok",
     "optional": "opcjonalnie",
     "password": "Hasło",
     "passwordRepeat": "Powtórz hasło",
@@ -42,7 +47,10 @@
     "profit": "Zysk",
     "returnTo": "Wróć do",
     "save": "Zapisz",
+    "status": "Status",
+    "submitted": "Złożono",
     "taxID": "NIP",
+    "to": "Do",
     "userType": "Rodzaj użytkownika",
     "userTypes": {
       "admin": "Administrator",
@@ -53,6 +61,43 @@
     },
     "value": "Wartość",
     "warehouse": "Magazyn"
+  },
+  "complaint": {
+    "complaint": "Reklamacja",
+    "complaintNo": "Reklamacja numer",
+    "considerComplain": "Rozpatrz reklamację",
+    "considered": "Rozpatrzono",
+    "content": "Treść reklamacji",
+    "decision": "Decyzja",
+    "decisionsOptions": {
+      "ACCEPTED": "Rozpatrz reklamację pozytywnie",
+      "DECISION": "Wydaj niestandardową decyzję",
+      "REJECTED": "Odrzuć reklamację"
+    },
+    "forOrderNo": "Do zamówienia nr",
+    "newComplaint": "Nowa reklamacja",
+    "noContent": "Brak treści",
+    "reasons": "Uzasadnienie decyzji",
+    "reply": "Odpowiedź",
+    "state": {
+      "ACCEPTED": "Reklamacja została rozpatrzona pozytywnie",
+      "CANCELED": "Reklamacja została wycofana przez klienta",
+      "REJECTED": "Reklamacja została odrzucona",
+      "WAITING": "Reklamacja oczekuje na rozpatrzenie"
+    },
+    "stateShort": {
+      "ACCEPTED": "Rozpatrzona pozytywnie",
+      "CANCELED": "Wycofana",
+      "DECISION": "Wydano decyzję",
+      "READ": "Odczytana",
+      "REGISTERED": "Zarejestrowana",
+      "REJECTED": "Odrzucona",
+      "UNKNOWN": "Nierozpoznano"
+    },
+    "submitComplaint": "Złóż reklamację",
+    "submitNewComplaint": "Złóż nową reklamację",
+    "withdrawComplaint": "Wycofaj reklamację",
+    "yourComplaint": "Twoje zgłoszenie"
   },
   "employee": {
     "corporateData": "Dane firmowe",
@@ -67,8 +112,11 @@
       "outOfSpace": "Kończy się miejsce w magazynie",
       "outOfStock": "Kończą się zapasy produktu"
     },
+    "contentComplaintEmpty": "Treść zażalenia nie może być pusta",
     "emailInvalid": "Adres e-mail jest nieprawidłowy",
     "emailTaken": "Ten email jest już w użyciu! Podaj inny adres.",
+    "emptyJustification": "Treść uzasadnienia nie może być pusta",
+    "emptyValue": "Wartość nie może być pusta",
     "formats": "Obsługiwane formaty plików to: {{formats}}",
     "greaterThan": "Wartość musi być większa od {{number}}",
     "imageSmallerThan": "Obraz powinien być mniejszy niż {{count}}MB!",
@@ -78,10 +126,13 @@
     "loginTaken": "Ten login jest zajęty! Wybierz inny login.",
     "max": "Maksymalnie {{count}} znaki",
     "maxQuantity": "Ilość nie może być większa niż maksymalna liczba sztuk",
+    "messageContentEmpty": "Treść wiadomości nie może być pusta",
     "min": "Minimum {{count}} znaki",
     "min1": "Minimum {{count}} znak",
     "mustContainDigits": "Kod musi zawierać {{count}} cyfry",
     "negativeValue": "Nie można wprowadzić wartości ujemnej",
+    "noContent": "Brak treści",
+    "notGreaterThan": "Wartość nie może być większ niż {{count}}!",
     "orderNotFound": "Nie znaleziono wybranego zamówienia",
     "passCount": "Hasło musi zawierać co najmniej {{count}} znaków",
     "passDigit": "Wymagana conajmniej jedna cyfra",
@@ -91,13 +142,20 @@
     "passUpper": "Wymagana co najmniej jedna duża litera",
     "phoneDigits": "Minimum 9 cyfr",
     "quantityNegative": "Ilość nie może być ujemna",
+    "recipientNotSelected": "Musisz wybrać adresata",
     "required": "To pole jest wymagane!",
     "taxIDInvalid": "NIP powinien zawierać {{count}} znaków",
     "tooHigh": "Zbyt duża wartość"
   },
   "messages": {
+    "content": "Treść",
+    "enterMessageText": "Wpisz treść wiadomości",
+    "messageRecipient": "Adresat",
+    "newMessage": "Nowa wiadomość",
     "read": "Przeczytane",
-    "sent": "Wysłane",
+    "readDate": "Odczytano",
+    "send": "Wyślij",
+    "sent": "Wysłano",
     "unread": "Nieprzeczytane"
   },
   "orders": {
@@ -140,6 +198,20 @@
       "WAITING_FOR_PAYMENT": "Zamówienie oczekuje na opłacenie"
     },
     "value": "Wartość"
+  },
+  "popups": {
+    "areYouSureDelete": "Czy napewno chcesz usunąć",
+    "batchDeleteConfirmationText": "Czy napewno chcesz usunąć partię produktu o numerze {{ batch_no }} z magazynu {{ warehouse }}?",
+    "delete": "Usuń",
+    "deleteSelected": "Usuń wybrane",
+    "deletingInProgress": "Trwa usuwanie",
+    "discountPercent": "Wpisz procent rabatu (wartość od 0 do 100 bez symbolu \"%\")",
+    "discountValue": "Wartość rabatu",
+    "editCustomerDiscount": "Edytuj rabat dla klienta",
+    "editShippingAddress": "Edytuj adres dostawy",
+    "generalDeleteConfirmationText": "Czy napewno chcesz usunąć {{ type }} {{ name }}?",
+    "newShippingAddress": "Nowy adres dostawy",
+    "selected": "Wybranych"
   },
   "products": {
     "buyPrice": "Cena po jakiej magazyn <b>kupuje</b> jednostkę produktu",

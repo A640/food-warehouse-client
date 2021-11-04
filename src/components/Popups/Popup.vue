@@ -52,10 +52,10 @@ export default {
         title(){
             let title='';
             if(this.edit){
-                title = "Edytuj"
+                title = this.$t('common.edit');
             }
             else{ 
-                title = "Dodaj"
+                title = this.$t('common.add');
             }
 
 
