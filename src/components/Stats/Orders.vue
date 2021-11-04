@@ -17,7 +17,7 @@
                 labels: dat.dates,
                 datasets: [
                     {
-                        label: 'Zamówienia',
+                        label: this.$t('common.orders'),
                         borderColor: '#f69119',
                         pointBackgroundColor: 'rgba(0,0,0,0)',
                         pointBorderColor: 'rgba(0,0,0,0)',

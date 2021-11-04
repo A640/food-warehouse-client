@@ -17,7 +17,7 @@
                 labels: dat.products,
                 datasets: [
                     {
-                        label: 'Produkty',
+                        label: this.$t('products.products'),
                         borderColor: '#4795bf',
                         // pointBackgroundColor: 'rgba(0,0,0,0)',
                         // pointBorderColor: 'rgba(0,0,0,0)',
@@ -31,7 +31,7 @@
                         data: dat.quantities_regular,
                     },
                      {
-                        label: 'Produkty przecenione',
+                        label: this.$t('products.discountedProducts'),
                         borderColor: '#8ca6b3',
                         // pointBackgroundColor: 'rgba(0,0,0,0)',
                         // pointBorderColor: 'rgba(0,0,0,0)',

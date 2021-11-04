@@ -17,7 +17,7 @@
                 labels: dat.dates,
                 datasets: [
                     {
-                        label: 'Zysk ze sprzedaży',
+                        label: this.$t('common.profitFromSale'),
                         borderColor: '#82b4aa',
                         pointBackgroundColor: 'rgba(0,0,0,0)',
                         pointBorderColor: 'rgba(0,0,0,0)',
