@@ -8,7 +8,7 @@
             >
                 <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
-            <h2 class="title ml-3">Podaj swoje dane</h2>
+            <h2 class="title ml-3">{{ $t("register.enterYourDetails") }}</h2>
         </div>
         
         <edit-customer 

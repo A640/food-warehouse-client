@@ -8,7 +8,7 @@
             >
                 <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
-            <h2 class="title ml-3">Podaj swój adres</h2>
+            <h2 class="title ml-3">{{ $t("register.enterYourAddress") }}</h2>
         </div>
         
         
@@ -21,7 +21,7 @@
     
 
         <div class="cell relative">
-            <v-btn class="submit__btn" @click="validate()">Utwórz konto</v-btn>
+            <v-btn class="submit__btn" @click="validate()">{{ $t("register.createAccount") }}</v-btn>
         </div>
 
         

@@ -227,6 +227,16 @@
     "sellPrice": "The price at which the warehouse <b>sells</b> a product unit",
     "shortDescription": "Short description"
   },
+  "register": {
+    "accountCreatedSuccessfully": "Your account has been created successfully",
+    "createAccount": "Create account",
+    "enterYourAddress": "Enter your address",
+    "enterYourDetails": "Enter your details",
+    "haveAccount": "Already have an account?",
+    "logIn": "Log in",
+    "loginPage": "login page",
+    "youCanGoTo": "Now you can go to"
+  },
   "store": {
     "addToCart": "Add to cart",
     "expirationDate": "Expiration date",

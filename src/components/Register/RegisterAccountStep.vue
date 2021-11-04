@@ -2,7 +2,7 @@
     <div class="register-component">
 
          <div class="cell">
-            <h2 class="title">Utwórz konto</h2>
+            <h2 class="title">{{ $t("register.createAccount") }}</h2>
         </div>
        
         <edit-account 
@@ -17,8 +17,8 @@
         </div>
 
         <div class="cell align-center footer">
-            <p>Masz już konto?
-            <router-link :to="{name: 'Login'}" class="cell__link">Zaloguj się</router-link>
+            <p>{{ $t("register.haveAccount") }}
+            <router-link :to="{name: 'Login'}" class="cell__link">{{ $t("register.logIn") }}</router-link>
             </p>
         </div>
 

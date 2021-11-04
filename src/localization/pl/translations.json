@@ -227,6 +227,16 @@
     "sellPrice": "Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu",
     "shortDescription": "Skrócony opis"
   },
+  "register": {
+    "accountCreatedSuccessfully": "Konto zostało utworzone",
+    "createAccount": "Utwórz konto",
+    "enterYourAddress": "Podaj swój adres",
+    "enterYourDetails": "Podaj swoje dane",
+    "haveAccount": "Masz już konto?",
+    "logIn": "Zaloguj się",
+    "loginPage": "strony logowania",
+    "youCanGoTo": "Teraz możesz przejść do"
+  },
   "store": {
     "addToCart": "Dodaj do koszyka",
     "expirationDate": "Data ważności",

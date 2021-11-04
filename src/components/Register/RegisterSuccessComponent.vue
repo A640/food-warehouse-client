@@ -4,12 +4,12 @@
 
         <v-icon class="ico">mdi-check-circle</v-icon>
 
-        <h2 class="title">Konto zostało utworzone</h2>
+        <h2 class="title">{{ $t("register.accountCreatedSuccessfully") }}</h2>
         
 
         <div class="cell align-center footer">
-            <p>Teraz możesz przejść do 
-            <router-link :to="{name: 'Login'}" class="cell__link">strony logowania</router-link>
+            <p>{{ $t("register.youCanGoTo") }}
+            <router-link :to="{name: 'Login'}" class="cell__link">{{ $t("register.loginPage") }}</router-link>
             </p>
         </div>
 
