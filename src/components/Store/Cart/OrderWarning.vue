@@ -5,17 +5,17 @@
 
         <v-icon class="ico">mdi-check-circle</v-icon>
 
-        <h2 class="title">Zamówienie zostało złożone</h2>
+        <h2 class="title">{{ $t("store.orderPlacedSuccessfully") }}</h2>
         
         <div class="warning-cell">
             <v-icon color="#FFA000" class="ico-cell">mdi-alert-outline</v-icon>
-            <h3> Płatność była nieudana i zostanie pobrana przez dostawcę po dostarczeniu zamówienia</h3>
+            <h3> {{ $t("store.cart.paymentUnsuccessfull") }}</h3>
         </div>
         
 
         <div class="cell align-center footer">
-            <p>Możesz wrócić do  
-            <router-link :to="{name: 'Store_Grid'}" class="cell__link">strony sklepu</router-link>
+            <p>{{ $t("store.comebackTo") }}
+            <router-link :to="{name: 'Store_Grid'}" class="cell__link">{{ $t("store.storePage") }}</router-link>
             </p>
         </div>
 

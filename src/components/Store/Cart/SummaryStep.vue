@@ -6,7 +6,7 @@
                 <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Podsumowanie:</v-card-title> 
+                           <v-card-title>{{ $t("store.cart.summary") }}:</v-card-title> 
                         </v-card>
                     </v-col>
                     
@@ -42,7 +42,7 @@
                                         <Product class="mb-4 ml-4"  :removable="false" :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
-                                            <v-card-subtitle>Ilość</v-card-subtitle>
+                                            <v-card-subtitle>{{ $t("products.quantity") }}</v-card-subtitle>
                                             <div class="quantity-cell">
                                                 
                                                 <p class="quantity-label centered-input" >{{product.quantity}}</p>
@@ -70,7 +70,7 @@
                             </div>
                         </v-card>
 
-                        <v-btn outlined @click="clearCart()" class="mt-5" color="rgba(0,0,0,0.5)" >Wyczyść koszyk</v-btn>
+                        <v-btn outlined @click="clearCart()" class="mt-5" color="rgba(0,0,0,0.5)" >{{ $t("store.cart.clearCart") }}</v-btn>
 
                     </v-col>
                     <v-col>
@@ -78,14 +78,14 @@
                             <div class="card-container cell">
                                 <h3 class="cell" >
                                     
-                                    Do zapłaty:
+                                    {{ $t("store.cart.toPay") }}:
                                 </h3>
                                 <p  class="cell details-price ">{{total}} zł</p>
                                 <p class="cell details-unit "></p>
                                 <div class="order-button cell">
-                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Kupuję i płacę</v-btn>
+                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >{{ $t("store.cart.buyAndPay") }}</v-btn>
                                 </div>
-                                <p class="detail-claim cell">Klikając przycisk "kupuję i płacę" akceptujesz regulamin sklepu i zobowiązujesz się do uregulowania płatności względem {{store_name}}</p>
+                                <p class="detail-claim cell">{{ $t("store.cart.termsAndConditions") }} {{store_name}}</p>
                             </div>
                         </v-card>
 

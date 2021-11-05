@@ -8,7 +8,7 @@
                 :complete="step > 1"
                 step="1"
                 >
-                Koszyk
+                {{ $t("store.cart.cart") }}
                 </v-stepper-step>
         
                 <v-divider></v-divider>
@@ -19,13 +19,13 @@
                 :complete="step > 2"
                 step="2"
                 >
-                Adres i płatność
+                {{ $t("store.addressAndPaymentShort") }}
                 </v-stepper-step>
         
                 <v-divider></v-divider>
         
                 <v-stepper-step :editable="step > 2" edit-icon="mdi-check" step="3">
-                Podsumowanie
+                {{ $t("store.cart.summary") }}
                 </v-stepper-step>
             </v-stepper-header>
         

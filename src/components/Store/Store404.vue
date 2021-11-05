@@ -3,12 +3,12 @@
         <div class="component-404">
             <v-icon class="ico">mdi-close-circle</v-icon>
 
-            <h2 class="title">Nie znaleziono podanego produktu</h2>
+            <h2 class="title">{{ $t("store.productNotFound") }}</h2>
             
 
             <div class="cell align-center footer">
                 <p>{{ $t("returnTo") }}
-                <router-link :to="{name: 'Store_Grid'}" class="cell__link">katalogu produktów</router-link>
+                <router-link :to="{name: 'Store_Grid'}" class="cell__link">{{ $t("store.storePage") }}</router-link>
                 </p>
             </div>       
         </div>

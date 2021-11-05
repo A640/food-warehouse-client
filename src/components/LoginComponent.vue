@@ -1,13 +1,13 @@
 <template>
     <div class="login-component">
-        <h2 class="title">Zaloguj się</h2>
+        <h2 class="title">{{ $t("register.logIn") }}</h2>
 
         <div class="cell credentials_error" v-if="c_error">
-            <p>Podano niewłaściwe dane logowania. Popraw dane i spróbuj ponownie.</p>
+            <p>{{ $t("errors.incorrectCredentials") }}</p>
         </div>
 
         <form class="cell">
-            <label class="cell__label">Login</label>
+            <label class="cell__label">{{ $t("common.login") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -18,7 +18,7 @@
         </form>
         
         <form class="cell">
-            <label class="cell__label">Hasło</label>
+            <label class="cell__label">{{ $t("common.password") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -32,12 +32,12 @@
         </form>
 
         <div class="cell relative">
-            <v-btn class="submit__btn" @click="login()">Zaloguj się</v-btn>
+            <v-btn class="submit__btn" @click="login()">{{ $t("register.logIn") }}</v-btn>
         </div>
 
         <div class="cell align-center footer">
-            <p>Nie masz konta?
-            <router-link :to="{name: 'Register'}" class="cell__link">Zarejestruj się</router-link>
+            <p>{{ $t("register.dontHaveAccount") }}
+            <router-link :to="{name: 'Register'}" class="cell__link">{{ $t("register.createAccount") }}</router-link>
             </p>
         </div>
 

@@ -18,8 +18,8 @@
                         <v-card >
                             <div class="card-container">
                                 <p  class="cell details-title ">{{product.name}}</p>
-                                <p  class="cell details-producer">Producent: {{product.producer_name}}</p>
-                                <h3 class="cell" >Szczegóły:</h3>
+                                <p  class="cell details-producer">{{ $t("products.manufacturer") }}: {{product.producer_name}}</p>
+                                <h3 class="cell" >{{ $t("products.details") }}:</h3>
                                 <p  class="cell details-description ">{{product.description}}</p>
                             </div>
                         </v-card>
@@ -29,10 +29,10 @@
                         <div class="card-container cell">
                                 <h3 class="cell" >
                                     
-                                    Cena:
+                                    {{ $t("products.price") }}:
                                 </h3>
                                 <p  class="cell details-price ">{{product.sell_price}} zł</p>
-                                <p class="cell details-unit ">za 1 europaletę produktu</p>
+                                <p class="cell details-unit ">{{ $t("store.forEuro-pallet", {'count': 1}) }}</p>
                                 <div class="order-button cell">
                                     <add-to-cart
                                         :product="product" 
@@ -43,7 +43,7 @@
                                         :sale_id="-1"
                                     />
                                 </div>
-                                <p class="detail-claim cell">Produkt z tej oferty ma jeszcze conajmniej 1 miesiąc przydatności</p>
+                                <p class="detail-claim cell">{{ $t("store.productHasShelfLife", {'count': 1}) }}</p>
                             </div>
                         </v-card>
 
@@ -58,12 +58,12 @@
                                         class="mr-2"
                                         color="amber"
                                     >
-                                        Promocja
+                                        {{ $t("store.specialOffer") }}
                                     </v-chip>
-                                    Cena:
+                                    {{ $t("products.price") }}:
                                 </h3>
                                 <p  class="cell details-price "><span class="old-price">{{product.sell_price}}</span> {{discount.sell_price}} zł</p>
-                                <p class="cell details-unit ">za 1 europaletę produktu</p>
+                                <p class="cell details-unit ">{{ $t("store.forEuro-pallet", {'count': 1}) }}</p>
                                 <div class="order-button cell">
                                     <add-to-cart 
                                         :product="product" 
@@ -76,7 +76,7 @@
                                     />
                                 </div>
                                 <p class="detail-claim cell">
-                                    Data ważności produktu z tej oferty kończy się 
+                                    {{ $t("store.expirationDateEnds") }}
                                     <v-chip
                                         label
                                         outlined

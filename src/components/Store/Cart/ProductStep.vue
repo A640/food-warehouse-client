@@ -6,7 +6,7 @@
                 <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Produkty w koszyku:</v-card-title> 
+                           <v-card-title>{{ $t("store.cart.productsInCart") }}:</v-card-title> 
                         </v-card>
                     </v-col>
                     
@@ -18,24 +18,24 @@
                                 <!-- Product list -->
                                 <v-form v-model="validated">
                                     <!-- placeholder for empty cart -->
-                                    <v-card-subtitle class="text-center" v-if="products.length < 1" >Koszyk jest pusty
-                                        <p>wróć do <router-link :to="{name: 'Store_Grid'}" class="cell__link">sklepu</router-link> i dodaj coś</p></v-card-subtitle>
+                                    <v-card-subtitle class="text-center" v-if="products.length < 1" >{{ $t("store.cart.emptyCart") }}
+                                        <p>{{ $t("store.cart.returnTo") }} <router-link :to="{name: 'Store_Grid'}" class="cell__link">{{ $t("store.cart.shop") }}</router-link> {{ $t("store.cart.addSomething") }}</p></v-card-subtitle>
 
                                     <!-- products -->
                                     <div class="product-cell" v-for="product in products" :key="String(product.product_id)+String(product.discount_id)">
                                         <Product class="mb-4 ml-4"  :product="product" @Deleted="loadData()"/>
                                     
                                         <v-card height="9rem" class="mr-4 ml-2">
-                                            <v-card-subtitle>Ilość</v-card-subtitle>
+                                            <v-card-subtitle>{{ $t("products.quantity") }}</v-card-subtitle>
                                             <div class="quantity-cell">
                                                 <v-btn text icon @click="product.quantity = Number.parseInt(product.quantity) - 1"><v-icon>mdi-minus</v-icon></v-btn>
                                                 <v-text-field
                                                     class="quantity-input centered-input"
                                                     type="number"
                                                     v-model="product.quantity"
-                                                    :rules="[value => (value || '') <= product.max || 'Za dużo',
-                                                        value => !!value || 'Usuń produkt',
-                                                        value => (value || '') >= 0 || 'Nie może być ujemna',
+                                                    :rules="[value => (value || '') <= product.max || $t('errors.tooHigh'),
+                                                        value => !!value || $t('store.cart.removeProduct'),
+                                                        value => (value || '') >= 0 || $t('store.cart.negativeCount'),
                                                     ]"
                                                     flat
                                                     solo
@@ -73,14 +73,14 @@
                             <div class="card-container cell">
                                 <h3 class="cell" >
                                     
-                                    Razem:
+                                    {{ $t("payment.total") }}:
                                 </h3>
                                 <p  class="cell details-price ">{{total}} zł</p>
                                 <p class="cell details-unit "></p>
                                 <div class="order-button cell">
-                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >Przejdź do dostawy</v-btn>
+                                    <v-btn :dark="total > 0" :disabled="!(total > 0)" color="green lighten-1" @click="nextStep()" >{{ $t("store.cart.goToDeliveryOptions") }}</v-btn>
                                 </div>
-                                <p class="detail-claim cell">Produkty zostaną dostarczone w ciągu maksymalnie 5 dni roboczych</p>
+                                <p class="detail-claim cell">{{ $t("store.deliveryFiveDays") }}</p>
                             </div>
                         </v-card>
 

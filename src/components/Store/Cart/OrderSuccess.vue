@@ -5,12 +5,12 @@
 
         <v-icon class="ico">mdi-check-circle</v-icon>
 
-        <h2 class="title">Zamówienie zostało złożone</h2>
+        <h2 class="title">{{ $t("store.orderPlacedSuccessfully") }}</h2>
         
 
         <div class="cell align-center footer">
-            <p>Możesz wrócić do  
-            <router-link :to="{name: 'Store_Grid'}" class="cell__link">strony sklepu</router-link>
+            <p>{{ $t("store.comebackTo") }}
+            <router-link :to="{name: 'Store_Grid'}" class="cell__link">{{ $t("store.storePage") }}</router-link>
             </p>
         </div>
 

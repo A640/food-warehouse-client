@@ -6,7 +6,7 @@
                 <v-row>
                     <v-col>
                         <v-card height="4rem">
-                           <v-card-title>Adres dostawy i sposób płatności</v-card-title> 
+                           <v-card-title>{{ $t("store.addressAndPayment") }}</v-card-title> 
                         </v-card>
                     </v-col>
                     
@@ -25,10 +25,10 @@
                         <NewAddress v-if="!new_address_added" @newAddress="addNewAddress"/>
                         
 
-                        <p class="mb-4 mt-5">Sposób płatności</p>
+                        <p class="mb-4 mt-5">{{ $t("store.paymentMethod") }}</p>
                         
                         <v-card class="pt-3 pl-3 pb-3">
-                            <v-card-title>Wybierz metodę płatności:</v-card-title>
+                            <v-card-title>{{ $t("store.choosePaymentMethod") }}:</v-card-title>
                             <v-radio-group v-model="payment_method" class="ml-4">
                                 <v-radio v-for="method in payment_methods" :key="method.payment_type_id" :value="method" :label="method.payment_type" />
                             </v-radio-group>
@@ -49,14 +49,14 @@
                         <v-card >
                             <div class="card-container cell">
                                 <h3 class="cell" >
-                                   Przejdź dalej
+                                   {{ $t("store.cart.nextStep") }}
                                 </h3>
                                 <p  class="cell details-price "></p>
                                 <p class="cell details-unit "></p>
                                 <div class="order-button cell">
-                                    <v-btn :dark="validated" :disabled="!validated" color="green lighten-1" @click="nextStep()" >Zatwierdź</v-btn>
+                                    <v-btn :dark="validated" :disabled="!validated" color="green lighten-1" @click="nextStep()" >{{ $t("common.confirm") }}</v-btn>
                                 </div>
-                                <p class="detail-claim cell">Produkty zostaną dostarczone w ciągu maksymalnie 5 dni roboczych</p>
+                                <p class="detail-claim cell">{{ $t("store.deliveryFiveDays") }}</p>
                             </div>
                         </v-card>
 
@@ -158,10 +158,7 @@ export default {
 
 <style scoped>
 
-    .plus-ico{
-        /* margin: 0 auto !important;
-        font-size: 2rem; */
-    }
+
 
     .cart-component{
         width: 100%;

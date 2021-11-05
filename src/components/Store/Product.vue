@@ -9,7 +9,7 @@
             >
                 <v-fade-transition>
                     <div class="detail-info" v-if="hover">
-                        Szczegóły produktu
+                        {{ $t("products.productDetails") }}
                     </div>
                 </v-fade-transition>
             </v-img>
@@ -25,14 +25,14 @@
                 color="amber"
                 @click="showDetails()"
             >
-                Dostępna promocja
+                {{ $t("store.specialOfferAvailable") }}
             </v-chip>
             {{ product.name }} 
             <v-spacer></v-spacer> 
             <!-- if product wadd added to cart -->
             <v-chip dark color="green lighten-1" v-if="product.added">
                 <v-icon left>mdi-check</v-icon>
-                Dodano 
+                {{ $t("store.added") }}
             </v-chip>
         </v-card-title>
 
