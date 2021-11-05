@@ -21,7 +21,7 @@
             mdi-wifi-off
           </v-icon>
         </v-avatar>
-          Brak połączenia z serwerem. Sprawdź swoje połączenie internetowe.
+          {{ $t("errors.noConnection") }}
       </v-banner>
       <v-banner
         v-model="this.$store.getters.getReconnected"

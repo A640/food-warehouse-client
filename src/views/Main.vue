@@ -12,7 +12,7 @@
         <div id="content">
             <h1>{{ $t("welcome.inner") }}</h1>
             <transition name="slide-fade" mode="out-in">
-               <v-btn outlined @click="showStore()">Katalog produktów</v-btn>
+               <v-btn outlined @click="showStore()">{{ $t("views.productCatalog") }}</v-btn>
             </transition>
         </div>
     </div>
@@ -26,15 +26,15 @@ export default {
         return {
         drawer: true,
         items: [
-            { title: 'Pracownicy', icon: 'mdi-account', link: 'Admin_Employees' },
-            { title: 'Klienci', icon: 'mdi-account-group', link: 'Admin_Customers' },
-            { title: 'Pojazdy', icon: 'mdi-truck', link: 'Admin_Vehicles' },
-            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Admin_Warehouses'},
-            { title: 'Producenci', icon: 'mdi-food', link: 'Admin_Producers' },
-            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Admin_Products' },
+            { title: this.$t('views.sidebar.employees'), icon: 'mdi-account', link: 'Admin_Employees' },
+            { title: this.$t('views.sidebar.customers'), icon: 'mdi-account-group', link: 'Admin_Customers' },
+            { title: this.$t('views.sidebar.vehicles'), icon: 'mdi-truck', link: 'Admin_Vehicles' },
+            { title: this.$t('views.sidebar.warehouses'), icon:  'mdi-home-variant', link: 'Admin_Warehouses'},
+            { title: this.$t('views.sidebar.manufacturers'), icon: 'mdi-food', link: 'Admin_Producers' },
+            { title: this.$t('views.sidebar.products'), icon: 'mdi-tag-outline', link: 'Admin_Products' },
         ],
         mini: true,
-        title: 'Pracownicy'
+        title: this.$t('views.sidebar.employees')
         }
     },
 

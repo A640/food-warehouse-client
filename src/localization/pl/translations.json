@@ -35,6 +35,7 @@
     "id": "ID",
     "lastName": "Nazwisko",
     "login": "Login",
+    "logout": "Wyloguj się",
     "myData": "Moje dane",
     "newCaps": "NOWA",
     "notChanged": "nie zmieniono",
@@ -135,6 +136,7 @@
     "min1": "Minimum {{count}} znak",
     "mustContainDigits": "Kod musi zawierać {{count}} cyfry",
     "negativeValue": "Nie można wprowadzić wartości ujemnej",
+    "noConnection": "Brak połączenia z serwerem. Sprawdź swoje połączenie internetowe.",
     "noContent": "Brak treści",
     "notGreaterThan": "Wartość nie może być większ niż {{count}}!",
     "orderNotFound": "Nie znaleziono wybranego zamówienia",
@@ -192,7 +194,10 @@
     "value": "Wartość zamówienia"
   },
   "payment": {
+    "payment": "Płatność",
+    "paymentFailed": "płatność nieudana",
     "paymentMethod": "Metoda płatności",
+    "paymentSuccessful": "Płatność udana",
     "state": {
       "CANCELED": "Płatność wycofana",
       "COMPLETED": "Opłacono",
@@ -298,6 +303,34 @@
     "plateNumber": "NR Rejestracyjny",
     "productionYear": "Rok produkcji",
     "vehicle": "Pojazd"
+  },
+  "views": {
+    "loggedAs": "Zalogowany jako",
+    "myAccount": "Moje konto",
+    "myOrders": "Moje zamówienia",
+    "productCatalog": "Katalog produktów",
+    "roles": {
+      "admin": "Administrator",
+      "deliveryMan": "Dostawca",
+      "employee": "Pracownik",
+      "manager": "Menedżer"
+    },
+    "searchPlaceholder": "Co podać?",
+    "sidebar": {
+      "batches": "Partie produktów",
+      "complaints": "Reklamacje",
+      "customers": "Klienci",
+      "employees": "Pracownicy",
+      "manufacturers": "Producenci",
+      "messages": "Wiadomości",
+      "orders": "Zamówienia",
+      "products": "Produkty",
+      "stats": "Statystyki",
+      "systemAlerts": "Komunikaty systemowe",
+      "vehicle": "Pojazd",
+      "vehicles": "Pojazdy",
+      "warehouses": "Magazyny"
+    }
   },
   "warehouse": {
     "capacity": "Pojemność",

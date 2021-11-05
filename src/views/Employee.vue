@@ -16,7 +16,7 @@
                 <v-icon dark>mdi-menu</v-icon>
             </v-list-item-icon>
     
-            <v-list-item-title class="item-color">Pracownik</v-list-item-title>
+            <v-list-item-title class="item-color">{{ $t("views.roles.employee") }}</v-list-item-title>
     
             <v-btn
                 icon
@@ -114,7 +114,7 @@
                             <v-list-item>
                 
                             <v-list-item-content>
-                                <v-list-item-subtitle class="mb-2">Zalogowany jako:</v-list-item-subtitle>
+                                <v-list-item-subtitle class="mb-2">{{ $t("views.loggedAs") }}:</v-list-item-subtitle>
                                 <v-list-item-title class="menu-name">{{user_name}}</v-list-item-title>
                             </v-list-item-content>
                             </v-list-item>
@@ -124,10 +124,10 @@
                 
                         <v-list>
                             <v-list-item link :to="{name: 'Employee_Account'}">
-                                <v-list-item-title class="c-text"  >Moje dane</v-list-item-title>
+                                <v-list-item-title class="c-text"  >{{ $t("common.myData") }}</v-list-item-title>
                             </v-list-item>
                             <v-list-item link>
-                                <v-list-item-title class="c-text" @click="logout()" >Wyloguj</v-list-item-title>
+                                <v-list-item-title class="c-text" @click="logout()" >{{ $t("common.logout") }}</v-list-item-title>
                             </v-list-item>
                         </v-list>
                         </v-card>
@@ -159,16 +159,16 @@ export default {
         return {
         drawer: true,
         items: [
-            { title: 'Magazyny', icon:  'mdi-home-variant', link: 'Employee_Warehouses'},
-            { title: 'Produkty', icon: 'mdi-tag-outline', link: 'Employee_Products' },
-            // { title: 'Reklamacje', icon: 'mdi-chart-line', link: 'Employee_Stats_Orders' },
-            { title: 'Komunikaty systemowe', icon: 'mdi-alert-outline', link: 'Employee_Alerts' },
-            { title: 'Zamówienia', icon: 'mdi-package-variant-closed', link: 'Employee_Orders' },
-            { title: 'Wiadomości', icon: 'mdi-email', link: 'Employee_Messages' },
-             { title: 'Partie produktów', icon: 'mdi-tag-multiple', link: 'Employee_Batch' },
+            { title: this.$t('views.sidebar.warehouses'), icon:  'mdi-home-variant', link: 'Employee_Warehouses'},
+            { title: this.$t('views.sidebar.products'), icon: 'mdi-tag-outline', link: 'Employee_Products' },
+            // { title: this.$t('views.sidebar.complaints'), icon: 'mdi-chart-line', link: 'Employee_Stats_Orders' },
+            { title: this.$t('views.sidebar.systemAlerts'), icon: 'mdi-alert-outline', link: 'Employee_Alerts' },
+            { title: this.$t('views.sidebar.orders'), icon: 'mdi-package-variant-closed', link: 'Employee_Orders' },
+            { title: this.$t('views.sidebar.messages'), icon: 'mdi-email', link: 'Employee_Messages' },
+             { title: this.$t('views.sidebar.batches'), icon: 'mdi-tag-multiple', link: 'Employee_Batch' },
         ],
         mini: true,
-        title: 'Pracownicy',
+        title: this.$t('views.sidebar.employees'),
         mini_menu: false,
         }
     },
@@ -178,13 +178,13 @@ export default {
         showAlerts(){
             if(this.$route.name != 'Employee_Alerts'){
                 this.$router.push({ name: 'Employee_Alerts'});
-                this.title = 'Komunikaty systemowe';
+                this.title = this.$t('views.sidebar.systemAlerts');
             }
         },
         showMessages(){
             if(this.$route.name != 'Employee_Messages'){
                 this.$router.push({ name: 'Employee_Messages'});
-                this.title = 'Wiadomości';
+                this.title = this.$t('views.sidebar.messages');
             }
         },
         logout(){

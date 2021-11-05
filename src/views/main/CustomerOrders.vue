@@ -4,7 +4,7 @@
             <h2 @click="showMainStore()" class="appbar__title">{{ store_name }}</h2>
             
             <div class="section-title">
-                Moje zamówienia
+                {{ $t("views.myOrders") }}
             </div>
 
             <div>
@@ -31,7 +31,7 @@
                         <v-list-item>
             
                         <v-list-item-content>
-                            <v-list-item-subtitle class="mb-2">Zalogowany jako:</v-list-item-subtitle>
+                            <v-list-item-subtitle class="mb-2">{{ $t("views.loggedAs") }}:</v-list-item-subtitle>
                             <v-list-item-title class="menu-name">{{user_name}}</v-list-item-title>
                         </v-list-item-content>
                         </v-list-item>
@@ -41,14 +41,14 @@
             
                     <v-list>
                         <v-list-item link :to="{name: 'Customer_Account'}">
-                            <v-list-item-title class="c-text"  >Moje konto</v-list-item-title>
+                            <v-list-item-title class="c-text"  >{{ $t("views.myAccount") }}</v-list-item-title>
                         </v-list-item>
             
                         <v-list-item link :to="{name: 'Customer_Orders'}">
-                            <v-list-item-title class="c-text"  >Moje zamówienia</v-list-item-title>
+                            <v-list-item-title class="c-text"  >{{ $t("views.myOrders") }}</v-list-item-title>
                         </v-list-item>
                         <v-list-item link>
-                            <v-list-item-title class="c-text">Wyloguj</v-list-item-title>
+                            <v-list-item-title class="c-text">{{ $t("common.logout") }}</v-list-item-title>
                         </v-list-item>
                     </v-list>
                     </v-card>

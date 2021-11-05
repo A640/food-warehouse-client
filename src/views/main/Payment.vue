@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <p class="p_title">Płatność</p>
+        <p class="p_title">{{ $t("payment.payment") }}</p>
         <div class="p_buttons">
-            <v-btn outlined color="red" class="mr-5" @click="pay(false)" >Płatność nieudana</v-btn>
-            <v-btn outlined color="green" class="ml-5" @click="pay(true)" >Płatność udana</v-btn>
+            <v-btn outlined color="red" class="mr-5" @click="pay(false)" >{{ $t("payment.paymentFailed") }}</v-btn>
+            <v-btn outlined color="green" class="ml-5" @click="pay(true)" >{{ $t("payment.paymentSuccessful") }}</v-btn>
         </div>
     </div>
 </template>
@@ -44,10 +44,6 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-
-    .p_buttons{
-        
     }
 
     .p_title{

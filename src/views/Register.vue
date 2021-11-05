@@ -8,7 +8,7 @@
                 :complete="registration_step > 1"
                 step="1"
                 >
-                Konto
+                {{ $t("common.account") }}
                 </v-stepper-step>
         
                 <v-divider></v-divider>
@@ -17,13 +17,13 @@
                 :complete="registration_step > 2"
                 step="2"
                 >
-                Dane
+                {{ $t("common.personalData") }}
                 </v-stepper-step>
         
                 <v-divider></v-divider>
         
                 <v-stepper-step step="3">
-                Adres
+                {{ $t("address.address") }}
                 </v-stepper-step>
             </v-stepper-header>
         

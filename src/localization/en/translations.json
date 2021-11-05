@@ -35,6 +35,7 @@
     "id": "ID",
     "lastName": "Last name",
     "login": "Login",
+    "logout": "Log out",
     "myData": "My data",
     "newCaps": "NEW",
     "notChanged": "not changed",
@@ -135,6 +136,7 @@
     "min1": "Minimum {{count}} character",
     "mustContainDigits": "The code must contain {{count}} digits",
     "negativeValue": "You cannot enter a negative value here",
+    "noConnection": "No connection with the server. Check your internet connection.",
     "noContent": "No content",
     "notGreaterThan": "The value cannot be greater than {{count}}!",
     "orderNotFound": "The selected order was not found",
@@ -192,7 +194,10 @@
     "value": "Order value"
   },
   "payment": {
+    "payment": "Payment",
+    "paymentFailed": "Payment failed",
     "paymentMethod": "Payment method",
+    "paymentSuccessful": "Payment successful",
     "state": {
       "CANCELED": "Payment canceled",
       "COMPLETED": "Paid",
@@ -298,6 +303,34 @@
     "plateNumber": "Plate number",
     "productionYear": "Production year",
     "vehicle": "Vehicle"
+  },
+  "views": {
+    "loggedAs": "Logged in as",
+    "myAccount": "My account",
+    "myOrders": "My orders",
+    "productCatalog": "Product catalog",
+    "roles": {
+      "admin": "Admin",
+      "deliveryMan": "Delivery man",
+      "employee": "Employee",
+      "manager": "Manager"
+    },
+    "searchPlaceholder": "What are you looking for?",
+    "sidebar": {
+      "batches": "Batches",
+      "complaints": "Complaints",
+      "customers": "Customers",
+      "employees": "Employees",
+      "manufacturers": "Manufacturers",
+      "messages": "Messages",
+      "orders": "Orders",
+      "products": "Products",
+      "stats": "Stats",
+      "systemAlerts": "System alerts",
+      "vehicle": "Vehicle",
+      "vehicles": "Vehicles",
+      "warehouses": "Warehouses"
+    }
   },
   "warehouse": {
     "capacity": "Capacity",
