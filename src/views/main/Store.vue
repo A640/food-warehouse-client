@@ -92,6 +92,8 @@
                 >
                     {{ $t("register.logIn") }}
                 </v-btn>
+
+                <language-switcher />
             </div>
             
            
@@ -104,13 +106,14 @@
 </template>
 
 <script>
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
 
 
 export default {
 
     components:{
-
+        LanguageSwitcher,
     },
 
 

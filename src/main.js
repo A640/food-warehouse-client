@@ -13,12 +13,9 @@ Vue.use(VueI18Next);
 
 i18next.init({
   supportedLngs: ['en', 'pl'],
-  lng: 'en',
+  lng: (localStorage.getItem('foodwarehouseLanguage') || 'en'),
   fallbackLng: "en",
-  detection: {
-    order: [ 'path', 'cookie', 'htmlTag'],
-    caches: ['cookie'],
-  },
+
   
   resources: {
       en: { translation: en },

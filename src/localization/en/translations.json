@@ -258,7 +258,7 @@
     "addressAndPayment": "Shipping address and payment method",
     "addressAndPaymentShort": "Address and payment",
     "cart": {
-      "addSomething": "add something to the cart",
+      "addSomething": "and add something to the cart",
       "buyAndPay": "Buy and pay",
       "cart": "Cart",
       "clearCart": "Clear shopping cart",
