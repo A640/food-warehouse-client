@@ -58,7 +58,7 @@
           <div class="mb-5">
             <div class="bg">
               <p class="detail details-name">{{item.car_info.brand}} {{item.car_info.model}}</p>
-              <p class="detail details-id">ID: {{item.car_info.car_id}}</p>
+              <p class="detail details-id">{{ $t("common.id") }}: {{item.car_info.car_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
@@ -71,7 +71,7 @@
               <div class="cluster ">
                 <p class="cluster-title">Kierowca:</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.driver.personal_data.name}} {{item.driver.personal_data.surname}}</span></p>
-                <p class="detail detail-title">Stanowisko: <span class="detail detail-value">{{item.driver.personal_data.position}}</span></p>
+                <p class="detail detail-title">{{ $t("employee.jobPosition") }}: <span class="detail detail-value">{{item.driver.personal_data.position}}</span></p>
                 <p class="detail detail-title">Email: <span class="detail detail-value">{{item.driver.account.email}}</span></p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default {
         { text: 'Model', value: 'car_info.model' },
         { text: 'NR rejestracyjny', value: 'car_info.reg_no' },
         { text: 'Kierowca', value: 'car_info.driver_ns' },
-        { text: "Akcje", value: "controls", sortable: false, align:'center'}
+        { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       vehicles: [],
       expanded: [],
@@ -164,7 +164,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();

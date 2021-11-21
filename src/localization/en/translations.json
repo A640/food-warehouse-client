@@ -5,6 +5,7 @@
     "buildingNumber": "Building number",
     "city": "City",
     "country": "Country",
+    "deliveryAddress": "Delivery address",
     "postCode": "Post code",
     "street": "Street"
   },
@@ -14,11 +15,13 @@
     "batchNumber": "Batch NO",
     "productLot": "Product lot",
     "productQuantity": "Number of product units per 1 Euro-pallet",
-    "useByDate": "Eat by date"
+    "useByDate": "Eat by date",
+    "useByDateShort": "Eat by"
   },
   "common": {
     "account": "Account",
     "actionIrreversible": "This action cannot be undone!",
+    "actions": "Actions",
     "add": "Add",
     "cancel": "Cancel",
     "close": "Close",
@@ -26,6 +29,7 @@
     "companyName": "Company name",
     "confirm": "Confirm",
     "customer": "Customer",
+    "date": "Date",
     "discount": "Discount",
     "edit": "Edit",
     "email": "E-mail",
@@ -51,6 +55,7 @@
     "profitFromSale": "Profit from sale",
     "returnTo": "Return to",
     "save": "Save",
+    "search": "Search",
     "status": "Status",
     "submitted": "Submitted",
     "taxID": "Tax ID",
@@ -69,6 +74,7 @@
   "complaint": {
     "complaint": "Complaint",
     "complaintNo": "Complaint no.",
+    "complaintSubmissionDate": "Complaint submission date",
     "considerComplain": "Save",
     "considered": "Considered",
     "content": "Complaint content",
@@ -80,6 +86,7 @@
     },
     "forOrderNo": "For order no",
     "newComplaint": "New Complaint",
+    "noComplaint": "No complaint has been registered for this order",
     "noContent": "No content",
     "reasons": "Reasons for the decision",
     "reply": "Reply",
@@ -106,6 +113,8 @@
   "employee": {
     "corporateData": "Corporate data",
     "employee": "Employee",
+    "employeeData": "Employee data",
+    "jobPosition": "Job position",
     "jobTitle": "Job title",
     "permissionsLevel": "Permissions level",
     "salary": "Salary"
@@ -151,7 +160,8 @@
     "recipientNotSelected": "You have to select a recipient",
     "required": "This field is required!",
     "taxIDInvalid": "Tax ID should contain {{count}} characters",
-    "tooHigh": "Value is too high"
+    "tooHigh": "Value is too high",
+    "unableToDeleteFromDatabase": "Unable to delete from database"
   },
   "messages": {
     "content": "Content",
@@ -165,14 +175,21 @@
     "unread": "Unread"
   },
   "orders": {
+    "canBeCancelled": "The order may still be canceled by the customer",
     "cancel": "Cancel your order",
     "cancelError": "The order can no longer be canceled",
     "cancellationQuestion": "Are you sure you want to delete the selected order?",
+    "cantBeCancelled": "The order can no longer be canceled",
     "comments": "Comments to order",
     "commentsPlaceholder": "Enter your order comments here",
     "complaint": "Complaint",
     "dateOrdered": "Order date",
+    "delivered": "Delivered",
+    "delivery": "Delivery",
     "noCancel": "Do not delete",
+    "noOfComplaints": "Number of complaints",
+    "noOfProducts": "Number of products",
+    "order": "Order",
     "orderCancellation": "Order cancellation",
     "orderNumber": "Order number",
     "orders": "Orders",
@@ -191,13 +208,15 @@
       "UNKNOWN": "Unknown"
     },
     "status": "Order status",
-    "value": "Order value"
+    "value": "Order value",
+    "viewOrderSummary": "View order summary"
   },
   "payment": {
     "payment": "Payment",
     "paymentFailed": "Payment failed",
     "paymentMethod": "Payment method",
     "paymentSuccessful": "Payment successful",
+    "paymentType": "Payment type",
     "state": {
       "CANCELED": "Payment canceled",
       "COMPLETED": "Paid",
@@ -292,6 +311,38 @@
     "specialOfferAvailable": "Special offer available",
     "storePage": "store page",
     "total": "Total"
+  },
+  "tables": {
+    "batch": {
+      "batchAvailableInWarehouses": "The product batch is available in warehouses",
+      "batchInWarehouses": "Product batch available in warehouses",
+      "batchNo": "Batch number",
+      "euroPalletes": "Euro pallets",
+      "inHowManyWarehouses": "In no of warehouses",
+      "productID": "Product ID",
+      "quantity": "Quantity",
+      "search": "Search for product batch"
+    },
+    "complaint": {
+      "complaintNO": "Complaint no",
+      "complaintState": "Complaint state",
+      "issuedFromWarehouse": "Issued from the warehouse",
+      "orderNumber": "Order number",
+      "paymentState": "Payment status",
+      "searchForComplaint": "Search for complaint"
+    },
+    "customer": {
+      "customerDetails": "Customer details",
+      "searchForCustomer": "Search for customer"
+    },
+    "employee": {
+      "searchForEmployee": "Search for employee"
+    },
+    "manufacturer": "Search for manufacturer",
+    "order": {
+      "searchForOrder": "Search for order",
+      "viewOrderSummary": "View order summary"
+    }
   },
   "vehicle": {
     "assignedVehicle": "Assigned vehicle",

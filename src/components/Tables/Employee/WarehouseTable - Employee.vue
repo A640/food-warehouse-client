@@ -47,7 +47,7 @@
           <div class="mb-5">
             <div class="bg">
               <p class="detail details-name">{{item.storage.name}}</p>
-              <p class="detail details-id">ID: {{item.storage.storage_id}}</p>
+              <p class="detail details-id">{{ $t("common.id") }}: {{item.storage.storage_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
@@ -57,7 +57,7 @@
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster fix">
-                <p class="cluster-title">Adres:</p>
+                <p class="cluster-title">{{ $t("address.address") }}:</p>
                 <p class="detail detail-value"><span v-if="item.address.street" class="detail detail-value" >{{item.address.street}}</span>
                 {{item.address.building_number}}
                 <span v-if="item.address.apartment_number" class="detail detail-value" >/ {{item.address.apartment_number}}</span>
@@ -69,8 +69,8 @@
               <div class="cluster ">
                 <p class="cluster-title">Zarządca:</p>
                 <p class="detail detail-value">{{item.manager.personal_data.name}} {{item.manager.personal_data.surname}}
-                <p class="detail detail-title">Stanowisko: <span class="detail detail-value">{{item.manager.personal_data.position}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.manager.account.email}}</span></p>
+                <p class="detail detail-title">{{ $t("employee.jobPosition") }}: <span class="detail detail-value">{{item.manager.personal_data.position}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.manager.account.email}}</span></p>
               </div>
             </div>
             
@@ -158,7 +158,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();

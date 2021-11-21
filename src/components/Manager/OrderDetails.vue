@@ -109,14 +109,14 @@
 
                         <p class="mb-5">{{ $t("orders.cancel") }}</p>
                             <v-card class="mb-5 d-flex pt-5 pb-5">
-                                <v-card-subtitle v-if="cancellable" >Zamówienie może jeszcze zostać wycofane przez klienta</v-card-subtitle>
-                                <v-card-subtitle v-else >Nie można już wycofać zamówienia</v-card-subtitle>
+                                <v-card-subtitle v-if="cancellable" >{{ $t("orders.canBeCancelled") }}</v-card-subtitle>
+                                <v-card-subtitle v-else >{{ $t("orders.cantBeCancelled") }}</v-card-subtitle>
                                 
                             </v-card>
 
                         <p class="mb-5">{{ $t("orders.complaint") }}</p>
                             <v-card class="mb-5 cc-card pt-5 pb-5">
-                                <v-card-subtitle v-if="complaints.length == 0" >Nie zarejestrowano reklamacji dla wybranego zamówienia</v-card-subtitle>
+                                <v-card-subtitle v-if="complaints.length == 0" >{{ $t("complaint.noComplaint") }}</v-card-subtitle>
                                 <Complaint v-for="complaint in complaints" :key="complaint.complaint_id" :complaint="complaint" class="mt-3" @updateOrderDetails="loadData(true)"/>
                                 
                                 <!-- <v-card-subtitle >Nie można już wycofać zamówienia</v-card-subtitle> -->

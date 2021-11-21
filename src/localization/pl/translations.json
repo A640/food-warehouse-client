@@ -5,6 +5,7 @@
     "buildingNumber": "Numer budynku",
     "city": "Miejscowość",
     "country": "Kraj",
+    "deliveryAddress": "Adres dostawy",
     "postCode": "Kod pocztowy",
     "street": "Ulica"
   },
@@ -14,11 +15,13 @@
     "batchNumber": "NR Partii",
     "productLot": "Partia produktu",
     "productQuantity": "Ilość jednostek produktu na 1 europaletę",
-    "useByDate": "Termin przydatności do spożycia"
+    "useByDate": "Termin przydatności do spożycia",
+    "useByDateShort": "Data przydatności"
   },
   "common": {
     "account": "Konto",
     "actionIrreversible": "Tej akcji nie można cofnąć!",
+    "actions": "Akcje",
     "add": "Dodaj",
     "cancel": "Anuluj",
     "close": "Zamknij",
@@ -26,6 +29,7 @@
     "companyName": "Nazwa firmy",
     "confirm": "Zatwierdź",
     "customer": "Klient",
+    "date": "Data",
     "discount": "Zniżka",
     "edit": "Edytuj",
     "email": "E-mail",
@@ -51,6 +55,7 @@
     "profitFromSale": "Zysk ze sprzedaży",
     "returnTo": "Wróć do",
     "save": "Zapisz",
+    "search": "Szukaj",
     "status": "Status",
     "submitted": "Złożono",
     "taxID": "NIP",
@@ -69,6 +74,7 @@
   "complaint": {
     "complaint": "Reklamacja",
     "complaintNo": "Reklamacja numer",
+    "complaintSubmissionDate": "Data złożenia reklamacji",
     "considerComplain": "Rozpatrz reklamację",
     "considered": "Rozpatrzono",
     "content": "Treść reklamacji",
@@ -80,6 +86,7 @@
     },
     "forOrderNo": "Do zamówienia nr",
     "newComplaint": "Nowa reklamacja",
+    "noComplaint": "Nie zarejestrowano reklamacji dla wybranego zamówienia",
     "noContent": "Brak treści",
     "reasons": "Uzasadnienie decyzji",
     "reply": "Odpowiedź",
@@ -106,6 +113,8 @@
   "employee": {
     "corporateData": "Dane firmowe",
     "employee": "Pracownik",
+    "employeeData": "Dane pracownika",
+    "jobPosition": "Stanowisko",
     "jobTitle": "Nazwa stanowiska",
     "permissionsLevel": "Poziom uprawnień",
     "salary": "Wynagrodzenie"
@@ -151,7 +160,8 @@
     "recipientNotSelected": "Musisz wybrać adresata",
     "required": "To pole jest wymagane!",
     "taxIDInvalid": "NIP powinien zawierać {{count}} znaków",
-    "tooHigh": "Zbyt duża wartość"
+    "tooHigh": "Zbyt duża wartość",
+    "unableToDeleteFromDatabase": "Nie można usunąć z bazy danych"
   },
   "messages": {
     "content": "Treść",
@@ -165,14 +175,21 @@
     "unread": "Nieprzeczytane"
   },
   "orders": {
+    "canBeCancelled": "Zamówienie może jeszcze zostać wycofane przez klienta",
     "cancel": "Wycofaj zamówienie",
     "cancelError": "Nie można już wycofać zamówienia",
     "cancellationQuestion": "Czy napewno chcesz usunąć wycofać wybrane zamówienie?",
+    "cantBeCancelled": "Nie można już wycofać zamówienia",
     "comments": "Uwagi do zamówienia",
     "commentsPlaceholder": "Wpisz tutaj swoje uwagi do zamówienia",
     "complaint": "Reklamacja",
     "dateOrdered": "Data złożenia zamówienia",
+    "delivered": "Dostarczono",
+    "delivery": "Dostawa",
     "noCancel": "Pozostaw zamówienie",
+    "noOfComplaints": "Liczba reklamacji",
+    "noOfProducts": "Liczba produktów",
+    "order": "Zamówienie",
     "orderCancellation": "Wycofywanie zamówienia",
     "orderNumber": "Zamówienie numer",
     "orders": "Zamówienia",
@@ -191,13 +208,15 @@
       "UNKNOWN": "Nieznany"
     },
     "status": "Status zamówienia",
-    "value": "Wartość zamówienia"
+    "value": "Wartość zamówienia",
+    "viewOrderSummary": "Wyświetl podsumowanie zamówienia"
   },
   "payment": {
     "payment": "Płatność",
     "paymentFailed": "płatność nieudana",
     "paymentMethod": "Metoda płatności",
     "paymentSuccessful": "Płatność udana",
+    "paymentType": "Rodzaj płatności",
     "state": {
       "CANCELED": "Płatność wycofana",
       "COMPLETED": "Opłacono",
@@ -292,6 +311,38 @@
     "specialOfferAvailable": "Dostępna promocja",
     "storePage": "strony sklepu",
     "total": "Razem"
+  },
+  "tables": {
+    "batch": {
+      "batchAvailableInWarehouses": "Partia produktu dostępna w magazynach",
+      "batchInWarehouses": "Partia produktu dostępna w magazynach",
+      "batchNo": "Numer partii",
+      "euroPalletes": "europalet",
+      "inHowManyWarehouses": "W ilu magazynach",
+      "productID": "ID Produktu",
+      "quantity": "Ilość",
+      "search": "Wyszukaj partię produktu"
+    },
+    "complaint": {
+      "complaintNO": "Numer reklamacji",
+      "complaintState": "Status reklamacji",
+      "issuedFromWarehouse": "Wydano z magazynu",
+      "orderNumber": "Zamówienie numer",
+      "paymentState": "Status płatności",
+      "searchForComplaint": "Wyszukaj reklamację"
+    },
+    "customer": {
+      "customerDetails": "Dane klienta",
+      "searchForCustomer": "Wyszukaj klienta"
+    },
+    "employee": {
+      "searchForEmployee": "Wyszukaj pracownika"
+    },
+    "manufacturer": "Wyszukaj producenta",
+    "order": {
+      "searchForOrder": "Wyszukaj zamówienie",
+      "viewOrderSummary": "Wyświetl podsumowanie zamówienia"
+    }
   },
   "vehicle": {
     "assignedVehicle": "Przydzielony pojazd",

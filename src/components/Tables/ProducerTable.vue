@@ -58,17 +58,17 @@
           <div class="mb-5">
             <div class="bg">
               <p class="detail details-name">{{item.maker_data.firm_name}}</p>
-              <p class="detail details-id">ID: {{item.maker_data.maker_id}}</p>
+              <p class="detail details-id">{{ $t("common.id") }}: {{item.maker_data.maker_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
                 <p class="cluster-title">Dane producenta:</p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.maker_data.phone}}</span></p>
+                <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.maker_data.phone}}</span></p>
                 <p class="detail detail-title">Email: <span class="detail detail-value">{{item.maker_data.email}}</span></p>
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Adres:</p>
+                <p class="cluster-title">{{ $t("address.address") }}:</p>
                 <p class="detail detail-value"><span v-if="item.address.street" class="detail detail-value" >{{item.address.street}}</span>
                 {{item.address.building_number}}
                 <span v-if="item.address.apartment_number" class="detail detail-value" >/ {{item.address.apartment_number}}</span>
@@ -113,11 +113,11 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         { text: 'Nazwa', value: 'maker_data.firm_name' },
-        { text: 'Telefon', value: 'maker_data.phone' },
+        { text: this.$t('common.phone'), value: 'maker_data.phone' },
         { text: 'Email', value: 'maker_data.email' },
         { text: 'Miasto', value: 'address.town' },
         { text: 'Kraj', value: 'address.country' },
-        { text: "Akcje", value: "controls", sortable: false, align:'center'}
+        { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       producers: [],
       expanded: [],
@@ -168,7 +168,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();

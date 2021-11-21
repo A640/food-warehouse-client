@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj partię produktu"
+          :label="$t('common.search')"
           single-line
           hide-details
         ></v-text-field>
@@ -53,8 +53,8 @@
               <v-img class="mini-img" height="5rem" max-width="5rem" contain :src="item.product.product.image"></v-img>
               <div class="ml-5">
                 <p class="detail details-name">{{item.product.product.name}}</p>
-                <p class="detail details-id mb-0">ID Produktu: {{item.product.product.product_id}}</p>
-                <p class="detail details-id mb-0">Numer partii: {{item.batch_no}}</p>
+                <p class="detail details-id mb-0">{{ $t("tables.batch.productID") }}: {{item.product.product.product_id}}</p>
+                <p class="detail details-id mb-0">{{ $t("tables.batch.batchNo") }}: {{item.batch_no}}</p>
               </div>
             </div>
             <div class="details-container mb-5">
@@ -69,13 +69,13 @@
               <div class="cluster ">
                 <p class="cluster-title">Producent:</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.product.maker.maker_data.firm_name}}</span></p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.product.maker.maker_data.phone}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.product.maker.maker_data.email}}</span></p>
+                <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.product.maker.maker_data.phone}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.product.maker.maker_data.email}}</span></p>
               </div> -->
                <div class="cluster ml-5">
-                <p class="cluster-title">Partia produktu dostępna w magazynach:</p>
-                <p class="detail detail-title" v-for="storage in item.storages" :key="storage.storage.storage_id">Magazyn: <span class="detail detail-value mr-2 ml-1">{{storage.storage.name}}</span>
-                  Ilość: <span class="detail detail-value mr-2 ml-1">{{storage.quantity}} europalet</span>
+                <p class="cluster-title">{{ $t("tables.batch.batchAvailableInWarehouses") }}:</p>
+                <p class="detail detail-title" v-for="storage in item.storages" :key="storage.storage.storage_id">{{ $t("warehouse.warehouse") }}: <span class="detail detail-value mr-2 ml-1">{{storage.storage.name}}</span>
+                  {{ $t("tables.batch.quantity") }}: <span class="detail detail-value mr-2 ml-1">{{storage.quantity}} {{ $t("tables.batch.euroPalletes") }}</span>
                 <delete 
                   class="ml-3"
                   :batch_id="item.batch_id" 
@@ -129,15 +129,15 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Numer partii',
+          text: this.$t('tables.batch.batchNo'),
           align: 'start',
           value: 'batch_no',
         },
-        { text: 'Produkt', value: 'product.product.name' },
-        { text: 'Data przydatności', value: 'eat_by_date' },
-        { text: 'Zniżka', value: 'discount_display', align:'right' },
-        { text: 'W ilu magazynach', value: 'storages.length', align:'center' },
-        { text: 'Cena', value: 'sell_price_display', align:'right' },
+        { text: this.$t('products.product'), value: 'product.product.name' },
+        { text: this.$t('batch.useByDateShort'), value: 'eat_by_date' },
+        { text: this.$t('common.discount'), value: 'discount_display', align:'right' },
+        { text: this.$t('tables.batch.inHowManyWarehouses'), value: 'storages.length', align:'center' },
+        { text: this.$t('products.price'), value: 'sell_price_display', align:'right' },
       ],
       batches: [],
       expanded: [],
@@ -188,7 +188,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();

@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj pracownika"
+          :label="$t('tables.employee.searchForEmployee')"
           single-line
           hide-details
         ></v-text-field>
@@ -58,20 +58,20 @@
           <div class="mb-5">
             <div class="bg">
               <p class="detail details-name">{{item.personal_data.name}} {{item.personal_data.surname}}</p>
-              <p class="detail details-id">ID: {{item.personal_data.employee_id}}</p>
+              <p class="detail details-id">{{ $t("common.id") }}: {{item.personal_data.employee_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane pracownika:</p>
-                <p class="detail detail-title">Stanowisko: <span class="detail detail-value">{{item.personal_data.position}}</span></p>
-                <p class="detail detail-title">Pensja: <span class="detail detail-value">{{item.personal_data.salary}}</span></p>
+                <p class="cluster-title">{{ $t("employee.employeeData") }}:</p>
+                <p class="detail detail-title">{{ $t("employee.jobPosition") }}: <span class="detail detail-value">{{item.personal_data.position}}</span></p>
+                <p class="detail detail-title">{{ $t("employee.salary") }}: <span class="detail detail-value">{{item.personal_data.salary}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Konto:</p>
-                <p class="detail detail-title">Login: <span class="detail detail-value">{{item.account.username}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.account.email}}</span></p>
-                <p class="detail detail-title">Poziom uprawnień: <span class="detail detail-value">{{item.account.permission}}</span></p>
+                <p class="cluster-title">{{ $t("common.account") }}:</p>
+                <p class="detail detail-title">{{ $t("common.login") }}: <span class="detail detail-value">{{item.account.username}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.account.email}}</span></p>
+                <p class="detail detail-title">{{ $t("employee.permissionsLevel") }}: <span class="detail detail-value">{{item.account.permission}}</span></p>
               </div>
             </div>
             
@@ -110,14 +110,14 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Imię',
+          text: this.$t('common.firstName'),
           align: 'start',
           value: 'personal_data.name',
         },
-        { text: 'Nazwisko', value: 'personal_data.surname' },
-        { text: 'Stanowisko', value: 'personal_data.position' },
-        { text: 'Pensja', value: 'personal_data.salary', align:'right' },
-        { text: "Akcje", value: "controls", sortable: false, align:'center'}
+        { text: this.$t('common.lastName'), value: 'personal_data.surname' },
+        { text: this.$t('employee.jobPosition'), value: 'personal_data.position' },
+        { text: this.$t('employee.salary'), value: 'personal_data.salary', align:'right' },
+        { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       employees: [],
       expanded: [],
@@ -168,7 +168,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();

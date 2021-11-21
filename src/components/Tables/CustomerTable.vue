@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj klienta"
+          :label="$t('tables.customer.searchForCustomer')"
           single-line
           hide-details
         ></v-text-field>
@@ -58,25 +58,25 @@
           <div class="mb-5">
             <div class="bg">
               <p class="detail details-name">{{item.personal_data.name}} {{item.personal_data.surname}}</p>
-              <p class="detail details-id">ID: {{item.personal_data.customer_id}}</p>
+              <p class="detail details-id">{{ $t("common.id") }}: {{item.personal_data.customer_id}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane klienta:</p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.personal_data.phone_number}}</span></p>
-                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.personal_data.firm_name" >{{item.personal_data.firm_name}}</span><span v-else class="detail detail-value">-</span></p>
-                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.personal_data.tax_id" >{{item.personal_data.tax_id}}</span><span v-else class="detail detail-value">-</span></p>
+                <p class="cluster-title">{{ $t("tables.customer.customerDetails") }}:</p>
+                <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.personal_data.phone_number}}</span></p>
+                <p class="detail detail-title">{{ $t("common.company") }}: <span class="detail detail-value" v-if="item.personal_data.firm_name" >{{item.personal_data.firm_name}}</span><span v-else class="detail detail-value">-</span></p>
+                <p class="detail detail-title">{{ $t("common.taxID") }}: <span class="detail detail-value" v-if="item.personal_data.tax_id" >{{item.personal_data.tax_id}}</span><span v-else class="detail detail-value">-</span></p>
               </div>
               <v-divider vertical inset class="mr-10" />
               <div class="cluster fix">
-                <p class="cluster-title">Konto:</p>
-                <p class="detail detail-title">Login: <span class="detail detail-value">{{item.account.username}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.account.email}}</span></p>
-                <p class="detail detail-title">Poziom uprawnień: <span class="detail detail-value">{{item.account.permission}}</span></p>
+                <p class="cluster-title">{{ $t("common.account") }}:</p>
+                <p class="detail detail-title">{{ $t("common.login") }}: <span class="detail detail-value">{{item.account.username}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.account.email}}</span></p>
+                <p class="detail detail-title">{{ $t("employee.permissionsLevel") }}: <span class="detail detail-value">{{item.account.permission}}</span></p>
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Adres:</p>
+                <p class="cluster-title">{{ $t("address.address") }}:</p>
                 <p class="detail detail-value"><span v-if="item.address.street" class="detail detail-value" >{{item.address.street}}</span>
                 {{item.address.building_number}}
                 <span v-if="item.address.apartment_number" class="detail detail-value" >/ {{item.address.apartment_number}}</span>
@@ -121,14 +121,14 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Imię',
+          text: this.$t('common.firstName'),
           align: 'start',
           value: 'personal_data.name',
         },
-        { text: 'Nazwisko', value: 'personal_data.surname' },
-        { text: 'Telefon', value: 'personal_data.phone_number' },
-        { text: 'Firma', value: 'personal_data.firm_name' },
-        { text: "Akcje", value: "controls", sortable: false, align:'center'}
+        { text: this.$t('common.lastName'), value: 'personal_data.surname' },
+        { text: this.$t('common.phone'), value: 'personal_data.phone_number' },
+        { text: this.$t('common.company'), value: 'personal_data.firm_name' },
+        { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       customers: [],
       expanded: [],
@@ -179,7 +179,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();

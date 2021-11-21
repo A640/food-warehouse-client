@@ -47,25 +47,25 @@
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
             <div class="bg">
-              <p class="detail details-name">Zamówienie nr: {{item.order.order_id}}</p>
-              <p class="detail details-id">Status: {{item.order.order_state_display}}</p>
+              <p class="detail details-name">{{ $t("orders.orderNumber") }}: {{item.order.order_id}}</p>
+              <p class="detail details-id">{{ $t("common.status") }}: {{item.order.order_state_display}}</p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Zamówienie:</p>
-                <p class="detail detail-title">Produktów: <span class="detail detail-value">{{item.products.length}}</span></p>
-                <p class="detail detail-title">Data złożenia: <span class="detail detail-value">{{item.order.date}}</span></p>
+                <p class="cluster-title">{{ $t("orders.order") }}:</p>
+                <p class="detail detail-title">{{ $t("orders.noOfProducts") }}: <span class="detail detail-value">{{item.products.length}}</span></p>
+                <p class="detail detail-title">{{ $t("orders.dateOrdered") }}: <span class="detail detail-value">{{item.order.date}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster ">
-                <p class="cluster-title">Płatność:</p>
-                <p class="detail detail-title">Rodzaj płatności: <span class="detail detail-value">{{item.payment.payment_type}}</span></p>
-                <p class="detail detail-title">Kwota: <span class="detail detail-value">{{item.payment.value_display}}</span></p>
-                <p class="detail detail-title">Status: <span class="detail detail-value">{{item.payment.payment_state_display}}</span></p>
+                <p class="cluster-title">{{ $t("payment.payment") }}:</p>
+                <p class="detail detail-title">{{ $t("payment.paymentType") }}: <span class="detail detail-value">{{item.payment.payment_type}}</span></p>
+                <p class="detail detail-title">{{ $t("payment.value") }}: <span class="detail detail-value">{{item.payment.value_display}}</span></p>
+                <p class="detail detail-title">{{ $t("common.status") }}: <span class="detail detail-value">{{item.payment.payment_state_display}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster ">
-                <p class="cluster-title">Adres dostawy:</p>
+                <p class="cluster-title">{{ $t("address.deliveryAddress") }}:</p>
                 <p class="detail detail-value"><span v-if="item.delivery.address.street" class="detail detail-value" >{{item.delivery.address.street}}</span>
                 {{item.delivery.address.building_number}}
                 <span v-if="item.delivery.address.apartment_number" class="detail detail-value" >/ {{item.delivery.address.apartment_number}}</span>
@@ -77,20 +77,20 @@
             <v-divider  inset class="ml-10 mr-10 mt-2" />
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Zamawiający:</p>
+                <p class="cluster-title">{{ $t("common.customer") }}:</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.customer.name + ' ' + item.customer.surname}}</span></p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.customer.phone_number}}</span></p>
-                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.customer.firm_name != null">{{item.customer.firm_name}}</span>
+                <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.customer.phone_number}}</span></p>
+                <p class="detail detail-title">{{ $t("common.company") }}: <span class="detail detail-value" v-if="item.customer.firm_name != null">{{item.customer.firm_name}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
-                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.customer.tax_id != null">{{item.customer.tax_id}}</span>
+                <p class="detail detail-title">{{ $t("common.taxID") }}: <span class="detail detail-value" v-if="item.customer.tax_id != null">{{item.customer.tax_id}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster">
-                <p class="cluster-title">Dostawa:</p>
-                <p class="detail detail-title">Wydano z magazynu: <span class="detail detail-value" v-if="item.delivery.remove_from_storage_date">{{item.delivery.remove_from_storage_date}}</span>
+                <p class="cluster-title">{{ $t("orders.delivery") }}:</p>
+                <p class="detail detail-title">{{ $t("tables.complaint.issuedFromWarehouse") }}: <span class="detail detail-value" v-if="item.delivery.remove_from_storage_date">{{item.delivery.remove_from_storage_date}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
-                <p class="detail detail-title">Dostarczono: <span class="detail detail-value" v-if="item.delivery.delivery_date">{{item.delivery.delivery_date}}</span>
+                <p class="detail detail-title">{{ $t("orders.delivered") }}: <span class="detail detail-value" v-if="item.delivery.delivery_date">{{item.delivery.delivery_date}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
               </div>
             </div>
@@ -101,14 +101,14 @@
               <v-btn outlined @click="InDelivery(item.order.order_id)" v-if="item.order.order_state == 'READY TO DELIVER'" >Przyjmij zamówienie</v-btn>
               <v-btn outlined @click="Delivered(item.order.order_id)" v-if="item.order.order_state == 'OUT FOR DELIVERY'" >Oznacz jako dostarczone</v-btn>
               <v-btn outlined @click="NotDelivered(item.order.order_id)" v-if="item.order.order_state == 'OUT FOR DELIVERY'" >Oznacz jako odrzucone</v-btn>
-              <v-btn outlined @click="showDetails(item.order.order_id)">Wyświetl podsumowanie zamówienia</v-btn>
+              <v-btn outlined @click="showDetails(item.order.order_id)">{{ $t("tables.order.viewOrderSummary") }}</v-btn>
               
             </div>
 
             <v-divider  inset class="ml-10 mr-10 mt-2" />
 
             <div class="cluster details-container ml-5">
-              <p class="cluster-title">Komentarz do zamówienia:</p>
+              <p class="cluster-title">{{ $t("orders.comments") }}:</p>
               <p class="detail detail-title"><span class="detail detail-value">{{item.order.comment}}</span></p>
               
             </div>
@@ -140,16 +140,16 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Numer zamówienia',
+          text: this.$t('tables.complaint.orderNumber'),
           align: 'start',
           value: 'order.order_id',
         },
-        { text: 'Status', value: 'order.order_state_display' },
-        { text: 'Zamawiający', value: 'customer_name' },
-        { text: 'Liczba produktów', value: 'products.length', align: 'center'  },
-        { text: 'Status płatności', value: 'payment.payment_state_display',  },
-        { text: "Kwota", value: "payment.value_display", align:'right'},
-        { text: "Data", value: "order.date", align:'center'}
+        { text: this.$t('common.status'), value: 'order.order_state_display' },
+        { text: this.$t('common.customer'), value: 'customer_name' },
+        { text: this.$t('orders.noOfProducts'), value: 'products.length', align: 'center'  },
+        { text: this.$t('tables.complaint.paymentState'), value: 'payment.payment_state_display',  },
+        { text: this.$t('orders.value'), value: "payment.value_display", align:'right'},
+        { text: this.$t('common.date'), value: "order.date", align:'center'}
       ],
       orders: [],
       expanded: [],

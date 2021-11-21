@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj reklamację"
+          :label="$t('tables.complaint.searchForComplaint')"
           single-line
           hide-details
         ></v-text-field>
@@ -47,32 +47,32 @@
         <td :colspan="headers.length+1" class="pa-0 details" >
           <div class="mb-5">
             <div class="bg">
-              <p class="detail details-name">Zamówienie nr: {{item.order.order.order_id}}</p>
-              <p class="detail details-id">Status: {{item.order.order.order_state_display}}</p>
-              <p class="detail detail-title">Data złożenia zamówienia: <span class="detail detail-value" >{{item.order.order.date}}</span></p>
-              <p class="detail detail-title">Data złożenia reklamacji: <span class="detail detail-value" >{{item.complaint.send_date}}</span></p>
-              <p class="detail detail-title">Data rozpatrzenia reklamacji: <span class="detail detail-value" >{{item.complaint.decision_date}}</span></p>
+              <p class="detail details-name">{{ $t("orders.orderNumber") }}: {{item.order.order.order_id}}</p>
+              <p class="detail details-id">{{ $t("common.status") }}: {{item.order.order.order_state_display}}</p>
+              <p class="detail detail-title">{{ $t("orders.dateOrdered") }}: <span class="detail detail-value" >{{item.order.order.date}}</span></p>
+              <p class="detail detail-title">{{ $t("complaint.complaintSubmissionDate") }}: <span class="detail detail-value" >{{item.complaint.send_date}}</span></p>
+              <p class="detail detail-title">{{ $t("complaint.considered") }}: <span class="detail detail-value" >{{item.complaint.decision_date}}</span></p>
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Zamawiający:</p>
+                <p class="cluster-title">{{ $t("common.customer") }}:</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.order.customer.name + ' ' + item.order.customer.surname}}</span></p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.order.customer.phone_number}}</span></p>
-                <p class="detail detail-title">Firma: <span class="detail detail-value" v-if="item.order.customer.firm_name != null">{{item.order.customer.firm_name}}</span>
+                <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.order.customer.phone_number}}</span></p>
+                <p class="detail detail-title">{{ $t("common.company") }}: <span class="detail detail-value" v-if="item.order.customer.firm_name != null">{{item.order.customer.firm_name}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
-                <p class="detail detail-title">NIP: <span class="detail detail-value" v-if="item.order.customer.tax_id != null">{{item.order.customer.tax_id}}</span>
+                <p class="detail detail-title">{{ $t("common.taxID") }}: <span class="detail detail-value" v-if="item.order.customer.tax_id != null">{{item.order.customer.tax_id}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster ">
-                <p class="cluster-title">Płatność:</p>
-                <p class="detail detail-title">Rodzaj płatności: <span class="detail detail-value">{{item.order.payment.payment_type}}</span></p>
-                <p class="detail detail-title">Kwota: <span class="detail detail-value">{{item.order.payment.value_display}}</span></p>
-                <p class="detail detail-title">Status: <span class="detail detail-value">{{item.order.payment.payment_state_display}}</span></p>
+                <p class="cluster-title">{{ $t("payment.payment") }}:</p>
+                <p class="detail detail-title">{{ $t("payment.paymentType") }}: <span class="detail detail-value">{{item.order.payment.payment_type}}</span></p>
+                <p class="detail detail-title">{{ $t("payment.value") }}: <span class="detail detail-value">{{item.order.payment.value_display}}</span></p>
+                <p class="detail detail-title">{{ $t("common.status") }}: <span class="detail detail-value">{{item.order.payment.payment_state_display}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 mb-1" />
               <div class="cluster ">
-                <p class="cluster-title">Adres dostawy:</p>
+                <p class="cluster-title">{{ $t("address.deliveryAddress") }}:</p>
                 <p class="detail detail-value"><span v-if="item.order.delivery.address.street" class="detail detail-value" >{{item.order.delivery.address.street}}</span>
                 {{item.order.delivery.address.building_number}}
                 <span v-if="item.order.delivery.address.apartment_number" class="detail detail-value" >/ {{item.order.delivery.address.apartment_number}}</span>
@@ -84,10 +84,10 @@
             <v-divider  inset class="ml-10 mr-10 mt-2" />
             <div class="details-container">
               <div class="cluster ml-5">
-                <p class="cluster-title">Dostawa:</p>
-                <p class="detail detail-title">Wydano z magazynu: <span class="detail detail-value" v-if="item.order.delivery.remove_from_storage_date">{{item.order.delivery.remove_from_storage_date}}</span>
+                <p class="cluster-title">{{ $t("orders.delivery") }}:</p>
+                <p class="detail detail-title">{{ $t("tables.complaint.issuedFromWarehouse") }}: <span class="detail detail-value" v-if="item.order.delivery.remove_from_storage_date">{{item.order.delivery.remove_from_storage_date}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
-                <p class="detail detail-title">Dostarczono: <span class="detail detail-value" v-if="item.order.delivery.delivery_date">{{item.order.delivery.delivery_date}}</span>
+                <p class="detail detail-title">{{ $t("orders.delivered") }}: <span class="detail detail-value" v-if="item.order.delivery.delivery_date">{{item.order.delivery.delivery_date}}</span>
                 <span class="detail detail-value" v-else>-</span></p>
               </div>
             </div>
@@ -96,13 +96,13 @@
 
             <div class="cluster mt-4 mb-4 ml-5">
               <Complaint :complaint="item" @pdateComplaintsDetails="reloadData()" />
-              <v-btn outlined @click="showDetails(item.order.order.order_id)">Wyświetl podsumowanie zamówienia</v-btn>
+              <v-btn outlined @click="showDetails(item.order.order.order_id)">{{ $t("orders.viewOrderSummary") }}</v-btn>
             </div>
 
             <v-divider  inset class="ml-10 mr-10 mt-2" />
 
             <div class="cluster details-container ml-5">
-              <p class="cluster-title">Komentarz do zamówienia:</p>
+              <p class="cluster-title">{{ $t("orders.comments") }}:</p>
               <p class="detail detail-title"><span class="detail detail-value">{{item.complaint.comment}}</span></p>
               
             </div>
@@ -134,20 +134,20 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Numer reklamacji',
+          text: this.$t('tables.complaint.complaintNO'),
           align: 'start',
           value: 'complaint.complaint_id',
         },
-        { text: 'Status reklamacji', value: 'complaint.state_display' },
-        { text: "Data złożenia reklamacji", value: "complaint.send_date", align:'center'},
+        { text: this.$t('tables.complaint.complaintState'), value: 'complaint.state_display' },
+        { text: this.$t('complaint.complaintSubmissionDate'), value: "complaint.send_date", align:'center'},
         {
-          text: 'Numer zamówienia',
+          text: this.$t('tables.complaint.orderNumber'),
           align: 'start',
           value: 'order.order.order_id',
         },
-        { text: 'Zamawiający', value: 'customer_name' },
-        { text: "Kwota zamówienia", value: "order.payment.value_display", align:'right'},
-        { text: 'Status płatności', value: 'order.payment.payment_state_display',  },
+        { text: this.$t('common.customer'), value: 'customer_name' },
+        { text: this.$t('orders.value'), value: "order.payment.value_display", align:'right'},
+        { text: this.$t('tables.complaint.paymentState'), value: 'order.payment.payment_state_display',  },
         
         
       ],
@@ -201,56 +201,56 @@ export default {
           
           //order state change for displaying
           if(o.order.order.order_state == "PENDING"){
-                o.order.order.order_state_display =  "Oczekujące";
+                o.order.order.order_state_display =  this.$t('orders.state.PENDING');
             }else if(o.order.order.order_state == "REGISTERED"){
-                o.order.order.order_state_display =  'Przyjęte';
+                o.order.order.order_state_display =  this.$t('orders.state.REGISTERED');
             }else if(o.order.order.order_state == "CANCELED"){
-                o.order.order.order_state_display =  'Anulowane';
+                o.order.order.order_state_display =  this.$t('orders.state.CANCELED');
             }else if(o.order.order.order_state == "COMPLETING"){
-                o.order.order.order_state_display =  'W trakcie kompletacji';
+                o.order.order.order_state_display =  this.$t('orders.state.COMPLETING');
             }else if(o.order.order.order_state == "READY TO DELIVER"){
-                o.order.order.order_state_display =  'Gotowy do dostarczenia';
+                o.order.order.order_state_display = this.$t('orders.state.READY_TO_DELIVER');
             }else if(o.order.order.order_state == "OUT FOR DELIVERY"){
-                o.order.order.order_state_display =  'W drodze do klienta';
+                o.order.order.order_state_display =  this.$t('orders.state.OUT_FOR_DELIVERY');
             }else if(o.order.order.order_state == "DELIVERED"){
-                o.order.order.order_state_display =  'Dostarczono';
+                o.order.order.order_state_display =  this.$t('orders.state.DELIVERED');
             }else if(o.order.order.order_state == "RETURNED"){
-                o.order.order.order_state_display =  'Zwrócone';
+                o.order.order.order_state_display =  this.$t('orders.state.RETURNED');
             }else{
-                o.order.order.order_state_display =  'Nieznany';
+                o.order.order.order_state_display =  this.$t('orders.state.UNKNOWN');
           }
 
           //payment state for diplaying
           if(o.order.payment.payment_state == "IN PROGRESS"){
-                o.order.payment.payment_state_display =  "W trakcie";
+                o.order.payment.payment_state_display =  this.$t('payment.state.IN_PROGRESS');
             }else if(o.order.payment.payment_state == "COMPLETED"){
-                o.order.payment.payment_state_display =  'Opłacona';
+                o.order.payment.payment_state_display =  this.$t('payment.state.COMPLETED');
             }else if(o.order.payment.payment_state == "REJECTED"){
-                o.order.payment.payment_state_display =  'Odrzucona';
+                o.order.payment.payment_state_display =  this.$t('payment.state.REJECTED');
             }else if(o.order.payment.payment_state == "CANCELED"){
-                o.order.payment.payment_state_display =  'Wycofana';
+                o.order.payment.payment_state_display =  this.$t('payment.state.CANCELED');
             }else if(o.order.payment.payment_state == "WAITING FOR PAYMENT"){
-                o.order.payment.payment_state_display =  'Oczekuje na uregulowanie';
+                o.order.payment.payment_state_display =  this.$t('payment.state.WAITING_FOR_PAYMENT');
             }else{
-                o.order.payment.payment_state_display =  'Nieznany';
+                o.order.payment.payment_state_display =  this.$t('payment.state.UNKNOWN');
           }
 
           //complaint state
           
           if(o.complaint.state == 'REGISTERED'){
-              o.complaint.state_display =  'zarejestrowana'
+              o.complaint.state_display =  this.$t('complaint.stateShort.REGISTERED');
           }else if(o.complaint.state == 'READ'){
-              o.complaint.state_display =  'odczytana'
+              o.complaint.state_display =  this.$t('complaint.stateShort.READ');
           }else if(o.complaint.state == 'ACCEPTED'){
-              o.complaint.state_display =  'rozpatrzona pozytywnie'
+              o.complaint.state_display =  this.$t('complaint.decisionsOptions.ACCEPTED');
           }else if(o.complaint.state == 'REJECTED'){
-              o.complaint.state_display =  'odrzucona'
+              o.complaint.state_display =  this.$t('complaint.stateShort.REJECTED');
           }else if(o.complaint.state == 'DECISION'){
-              o.complaint.state_display =  'wydano decyzję'
+              o.complaint.state_display =  this.$t('complaint.stateShort.DECISION');
           }else if(o.complaint.state == 'CANCELED'){
-              o.complaint.state_display =  'wycofana'
+              o.complaint.state_display =  this.$t('complaint.stateShort.CANCELED');
           }else{
-              o.complaint.state_display =  'nierozpoznano'
+              o.complaint.state_display =  this.$t('complaint.stateShort.UNKNOWN');
           }
         
 

@@ -50,7 +50,7 @@
               <v-img class="mini-img" height="5rem" max-width="5rem" contain :src="item.product.image"></v-img>
               <div class="ml-5">
                 <p class="detail details-name">{{item.product.name}}</p>
-                <p class="detail details-id mb-0">ID: {{item.product.product_id}}</p>
+                <p class="detail details-id mb-0">{{ $t("common.id") }}: {{item.product.product_id}}</p>
               </div>
             </div>
             <div class="details-container mb-5">
@@ -65,8 +65,8 @@
               <div class="cluster ">
                 <p class="cluster-title">Producent:</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.maker.maker_data.firm_name}}</span></p>
-                <p class="detail detail-title">Telefon: <span class="detail detail-value">{{item.maker.maker_data.phone}}</span></p>
-                <p class="detail detail-title">E-mail: <span class="detail detail-value">{{item.maker.maker_data.email}}</span></p>
+                <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.maker.maker_data.phone}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.maker.maker_data.email}}</span></p>
               </div>
             </div>
             <v-divider />
@@ -170,7 +170,7 @@ export default {
         })
         .catch((err) => {
             if(err === "serverBlockDelete"){
-              alert("Nie można usunąć z bazy danych")
+              alert(this.$t('errors.unableToDeleteFromDatabase'))
             }
             console.log(err);
             this.$refs['del' + id ].dialogClose();
