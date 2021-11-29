@@ -1,7 +1,7 @@
 <template>
     <v-form ref="employeeForm" @submit.prevent="nextStep">
         <form class="cell">
-            <label class="cell__label">{{ $t("firstName") }}</label>
+            <label class="cell__label">{{ $t("common.firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -13,7 +13,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">{{ $t("lastName") }}</label>
+            <label class="cell__label">{{ $t("common.lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""

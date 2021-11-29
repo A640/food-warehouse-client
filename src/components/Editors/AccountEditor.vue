@@ -3,7 +3,7 @@
         <v-form ref="accountForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">{{ $t("login") }}</label>
+            <label class="cell__label">{{ $t("common.login") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -16,7 +16,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">{{ $t("email") }}</label>
+            <label class="cell__label">{{ $t("common.email") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -30,7 +30,7 @@
 
         
         <form class="cell">
-            <label class="cell__label">{{ $t("password") }}</label>
+            <label class="cell__label">{{ $t("common.password") }}</label>
             <v-text-field
                 class="input"
                 :label="password_rules.length == 0 ? $t('notChanged') : ''"
@@ -45,7 +45,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">{{ $t("passwordRepeat") }}</label>
+            <label class="cell__label">{{ $t("common.passwordRepeat") }}</label>
             <v-text-field
                 class="input"
                 :label="password_rules.length == 0 ? $t('notChanged') : ''"

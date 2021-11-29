@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj produkt"
+          :label="$t('tables.product.searchForProduct')"
           single-line
           hide-details
         ></v-text-field>
@@ -45,7 +45,7 @@
         <delete 
           :id="props.item.product.product_id" 
           :name="props.item.product.name"
-          type="produkt"
+          :type="$t('tables.product.typeProduct')"
           :ref="'del' + props.item.product.product_id"
           v-on:DeleteConfirm="deleteOne"
          />
@@ -65,15 +65,15 @@
             </div>
             <div class="details-container mb-5">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane produktu:</p>
-                <p class="detail detail-title">Kategoria: <span class="detail detail-value">{{item.product.category}}</span></p>
-                <p class="detail detail-title">Wymaga przechowywania w chłodni: <span class="detail detail-value">{{ item.product.needs_cold ? 'TAK' : 'NIE' }}</span></p>
-                <p class="detail detail-title">Cena kupna: <span class="detail detail-value">{{item.product.buy_price}}</span></p>
-                <p class="detail detail-title">Cena sprzedaży: <span class="detail detail-value">{{item.product.sell_price}}</span></p>
+                <p class="cluster-title">{{ $t("tables.product.productDetails") }}:</p>
+                <p class="detail detail-title">{{ $t("products.category") }}: <span class="detail detail-value">{{item.product.category}}</span></p>
+                <p class="detail detail-title">{{ $t("products.requiresRefrigeration") }}: <span class="detail detail-value">{{ item.product.needs_cold ? $t("common.yes") : $t("common.no") }}</span></p>
+                <p class="detail detail-title">{{ $t("tables.product.buyPrice") }}: <span class="detail detail-value">{{item.product.buy_price}}</span></p>
+                <p class="detail detail-title">{{ $t("tables.product.sellPrice") }}: <span class="detail detail-value">{{item.product.sell_price}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 " />
               <div class="cluster ">
-                <p class="cluster-title">Producent:</p>
+                <p class="cluster-title">{{ $t("products.manufacturer") }}</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.maker.maker_data.firm_name}}</span></p>
                 <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.maker.maker_data.phone}}</span></p>
                 <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.maker.maker_data.email}}</span></p>
@@ -83,9 +83,9 @@
             <div class="details-container">
               
               <div class="ml-5">
-                <p class="detail detail-value">Skrócony opis</p>
+                <p class="detail detail-value">{{ $t("products.shortDescription") }}</p>
                 <p class="detail details-id mb-0">{{item.product.short_description}}</p>
-                <p class="detail detail-value">Opis</p>
+                <p class="detail detail-value">{{ $t("products.description") }}</p>
                 <p class="detail details-id mb-0">{{item.product.description}}</p>
               </div>
             </div>
@@ -99,7 +99,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych produktów" :count="selected.length" type="produktów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many :name="$t('tables.product.DMName')" :count="selected.length" :type="$t('tables.product.DMType')" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>
@@ -125,15 +125,15 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'Nazwa',
+          text: this.$t('common.name'),
           align: 'start',
           value: 'product.name',
         },
-        { text: 'Kategoria', value: 'product.category' },
-        { text: 'Wymaga chłodni', value: 'product.cold', align:'center' },
-        { text: 'Producent', value: 'maker.maker_data.firm_name' },
-        { text: 'Cena kupna', value: 'product.buy_price', align:'right' },
-        { text: 'Cena sprzedaży', value: 'product.sell_price', align:'right' },
+        { text: this.$t('products.category'), value: 'product.category' },
+        { text: this.$t('products.requiresRefrigerationShort'), value: 'product.cold', align:'center' },
+        { text: this.$t('products.manufacturer'), value: 'maker.maker_data.firm_name' },
+        { text: this.$t('tables.product.buyPrice'), value: 'product.buy_price', align:'right' },
+        { text: this.$t('tables.product.sellPrice'), value: 'product.sell_price', align:'right' },
         { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       products: [],
@@ -215,7 +215,7 @@ export default {
       (newValue)=>{
         //Update data when changed
         let prod = newValue.map((product) => {
-          product.product.cold = product.product.needs_cold ? 'TAK' : 'NIE';
+          product.product.cold = product.product.needs_cold ? this.$t("common.yes") : this.$t("common.no");
           return product;
         })
         this.products = prod;

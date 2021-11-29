@@ -59,15 +59,15 @@
             </div>
             <div class="details-container mb-5">
               <!-- <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane produktu:</p>
-                <p class="detail detail-title">Kategoria: <span class="detail detail-value">{{item.product.product.category}}</span></p>
-                <p class="detail detail-title">Wymaga przechowywania w chłodni: <span class="detail detail-value">{{ item.product.product.needs_cold ? 'TAK' : 'NIE' }}</span></p>
-                <p class="detail detail-title">Cena kupna: <span class="detail detail-value">{{item.product.product.buy_price}}</span></p>
-                <p class="detail detail-title">Cena sprzedaży: <span class="detail detail-value">{{item.product.product.sell_price}}</span></p>
+                <p class="cluster-title">{{ $t("tables.product.productDetails") }}:</p>
+                <p class="detail detail-title">{{ $t("products.category") }}: <span class="detail detail-value">{{item.product.product.category}}</span></p>
+                <p class="detail detail-title">{{ $t("products.requiresRefrigeration") }}: <span class="detail detail-value">{{ item.product.product.needs_cold ? $t("common.yes") : $t("common.no") }}</span></p>
+                <p class="detail detail-title">{{ $t("products.buyPrice") }}: <span class="detail detail-value">{{item.product.product.buy_price}}</span></p>
+                <p class="detail detail-title">{{ $t("tables.product.sellPrice") }}: <span class="detail detail-value">{{item.product.product.sell_price}}</span></p>
               </div>
               <v-divider vertical inset class="ml-10 mr-10 " />
               <div class="cluster ">
-                <p class="cluster-title">Producent:</p>
+                <p class="cluster-title">{{ $t("products.manufacturer") }}</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.product.maker.maker_data.firm_name}}</span></p>
                 <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.product.maker.maker_data.phone}}</span></p>
                 <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.product.maker.maker_data.email}}</span></p>
@@ -83,7 +83,7 @@
                   :warehouse_id="storage.storage.storage_id"
                   :name="item.product.product.name" 
                   :warehouse="storage.storage.name"
-                  type="partię produktu"
+                  :type="$t('tables.batch.typeBatch')"
                   :ref="'del' + item.batch_id"
                   v-on:DeleteConfirm="deleteOne"
                 />
@@ -103,7 +103,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych partii produktów" :count="selected.length" type="partii produktów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many :name="$t('tables.batch.DMName')" :count="selected.length" :type="$t('tables.batch.DMType')" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>

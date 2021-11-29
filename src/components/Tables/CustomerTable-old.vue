@@ -43,7 +43,7 @@
         <delete 
           :id=props.item.personal_data.customer_id 
           :name="props.item.personal_data.name + ' ' + props.item.personal_data.surname" 
-          type="klienta"
+          :type="$t('tables.customer.customerType')"
           v-on:DeleteConfirm="deleteOne" 
         />
         <edit :edit="Boolean(true)" :account_id="props.item.account.user_id" :customer_id="props.item.personal_data.customer_id" />
@@ -90,7 +90,7 @@
 
      <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych klientów" :count="selected.length" type="klientów" v-on:deleteConfirm="deleteMany()"  ></delete-many>
+                <delete-many :name="$t('tables.customer.DMName')" :count="selected.length" :type="$t('tables.customer.DMType')" v-on:deleteConfirm="deleteMany()"  ></delete-many>
       </div>
     </v-card>
   </div>

@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj magazyn"
+          :label="$t('tables.warehouse.searchForWarehouse')"
           single-line
           hide-details
         ></v-text-field>
@@ -51,9 +51,9 @@
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane magazynu:</p>
-                <p class="detail detail-title">Pojemność: <span class="detail detail-value">{{item.storage.capacity}}</span></p>
-                <p class="detail detail-title">Chłodnia: <span class="detail detail-value">{{item.storage.is_cold_storage ? 'TAK' : 'NIE'}}</span></p>
+                <p class="cluster-title">{{ $t("warehouse.warehouseDetails") }}:</p>
+                <p class="detail detail-title">{{ $t("warehouse.capacity") }}: <span class="detail detail-value">{{item.storage.capacity}}</span></p>
+                <p class="detail detail-title">{{ $t("warehouse.freezer") }}: <span class="detail detail-value">{{item.storage.is_cold_storage ? $t("common.yes") : $t("common.no")}}</span></p>
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster fix">
@@ -67,7 +67,7 @@
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Zarządca:</p>
+                <p class="cluster-title">{{ $t("warehouse.manager") }}:</p>
                 <p class="detail detail-value">{{item.manager.personal_data.name}} {{item.manager.personal_data.surname}}
                 <p class="detail detail-title">{{ $t("employee.jobPosition") }}: <span class="detail detail-value">{{item.manager.personal_data.position}}</span></p>
                 <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.manager.account.email}}</span></p>
@@ -81,10 +81,7 @@
       
       </v-data-table>
 
-      <!-- <div v-if="delete_many_mode" class="right-buttons">
-                <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych magazynów" :count="selected.length" type="magazynów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
-      </div> -->
+
     </v-card>
   </div>
 </template>
@@ -103,11 +100,11 @@ export default {
       search: '',
       headers: [
         { text: '', value: 'data-table-expand' },
-        { text: 'Nazwa', value: 'storage.name' },
-        { text: 'Pojemność', value: 'storage.capacity', align:'end' },
-        { text: 'Chłodnia', value: 'storage.cold', align:'center' },
-        { text: 'Zarządca', value: 'storage.manager_ns' },
-        { text: 'Miasto', value: 'address.town' },
+        { text: this.$t('common.name'), value: 'storage.name' },
+        { text: this.$t('warehouse.capacity'), value: 'storage.capacity', align:'end' },
+        { text: this.$t('warehouse.freezer'), value: 'storage.cold', align:'center' },
+        { text: this.$t('warehouse.manager'), value: 'storage.manager_ns' },
+        { text: this.$t('address.city'), value: 'address.town' },
       ],
       warehouses: [],
       expanded: [],
@@ -189,7 +186,7 @@ export default {
         //Update data when changed
         let wareh = newValue.map((warehouse) => {
           //prepare boolean value and 2 string value to display AND SEARCH in table
-          warehouse.storage.cold = warehouse.storage.is_cold_storage ? 'TAK' : 'NIE';
+          warehouse.storage.cold = warehouse.storage.is_cold_storage ? this.$t("common.yes") : this.$t("common.no");
           warehouse.storage.manager_ns = warehouse.manager.personal_data.name + ' ' + warehouse.manager.personal_data.surname;
           return warehouse;
         })

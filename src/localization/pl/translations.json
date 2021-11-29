@@ -41,7 +41,10 @@
     "login": "Login",
     "logout": "Wyloguj się",
     "myData": "Moje dane",
+    "name": "Nazwa",
     "newCaps": "NOWA",
+    "no": "NIE",
+    "none": "brak",
     "notChanged": "nie zmieniono",
     "notRecognized": "Nie rozpoznano",
     "ok": "Ok",
@@ -69,7 +72,8 @@
       "manager": "Menedżer"
     },
     "value": "Wartość",
-    "warehouse": "Magazyn"
+    "warehouse": "Magazyn",
+    "yes": "TAK"
   },
   "complaint": {
     "complaint": "Reklamacja",
@@ -175,6 +179,7 @@
     "unread": "Nieprzeczytane"
   },
   "orders": {
+    "acceptOrder": "Przyjmij zamówienie",
     "canBeCancelled": "Zamówienie może jeszcze zostać wycofane przez klienta",
     "cancel": "Wycofaj zamówienie",
     "cancelError": "Nie można już wycofać zamówienia",
@@ -186,6 +191,8 @@
     "dateOrdered": "Data złożenia zamówienia",
     "delivered": "Dostarczono",
     "delivery": "Dostawa",
+    "markOrderDelivered": "Oznacz jako dostarczone",
+    "markOrderRejected": "Oznacz jako odrzucone przez klienta",
     "noCancel": "Pozostaw zamówienie",
     "noOfComplaints": "Liczba reklamacji",
     "noOfProducts": "Liczba produktów",
@@ -243,7 +250,7 @@
     "selected": "Wybranych"
   },
   "products": {
-    "buyPrice": "Cena po jakiej magazyn <b>kupuje</b> jednostkę produktu",
+    "buyPrice": "Cena po jakiej magazyn kupuje jednostkę produktu",
     "category": "Kategoria",
     "description": "Opis",
     "details": "Szczegóły",
@@ -257,7 +264,8 @@
     "products": "Produkty",
     "quantity": "Ilość",
     "requiresRefrigeration": "Wymaga przechowywania w chłodni",
-    "sellPrice": "Cena po jakiej magazyn <b>sprzedaje</b> jednostkę produktu",
+    "requiresRefrigerationShort": "Wymaga chłodni",
+    "sellPrice": "Cena po jakiej magazyn sprzedaje jednostkę produktu",
     "shortDescription": "Skrócony opis"
   },
   "register": {
@@ -314,6 +322,8 @@
   },
   "tables": {
     "batch": {
+      "DMName": "Usuwanie zaznaczonych partii produktów",
+      "DMType": "partii produktów",
       "batchAvailableInWarehouses": "Partia produktu dostępna w magazynach",
       "batchInWarehouses": "Partia produktu dostępna w magazynach",
       "batchNo": "Numer partii",
@@ -321,7 +331,8 @@
       "inHowManyWarehouses": "W ilu magazynach",
       "productID": "ID Produktu",
       "quantity": "Ilość",
-      "search": "Wyszukaj partię produktu"
+      "search": "Wyszukaj partię produktu",
+      "typeBatch": "partię produktu"
     },
     "complaint": {
       "complaintNO": "Numer reklamacji",
@@ -332,16 +343,49 @@
       "searchForComplaint": "Wyszukaj reklamację"
     },
     "customer": {
+      "DMName": "Usuwanie zaznaczonych klientów",
+      "DMType": "klientów",
       "customerDetails": "Dane klienta",
+      "customerType": "klienta",
       "searchForCustomer": "Wyszukaj klienta"
     },
     "employee": {
+      "DMName": "Usuwanie zaznaczonych pracowników",
+      "DMType": "pracowników",
+      "employeeType": "pracownika",
       "searchForEmployee": "Wyszukaj pracownika"
     },
-    "manufacturer": "Wyszukaj producenta",
+    "manufacturer": {
+      "DMName": "Usuwanie zaznaczonych producentów",
+      "DMType": "producentów",
+      "manufacturerDetails": "Dane producenta",
+      "searchForManufacturer": "Wyszukaj producenta",
+      "typeManufacturer": "producenta"
+    },
     "order": {
       "searchForOrder": "Wyszukaj zamówienie",
       "viewOrderSummary": "Wyświetl podsumowanie zamówienia"
+    },
+    "product": {
+      "DMName": "Usuwanie zaznaczonych produktów",
+      "DMType": "produktów",
+      "buyPrice": "Cena kupna",
+      "productDetails": "Dane produktu",
+      "searchForProduct": "Wyszukaj produkt",
+      "sellPrice": "Cena sprzedaży",
+      "typeProduct": "produkt"
+    },
+    "vehicle": {
+      "DMName": "Usuwanie zaznaczonych pojazdów",
+      "DMType": "pojazdów",
+      "searchForVehicle": "Wyszukaj pojazd",
+      "typeVehicle": "pojazdu"
+    },
+    "warehouse": {
+      "DMName": "Usuwanie zaznaczonych magazynów",
+      "DMType": "magazynów",
+      "searchForWarehouse": "Wyszukaj magazyn",
+      "typeWarehouse": "magazyn"
     }
   },
   "vehicle": {
@@ -353,7 +397,8 @@
     "mot": "Przegląd ważny do",
     "plateNumber": "NR Rejestracyjny",
     "productionYear": "Rok produkcji",
-    "vehicle": "Pojazd"
+    "vehicle": "Pojazd",
+    "vehicleDetails": "Dane pojazdu"
   },
   "views": {
     "loggedAs": "Zalogowany jako",
@@ -388,7 +433,8 @@
     "freezer": "Chłodnia",
     "manager": "Zarządca",
     "name": "Nazwa",
-    "warehouse": "Magazyn"
+    "warehouse": "Magazyn",
+    "warehouseDetails": "Dane magazynu"
   },
   "welcome": {
     "inner": "Super polski inner text"

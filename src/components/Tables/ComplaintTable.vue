@@ -220,7 +220,7 @@ export default {
                 o.order.order.order_state_display =  this.$t('orders.state.UNKNOWN');
           }
 
-          //payment state for diplaying
+          //payment state for displaying
           if(o.order.payment.payment_state == "IN PROGRESS"){
                 o.order.payment.payment_state_display =  this.$t('payment.state.IN_PROGRESS');
             }else if(o.order.payment.payment_state == "COMPLETED"){

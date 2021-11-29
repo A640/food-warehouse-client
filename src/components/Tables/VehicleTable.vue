@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj pojazd"
+          :label="$t('tables.vehicle.searchForVehicle')"
           single-line
           hide-details
         ></v-text-field>
@@ -45,7 +45,7 @@
         <delete 
           :id="props.item.car_info.car_id" 
           :name="props.item.car_info.brand + ' ' + props.item.car_info.model" 
-          type="pojazda"
+          :type="$t('tables.vehicle.typeVehicle')"
           :ref="'del' + props.item.car_info.car_id"
           v-on:DeleteConfirm="deleteOne"
          />
@@ -62,17 +62,17 @@
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane pojazdu:</p>
-                <p class="detail detail-title">NR Rejestracyjny: <span class="detail detail-value">{{item.car_info.reg_no}}</span></p>
-                <p class="detail detail-title">Ubezpieczenie do: <span class="detail detail-value">{{item.car_info.insurance.substr(0, 10)}}</span></p>
-                <p class="detail detail-title">Przegląd do: <span class="detail detail-value">{{item.car_info.inspection.substr(0, 10)}}</span></p>
+                <p class="cluster-title">{{ $t("vehicle.vehicleDetails") }}:</p>
+                <p class="detail detail-title">{{ $t("vehicle.plateNumber") }}: <span class="detail detail-value">{{item.car_info.reg_no}}</span></p>
+                <p class="detail detail-title">{{ $t("vehicle.insuranceValidUntil") }}: <span class="detail detail-value">{{item.car_info.insurance.substr(0, 10)}}</span></p>
+                <p class="detail detail-title">{{ $t("vehicle.mot") }}: <span class="detail detail-value">{{item.car_info.inspection.substr(0, 10)}}</span></p>
               </div>
                <v-divider vertical inset class="ml-10 mr-10" />
               <div class="cluster ">
-                <p class="cluster-title">Kierowca:</p>
+                <p class="cluster-title">{{ $t("vehicle.driver") }}:</p>
                 <p class="detail detail-title"><span class="detail detail-value">{{item.driver.personal_data.name}} {{item.driver.personal_data.surname}}</span></p>
                 <p class="detail detail-title">{{ $t("employee.jobPosition") }}: <span class="detail detail-value">{{item.driver.personal_data.position}}</span></p>
-                <p class="detail detail-title">Email: <span class="detail detail-value">{{item.driver.account.email}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }} <span class="detail detail-value">{{item.driver.account.email}}</span></p>
               </div>
             </div>
             
@@ -85,7 +85,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych pojazdów" :count="selected.length" type="pojazdów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many :name="$t('tables.vehicle.DMName')" :count="selected.length" :type="$t('tables.vehicle.DMType')" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>
@@ -110,10 +110,10 @@ export default {
       search: '',
       headers: [
         { text: '', value: 'data-table-expand' },
-        { text: 'Marka', value: 'car_info.brand', align: 'start' },
-        { text: 'Model', value: 'car_info.model' },
-        { text: 'NR rejestracyjny', value: 'car_info.reg_no' },
-        { text: 'Kierowca', value: 'car_info.driver_ns' },
+        { text: this.$t('vehicle.brand'), value: 'car_info.brand', align: 'start' },
+        { text: this.$t('vehicle.model'), value: 'car_info.model' },
+        { text: this.$t('vehicle.plateNumber'), value: 'car_info.reg_no' },
+        { text: this.$t('vehicle.driver'), value: 'car_info.driver_ns' },
         { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       vehicles: [],

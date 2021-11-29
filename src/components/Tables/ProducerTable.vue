@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj producenta"
+          :label="$t('tables.manufacturer.searchForManufacturer')"
           single-line
           hide-details
         ></v-text-field>
@@ -45,7 +45,7 @@
         <delete 
           :id="props.item.maker_data.maker_id" 
           :name="props.item.maker_data.firm_name" 
-          type="producenta"
+          :type="$t('tables.manufacturer.typeManufacturer')"
           :ref="'del' + props.item.maker_data.maker_id"
           v-on:DeleteConfirm="deleteOne"
          />
@@ -62,9 +62,9 @@
             </div>
             <div class="details-container">
               <div class="cluster fix ml-5">
-                <p class="cluster-title">Dane producenta:</p>
+                <p class="cluster-title">{{ $t("tables.manufacturer.manufacturerDetails") }}:</p>
                 <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.maker_data.phone}}</span></p>
-                <p class="detail detail-title">Email: <span class="detail detail-value">{{item.maker_data.email}}</span></p>
+                <p class="detail detail-title">{{ $t("common.email") }} <span class="detail detail-value">{{item.maker_data.email}}</span></p>
               </div>
               <v-divider vertical inset class="ml-2 mr-10" />
               <div class="cluster ">
@@ -87,7 +87,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych producentów" :count="selected.length" type="producentów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many :name="$t('tables.manufacturer.DMName')" :count="selected.length" :type="$t('tables.manufacturer.DMType')" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>
@@ -112,11 +112,11 @@ export default {
       search: '',
       headers: [
         { text: '', value: 'data-table-expand' },
-        { text: 'Nazwa', value: 'maker_data.firm_name' },
+        { text: this.$t('common.name'), value: 'maker_data.firm_name' },
         { text: this.$t('common.phone'), value: 'maker_data.phone' },
-        { text: 'Email', value: 'maker_data.email' },
-        { text: 'Miasto', value: 'address.town' },
-        { text: 'Kraj', value: 'address.country' },
+        { text: this.$t('common.email'), value: 'maker_data.email' },
+        { text: this.$t('address.city'), value: 'address.town' },
+        { text: this.$t('address.country'), value: 'address.country' },
         { text: this.$t('common.actions'), value: "controls", sortable: false, align:'center'}
       ],
       producers: [],

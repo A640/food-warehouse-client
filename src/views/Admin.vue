@@ -91,6 +91,8 @@
                         
                     </v-badge>
 
+                    <language-switcher/>
+
                     <!-- account menu -->
                     <v-menu
                         v-model="mini_menu"
@@ -148,8 +150,10 @@
 
 <script>
 //import UserTable from '@/components/EmployeeTable.vue' 
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
 export default {
+  components: { LanguageSwitcher },
     
     // components: {
     //    UserTable,

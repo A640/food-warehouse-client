@@ -22,7 +22,7 @@
     "account": "Account",
     "actionIrreversible": "This action cannot be undone!",
     "actions": "Actions",
-    "add": "Add",
+    "add": "Create",
     "cancel": "Cancel",
     "close": "Close",
     "company": "Company",
@@ -34,14 +34,17 @@
     "edit": "Edit",
     "email": "E-mail",
     "firstName": "First name",
-    "foodProducer": "Food producer",
+    "foodProducer": "Food manufacturer",
     "haveCompany": "I have a company",
     "id": "ID",
     "lastName": "Last name",
     "login": "Login",
     "logout": "Log out",
     "myData": "My data",
+    "name": "Name",
     "newCaps": "NEW",
+    "no": "NO",
+    "none": "none",
     "notChanged": "not changed",
     "notRecognized": "Not recognized",
     "ok": "Ok",
@@ -69,7 +72,8 @@
       "manager": "Manager"
     },
     "value": "Value",
-    "warehouse": "Warehouse"
+    "warehouse": "Warehouse",
+    "yes": "YES"
   },
   "complaint": {
     "complaint": "Complaint",
@@ -175,6 +179,7 @@
     "unread": "Unread"
   },
   "orders": {
+    "acceptOrder": "Accept the order",
     "canBeCancelled": "The order may still be canceled by the customer",
     "cancel": "Cancel your order",
     "cancelError": "The order can no longer be canceled",
@@ -186,6 +191,8 @@
     "dateOrdered": "Order date",
     "delivered": "Delivered",
     "delivery": "Delivery",
+    "markOrderDelivered": "Mark order as delivered",
+    "markOrderRejected": "Mark order as rejected by customer",
     "noCancel": "Do not delete",
     "noOfComplaints": "Number of complaints",
     "noOfProducts": "Number of products",
@@ -243,7 +250,7 @@
     "selected": "Selected"
   },
   "products": {
-    "buyPrice": "The price at which the warehouse <b>buys</b> a product unit",
+    "buyPrice": "The price at which the warehouse buys a product unit",
     "category": "Category",
     "description": "Description",
     "details": "Details",
@@ -257,7 +264,8 @@
     "products": "Products",
     "quantity": "Quantity",
     "requiresRefrigeration": "Requires refrigeration",
-    "sellPrice": "The price at which the warehouse <b>sells</b> a product unit",
+    "requiresRefrigerationShort": "Requires refrigeration",
+    "sellPrice": "The price at which the warehouse sells a product unit",
     "shortDescription": "Short description"
   },
   "register": {
@@ -314,6 +322,8 @@
   },
   "tables": {
     "batch": {
+      "DMName": "Delete selected product batches",
+      "DMType": "product batches",
       "batchAvailableInWarehouses": "The product batch is available in warehouses",
       "batchInWarehouses": "Product batch available in warehouses",
       "batchNo": "Batch number",
@@ -321,7 +331,8 @@
       "inHowManyWarehouses": "In no of warehouses",
       "productID": "Product ID",
       "quantity": "Quantity",
-      "search": "Search for product batch"
+      "search": "Search for product batch",
+      "typeBatch": "product batch"
     },
     "complaint": {
       "complaintNO": "Complaint no",
@@ -332,16 +343,49 @@
       "searchForComplaint": "Search for complaint"
     },
     "customer": {
+      "DMName": "Delete selected customers",
+      "DMType": "customers",
       "customerDetails": "Customer details",
+      "customerType": "customer",
       "searchForCustomer": "Search for customer"
     },
     "employee": {
+      "DMName": "Delete selected employees",
+      "DMType": "employees",
+      "employeeType": "employee",
       "searchForEmployee": "Search for employee"
     },
-    "manufacturer": "Search for manufacturer",
+    "manufacturer": {
+      "DMName": "Delete selected manufacturers",
+      "DMType": "manufacturers",
+      "manufacturerDetails": "Manufacturer details",
+      "searchForManufacturer": "Search for manufacturer",
+      "typeManufacturer": "manufacturer"
+    },
     "order": {
       "searchForOrder": "Search for order",
       "viewOrderSummary": "View order summary"
+    },
+    "product": {
+      "DMName": "Delete selected products",
+      "DMType": "products",
+      "buyPrice": "Buy price",
+      "productDetails": "Product details",
+      "searchForProduct": "Search for product",
+      "sellPrice": "Sell price",
+      "typeProduct": "product"
+    },
+    "vehicle": {
+      "DMName": "Delete selected vehicles",
+      "DMType": "vehicles",
+      "searchForVehicle": "Search for vehicle",
+      "typeVehicle": "vehicle"
+    },
+    "warehouse": {
+      "DMName": "Delete selected warehouses",
+      "DMType": "warehouses",
+      "searchForWarehouse": "Search for warehouse",
+      "typeWarehouse": "warehouse"
     }
   },
   "vehicle": {
@@ -353,7 +397,8 @@
     "mot": "MOT valid until",
     "plateNumber": "Plate number",
     "productionYear": "Production year",
-    "vehicle": "Vehicle"
+    "vehicle": "Vehicle",
+    "vehicleDetails": "Vehicle details"
   },
   "views": {
     "loggedAs": "Logged in as",
@@ -388,7 +433,8 @@
     "freezer": "Walk-in freezer",
     "manager": "Manager",
     "name": "Name",
-    "warehouse": "Warehouse"
+    "warehouse": "Warehouse",
+    "warehouseDetails": "Warehouse details"
   },
   "welcome": {
     "inner": "This is supper inner text"

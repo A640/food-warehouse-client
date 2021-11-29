@@ -17,7 +17,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Wyszukaj pracownika"
+          :label="$t('tables.order.searchForOrder')"
           single-line
           hide-details
         ></v-text-field>
@@ -98,9 +98,9 @@
             <v-divider  inset class="ml-10 mr-10 mt-2" />
 
             <div class="cluster mt-4 mb-4 ml-5">
-              <v-btn outlined @click="InDelivery(item.order.order_id)" v-if="item.order.order_state == 'READY TO DELIVER'" >Przyjmij zamówienie</v-btn>
-              <v-btn outlined @click="Delivered(item.order.order_id)" v-if="item.order.order_state == 'OUT FOR DELIVERY'" >Oznacz jako dostarczone</v-btn>
-              <v-btn outlined @click="NotDelivered(item.order.order_id)" v-if="item.order.order_state == 'OUT FOR DELIVERY'" >Oznacz jako odrzucone</v-btn>
+              <v-btn outlined @click="InDelivery(item.order.order_id)" v-if="item.order.order_state == 'READY TO DELIVER'" >{{ $t("orders.acceptOrder") }}</v-btn>
+              <v-btn outlined @click="Delivered(item.order.order_id)" v-if="item.order.order_state == 'OUT FOR DELIVERY'" >{{ $t("orders.markOrderDelivered") }}</v-btn>
+              <v-btn outlined @click="NotDelivered(item.order.order_id)" v-if="item.order.order_state == 'OUT FOR DELIVERY'" >{{ $t("orders.markOrderRejected") }}</v-btn>
               <v-btn outlined @click="showDetails(item.order.order_id)">{{ $t("tables.order.viewOrderSummary") }}</v-btn>
               
             </div>
@@ -229,39 +229,39 @@ export default {
         let orders = newValue.map((o) => {
           
           //order state change for displaying
-          if(o.order.order_state == "PENDING"){
-                o.order.order_state_display =  "Oczekujące";
+            if(o.order.order_state == "PENDING"){
+                o.order.order_state_display =  this.$t('orders.state.PENDING');
             }else if(o.order.order_state == "REGISTERED"){
-                o.order.order_state_display =  'Przyjęte';
+                o.order.order_state_display =  this.$t('orders.state.REGISTERED');
             }else if(o.order.order_state == "CANCELED"){
-                o.order.order_state_display =  'Anulowane';
+                o.order.order_state_display =  this.$t('orders.state.CANCELED');
             }else if(o.order.order_state == "COMPLETING"){
-                o.order.order_state_display =  'W trakcie kompletacji';
+                o.order.order_state_display =  this.$t('orders.state.COMPLETING');
             }else if(o.order.order_state == "READY TO DELIVER"){
-                o.order.order_state_display =  'Gotowy do dostarczenia';
+                o.order.order_state_display =  this.$t('orders.state.READY_TO_DELIVER');
             }else if(o.order.order_state == "OUT FOR DELIVERY"){
-                o.order.order_state_display =  'W drodze do klienta';
+                o.order.order_state_display =  this.$t('orders.state.OUT_FOR_DELIVERY');
             }else if(o.order.order_state == "DELIVERED"){
-                o.order.order_state_display =  'Dostarczono';
+                o.order.order_state_display =  this.$t('orders.state.DELIVERED');
             }else if(o.order.order_state == "RETURNED"){
-                o.order.order_state_display =  'Zwrócone';
+                o.order.order_state_display =  this.$t('orders.state.RETURNED');
             }else{
-                o.order.order_state_display =  'Nieznany';
+                o.order.order_state_display =  this.$t('orders.state.UNKNOWN');
           }
 
-          //payment state for diplaying
+          //payment state for displaying
           if(o.payment.payment_state == "IN PROGRESS"){
-                o.payment.payment_state_display =  "W trakcie";
+                o.payment.payment_state_display =  this.$t('payment.state.IN_PROGRESS');
             }else if(o.payment.payment_state == "COMPLETED"){
-                o.payment.payment_state_display =  'Opłacona';
+                o.payment.payment_state_display =  this.$t('payment.state.COMPLETED');
             }else if(o.payment.payment_state == "REJECTED"){
-                o.payment.payment_state_display =  'Odrzucona';
+                o.payment.payment_state_display =  this.$t('payment.state.REJECTED');
             }else if(o.payment.payment_state == "CANCELED"){
-                o.payment.payment_state_display =  'Wycofana';
+                o.payment.payment_state_display =  this.$t('payment.state.CANCELED');
             }else if(o.payment.payment_state == "WAITING FOR PAYMENT"){
-                o.payment.payment_state_display =  'Oczekuje na uregulowanie';
+                o.payment.payment_state_display =  this.$t('payment.state.WAITING_FOR_PAYMENT');
             }else{
-                o.payment.payment_state_display =  'Nieznany';
+                o.payment.payment_state_display =  this.$t('payment.state.UNKNOWN');
           }
 
           o.customer_name = o.customer.name + ' ' + o.customer.surname + ' ' + o.customer.firm_name;

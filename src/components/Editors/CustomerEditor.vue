@@ -2,7 +2,7 @@
     <v-form ref="detailsForm" @submit.prevent="nextStep">
 
         <form class="cell">
-            <label class="cell__label">{{ $t("firstName") }}</label>
+            <label class="cell__label">{{ $t("common.firstName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -14,7 +14,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">{{ $t("lastName") }}</label>
+            <label class="cell__label">{{ $t("common.lastName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -26,7 +26,7 @@
         </form>
 
         <form class="cell">
-            <label class="cell__label">{{ $t("phone") }}</label>
+            <label class="cell__label">{{ $t("common.phone") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -37,12 +37,12 @@
             ></v-text-field>
         </form>
         <div class="cell">
-            <v-switch v-model="is_company" :label="$t('haveCompany')"></v-switch>
+            <v-switch v-model="is_company" :label="$t('common.haveCompany')"></v-switch>
         </div>
         
 
         <form class="cell" v-if="is_company">
-            <label class="cell__label">{{ $t("companyName") }}</label>
+            <label class="cell__label">{{ $t("common.companyName") }}</label>
             <v-text-field
                 class="input"
                 label=""
@@ -54,7 +54,7 @@
         </form>
 
         <form class="cell" v-if="is_company">
-            <label class="cell__label">{{ $t("taxID") }}</label>
+            <label class="cell__label">{{ $t("common.taxID") }}</label>
             <v-text-field
                 class="input"
                 label=""

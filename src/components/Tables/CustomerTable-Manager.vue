@@ -57,7 +57,7 @@
                 <p class="cluster-title">{{ $t("tables.customer.customerDetails") }}:</p>
                 <p class="detail detail-title">{{ $t("common.phone") }}: <span class="detail detail-value">{{item.personal_data.phone_number}}</span></p>
                 <p class="detail detail-title">{{ $t("common.email") }}: <span class="detail detail-value">{{item.account.email}}</span></p>
-                <p class="detail detail-title">{{ $t("common.discount") }}: <span class="detail detail-value" v-if="item.personal_data.discount > 0">{{item.personal_data.discount}} %</span><span class="detail detail-value" v-else>brak</span></p>
+                <p class="detail detail-title">{{ $t("common.discount") }}: <span class="detail detail-value" v-if="item.personal_data.discount > 0">{{item.personal_data.discount}} %</span><span class="detail detail-value" v-else>{{ $t("common.none") }}</span></p>
               </div>
               <v-divider vertical inset class="mr-10" />
               <div class="cluster fix">
@@ -86,7 +86,7 @@
 
       <!-- <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych klientów" :count="selected.length" type="klientów" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many :name="$t('tables.customer.DMName')" :count="selected.length" :type="$t('tables.customer.DMType')" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div> -->
     </v-card>
   </div>

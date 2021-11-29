@@ -45,7 +45,7 @@
         <delete 
           :id="props.item.personal_data.employee_id" 
           :name="props.item.personal_data.name + ' ' + props.item.personal_data.surname" 
-          type="pracownika"
+          :type="$t('tables.employee.employeeType')"
           :ref="'del' + props.item.personal_data.employee_id"
           v-on:DeleteConfirm="deleteOne"
          />
@@ -84,7 +84,7 @@
 
       <div v-if="delete_many_mode" class="right-buttons">
                 <v-btn text class="mb-3 mr-2" @click="disableDeleteManyMode()">{{ $t("common.cancel") }}</v-btn>
-                <delete-many name="Usuwanie zaznaczonych pracowników" :count="selected.length" type="pracowników" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
+                <delete-many :name="$t('tables.employee.DMName')" :count="selected.length" :type="$t('tables.employee.DMType')" v-on:deleteConfirm="deleteMany()"  ref="delMany"></delete-many>
       </div>
     </v-card>
   </div>
