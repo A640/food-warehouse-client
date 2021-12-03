@@ -9,7 +9,7 @@
                     <h2 class="pop-title__text">{{ $t("messages.newMessage") }}</h2>
                 </div>
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     
                     <v-form v-model="validated" class="cell" ref="detailsForm" @submit.prevent="nextStep">
                         <label class="cell__label">{{ $t("messages.content") }}</label>
@@ -54,14 +54,14 @@
                     </v-overlay>
 
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 
 export default {
 
@@ -72,7 +72,7 @@ export default {
     },
 
     components: {
-        simplebar,
+        
     },
 
     data() {

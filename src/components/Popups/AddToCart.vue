@@ -9,7 +9,7 @@
                     <h2 class="pop-title__text">{{ $t("store.addToCart") }}</h2>
                 </div>
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     <product-mini class="mini" :product="product"></product-mini>
 
                     <p 
@@ -57,14 +57,14 @@
                     </div>
                     
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 import ProductMini from '@/components/Store/ProductMini.vue'
 
 export default {
@@ -99,7 +99,7 @@ export default {
     },
 
     components: {
-        simplebar,
+        
         ProductMini,
     },
 

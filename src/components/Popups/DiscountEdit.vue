@@ -11,7 +11,7 @@
                     <h2 class="pop-title__text">{{ $t("popups.editCustomerDiscount") }}</h2>
                 </div>
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     <p class="cell pop-subtitle">{{ $t("popups.discountPercent") }}</p>
                     <v-text-field
                         solo
@@ -46,14 +46,14 @@
                     </v-overlay>
 
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 
 export default {
 
@@ -69,7 +69,7 @@ export default {
     },
 
     components: {
-        simplebar,
+        
     },
 
     data() {

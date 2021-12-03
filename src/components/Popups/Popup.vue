@@ -14,17 +14,17 @@
                     <h2 class="pop-title__text">{{ title() }}</h2>
                 </div>
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     <slot :close_popup="closeDialog" ></slot>
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 
 export default {
 
@@ -38,7 +38,7 @@ export default {
     },
 
     components: {
-        simplebar,
+        
     },
 
     data() {

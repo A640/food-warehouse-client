@@ -43,7 +43,7 @@
             mdi-wifi
           </v-icon>
         </v-avatar>
-          Odzyskano połączenie z serwerem.
+           {{ $t("common.reEstablishedConnection") }}
       </v-banner>
       <router-view/>
     </v-app>

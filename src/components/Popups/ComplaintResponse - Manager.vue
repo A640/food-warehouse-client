@@ -18,7 +18,7 @@
                     <h2 class="pop-title__text">{{ $t("complaint.complaint") }}</h2>
                 </div>
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     <div class="cell">
                         <p class="section-title">{{ $t("complaint.forOrderNo") }}: <router-link :to="{name: 'Order_Details_2' , params: { id:  complaint.order.order.order_id }}" class="cell__link">{{ complaint.order.order.order_id }}</router-link></p>
                         <p class="section-title">{{ $t("common.submitted") }}: {{complaint.complaint.send_date}}</p>
@@ -104,14 +104,14 @@
                     </v-overlay>
 
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 
 export default {
 
@@ -125,7 +125,7 @@ export default {
     },
 
     components: {
-        simplebar,
+        
     },
 
     data() {

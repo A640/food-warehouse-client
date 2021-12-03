@@ -22,7 +22,7 @@
             <div class="pop-wrapper">
                 
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     <div class="cell">
                         <span class="message-sender">{{title}}</span>
                         <p class="message-date">{{ $t("messages.sent") }}: {{message.send_date}}</p>
@@ -58,14 +58,14 @@
                     </v-overlay> -->
 
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 
 export default {
 
@@ -83,7 +83,7 @@ export default {
     },
 
     components: {
-        simplebar,
+        
     },
 
     data() {

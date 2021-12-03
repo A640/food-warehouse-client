@@ -11,7 +11,7 @@
                     <h2 class="pop-title__text">{{ $t("popups.editShippingAddress") }}</h2>
                 </div>
                 
-                <simplebar class="pop-content" data-simplebar-auto-hide="false">
+                <div class="pop-content">
                     <AddressEditor 
                         :pid="-1"
                         :address_obj ="address_in" 
@@ -32,14 +32,14 @@
                         </div>
                     </div>
             
-                </simplebar>
+                </div>
             </div>
         </div>
     </v-dialog>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
+
 import AddressEditor from '@/components/Editors/AddressEditor.vue'
 
 export default {
@@ -54,7 +54,7 @@ export default {
 
 
     components: {
-        simplebar,
+        
         AddressEditor,
     },
 
