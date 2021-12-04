@@ -19,7 +19,7 @@
             @click="changeLanguage(item)"
           >
             
-            <country-flag :country="item.icon" size=''/>
+            <country-flag :country="item.icon" />
             {{ item.text }}
                
           </v-list-item>
@@ -63,6 +63,7 @@ export default {
             this.currentLanguageName = languageItem.text;
             this.$i18n.i18next.changeLanguage(languageItem.language);
             localStorage.setItem('foodwarehouseLanguage',languageItem.language);
+            window.location.reload(true);
         }
     },
 

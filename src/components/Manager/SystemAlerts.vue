@@ -1,15 +1,11 @@
 <template>
-    <div>
-        <v-container>
-            <v-row>
-                <v-col>
-                    <v-card :class="{'pa-4': true, 'pt-5':true, 'pb-5':true, 'mb-4':true, 'dan': alert.danger, 'war': alert.warning}" v-for="alert in alerts" :key="alert.content" max-width="500px">
-                        <p class="a-title cell mb-3">{{alert.title}}</p>
-                        <p class="content cell">{{alert.content}}</p>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-container>
+    <div class="alerts-container"> 
+        
+        <v-card :class="{card: true, 'dan': alert.danger, 'war': alert.warning}" v-for="alert in alerts" :key="alert.content" max-width="500px">
+            <p class="a-title cell mb-3">{{alert.title}}</p>
+            <p class="content cell">{{alert.content}}</p>
+        </v-card>
+
     </div>
 </template>
 
@@ -60,6 +56,20 @@ export default {
 </script>
 
 <style scoped>
+
+    .card{
+        padding: 30px 0px;
+        margin: 15px;
+    }
+
+    .alerts-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+    }
+
     .content{
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 500;
