@@ -98,7 +98,12 @@ export default {
         },
         user_name(){
             let n = this.$store.getters.getName;
-            return n.name + ' ' + n.surname;
+            if(n != null){
+                 return n.name + ' ' + n.surname;
+            }
+            else{
+                return '';
+            }
         }
     },
 

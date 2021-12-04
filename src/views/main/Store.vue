@@ -75,8 +75,8 @@
                         <v-list-item link :to="{name: 'Customer_Orders'}">
                             <v-list-item-title class="c-text"  >{{ $t("views.myOrders") }}</v-list-item-title>
                         </v-list-item>
-                        <v-list-item link>
-                            <v-list-item-title class="c-text" @click="logout()" >{{ $t("common.logout") }}</v-list-item-title>
+                        <v-list-item link @click="logout()">
+                            <v-list-item-title class="c-text"  >{{ $t("common.logout") }}</v-list-item-title>
                         </v-list-item>
                     </v-list>
                     </v-card>
@@ -86,8 +86,6 @@
                 <v-btn
                     v-else
                     depressed
-                    v-on="on"
-                    v-bind="attrs"
                     @click="loginRedirect()"
                 >
                     {{ $t("register.logIn") }}
@@ -140,13 +138,24 @@ export default {
         },
         user_name(){
             let n = this.$store.getters.getName;
-            return n.name + ' ' + n.surname;
+            if(n != null){
+                 return n.name + ' ' + n.surname;
+            }
+            else{
+                return '';
+            }
         },
         reconnected(){
             return this.$store.getters.getReconnected;
         },
         loggedIn(){
-            return this.$store.getters.getIsLoggedIn;
+            let t = localStorage.getItem('jwtToken');
+            if( t != null && t != 'null'){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
     },
 

@@ -72,7 +72,7 @@ export default {
         display: flex;
         flex-direction: column;
         position: relative;
-        
+        justify-content: start;
     }
 
     .bar__appbar{

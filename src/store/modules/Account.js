@@ -71,7 +71,7 @@ const AccountModule = {
         login(context,credentials){
             return new Promise(function(resolve,reject){
       
-              console.log(context.getters.getServerAddress);
+              console.log('Login', credentials);
       
               axios.post(context.getters.getServerAddress +'/login', credentials)
                 .then((response) =>{
@@ -130,6 +130,7 @@ const AccountModule = {
 
 
         logout(context){
+            console.log('Logout');
             localStorage.setItem('jwtToken', null);
             context.dispatch('clearEverything').then(() => {
                 router.push({ name: 'Login'});
@@ -308,7 +309,8 @@ const AccountModule = {
                 }
 
                 if(error.response.status == 403){
-                  context.dispatch('forbiddenResponse');
+                  // context.dispatch('forbiddenResponse');
+                  context.commit('setName',null);
                 }
                
               }

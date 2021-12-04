@@ -128,8 +128,8 @@
                             <v-list-item link :to="{name: 'Employee_Account'}">
                                 <v-list-item-title class="c-text"  >{{ $t("common.myData") }}</v-list-item-title>
                             </v-list-item>
-                            <v-list-item link>
-                                <v-list-item-title class="c-text" @click="logout()" >{{ $t("common.logout") }}</v-list-item-title>
+                            <v-list-item link @click="logout()">
+                                <v-list-item-title class="c-text" >{{ $t("common.logout") }}</v-list-item-title>
                             </v-list-item>
                         </v-list>
                         </v-card>
@@ -206,7 +206,12 @@ export default {
 
         user_name(){
             let n = this.$store.getters.getName;
-            return n.name + ' ' + n.surname;
+            if(n != null){
+                 return n.name + ' ' + n.surname;
+            }
+            else{
+                return '';
+            }
         },
     },
 

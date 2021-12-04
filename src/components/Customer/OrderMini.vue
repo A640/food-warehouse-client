@@ -54,21 +54,21 @@ export default {
 
     computed:{
         state(){
-            if(this.order.order_state == "PENDING"){
+            if(this.order.order.order_state == "PENDING"){
                 return this.$t('orders.state.PENDING');
-            }else if(this.order.order_state == "REGISTERED"){
+            }else if(this.order.order.order_state == "REGISTERED"){
                 return this.$t('orders.state.REGISTERED');
-            }else if(this.order.order_state == "CANCELED"){
+            }else if(this.order.order.order_state == "CANCELED"){
                 return this.$t('orders.state.CANCELED');
-            }else if(this.order.order_state == "COMPLETING"){
+            }else if(this.order.order.order_state == "COMPLETING"){
                 return this.$t('orders.state.COMPLETING');
-            }else if(this.order.order_state == "READY TO DELIVER"){
+            }else if(this.order.order.order_state == "READY TO DELIVER"){
                 return this.$t('orders.state.READY_TO_DELIVER');
-            }else if(this.order.order_state == "OUT FOR DELIVERY"){
+            }else if(this.order.order.order_state == "OUT FOR DELIVERY"){
                 return this.$t('orders.state.OUT_FOR_DELIVERY');
-            }else if(this.order.order_state == "DELIVERED"){
+            }else if(this.order.order.order_state == "DELIVERED"){
                 return this.$t('orders.state.DELIVERED');
-            }else if(this.order.order_state == "RETURNED"){
+            }else if(this.order.order.order_state == "RETURNED"){
                 return this.$t('orders.state.RETURNED');
             }else{
                 return this.$t('orders.state.UNKNOWN');
