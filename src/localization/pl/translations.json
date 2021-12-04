@@ -223,6 +223,11 @@
     "payment": "Płatność",
     "paymentFailed": "płatność nieudana",
     "paymentMethod": "Metoda płatności",
+    "paymentMethods": {
+      "cardDelivery": "Za pobraniem kartą",
+      "cashDelivery": "Za pobraniem gotówką",
+      "instantTransfer": "Przelew natychmiastowy"
+    },
     "paymentSuccessful": "Płatność udana",
     "paymentType": "Rodzaj płatności",
     "state": {

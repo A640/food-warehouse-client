@@ -22,7 +22,7 @@
     "account": "Account",
     "actionIrreversible": "This action cannot be undone!",
     "actions": "Actions",
-    "add": "Create",
+    "add": "Add",
     "cancel": "Cancel",
     "close": "Close",
     "company": "Company",
@@ -223,6 +223,11 @@
     "payment": "Payment",
     "paymentFailed": "Payment failed",
     "paymentMethod": "Payment method",
+    "paymentMethods": {
+      "cardDelivery": "Credit card on delivery",
+      "cashDelivery": "Cash on delivery",
+      "instantTransfer": "Instant transfer"
+    },
     "paymentSuccessful": "Payment successful",
     "paymentType": "Payment type",
     "state": {

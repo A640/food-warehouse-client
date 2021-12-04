@@ -1,6 +1,6 @@
 <template>
     <div class="cell">
-        <v-card class="pa-5 mt-5" @click="showDetails()">
+        <v-card class="pa-5" @click="showDetails()">
             <!-- <div class="mini-img">
 
             </div> -->

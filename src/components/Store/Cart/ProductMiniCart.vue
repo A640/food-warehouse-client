@@ -3,7 +3,7 @@
         <v-card class="flex-row">
             
                 
-            <v-img :src="product.image" class="round-fix"  max-height="100%" max-width="9rem" />
+            <v-img :src="product.image" class="round-fix"  max-height="9rem" max-width="9rem" />
             <!-- <div class="mini-img">
 
             </div> -->

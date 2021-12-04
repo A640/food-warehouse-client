@@ -133,7 +133,33 @@ export default {
     computed:{
         payment_methods(){
             console.log('payment',this.$store.getters.getPaymentMethods)
-            return this.$store.getters.getPaymentMethods;
+            return this.$store.getters.getPaymentMethods.map(paymentMethod => {
+
+                switch(paymentMethod.payment_type){
+                    case 'Za pobraniem gotówką':{
+                         return {
+                            payment_type: this.$t('payment.paymentMethods.cashDelivery'),
+                            payment_type_id: paymentMethod.payment_type_id
+                        }
+                    }
+                    case 'Za pobraniem kartą':{
+                         return {
+                            payment_type: this.$t('payment.paymentMethods.cardDelivery'),
+                            payment_type_id: paymentMethod.payment_type_id
+                        }
+                    }
+                    case 'Przelew natychmiastowy':{
+                         return {
+                            payment_type: this.$t('payment.paymentMethods.instantTransfer'),
+                            payment_type_id: paymentMethod.payment_type_id
+                        }
+                    }
+                    default: {
+                         return paymentMethod;
+                    } 
+                }
+
+            });
         },
 
         validated(){

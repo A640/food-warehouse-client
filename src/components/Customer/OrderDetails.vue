@@ -100,7 +100,7 @@
                         <p class="mb-5">{{ $t("orders.cancel") }}</p>
                             <v-card class="mb-5 d-flex pt-5 pb-5">
 
-                                <Cancel class="center-btn"  v-if="cancellable" :id="order.order_id" @updateOrderDetails="loadData(true)"/>
+                                <Cancel class="center-btn"  v-if="cancellable" :id="order.order_id" @updateOrderDetails="showOrdersList"/>
                                 <v-card-subtitle v-else >{{ $t("orders.cancelError") }}</v-card-subtitle>
                                 
                             </v-card>

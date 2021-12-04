@@ -186,6 +186,7 @@ export default {
 
     watch:{
         i_search(val){
+            console.log('search',val);
             this.$store.commit('setSearch',val);
         }
     },

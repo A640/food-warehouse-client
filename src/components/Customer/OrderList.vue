@@ -1,8 +1,8 @@
 <template>
-    <div class="store-grid">
+    <div class="store-grid pt-3 pb-3">
             
         
-        <Order v-for="order in orders" :key="order.order.order_id" :order="order"  />
+        <Order class="order" v-for="order in orders" :key="order.order.order_id" :order="order"  />
                 
            
         <!-- Loader -->
@@ -64,6 +64,10 @@ export default {
 </script>
 
 <style scoped>
+
+    .order{
+        margin-top: 7px;
+    }
 
     .store-grid{
         width: 100%;

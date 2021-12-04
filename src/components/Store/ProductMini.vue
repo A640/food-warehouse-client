@@ -5,7 +5,7 @@
                 
                 
                    
-                <v-img :src="product.image" class="round-fix"  max-height="100%" max-width="6rem" />
+                <v-img :src="product.image" class="round-fix"  max-height="6rem" max-width="6rem" />
                 <!-- <div class="mini-img">
 
                 </div> -->

@@ -1,15 +1,9 @@
 <template>
     <div class="store-grid">
-       
-        <v-container grid-list-md text-xs-center>
-            <v-layout row wrap>
+
                 
-                <v-flex v-for="product in products" :key="product.product_id" >
-                    <product  :product="product"  />
-                </v-flex>
+        <product class="product" v-for="product in products" :key="product.product_id"  :product="product"  />
                 
-            </v-layout>
-        </v-container>
                 
        
     </div>
@@ -103,8 +97,10 @@ export default {
         height: 100%;
         background-color: rgb(240, 242, 245);
         display: flex;
-        flex-direction: column;
-        
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 2rem;
+        justify-content: center;
     }
 
     .bar__appbar{
@@ -169,6 +165,11 @@ export default {
         width: 50%;
         display: flex;
         align-items: center;
+    }
+
+    .product{
+        height: fit-content;
+        margin: 15px;
     }
 
 
