@@ -91,6 +91,8 @@
                         
                     </v-badge>
 
+                    <language-switcher/>
+
                     <!-- account menu -->
                     <v-menu
                         v-model="mini_menu"
@@ -148,12 +150,13 @@
 
 <script>
 //import UserTable from '@/components/EmployeeTable.vue' 
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
 export default {
     
-    // components: {
-    //    UserTable,
-    // },
+    components: {
+       LanguageSwitcher,
+    },
 
     data () {
         return {
@@ -164,7 +167,7 @@ export default {
             { title: this.$t('views.sidebar.vehicles'), icon: 'mdi-truck', link: 'Manager_Vehicles' },
             { title: this.$t('views.sidebar.warehouses'), icon:  'mdi-home-variant', link: 'Manager_Warehouses'},
             { title: this.$t('views.sidebar.manufacturers'), icon: 'mdi-food', link: 'Manager_Producers' },
-            { title: '{{ $t("products.products") }}', icon: 'mdi-tag-outline', link: 'Manager_Products' },
+            { title: this.$t('products.products'), icon: 'mdi-tag-outline', link: 'Manager_Products' },
             { title: this.$t('views.sidebar.stats'), icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             // { title: this.$t('views.sidebar.complaints'), icon: 'mdi-chart-line', link: 'Manager_Stats_Orders' },
             { title: this.$t('views.sidebar.systemAlerts'), icon: 'mdi-alert-outline', link: 'Manager_Alerts' },

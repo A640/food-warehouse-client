@@ -1,7 +1,10 @@
 <template>
     <div class="bg">
         <div class="register">
-            <h2 class="register__title">Zarejestruj się</h2>
+            <h2 class="register__title">
+                {{ $t("register.register") }} 
+                <language-switcher class="language-switcher" absolute />
+                </h2>
             <v-stepper alt-labels v-model="registration_step" class="register__stepper" >
             <v-stepper-header class="register__stepper-header">
                 <v-stepper-step
@@ -51,12 +54,14 @@
 import Register1 from '@/components/Register/RegisterAccountStep.vue'
 import Register2 from '@/components/Register/RegisterDetailsStep.vue'
 import Register3 from '@/components/Register/RegisterAddressStep.vue'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
 export default {
     components: {
         Register1,
         Register2,
         Register3,
+        LanguageSwitcher,
     },
 
     data() {
@@ -158,6 +163,7 @@ export default {
         margin-top: 2rem;
         margin-bottom: 1rem;
         background-color: rgb(251, 252, 253);
+        position: relative;
     }
 
     .register__stepper{
@@ -168,6 +174,5 @@ export default {
     .register__stepper-header{
        background-color: rgb(251, 252, 253);
     }
-
     
 </style>

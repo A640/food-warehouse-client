@@ -1,5 +1,6 @@
 <template>
     <div class="login-component">
+        <div class="language-switcher"><language-switcher /></div>
         <h2 class="title">{{ $t("register.logIn") }}</h2>
 
         <div class="cell credentials_error" v-if="c_error">
@@ -46,9 +47,18 @@
 </template>
 
 <script>
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
+
+
+
 export default {
+
+    components:{
+        LanguageSwitcher,
+    },
     
     data() {
+
         return{
             passwd_show: false,
             c_login: '',
@@ -103,6 +113,13 @@ export default {
 
 <style scoped>
 
+    .language-switcher{
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        padding-top: 20px;
+    }
+
     .login-component{
         width: 50%;
         min-height: 60%;
@@ -127,7 +144,7 @@ export default {
 
     .title{
         margin: 0 auto;
-        margin-top: 4rem;
+        margin-top: 2rem;
         margin-bottom: 3rem;
         font-family: 'Segoe UI';
         font-weight: 600;

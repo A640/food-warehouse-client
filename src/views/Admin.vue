@@ -177,7 +177,8 @@ export default {
             { title: this.$t('views.sidebar.complaints'), icon: 'mdi-account-alert', link: 'Admin_Complaints' },
              { title: this.$t('views.sidebar.batches'), icon: 'mdi-tag-multiple', link: 'Admin_Batch' },
         ],
-        mini_menu: true,
+        mini_menu: false,
+        mini: true,
         title: this.$t('views.sidebar.employees')
         }
     },
@@ -215,6 +216,8 @@ export default {
             return n.name + ' ' + n.surname;
         },
     },
+
+    
 
     mounted() {
         this.$store.dispatch('getName');

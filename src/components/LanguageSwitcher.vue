@@ -6,7 +6,7 @@
             small
             v-bind="attrs"
             v-on="on"
-            class="mr-5 ml-5"
+            :class="{'mr-5':true, 'ml-5':true, 'absolute':absolute }"
           >
           <country-flag :country="currentLanguageIcon" size='normal'/>
             {{ currentLanguageName }}
@@ -35,6 +35,13 @@ export default {
     
     components:{
         CountryFlag,
+    },
+
+    props:{
+      absolute: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -78,6 +85,10 @@ export default {
     
     .country-icon-menu{
         width: 3rem!important;
+    }
+
+    .absolute{
+      position: absolute;
     }
 
 
