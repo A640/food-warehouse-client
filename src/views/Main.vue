@@ -1,19 +1,24 @@
 <template>
-    <div>
-        <div id="bar">
+    <div class="landing-container">
+        <!-- <div id="bar">
             <v-app-bar class="bar__appbar"
                 elevation="1"
                 color="#ffffff"
             >
                 <h2 class="appbar__title">{{ store_name }}</h2>
             </v-app-bar>
-        </div>
+        </div> -->
         
-        <div id="content">
-            <h1>{{ $t("welcome.inner") }}</h1>
-            <transition name="slide-fade" mode="out-in">
-               <v-btn outlined @click="showStore()">{{ $t("views.productCatalog") }}</v-btn>
-            </transition>
+        <img class="img-background" src="@/assets/landing-page-background.jpg" alt="" srcset="">
+
+        <div id="landing-content">
+            <div id="landing-content-background">
+                <h4 >{{ $t("welcome.sampleLandingPage") }}</h4>
+                <h1 class="mb-5">{{ $t("welcome.inner") }}</h1>
+                <transition name="slide-fade" mode="out-in">
+                <v-btn dark  @click="showStore()" color="#34eb68" >{{ $t("views.productCatalog") }}</v-btn>
+                </transition>
+            </div>
         </div>
     </div>
 </template>
@@ -98,11 +103,18 @@ export default {
         flex-grow: 0;
     }
 
-    #content{
-        margin-left: 1rem;
-        margin-right: 1rem;
-        order: 2;
-        flex-grow: 1;
+    #landing-content{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        color: white;
     }
 
     .appbar__title{
@@ -111,6 +123,32 @@ export default {
         font-family: 'Segoe UI';
         font-weight: 600;
         
+    }
+
+    .landing-container{
+        width: 100vw;
+        height: 100vh;
+        background-color: aqua;
+        position: relative;
+    }
+
+    #landing-content-background{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 30px;
+        border-radius: 7px;
+    }
+
+    .img-background{
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
     }
 
 

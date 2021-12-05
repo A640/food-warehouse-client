@@ -411,7 +411,7 @@
     "loggedAs": "Zalogowany jako",
     "myAccount": "Moje konto",
     "myOrders": "Moje zamówienia",
-    "productCatalog": "Katalog produktów",
+    "productCatalog": "Przeglądaj katalog produktów",
     "roles": {
       "admin": "Administrator",
       "deliveryMan": "Dostawca",
@@ -444,6 +444,7 @@
     "warehouseDetails": "Dane magazynu"
   },
   "welcome": {
-    "inner": "Super polski inner text"
+    "inner": "Jedz zdrowiej - żyj lepiej",
+    "sampleLandingPage": "Przykładowa strona hurtowni żywności"
   }
 }

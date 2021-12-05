@@ -411,7 +411,7 @@
     "loggedAs": "Logged in as",
     "myAccount": "My account",
     "myOrders": "My orders",
-    "productCatalog": "Product catalog",
+    "productCatalog": "Browse product catalog",
     "roles": {
       "admin": "Admin",
       "deliveryMan": "Delivery man",
@@ -444,6 +444,7 @@
     "warehouseDetails": "Warehouse details"
   },
   "welcome": {
-    "inner": "This is supper inner text"
+    "inner": "Eat healthier - live better",
+    "sampleLandingPage": "Sample landing page"
   }
 }
