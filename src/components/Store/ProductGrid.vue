@@ -33,23 +33,11 @@ export default {
         },
 
         search(){
-            if(this.$store.getters.getSearch != undefined && this.$store.getters.getSearch != null){
-                if(typeof(this.$store.getters.getSearch) == String){
-                    return this.$store.getters.getSearch;
-                }
-                else{
-                    return this.$store.getters.getSearch.text;
-                }
-            }
-            else{
-                return '';
-            }
-            
-            
+            return this.$store.getters.getSearch;
         },
 
         products(){
-            if(this.search == '' || this.search == null){
+            if(this.search == '' || this.search == null || this.search == undefined){
                 return this.$store.getters.getStoreProducts
             }
             else{
