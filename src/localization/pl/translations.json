@@ -233,7 +233,7 @@
     "state": {
       "CANCELED": "Płatność wycofana",
       "COMPLETED": "Opłacono",
-      "IN_PROGRESS": "W trakcie płatnoći",
+      "IN_PROGRESS": "W trakcie płatności",
       "REJECTED": "Płatność odrzucona",
       "UNKNOWN": "Nieznany",
       "WAITING_FOR_PAYMENT": "Zamówienie oczekuje na opłacenie"
