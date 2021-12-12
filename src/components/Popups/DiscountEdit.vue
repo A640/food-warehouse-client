@@ -93,9 +93,10 @@ export default {
                 this.loading = true;
                 let obj = {
                     id: this.id,
-                    discount: this.i_discount,
+                    discount: Number.parseInt(this.i_discount),
                 }
                 this.$store.dispatch('updateDiscount',obj).then( () => {
+                    this.$store.dispatch('getAllCustomers',true);
                     this.loading = false;
                     this.dialog = false;
                 })

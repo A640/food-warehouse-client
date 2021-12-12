@@ -35,12 +35,12 @@
 
                     <div v-if="complaint.decision != null" class="cell">
                         <p class="title" >{{ $t("complaint.reply") }}</p>
-                        <p class="section-title">{{ $t("complaint.considered") }}: {complaint.decision_date}}</p>
+                        <p class="section-title">{{ $t("complaint.considered") }}: {{complaint.decision_date}}</p>
                         <v-textarea
                             solo
                             readonly
                             v-model="complaint.decision"
-                            class="cell input"
+                            class="cell input w100"
                             :rules="c_rules"
                             :label="$t('complaint.noContent')"
                         />
@@ -149,7 +149,7 @@ export default {
             }else if(this.complaint.state == 'READ'){
                 return this.$t('complaint.stateShort.READ');
             }else if(this.complaint.state == 'ACCEPTED'){
-                return this.$t('complaint.decisionsOptions.ACCEPTED')
+                return this.$t('complaint.stateShort.ACCEPTED')
             }else if(this.complaint.state == 'REJECTED'){
                 return this.$t('complaint.stateShort.REJECTED');
             }else if(this.complaint.state == 'DECISION'){
@@ -252,6 +252,10 @@ export default {
 
     .rejected{
         color: rgb(180, 130, 130);
+    }
+
+    .w100{
+        width: 100%;
     }
 
 </style>

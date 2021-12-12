@@ -242,7 +242,7 @@ export default {
           }else if(o.complaint.state == 'READ'){
               o.complaint.state_display =  this.$t('complaint.stateShort.READ');
           }else if(o.complaint.state == 'ACCEPTED'){
-              o.complaint.state_display =  this.$t('complaint.decisionsOptions.ACCEPTED');
+              o.complaint.state_display =  this.$t('complaint.stateShort.ACCEPTED');
           }else if(o.complaint.state == 'REJECTED'){
               o.complaint.state_display =  this.$t('complaint.stateShort.REJECTED');
           }else if(o.complaint.state == 'DECISION'){

@@ -102,7 +102,7 @@
                                 <div class="card-container cell">
                                     <h4 class="cell">{{customer.name + ' ' + customer.surname}}</h4>
                                     <p class="cell">{{ $t("common.company") }}: {{customer.firm_name}}</p>
-                                    <p class="cell">{{ $t("common.taxID") }}: {{customer.tax_id}}</p>
+                                    <p v-if="customer.tax_id" class="cell">{{ $t("common.taxID") }}: {{customer.tax_id}}</p>
                                     <p class="cell">{{ $t("common.phone") }}: {{customer.phone_number}}</p>
                                 </div>
                             </v-card>

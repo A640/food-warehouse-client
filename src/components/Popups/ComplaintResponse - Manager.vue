@@ -193,7 +193,7 @@ export default {
             }else if(this.complaint.complaint.state == 'READ'){
                 return this.$t('complaint.stateShort.READ');
             }else if(this.complaint.complaint.state == 'ACCEPTED'){
-                return this.$t('complaint.decisionsOptions.ACCEPTED')
+                return this.$t('complaint.stateShort.ACCEPTED')
             }else if(this.complaint.complaint.state == 'REJECTED'){
                 return this.$t('complaint.stateShort.REJECTED');
             }else if(this.complaint.complaint.state == 'DECISION'){

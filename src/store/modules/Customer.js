@@ -341,9 +341,9 @@ const CustomerModule = {
         return new Promise(function(resolve,reject){
           //get authorization token
           let token = localStorage.getItem('jwtToken')
-  
+            console.log('discount update', data);
             // if updating existing Customer and User data
-            axios.put(context.getters.getServerAddress + '/customer/discount/' + data.id, data.discount,{ headers: { Authorization: `Bearer ${token}` }})
+            axios.put(context.getters.getServerAddress + '/customer/discount/' + data.id, data.discount, { headers: { Authorization: `Bearer ${token}`,  "Content-Type": "application/json"}})
             .then((response) =>{
               console.log(response);
   
