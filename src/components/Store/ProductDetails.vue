@@ -20,7 +20,7 @@
                                 <p  class="cell details-title ">{{product.name}}</p>
                                 <p  class="cell details-producer">{{ $t("products.manufacturer") }}: {{product.producer_name}}</p>
                                 <h3 class="cell" >{{ $t("products.details") }}:</h3>
-                                <p  class="cell details-description ">{{product.description}}</p>
+                                <p  class="cell details-description multiline">{{product.description}}</p>
                             </div>
                         </v-card>
                     </v-col>
@@ -244,6 +244,10 @@ export default {
         text-decoration: line-through;
         color: rgba(50, 50, 50, 0.5);
         font-weight: 600;
+    }
+
+    .multiline {
+        white-space: pre-wrap;
     }
 
 

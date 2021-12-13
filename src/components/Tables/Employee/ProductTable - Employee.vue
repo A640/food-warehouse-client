@@ -76,7 +76,7 @@
                 <p class="detail detail-value">{{ $t("products.shortDescription") }}</p>
                 <p class="detail details-id mb-0">{{item.product.short_description}}</p>
                 <p class="detail detail-value">{{ $t("products.description") }}</p>
-                <p class="detail details-id mb-0">{{item.product.description}}</p>
+                <p class="detail details-id mb-0 multiline">{{item.product.description}}</p>
               </div>
             </div>
             
@@ -308,5 +308,9 @@ export default {
     /* border: solid 1px rgba(0, 0, 0, 0.5); */
     border-radius: 5px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .multiline {
+        white-space: pre-wrap;
   }
 </style>
