@@ -283,6 +283,54 @@ const BatchModule = {
               }); 
         },
 
+        getAllBatchesEmployee(context, silent=false){
+          //get all Batches and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik batch")
+          context.commit('setBatchesLoading',true);
+          let token = localStorage.getItem('jwtToken')
+          axios.get(context.getters.getServerAddress +'/batch/employee', { headers: { Authorization: `Bearer ${token}` } })
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Batches data in vuex store
+              console.log('batch',data)
+              context.commit('setBatches',data.data.result);
+              context.commit('setBatchesLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setBatchesLoading',false);
+            }); 
+      },
+
 
         getOneBatch(context, id){
           //get all Batches and their User info from server

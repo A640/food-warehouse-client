@@ -323,10 +323,10 @@ const StoreModule = {
           await cart.map(async (prod) =>{
             let idx = context.state.store_products.findIndex(store_product => store_product.product_id == prod.product_id)
             if(idx == -1){
-              await context.dispatch("getAllStoreProducts");
+              let d = await context.dispatch("getAllStoreProducts");
             //  p = await context.dispatch("getOneProduct", prod.product_id);
             //  context.commit("addStoreProducts", p);
-             console.log('GOP',context.state.store_product);
+             console.log('GOP',d);
              let idx2 = context.state.store_products.findIndex(store_product => store_product.product_id == prod.product_id);
              context.state.store_products[idx2];
             }

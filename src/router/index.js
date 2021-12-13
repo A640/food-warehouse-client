@@ -206,7 +206,7 @@ const routes = [
       {
         path: 'batch',
         name: 'Employee_Batch',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/BatchTable.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Tables/Employee/BatchTable.vue'),
       },
       {
         path: 'warehouses',
@@ -221,7 +221,7 @@ const routes = [
       {
         path: 'alerts',
         name: 'Employee_Alerts',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Manager/SystemAlerts.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Employee/SystemAlerts.vue'),
       },
      
     ]
