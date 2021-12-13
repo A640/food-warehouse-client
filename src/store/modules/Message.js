@@ -133,6 +133,54 @@ const MessageModule = {
               }); 
         },
 
+        getAlertsEmployee(context, silent=false){
+          //get all Alerts and their User info from server
+          //silent option is mainly for not hide reconnected banner
+    
+          console.log("Gecik Alerts")
+          context.commit('setAlertsLoading',true);
+          let token = localStorage.getItem('jwtToken')
+          return axios.get(context.getters.getServerAddress +'/alert/employee', { headers: { Authorization: `Bearer ${token}` } })
+            .then( (data) => {
+    
+              if(!silent){
+                //connected to server, hide no connection banner
+                context.dispatch('noConnectionChange',false);
+              }
+             
+    
+              //save Alerts data in vuex store
+              console.log('alerts',data)
+              context.commit('setAlerts',data.data.result);
+              context.commit('setAlertsLoading',false);
+            })
+            .catch( (error) =>{
+    
+              if(error.toJSON().message == "Network Error"){
+                //if can't connect to server
+    
+                context.dispatch('noConnectionChange',true);
+    
+              }else{
+                // Request made and server responded
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+    
+                if(!silent){
+                   //if connected to server, hide no connection banner
+                  context.dispatch('noConnectionChange',false);
+                }
+
+                if(error.response.status == 403){
+                  context.dispatch('forbiddenResponse');
+                }
+               
+              }
+              context.commit('setAlertsLoading',false);
+            }); 
+      },
+
         getMessages(context, silent=false){
             //get all Messages and their User info from server
             //silent option is mainly for not hide reconnected banner

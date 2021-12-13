@@ -219,7 +219,7 @@ export default {
         this.$store.dispatch('getName');
         this.$store.dispatch('getMessages');
         this.$store.dispatch('getUnreadMessagesCount');
-        this.$store.dispatch('getAlerts');
+        this.$store.dispatch('getAlertsEmployee');
     },
 }
 </script>
