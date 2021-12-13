@@ -384,7 +384,10 @@ const MessageModule = {
         getAlertsCount(context){
             if(context.system_alerts.expiring_batches != null && context.system_alerts.expiring_batches != undefined){
                 let a = context.system_alerts.expiring_batches.length
-                let b = context.system_alerts.running_out_products.length
+                let b = 0;
+                if(context.system_alerts.running_out_products){
+                  b = context.system_alerts.running_out_products.length
+                }
                 let c = context.system_alerts.storages_running_out_of_space.length
                 return a + b + c;
             }
