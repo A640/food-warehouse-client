@@ -122,7 +122,7 @@ export default {
         display: block;
         /* vertical-align: middle; */
         width: 80%;
-        height: 100%;
+        /* height: 100%; */
         margin: 0 auto;
         margin-bottom: 0.25rem;
         max-width: 800px;

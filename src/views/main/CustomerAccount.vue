@@ -49,14 +49,15 @@
                         <v-list-item link :to="{name: 'Customer_Orders'}">
                             <v-list-item-title class="c-text"  >{{ $t("views.myOrders") }}</v-list-item-title>
                         </v-list-item>
-                        <v-list-item link>
+                        <v-list-item link @click="logout()">
                             <v-list-item-title class="c-text">{{ $t("common.logout") }}</v-list-item-title>
                         </v-list-item>
                     </v-list>
                     </v-card>
                 </v-menu>
+                <language-switcher />
             </div>
-            <language-switcher />
+            
            
         </div>
         
@@ -130,6 +131,9 @@ export default {
             if(this.$route.name != 'Store_Cart'){
                 this.$router.push({ name: 'Store_Cart'});
             }
+        },
+        logout(){
+            this.$store.dispatch('logout')
         }
     },
 

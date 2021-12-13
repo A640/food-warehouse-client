@@ -95,7 +95,7 @@
             <v-divider  inset class="ml-10 mr-10 mt-2" />
 
             <div class="cluster mt-4 mb-4 ml-5">
-              <Complaint :complaint="item" @pdateComplaintsDetails="reloadData()" />
+              <Complaint :complaint="item" @updateComplaintsDetails="reloadData()" />
               <v-btn outlined @click="showDetails(item.order.order.order_id)">{{ $t("orders.viewOrderSummary") }}</v-btn>
             </div>
 
