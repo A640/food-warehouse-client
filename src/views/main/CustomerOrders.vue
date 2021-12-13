@@ -55,7 +55,7 @@
                 </v-menu>
             </div>
             
-           
+           <language-switcher />
         </div>
         
         <div id="content">
@@ -65,13 +65,13 @@
 </template>
 
 <script>
-
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
 
 export default {
 
     components:{
-
+        LanguageSwitcher,
     },
 
 
