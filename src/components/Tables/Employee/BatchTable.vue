@@ -164,7 +164,7 @@ export default {
         .then( () => {
             // if added  successfully (resolved promise) clear popup and close
             
-            this.$store.dispatch('getAllBatches');
+            this.$store.dispatch('getAllBatchesEmployee');
             this.$refs['delMany'].dialogClose();
             this.selected = [];
             this.delete_many_mode = false;
@@ -182,7 +182,7 @@ export default {
         .then( () => {
             // if added  successfully (resolved promise) clear popup and close
             
-            this.$store.dispatch('getAllBatches');
+            this.$store.dispatch('getAllBatchesEmployee');
             this.$refs['del' + id.batch_id ].dialogClose();
             
         })
@@ -237,7 +237,7 @@ export default {
   watch:{
     reconnected(val){
       if(val){
-        this.$store.dispatch('getAllBatches',true);
+        this.$store.dispatch('getAllBatchesEmployee',true);
       }
     }
   },
