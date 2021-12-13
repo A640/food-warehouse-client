@@ -59,7 +59,21 @@
 
                     <v-spacer></v-spacer>
 
-                   
+                    <v-badge
+                        :content="alert_count"
+                        :value="true"
+                        color="amber darken-2"
+                        class="mr-10"
+                        overlap
+                        v-if="alert_count > 0"
+                    >
+                        <v-btn depressed @click="showAlerts()">
+                            <v-icon color="amber darken-2">mdi-alert</v-icon>
+                            <!-- <v-icon>mdi-email-outline</v-icon> -->
+                        </v-btn>
+                        
+                        
+                    </v-badge>
 
                     <v-badge
                         :content="messages_count"
@@ -151,7 +165,7 @@ export default {
             { title: this.$t('views.sidebar.warehouses'), icon:  'mdi-home-variant', link: 'Employee_Warehouses'},
             { title: this.$t('views.sidebar.products'), icon: 'mdi-tag-outline', link: 'Employee_Products' },
             // { title: this.$t('views.sidebar.complaints'), icon: 'mdi-chart-line', link: 'Employee_Stats_Orders' },
-            // { title: this.$t('views.sidebar.systemAlerts'), icon: 'mdi-alert-outline', link: 'Employee_Alerts' },
+            { title: this.$t('views.sidebar.systemAlerts'), icon: 'mdi-alert-outline', link: 'Employee_Alerts' },
             { title: this.$t('views.sidebar.orders'), icon: 'mdi-package-variant-closed', link: 'Employee_Orders' },
             { title: this.$t('views.sidebar.messages'), icon: 'mdi-email', link: 'Employee_Messages' },
              { title: this.$t('views.sidebar.batches'), icon: 'mdi-tag-multiple', link: 'Employee_Batch' },
@@ -164,7 +178,12 @@ export default {
 
 
     methods: {
-        
+        showAlerts(){
+            if(this.$route.name != 'Employee_Alerts'){
+                this.$router.push({ name: 'Employee_Alerts'});
+                this.title = this.$t('views.sidebar.systemAlerts');
+            }
+        },
         showMessages(){
             if(this.$route.name != 'Employee_Messages'){
                 this.$router.push({ name: 'Employee_Messages'});
@@ -177,7 +196,9 @@ export default {
     },
 
     computed:{
-        
+        alert_count(){
+            return this.$store.getters.getAlertsCount;
+        },
 
         messages_count(){
             return this.$store.getters.getMessagesCount;
@@ -198,6 +219,7 @@ export default {
         this.$store.dispatch('getName');
         this.$store.dispatch('getMessages');
         this.$store.dispatch('getUnreadMessagesCount');
+        this.$store.dispatch('getAlerts');
     },
 }
 </script>
