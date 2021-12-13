@@ -56,7 +56,7 @@
                     </v-card>
                 </v-menu>
             </div>
-            
+            <language-switcher />
            
         </div>
         
@@ -75,12 +75,14 @@
 
 <script>
 import Edit from '@/components/Customer/CustomerSettings.vue'
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
 
 export default {
 
     components:{
         Edit,
+        LanguageSwitcher,
     },
 
 

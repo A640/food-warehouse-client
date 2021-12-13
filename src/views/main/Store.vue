@@ -204,6 +204,7 @@ export default {
         if(this.loggedIn){
             this.$store.dispatch('getName')
         }
+        this.$store.commit('readCartFromLocalStorage');
     },
 
 

@@ -147,7 +147,8 @@ export default {
     },
 
     mounted() {
-        this.loadData();
+        this.$store.commit('readCartFromLocalStorage');
+        this.loadData();        
     },
 
 }

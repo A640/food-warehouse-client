@@ -29,6 +29,19 @@ const StoreModule = {
 
     mutations: {
 
+      readCartFromLocalStorage(context){
+        let cart_state = window.localStorage.getItem("FWCart");
+        if(cart_state != null){
+          cart_state = JSON.parse(cart_state);
+          console.log('FWCart',cart_state);
+          context.cart = cart_state.cart;
+          context.cart_settings = cart_state.cart_settings;
+        }
+      },
+        addStoreProducts(context,data){
+            context.store_products.push(data);
+        },
+
         setStoreProducts(context,data){
             context.store_products = data;
         },
@@ -51,18 +64,22 @@ const StoreModule = {
 
         setCartAddress(context,address){
           context.cart_settings.address = address;
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         setOrderId(context,id){
           context.cart_settings.order_id = id;
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         setPaymentId(context,id){
           context.cart_settings.payment_id = id;
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         setOrderComment(context,comment){
           context.cart_settings.comment = comment;
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         setOrders(context,orders){
@@ -85,6 +102,7 @@ const StoreModule = {
           context.cart_settings.order_id = null;
           context.cart_settings.payment_id = null;
           context.search = '';
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         addToCart(context,product){
@@ -96,6 +114,8 @@ const StoreModule = {
           else{
             context.cart.push(product);
           }
+
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         deleteFromCart(context,product){
@@ -105,6 +125,7 @@ const StoreModule = {
               context.cart.splice(i,1);
             }
           }
+          window.localStorage.setItem("FWCart", JSON.stringify({cart: context.cart, cart_settings: context.cart_settings}));
         },
 
         setOrderLoading(context,value){
@@ -135,6 +156,8 @@ const StoreModule = {
     },
 
     actions: {
+
+      
 
         
 
@@ -294,10 +317,23 @@ const StoreModule = {
             return res;
         },
 
-        getCartProducts(context){
+        async getCartProducts(context){
           let cart = context.state.cart
-          cart.map((prod) =>{
-            let p = context.state.store_products.find(store_product => store_product.product_id == prod.product_id)
+          let p = null
+          await cart.map(async (prod) =>{
+            let idx = context.state.store_products.findIndex(store_product => store_product.product_id == prod.product_id)
+            if(idx == -1){
+              await context.dispatch("getAllStoreProducts");
+            //  p = await context.dispatch("getOneProduct", prod.product_id);
+            //  context.commit("addStoreProducts", p);
+             console.log('GOP',context.state.store_product);
+             let idx2 = context.state.store_products.findIndex(store_product => store_product.product_id == prod.product_id);
+             context.state.store_products[idx2];
+            }
+            else{
+              p  = context.state.store_products[idx]
+            }
+            
             prod.name = p.name;
             prod.producer_name = p.producer_name;
             prod.image = p.image;
@@ -314,6 +350,8 @@ const StoreModule = {
             }
             return prod;
           })
+
+          console.log('mapCart',cart);
           return cart;
         },
 

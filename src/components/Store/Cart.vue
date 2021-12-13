@@ -101,9 +101,11 @@ export default {
         r3Back(){
             this.step = 2;
         },
-    }
+    },
 
-   
+   mounted() {
+      this.$store.commit('readCartFromLocalStorage'); 
+   },
 
 
 }

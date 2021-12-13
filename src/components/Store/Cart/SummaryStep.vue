@@ -169,6 +169,7 @@ export default {
     },
 
     mounted() {
+        this.$store.commit('readCartFromLocalStorage');
         this.loadData();
     },
 
